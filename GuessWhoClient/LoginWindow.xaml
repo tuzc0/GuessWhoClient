@@ -94,13 +94,15 @@
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
                     Margin="0,0,0,8">
-            
+
             <TextBlock Style="{StaticResource Txt.Pixel}" 
-                       Text="Create account" 
-                       FontSize="20" 
-                       Cursor="Hand" 
-                       Margin="0,0,8,0"/>
-            
+           Text="Create account" 
+           FontSize="20" 
+           Cursor="Hand" 
+           Margin="0,0,8,0"
+           MouseLeftButtonUp="CreateAccount_Click"/>
+
+
             <TextBlock Style="{StaticResource Txt.Pixel}" 
                        Text="•" 
                        Margin="4,0"/>
