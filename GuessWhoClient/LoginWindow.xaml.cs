@@ -28,5 +28,12 @@ namespace GuessWhoClient
         {
 
         }
+
+        private void CreateAccount_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            CreateAccountWindow createAccountWindow = new CreateAccountWindow();
+            createAccountWindow.Owner = this; 
+            createAccountWindow.ShowDialog(); 
+        }
     }
 }
