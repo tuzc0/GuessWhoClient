@@ -1,22 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using GuessWhoClient.Globalization;
 
 namespace GuessWhoClient
 {
-    /// <summary>
-    /// Lógica de interacción para LoginWindow.xaml
-    /// </summary>
     public partial class LoginWindow : Window
     {
         public LoginWindow()
@@ -24,16 +12,29 @@ namespace GuessWhoClient
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
+            // falta implementar logica
+        }
 
+        private void CmbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox combo && combo.SelectedItem is ComboBoxItem item && item.Tag is string culture)
+            {
+                LocalizationProvider.Instance.ChangeCulture(culture);
+            }
         }
 
         private void CreateAccount_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             CreateAccountWindow createAccountWindow = new CreateAccountWindow();
-            createAccountWindow.Owner = this; 
-            createAccountWindow.ShowDialog(); 
+            createAccountWindow.Owner = this;
+            createAccountWindow.ShowDialog();
+        }
+
+        private void ForgotPassword_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // falta implementar logica
         }
     }
 }
