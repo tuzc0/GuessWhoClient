@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuessWhoClient"
+        xmlns:localization="clr-namespace:GuessWhoClient.Globalization"
         mc:Ignorable="d"
-        Title="Create account"
+        Title="{Binding [AppTitle], Source={x:Static localization:LocalizationProvider.Instance}}"
         Width="800"
         SizeToContent="Height"
         MinHeight="450">
@@ -18,7 +19,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Background="{StaticResource Brush.Bg}" Margin="20">
+    <Grid Background="{StaticResource Brush.Bg}" Margin="0,0,0,-6">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -28,7 +29,7 @@
         <Border Grid.Row="0" Background="{StaticResource Brush.Panel}" CornerRadius="16" Padding="12" Margin="0,0,0,20">
             <Viewbox Stretch="Uniform" MaxHeight="72">
                 <TextBlock Style="{StaticResource Txt.Pixel}"
-                           Text="GUESS WHO?"
+                           Text="{Binding [AppTitle], Source={x:Static localization:LocalizationProvider.Instance}}"
                            Foreground="{StaticResource Brush.Accent}"/>
             </Viewbox>
         </Border>
@@ -46,30 +47,36 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Txt.Pixel}" 
-                           Text="Email" FontSize="18" VerticalAlignment="Center" 
+                <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource Txt.Pixel}"
+                           Text="{Binding [LblEmail], Source={x:Static localization:LocalizationProvider.Instance}}"
+                           FontSize="18" VerticalAlignment="Center"
                            HorizontalAlignment="Right" Margin="0,0,10,0"/>
                 <TextBox x:Name="txtEmail" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Txt.Pixel}" 
-                           Text="User" FontSize="18" VerticalAlignment="Center" 
+                <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Txt.Pixel}"
+                           Text="{Binding [LblUser], Source={x:Static localization:LocalizationProvider.Instance}}"
+                           FontSize="18" VerticalAlignment="Center"
                            HorizontalAlignment="Right" Margin="0,0,10,0"/>
-                <TextBox x:Name="txtUser" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
+                <TextBox x:Name="txtDisplayName" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
 
-                <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Txt.Pixel}" 
-                           Text="Password" FontSize="18" VerticalAlignment="Center" 
+                <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Txt.Pixel}"
+                           Text="{Binding [LblPassword], Source={x:Static localization:LocalizationProvider.Instance}}"
+                           FontSize="18" VerticalAlignment="Center"
                            HorizontalAlignment="Right" Margin="0,0,10,0"/>
                 <PasswordBox x:Name="txtPassword" Grid.Row="2" Grid.Column="1" Margin="0,5"/>
 
-                <TextBlock Grid.Row="3" Style="{StaticResource Txt.Pixel}" 
-                           Text="Confirm Password" FontSize="18" VerticalAlignment="Center" 
-                           HorizontalAlignment="Left" Width="158" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource Txt.Pixel}"
+                           Text="{Binding [LblConfirmPassword], Source={x:Static localization:LocalizationProvider.Instance}}"
+                           FontSize="18" VerticalAlignment="Center"
+                           HorizontalAlignment="Left" Margin="-16,0,0,0" Width="156"/>
                 <PasswordBox x:Name="txtConfirmPassword" Grid.Row="3" Grid.Column="1" Margin="0,5"/>
             </Grid>
         </Border>
 
-        <Button x:Name="btnCreateAccount" Grid.Row="2" Content="Create account"
+        <Button x:Name="btnCreateAccount" Grid.Row="2"
+                Content="{Binding [BtnCreateAccount], Source={x:Static localization:LocalizationProvider.Instance}}"
                 Style="{StaticResource Btn.Primary}" Height="48" Width="200"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center"
+                Click="btnCreateAccount_Click"/>
     </Grid>
 </Window>
