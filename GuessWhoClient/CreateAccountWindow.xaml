@@ -77,6 +77,6 @@
                 Content="{Binding [BtnCreateAccount], Source={x:Static localization:LocalizationProvider.Instance}}"
                 Style="{StaticResource Btn.Primary}" Height="48" Width="200"
                 HorizontalAlignment="Center"
-                Click="btnCreateAccount_Click"/>
+                Click="BtnCreateAccount_Click"/>
     </Grid>
 </Window>

@@ -88,6 +88,60 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Unable to connect to the database.
+        /// </summary>
+        public static string FaultDatabaseConnection {
+            get {
+                return ResourceManager.GetString("FaultDatabaseConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database server took too long to respond.
+        /// </summary>
+        public static string FaultDatabaseTimeout {
+            get {
+                return ResourceManager.GetString("FaultDatabaseTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email address is already registered.
+        /// </summary>
+        public static string FaultDuplicateEmail {
+            get {
+                return ResourceManager.GetString("FaultDuplicateEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The operation violates an existing relationship.
+        /// </summary>
+        public static string FaultForeignKey {
+            get {
+                return ResourceManager.GetString("FaultForeignKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The request is invalid.
+        /// </summary>
+        public static string FaultInvalidRequest {
+            get {
+                return ResourceManager.GetString("FaultInvalidRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred.
+        /// </summary>
+        public static string FaultUnexpected {
+            get {
+                return ResourceManager.GetString("FaultUnexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirm Password.
         /// </summary>
         public static string LblConfirmPassword {
@@ -138,6 +192,123 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string LinkForgot {
             get {
                 return ResourceManager.GetString("LinkForgot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account created.
+        /// </summary>
+        public static string UiAccountCreatedForFmt {
+            get {
+                return ResourceManager.GetString("UiAccountCreatedForFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Could not communicate with the service.
+        /// </summary>
+        public static string UiCommsGeneric {
+            get {
+                return ResourceManager.GetString("UiCommsGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Transport authentication (Windows) failed. Verify that the service is running.
+        /// </summary>
+        public static string UiSecurityNegotiationFailed {
+            get {
+                return ResourceManager.GetString("UiSecurityNegotiationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error.
+        /// </summary>
+        public static string UiTitleError {
+            get {
+                return ResourceManager.GetString("UiTitleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Information.
+        /// </summary>
+        public static string UiTitleInfo {
+            get {
+                return ResourceManager.GetString("UiTitleInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Warning.
+        /// </summary>
+        public static string UiTitleWarning {
+            get {
+                return ResourceManager.GetString("UiTitleWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Display name is required.
+        /// </summary>
+        public static string UiValidationDisplayNameRequired {
+            get {
+                return ResourceManager.GetString("UiValidationDisplayNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Display name is too long (max. 50 characteres).
+        /// </summary>
+        public static string UiValidationDisplayNameTooLong {
+            get {
+                return ResourceManager.GetString("UiValidationDisplayNameTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid email format.
+        /// </summary>
+        public static string UiValidationEmailFormat {
+            get {
+                return ResourceManager.GetString("UiValidationEmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email is required.
+        /// </summary>
+        public static string UiValidationEmailRequired {
+            get {
+                return ResourceManager.GetString("UiValidationEmailRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Passwords do not match.
+        /// </summary>
+        public static string UiValidationPasswordDontMatch {
+            get {
+                return ResourceManager.GetString("UiValidationPasswordDontMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password is required.
+        /// </summary>
+        public static string UiValidationPasswordRequired {
+            get {
+                return ResourceManager.GetString("UiValidationPasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password must be at least 8 characters long.
+        /// </summary>
+        public static string UiValidationPasswordTooShort {
+            get {
+                return ResourceManager.GetString("UiValidationPasswordTooShort", resourceCulture);
             }
         }
     }

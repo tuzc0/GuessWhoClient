@@ -68,13 +68,14 @@
                             Style="{StaticResource Btn.Primary}"
                             Width="300" Height="80"
                             Margin="0,0,0,15"
-                            Click="btnProfile_Click"/>
+                            Click="BtnProfile_Click"/>
 
                     <Button x:Name="btnExit"
                             Content="Exit"
                             Style="{StaticResource Btn.Primary}"
                             Width="300" Height="80"
-                            Margin="0,0,0,0"/>
+                            Margin="0,0,0,0"
+                            Click="BtnExit_Click"/>
 
                 </StackPanel>
 
