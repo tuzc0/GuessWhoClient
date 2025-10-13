@@ -8,7 +8,9 @@
         Title="Create account"
         Width="800"
         SizeToContent="Height"
-        MinHeight="450">
+        MinHeight="450"
+        Background="{StaticResource Brush.Bg}">
+        
 
     <Window.Resources>
         <ResourceDictionary>

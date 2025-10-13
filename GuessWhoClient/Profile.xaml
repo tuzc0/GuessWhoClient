@@ -1,0 +1,87 @@
+﻿<Window x:Class="GuessWhoClient.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuessWhoClient"
+        mc:Ignorable="d"
+        Title="Profile" Height="450" Width="800"
+        Background="{StaticResource Brush.Bg}">
+
+    <Grid>
+        <Border 
+            Background="{StaticResource Brush.Card}" 
+            CornerRadius="16" 
+            Padding="24" 
+            Margin="80,80,80,80">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Username -->
+                    <RowDefinition Height="12"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Password -->
+                    <RowDefinition Height="12"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Email -->
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Button -->
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                           Grid.Column="0" 
+                           Style="{StaticResource Txt.Pixel}" 
+                           FontSize="18" 
+                           VerticalAlignment="Center"
+                           Text="Username"/>
+                <TextBox x:Name="txtUser" 
+                         Grid.Row="0" 
+                         Grid.Column="2"
+                         Height="30"
+                         Margin="0,4,0,4"/>
+
+                <TextBlock Grid.Row="2" 
+                           Grid.Column="0" 
+                           Style="{StaticResource Txt.Pixel}" 
+                           FontSize="18" 
+                           VerticalAlignment="Center"
+                           Text="Password"/>
+                <PasswordBox x:Name="txtPassword" 
+                             Grid.Row="2" 
+                             Grid.Column="2"
+                             Height="30"
+                             Margin="0,4,0,4"/>
+
+                <TextBlock Grid.Row="4" 
+                           Grid.Column="0" 
+                           Style="{StaticResource Txt.Pixel}" 
+                           FontSize="18" 
+                           VerticalAlignment="Center"
+                           Text="Email"/>
+                <TextBox x:Name="txtEmail" 
+                         Grid.Row="4" 
+                         Grid.Column="2"
+                         Height="30"
+                         Margin="0,4,0,4"/>
+
+                <Button x:Name="btnSave" 
+                        Grid.Row="6"
+                        Grid.Column="2"
+                        Content="Save Changes"
+                        Style="{StaticResource Btn.Primary}"
+                        Height="48" 
+                        Width="200"
+                        HorizontalAlignment="Left"
+                        Margin="0,10,0,0"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
