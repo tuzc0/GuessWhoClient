@@ -1,7 +1,10 @@
-﻿using System;
+﻿using GuessWhoClient.Globalization;
+using System;
+using System.ServiceModel;
+using System.ServiceModel.Security;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using GuessWhoClient.Globalization;
 
 namespace GuessWhoClient
 {
@@ -12,9 +15,69 @@ namespace GuessWhoClient
             InitializeComponent();
         }
 
-        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        private async void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            // falta implementar logica
+            string user = txtUser.Text.Trim();
+            string password = pwdPassword.Password.Trim();
+
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter both username and password.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            btnLogin.IsEnabled = false;
+
+            var client = new LoginServiceRef.LoginServiceClient("NetTcp_LoginService");
+
+            try
+            {
+                // Crear request
+                var request = new LoginServiceRef.LoginRequest
+                {
+                    User = user,
+                    Password = password
+                };
+
+                // Llamar al servicio
+                var response = await client.LoginUserAsync(request);
+
+                if (response != null && response.ValidUser == "True")
+                {
+                    MessageBox.Show($"Welcome, {response.User}!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Abrir ventana principal
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                // Cerrar cliente
+                await Task.Run(() => client.Close());
+            }
+            catch (MessageSecurityException)
+            {
+                client.Abort();
+                MessageBox.Show("Security error connecting to the service.", "Security Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (EndpointNotFoundException)
+            {
+                client.Abort();
+                MessageBox.Show("Login service not available.", "Connection Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                client.Abort();
+                MessageBox.Show("Unexpected error: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                btnLogin.IsEnabled = true;
+            }
         }
 
         private void CmbLanguage_SelectionChanged(object sender, SelectionChangedEventArgs e)

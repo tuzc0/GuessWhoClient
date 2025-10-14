@@ -59,11 +59,13 @@
                 <PasswordBox x:Name="pwdPassword" Grid.Row="2" Grid.Column="2"/>
 
                 <Button x:Name="btnLogin" Grid.Row="4" Grid.ColumnSpan="3"
-                        Margin="0,8,0,0"
-                        Content="{Binding [BtnLogin], Source={x:Static localization:LocalizationProvider.Instance}}"
-                        Style="{StaticResource Btn.Primary}"
-                        Height="48" Width="200"
-                        HorizontalAlignment="Center"/>
+        Margin="0,8,0,0"
+        Content="{Binding [BtnLogin], Source={x:Static localization:LocalizationProvider.Instance}}"
+        Style="{StaticResource Btn.Primary}"
+        Height="48" Width="200"
+        HorizontalAlignment="Center"
+        Click="BtnLogin_Click"/>
+
             </Grid>
         </Border>
 
