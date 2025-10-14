@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="99077632-9efb-482d-aeb5-502c167bef17" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ad2a8c84-3c56-45c8-85c3-083dad9153ed" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
     <MetadataFile FileName="GuessWho.Contracts.Dtos.xsd" MetadataType="Schema" ID="db7d8523-2b44-4045-923f-f7ef85488f6c" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="b1542fac-3075-4abe-b183-dcc6e0e427a7" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

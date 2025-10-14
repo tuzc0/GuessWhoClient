@@ -126,6 +126,24 @@
   <data name="BtnLogin" xml:space="preserve">
     <value>Connexion</value>
   </data>
+  <data name="FaultDatabaseConnection" xml:space="preserve">
+    <value>Impossible de se connecter à la base de données</value>
+  </data>
+  <data name="FaultDatabaseTimeout" xml:space="preserve">
+    <value>Le serveur de base de données a mis trop de temps à répondre</value>
+  </data>
+  <data name="FaultDuplicateEmail" xml:space="preserve">
+    <value>L’adresse e-mail est déjà enregistrée</value>
+  </data>
+  <data name="FaultForeignKey" xml:space="preserve">
+    <value>L’opération viole une relation existante</value>
+  </data>
+  <data name="FaultInvalidRequest" xml:space="preserve">
+    <value>La requête est invalide</value>
+  </data>
+  <data name="FaultUnexpected" xml:space="preserve">
+    <value>Une erreur inattendue s’est produite</value>
+  </data>
   <data name="LblConfirmPassword" xml:space="preserve">
     <value>Confirmer le mot de passe</value>
   </data>
@@ -143,5 +161,44 @@
   </data>
   <data name="LinkForgot" xml:space="preserve">
     <value>J’ai oublié mon mot de passe</value>
+  </data>
+  <data name="UiAccountCreatedForFmt" xml:space="preserve">
+    <value>Compte créé</value>
+  </data>
+  <data name="UiCommsGeneric" xml:space="preserve">
+    <value>Impossible de communiquer avec le service</value>
+  </data>
+  <data name="UiSecurityNegotiationFailed" xml:space="preserve">
+    <value>L’authentification du transport (Windows) a échoué. Vérifiez que le service est en cours d’exécution</value>
+  </data>
+  <data name="UiTitleError" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="UiTitleInfo" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="UiTitleWarning" xml:space="preserve">
+    <value>Avertissement</value>
+  </data>
+  <data name="UiValidationDisplayNameRequired" xml:space="preserve">
+    <value>Le nom d’affichage est requis</value>
+  </data>
+  <data name="UiValidationDisplayNameTooLong" xml:space="preserve">
+    <value>Le nom d’affichage est trop long (max. 50 caractères)</value>
+  </data>
+  <data name="UiValidationEmailFormat" xml:space="preserve">
+    <value>Format d’e-mail invalide</value>
+  </data>
+  <data name="UiValidationEmailRequired" xml:space="preserve">
+    <value>L’adresse e-mail est requise</value>
+  </data>
+  <data name="UiValidationPasswordDontMatch" xml:space="preserve">
+    <value>Les mots de passe ne correspondent pas</value>
+  </data>
+  <data name="UiValidationPasswordRequired" xml:space="preserve">
+    <value>Le mot de passe est requis</value>
+  </data>
+  <data name="UiValidationPasswordTooShort" xml:space="preserve">
+    <value>Le mot de passe doit comporter au moins 8 caractères</value>
   </data>
 </root>

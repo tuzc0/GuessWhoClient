@@ -126,6 +126,24 @@
   <data name="BtnLogin" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="FaultDatabaseConnection" xml:space="preserve">
+    <value>Unable to connect to the database</value>
+  </data>
+  <data name="FaultDatabaseTimeout" xml:space="preserve">
+    <value>The database server took too long to respond</value>
+  </data>
+  <data name="FaultDuplicateEmail" xml:space="preserve">
+    <value>The email address is already registered</value>
+  </data>
+  <data name="FaultForeignKey" xml:space="preserve">
+    <value>The operation violates an existing relationship</value>
+  </data>
+  <data name="FaultInvalidRequest" xml:space="preserve">
+    <value>The request is invalid</value>
+  </data>
+  <data name="FaultUnexpected" xml:space="preserve">
+    <value>An unexpected error occurred</value>
+  </data>
   <data name="LblConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
@@ -143,5 +161,44 @@
   </data>
   <data name="LinkForgot" xml:space="preserve">
     <value>I forgot my password</value>
+  </data>
+  <data name="UiAccountCreatedForFmt" xml:space="preserve">
+    <value>Account created</value>
+  </data>
+  <data name="UiCommsGeneric" xml:space="preserve">
+    <value>Could not communicate with the service</value>
+  </data>
+  <data name="UiSecurityNegotiationFailed" xml:space="preserve">
+    <value>Transport authentication (Windows) failed. Verify that the service is running</value>
+  </data>
+  <data name="UiTitleError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="UiTitleInfo" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="UiTitleWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="UiValidationDisplayNameRequired" xml:space="preserve">
+    <value>Display name is required</value>
+  </data>
+  <data name="UiValidationDisplayNameTooLong" xml:space="preserve">
+    <value>Display name is too long (max. 50 characteres)</value>
+  </data>
+  <data name="UiValidationEmailFormat" xml:space="preserve">
+    <value>Invalid email format</value>
+  </data>
+  <data name="UiValidationEmailRequired" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="UiValidationPasswordDontMatch" xml:space="preserve">
+    <value>Passwords do not match</value>
+  </data>
+  <data name="UiValidationPasswordRequired" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="UiValidationPasswordTooShort" xml:space="preserve">
+    <value>Password must be at least 8 characters long</value>
   </data>
 </root>

@@ -9,7 +9,7 @@ namespace GuessWhoClient
             InitializeComponent();
         }
 
-        private void btnProfile_Click(object sender, RoutedEventArgs e)
+        private void BtnProfile_Click(object sender, RoutedEventArgs e)
         {
             var login = new LoginWindow
             {
@@ -26,5 +26,11 @@ namespace GuessWhoClient
 
             login.Show();
         }
+
+        private void BtnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
+
 }
