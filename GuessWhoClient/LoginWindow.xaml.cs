@@ -28,7 +28,8 @@ namespace GuessWhoClient
 
             btnLogin.IsEnabled = false;
 
-            var client = new LoginServiceRef.LoginServiceClient("NetTcp_LoginService");
+            var client = new LoginServiceRef.LoginServiceClient("NetTcpBinding_ILoginService");
+
 
             try
             {
@@ -47,8 +48,8 @@ namespace GuessWhoClient
                     MessageBox.Show($"Welcome, {response.User}!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     // Abrir ventana principal
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
+                    MainMenuWindow mainMenuWindow = new MainMenuWindow();
+                    mainMenuWindow.Show();
                     this.Close();
                 }
                 else
