@@ -14,10 +14,12 @@ using System.Windows.Shapes;
 
 namespace GuessWhoClient
 {
-
-    public partial class Profile : Window
+    /// <summary>
+    /// Lógica de interacción para FinalMatchStatistics.xaml
+    /// </summary>
+    public partial class FinalMatchStatistics : Window
     {
-        public Profile()
+        public FinalMatchStatistics()
         {
             InitializeComponent();
         }

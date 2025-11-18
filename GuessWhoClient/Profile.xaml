@@ -18,19 +18,15 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- Avatar -->
                     <RowDefinition Height="24"/>
                     <RowDefinition Height="Auto"/>
-                    <!-- Username -->
                     <RowDefinition Height="12"/>
                     <RowDefinition Height="Auto"/>
-                    <!-- Password -->
                     <RowDefinition Height="12"/>
                     <RowDefinition Height="Auto"/>
                     <!-- Email -->
                     <RowDefinition Height="24"/>
                     <RowDefinition Height="Auto"/>
-                    <!-- Button -->
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
@@ -51,7 +47,6 @@
                            ClipToBounds="True"/>
                 </Border>
 
-                <!-- Username -->
                 <TextBlock Grid.Row="2" 
                            Grid.Column="0" 
                            Style="{StaticResource Txt.Pixel}" 

@@ -1,0 +1,463 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Class="GuessWhoClient.MatchWindow"
+    Title="Guess Who Board"
+    Height="720" Width="1120"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/PixelTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Cursor="Hand">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="95*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="imgBackground"
+               Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Panel.ZIndex="0" Grid.ColumnSpan="2">
+            <Image.Effect>
+                <BlurEffect Radius="5"/>
+            </Image.Effect>
+        </Image>
+
+        <Rectangle Fill="{StaticResource Brush.Bg}" Opacity="0.6" Panel.ZIndex="1" Grid.ColumnSpan="2"/>
+
+        <Border CornerRadius="20"
+                Background="#34495E"
+                Padding="25"
+                Margin="40,40,40,40"
+                BorderBrush="#3498DB"
+                BorderThickness="2"
+                Panel.ZIndex="2" Grid.ColumnSpan="2">
+
+            <Grid Background="{StaticResource Brush.Bg}" Opacity="0.9" Margin="-25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="GUESS WHO"
+                               Style="{StaticResource Txt.Pixel}"
+                               Foreground="{StaticResource Brush.Accent}"
+                               FontSize="42"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,20"/>
+
+                    <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Background="Transparent"
+                                  Margin="0,0,0,10">
+                        <UniformGrid Rows="4" Columns="6"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Top"
+             Margin="8">
+
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Adonis_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Alberto_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Alejandro_Animado.jpg"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Alexander_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Austin_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Edward_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Beatriz_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Claudia_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Genaro_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Giovanni_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Kenia_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Laura_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Luisa_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Margarita_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Mauricio_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Kai_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Shai_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="Images\Characters\Mazo1_Rodrigo_Animado.png"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+
+                            <Border Width="140" Height="180"
+            CornerRadius="8"
+            Background="#2C3E50"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Margin="6">
+                                <Image Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Margin="4"/>
+                            </Border>
+                        </UniformGrid>
+
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,10,0,0">
+                        <Button Content="GUESS"
+                                Style="{StaticResource Btn.Primary}"
+                                Width="180" Height="55"
+                                Margin="0,0,15,0"/>
+                        <Button Content="ASK"
+                                Style="{StaticResource Btn.Primary}"
+                                Width="180" Height="55"
+                                Margin="0,0,15,0" Click="Button_Click"/>
+                        <Button Content="END TURN"
+                                Style="{StaticResource Btn.Primary}"
+                                Width="180" Height="55"/>
+                    </StackPanel>
+                </Grid>
+
+                <Rectangle Grid.Column="1" Fill="#3498DB" Opacity="0.7" Margin="0,15"/>
+
+                <Grid Grid.Column="2" Margin="0,15,0,15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0"
+                            CornerRadius="10"
+                            Padding="10"
+                            Background="#2C3E50"
+                            BorderBrush="#E59866"
+                            BorderThickness="2"
+                            Margin="0,0,0,15"
+                            Height="230">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border Width="150" Height="170"
+                                    CornerRadius="6"
+                                    BorderBrush="#E59866"
+                                    BorderThickness="2"
+                                    Background="#34495E">
+                                <Image x:Name="imgSelectedCharacter"
+                                       Source="/Images/mainMenu.jpeg"
+                                       Stretch="UniformToFill"
+                                       Margin="4"/>
+                            </Border>
+
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            CornerRadius="12"
+                            Padding="12"
+                            Background="#2C3E50"
+                            BorderBrush="#3498DB"
+                            BorderThickness="2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0"
+                                    Background="#3498DB"
+                                    CornerRadius="6,6,0,0"
+                                    Padding="8,4"
+                                    Margin="0,0,0,8">
+                                <TextBlock Text="CHAT"
+                                           Style="{StaticResource Txt.Pixel}"
+                                           Foreground="White"
+                                           FontSize="13"
+                                           HorizontalAlignment="Center"/>
+                            </Border>
+
+                            <TextBox Name="txtChat"
+                                     Grid.Row="1"
+                                     IsReadOnly="True"
+                                     VerticalScrollBarVisibility="Auto"
+                                     TextWrapping="Wrap"
+                                     Background="Transparent"
+                                     Foreground="White"
+                                     BorderThickness="0"
+                                     FontSize="11"
+                                     FontFamily="Segoe UI"
+                                     Margin="0,0,0,8"/>
+
+                            <StackPanel Grid.Row="2"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Bottom">
+                                <TextBox Name="txtMessage"
+                                         Width="190"
+                                         Height="32"
+                                         Margin="0,0,5,0"
+                                         Background="#34495E"
+                                         Foreground="White"
+                                         BorderBrush="#3498DB"
+                                         BorderThickness="1"
+                                         FontSize="11"
+                                         FontFamily="Segoe UI"/>
+                                <Button Content="SEND"
+                                        Width="65"
+                                        Height="32"
+                                        Style="{StaticResource Btn.Primary}"
+                                        FontSize="10"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Button x:Name="btnBack"
+                Content="Back"
+                Style="{StaticResource Btn.Primary}"
+                Width="110" Height="38"
+                Margin="15,8,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Panel.ZIndex="3"/>
+    </Grid>
+</Window>
