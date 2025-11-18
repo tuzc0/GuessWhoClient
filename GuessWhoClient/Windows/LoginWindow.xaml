@@ -1,14 +1,14 @@
-﻿<Window x:Class="GuessWhoClient.LoginWindow"
+﻿<Window x:Class="GuessWhoClient.Windows.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:localization="clr-namespace:GuessWhoClient.Globalization"
         Title="{Binding [AppTitle], Source={x:Static localization:LocalizationProvider.Instance}}"
-        Height="635" Width="720">
+        Height="720" Width="1120">
 
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/PixelTheme.xaml"/>
+                <ResourceDictionary Source="/Themes/PixelTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -29,7 +29,7 @@
             </Viewbox>
         </Border>
 
-        <Border Grid.Row="2" Background="{StaticResource Brush.Card}" CornerRadius="16" Padding="24" Margin="0,194,0,20">
+        <Border Grid.Row="2" Background="{StaticResource Brush.Card}" CornerRadius="16" Padding="24" Margin="0,324,0,43">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -49,23 +49,28 @@
                            Text="{Binding [LblUser], Source={x:Static localization:LocalizationProvider.Instance}}"
                            FontSize="18" VerticalAlignment="Center"/>
 
-                <TextBox x:Name="txtUser" Grid.Row="0" Grid.Column="2"/>
+                <TextBox x:Name="txtUser"
+                         MaxLength="254"
+                         Grid.Row="0" 
+                         Grid.Column="2"/>
 
                 <TextBlock Grid.Row="2" Grid.Column="0"
                            Style="{StaticResource Txt.Pixel}"
                            Text="{Binding [LblPassword], Source={x:Static localization:LocalizationProvider.Instance}}"
                            FontSize="18" VerticalAlignment="Center"/>
 
-                <PasswordBox x:Name="pwdPassword" Grid.Row="2" Grid.Column="2"/>
+                <PasswordBox x:Name="pwdPassword"
+                             MaxLength="64"
+                             Grid.Row="2" 
+                             Grid.Column="2"/>
 
                 <Button x:Name="btnLogin" Grid.Row="4" Grid.ColumnSpan="3"
-        Margin="0,8,0,0"
-        Content="{Binding [BtnLogin], Source={x:Static localization:LocalizationProvider.Instance}}"
-        Style="{StaticResource Btn.Primary}"
-        Height="48" Width="200"
-        HorizontalAlignment="Center"
-        Click="BtnLogin_Click"/>
-
+                        Margin="0,8,0,0"
+                        Content="{Binding [BtnLogin], Source={x:Static localization:LocalizationProvider.Instance}}"
+                        Style="{StaticResource Btn.Primary}"
+                        Height="48" Width="200"
+                        HorizontalAlignment="Center"
+                        Click="BtnLogin_Click"/>
             </Grid>
         </Border>
 

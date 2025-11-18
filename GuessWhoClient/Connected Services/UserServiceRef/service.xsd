@@ -1,18 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWho.Contracts.Dtos" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
   <xs:element name="RegisterUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWho.Contracts.Dtos" minOccurs="0" name="request" nillable="true" type="q1:RegisterRequest" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="request" nillable="true" type="q1:RegisterRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RegisterUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWho.Contracts.Dtos" minOccurs="0" name="RegisterUserResult" nillable="true" type="q2:RegisterResponse" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="RegisterUserResult" nillable="true" type="q2:RegisterResponse" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConfirmEmailAddressWithVerificationCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="request" nillable="true" type="q3:VerifyEmailRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConfirmEmailAddressWithVerificationCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="ConfirmEmailAddressWithVerificationCodeResult" nillable="true" type="q4:VerifyEmailResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResendEmailVerificationCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="request" nillable="true" type="q5:ResendVerificationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResendEmailVerificationCodeResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

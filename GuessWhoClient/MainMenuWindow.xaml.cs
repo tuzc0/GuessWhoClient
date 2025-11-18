@@ -1,30 +1,64 @@
-﻿using System.Windows;
+﻿using GuessWhoClient.Session;
+using GuessWhoClient.Windows;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace GuessWhoClient
 {
-    public partial class MainMenuWindow : Window
+    public partial class MainMenuScreen : UserControl
     {
-        public MainMenuWindow()
+        private readonly SessionContext sessionContext = SessionContext.Current;
+
+        public MainMenuScreen()
         {
             InitializeComponent();
         }
 
         private void BtnProfile_Click(object sender, RoutedEventArgs e)
         {
-            var login = new LoginWindow
-            {
-                Owner = this,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
-            };
+            Window ownerWindow = Window.GetWindow(this);
 
-            this.IsEnabled = false;
-            login.Closed += (_, __) =>
+            if (sessionContext.UserId == 0)
             {
-                this.IsEnabled = true;
-                this.Activate();
-            };
+                var loginWindow = new LoginWindow
+                {
+                    Owner = ownerWindow,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
 
-            login.Show();
+                IsEnabled = false;
+
+                loginWindow.Closed += (_, __) =>
+                {
+                    IsEnabled = true;
+                    ownerWindow?.Activate();
+                };
+
+                loginWindow.Show();
+            }
+            else
+            {
+                var profileWindow = Window.GetWindow(this) as GameWindow;
+
+                if (profileWindow == null)
+                {
+                    return;
+                }
+
+                profileWindow.LoadUpdateProfileScreen();
+            }
+        }
+
+        private void BtnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            var gameWindow = Window.GetWindow(this) as GameWindow;
+
+            if (gameWindow == null)
+            {
+                return;
+            }
+
+            gameWindow.LoadJoinOrCreateGameScreen();
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -32,5 +66,4 @@ namespace GuessWhoClient
             Application.Current.Shutdown();
         }
     }
-
 }

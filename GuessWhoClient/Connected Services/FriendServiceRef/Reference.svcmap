@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="5535bde8-7698-4aca-b8ff-7c22f67de2c5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8099/FriendService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="77d38f15-e0d3-44ce-87de-a1a0fe2b85b0" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a7a76f08-c05d-4a28-b5a1-529a4462800d" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="7b5548c9-913b-463d-8325-c8e21f714575" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="daa71abf-12b2-40ee-80d6-80a9e32b6d16" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Faults.xsd" MetadataType="Schema" ID="c4c41299-b5f0-4824-95e8-df1fdf0c1e2d" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
