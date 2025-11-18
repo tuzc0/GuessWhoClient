@@ -36,9 +36,9 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWho.Contracts.Dtos" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUserService_RegisterUser_InputMessage">
@@ -48,13 +48,41 @@
     <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
   </wsdl:message>
   <wsdl:message name="IUserService_RegisterUser_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/" name="detail" element="q1:ServiceFault" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_ConfirmEmailAddressWithVerificationCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmEmailAddressWithVerificationCode" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_ConfirmEmailAddressWithVerificationCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmEmailAddressWithVerificationCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_ConfirmEmailAddressWithVerificationCode_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q2:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_ResendEmailVerificationCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResendEmailVerificationCode" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_ResendEmailVerificationCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResendEmailVerificationCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_ResendEmailVerificationCode_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q3:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="RegisterUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/RegisterUser" message="tns:IUserService_RegisterUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RegisterUserResponse" message="tns:IUserService_RegisterUser_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/RegisterUserServiceFaultFault" name="ServiceFaultFault" message="tns:IUserService_RegisterUser_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmEmailAddressWithVerificationCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCode" message="tns:IUserService_ConfirmEmailAddressWithVerificationCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCodeResponse" message="tns:IUserService_ConfirmEmailAddressWithVerificationCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCodeServiceFaultFault" name="ServiceFaultFault" message="tns:IUserService_ConfirmEmailAddressWithVerificationCode_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResendEmailVerificationCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/ResendEmailVerificationCode" message="tns:IUserService_ResendEmailVerificationCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/ResendEmailVerificationCodeResponse" message="tns:IUserService_ResendEmailVerificationCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/ResendEmailVerificationCodeServiceFaultFault" name="ServiceFaultFault" message="tns:IUserService_ResendEmailVerificationCode_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUserService" type="tns:IUserService">
@@ -63,6 +91,30 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="RegisterUser">
       <soap12:operation soapAction="http://tempuri.org/IUserService/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmEmailAddressWithVerificationCode">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ResendEmailVerificationCode">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/ResendEmailVerificationCode" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

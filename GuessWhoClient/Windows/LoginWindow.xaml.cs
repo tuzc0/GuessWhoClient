@@ -5,11 +5,15 @@ using System.ServiceModel.Security;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using GuessWhoClient.LoginServiceRef;
+using GuessWhoClient.Session;
 
-namespace GuessWhoClient
+namespace GuessWhoClient.Windows
 {
     public partial class LoginWindow : Window
     {
+        private readonly SessionContext sessionContext = SessionContext.Current;
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -28,25 +32,34 @@ namespace GuessWhoClient
 
             btnLogin.IsEnabled = false;
 
-            var client = new LoginServiceRef.LoginServiceClient("NetTcpBinding_ILoginService");
+            var client = new LoginServiceClient("NetTcpBinding_ILoginService");
 
 
             try
             {
-                var request = new LoginServiceRef.LoginRequest
+                var request = new LoginRequest
                 {
                     User = user,
                     Password = password
                 };
 
+
                 var response = await client.LoginUserAsync(request);
 
-                if (response != null && response.ValidUser == "True")
+                if (response != null && response.ValidUser)
                 {
-                    MessageBox.Show($"Welcome, {response.User}!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    long userId = response.UserId;
+                    string displayName = response.DisplayName;
+                    string email = response.Email;
+                    bool isValidUser = response.ValidUser;
 
-                    MainMenuWindow mainMenuWindow = new MainMenuWindow();
-                    mainMenuWindow.Show();
+                    sessionContext.SignIn(userId, displayName, email, isValidUser);
+
+                    MessageBox.Show($"Welcome, {response.DisplayName}!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    var gameWindow = new GameWindow();
+                    gameWindow.Show();
+
                     this.Close();
                 }
                 else
@@ -87,14 +100,17 @@ namespace GuessWhoClient
 
         private void CreateAccount_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            CreateAccountWindow createAccountWindow = new CreateAccountWindow();
-            createAccountWindow.Owner = this;
+            CreateAccountWindow createAccountWindow = new CreateAccountWindow
+            {
+                Owner = this
+            };
+
             createAccountWindow.ShowDialog();
         }
 
         private void ForgotPassword_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-
+            throw new NotImplementedException("Forgot Password functionality is not implemented yet.");
         }
     }
 }

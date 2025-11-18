@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="fbc3b15f-f838-4ab4-ab4d-612e56aab93c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8101/UpdateProfileService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="40d71a4c-e30a-40b8-87bb-d49072fa3610" SourceId="1" SourceUrl="net.tcp://localhost:8101/UpdateProfileService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="50c28a35-a721-4a43-ab10-949bc5fb2246" SourceId="1" SourceUrl="net.tcp://localhost:8101/UpdateProfileService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="a38d3f61-37fb-46e1-ab43-271a91db22c3" SourceId="1" SourceUrl="net.tcp://localhost:8101/UpdateProfileService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="1be0794e-b0b7-4d0f-8a4f-e21dda521c78" SourceId="1" SourceUrl="net.tcp://localhost:8101/UpdateProfileService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Faults.xsd" MetadataType="Schema" ID="e50e43c7-b0a9-4c50-b5fd-8f3b72202ed7" SourceId="1" SourceUrl="net.tcp://localhost:8101/UpdateProfileService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

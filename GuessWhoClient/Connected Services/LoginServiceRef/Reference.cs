@@ -15,7 +15,8 @@ namespace GuessWhoClient.LoginServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LoginRequest", Namespace="http://schemas.datacontract.org/2004/07/ClassLibraryGuessWho.Contracts.Dtos")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LoginRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
     [System.SerializableAttribute()]
     public partial class LoginRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -74,7 +75,8 @@ namespace GuessWhoClient.LoginServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LoginResponse", Namespace="http://schemas.datacontract.org/2004/07/ClassLibraryGuessWho.Contracts.Dtos")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LoginResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
     [System.SerializableAttribute()]
     public partial class LoginResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -82,13 +84,16 @@ namespace GuessWhoClient.LoginServiceRef {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordField;
+        private string DisplayNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string UserField;
+        private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ValidUserField;
+        private long UserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ValidUserField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -101,38 +106,51 @@ namespace GuessWhoClient.LoginServiceRef {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
+        public string DisplayName {
             get {
-                return this.PasswordField;
+                return this.DisplayNameField;
             }
             set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
-                    this.PasswordField = value;
-                    this.RaisePropertyChanged("Password");
+                if ((object.ReferenceEquals(this.DisplayNameField, value) != true)) {
+                    this.DisplayNameField = value;
+                    this.RaisePropertyChanged("DisplayName");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string User {
+        public string Email {
             get {
-                return this.UserField;
+                return this.EmailField;
             }
             set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ValidUser {
+        public long UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ValidUser {
             get {
                 return this.ValidUserField;
             }
             set {
-                if ((object.ReferenceEquals(this.ValidUserField, value) != true)) {
+                if ((this.ValidUserField.Equals(value) != true)) {
                     this.ValidUserField = value;
                     this.RaisePropertyChanged("ValidUser");
                 }

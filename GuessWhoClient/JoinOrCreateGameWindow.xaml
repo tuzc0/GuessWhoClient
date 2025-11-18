@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="GuessWhoClient.JoinOrCreateGameWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Cursor="Hand">
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Width="400">
+
+            <TextBlock Text="Match"
+                       Style="{StaticResource Txt.Pixel}"
+                       Foreground="{StaticResource Brush.Accent}"
+                       FontSize="64"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,40"/>
+
+            <Button x:Name="btnCreateNewGame"
+                    Content="New Game"
+                    Style="{StaticResource Btn.Primary}"
+                    Width="350" Height="80"
+                    Margin="0,0,0,80"
+                    Click="BtnCreateNewGame_Click"/>
+
+            <TextBlock Text="Code"
+                       Style="{StaticResource Txt.Pixel}"
+                       Foreground="{StaticResource Brush.Accent}"
+                       FontSize="24"
+                       HorizontalAlignment="Center"/>
+
+            <TextBox x:Name="txtCodeMatch"
+                     Width="350" Height="70"
+                     Margin="0,0,0,15"
+                     MaxLength="6"/>
+
+            <Button x:Name="btnJoinExistingGame"
+                    Content="Join Game"
+                    Style="{StaticResource Btn.Primary}"
+                    Width="350" Height="80"
+                    Margin="0,0,0,15"
+                    Click="BtnJoinExistingGame_Click"/>
+        </StackPanel>
+
+        <Button x:Name="btnBack"
+                Style="{StaticResource Btn.Play.Left}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="40,0,0,40"
+                Click="BtnBack_Click"/>
+    </Grid>
+</UserControl>
