@@ -61,6 +61,9 @@
     <Compile Include="ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChooseCharacterWindow.xaml.cs">
+      <DependentUpon>ChooseCharacterWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\ChatServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +86,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ChooseCharacterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FinalMatchStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,6 +110,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FinalMatchStatistics.xaml.cs">
+      <DependentUpon>FinalMatchStatistics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Globalization\LocalizationProvider.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -110,6 +124,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MatchWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +142,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MatchWindow.xaml.cs">
+      <DependentUpon>MatchWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
@@ -240,6 +261,42 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Characters\Mazo1_Adonis_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Alberto_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Alejandro_Animado.jpg" />
+    <Resource Include="Images\Characters\Mazo1_Alexander_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Austin_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Beatriz_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Claudia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Edward_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Genaro_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Giovanni_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Hailee_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Jaime_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Jose_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Josh_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Kai_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Kenia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Laura_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_LIa_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Lucas_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Luisa_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Luis_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Margarita_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Mauricio_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Nadia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Omar_Animado.jpg" />
+    <Resource Include="Images\Characters\Mazo1_Pablo_Animado.jpg" />
+    <Resource Include="Images\Characters\Mazo1_Rhodey_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Ricardo_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Rodrigo_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Samuel_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Shai_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Terry_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Will_Animado.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

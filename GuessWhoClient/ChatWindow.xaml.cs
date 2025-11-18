@@ -14,13 +14,11 @@ namespace GuessWhoClient
         {
             InitializeComponent();
 
-            // Crear el callback y el canal duplex
             var callback = new ChatCallbackWrapper(this);
             var context = new InstanceContext(callback);
             var factory = new DuplexChannelFactory<IChatService>(context, "NetTcpBinding_IChatService");
             chatProxy = factory.CreateChannel();
 
-            // Unirse al chat
             chatProxy.Join("UsuarioPrueba");
         }
 
@@ -33,7 +31,6 @@ namespace GuessWhoClient
             }
         }
 
-        // Método para agregar mensajes a la TextBox desde el callback
         public void AddMessage(string user, string message)
         {
             Dispatcher.Invoke(() =>
@@ -43,8 +40,7 @@ namespace GuessWhoClient
             });
         }
     }
-
-    // Wrapper de callback para actualizar la UI
+  
     public class ChatCallbackWrapper : IChatServiceCallback
     {
         private readonly ChatWindow window;

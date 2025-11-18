@@ -33,21 +33,18 @@ namespace GuessWhoClient
 
             try
             {
-                // Crear request
                 var request = new LoginServiceRef.LoginRequest
                 {
                     User = user,
                     Password = password
                 };
 
-                // Llamar al servicio
                 var response = await client.LoginUserAsync(request);
 
                 if (response != null && response.ValidUser == "True")
                 {
                     MessageBox.Show($"Welcome, {response.User}!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Abrir ventana principal
                     MainMenuWindow mainMenuWindow = new MainMenuWindow();
                     mainMenuWindow.Show();
                     this.Close();
@@ -57,7 +54,6 @@ namespace GuessWhoClient
                     MessageBox.Show("Invalid credentials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
-                // Cerrar cliente
                 await Task.Run(() => client.Close());
             }
             catch (MessageSecurityException)
@@ -98,7 +94,7 @@ namespace GuessWhoClient
 
         private void ForgotPassword_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // falta implementar logica
+
         }
     }
 }
