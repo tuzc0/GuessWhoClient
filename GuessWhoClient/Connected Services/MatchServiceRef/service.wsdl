@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="MatchService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IMatchService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMatchService_SusbcribeLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:SusbcribeLobby" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_SusbcribeLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SusbcribeLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_UnsusbcribeLobby_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnsusbcribeLobby" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_UnsusbcribeLobby_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnsusbcribeLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_CreateMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateMatch" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_CreateMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_JoinMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:JoinMatch" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_JoinMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:JoinMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_LeaveMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveMatch" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_LeaveMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LeaveMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_SetPlayerReadyStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPlayerReadyStatus" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_SetPlayerReadyStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPlayerReadyStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_StartMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartMatch" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_StartMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_OnPlayerJoined_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnPlayerJoined" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_OnPlayerLeft_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnPlayerLeft" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_OnReadyChanged_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnReadyChanged" />
+  </wsdl:message>
+  <wsdl:portType name="IMatchService">
+    <wsdl:operation name="SusbcribeLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/SusbcribeLobby" message="tns:IMatchService_SusbcribeLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/SusbcribeLobbyResponse" message="tns:IMatchService_SusbcribeLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnsusbcribeLobby">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/UnsusbcribeLobby" message="tns:IMatchService_UnsusbcribeLobby_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/UnsusbcribeLobbyResponse" message="tns:IMatchService_UnsusbcribeLobby_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/CreateMatch" message="tns:IMatchService_CreateMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/CreateMatchResponse" message="tns:IMatchService_CreateMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="JoinMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/JoinMatch" message="tns:IMatchService_JoinMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/JoinMatchResponse" message="tns:IMatchService_JoinMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LeaveMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/LeaveMatch" message="tns:IMatchService_LeaveMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/LeaveMatchResponse" message="tns:IMatchService_LeaveMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPlayerReadyStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/SetPlayerReadyStatus" message="tns:IMatchService_SetPlayerReadyStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/SetPlayerReadyStatusResponse" message="tns:IMatchService_SetPlayerReadyStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/StartMatch" message="tns:IMatchService_StartMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/StartMatchResponse" message="tns:IMatchService_StartMatch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnPlayerJoined">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/OnPlayerJoined" message="tns:IMatchService_OnPlayerJoined_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnPlayerLeft">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/OnPlayerLeft" message="tns:IMatchService_OnPlayerLeft_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnReadyChanged">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/OnReadyChanged" message="tns:IMatchService_OnReadyChanged_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IMatchService" type="tns:IMatchService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IMatchService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="SusbcribeLobby">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/SusbcribeLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnsusbcribeLobby">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/UnsusbcribeLobby" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/CreateMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="JoinMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/JoinMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LeaveMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/LeaveMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPlayerReadyStatus">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/SetPlayerReadyStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="StartMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/StartMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnPlayerJoined">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/OnPlayerJoined" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnPlayerLeft">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/OnPlayerLeft" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnReadyChanged">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/OnReadyChanged" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MatchService">
+    <wsdl:port name="NetTcpBinding_IMatchService" binding="tns:NetTcpBinding_IMatchService">
+      <soap12:address location="net.tcp://localhost:8100/MatchService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8100/MatchService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>LAPTOP-MG984O4N\CLAUDIO</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

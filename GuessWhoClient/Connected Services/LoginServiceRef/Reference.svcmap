@@ -25,7 +25,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="04acc121-1256-46b8-b9a0-cd5167cb7b41" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9f04d261-39e7-441e-9ac9-8c9819a5c808" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="b395026f-4317-489a-8cf6-07b506ad5633" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
-    <MetadataFile FileName="ClassLibraryGuessWho.Contracts.Dtos.xsd" MetadataType="Schema" ID="10be727c-47e0-44d1-b8b4-fb38ecdffbfb" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="ea2ad7e3-5e69-4172-9377-79b9ad15d4c6" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

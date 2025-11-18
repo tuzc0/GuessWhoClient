@@ -1,6 +1,4 @@
 ﻿using GuessWhoClient.ChatServiceRef;
-using GuessWhoClient.Callbacks;
-using System;
 using System.ServiceModel;
 using System.Windows;
 

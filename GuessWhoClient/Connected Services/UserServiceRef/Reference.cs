@@ -15,7 +15,8 @@ namespace GuessWhoClient.UserServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RegisterRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWho.Contracts.Dtos")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RegisterRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
     [System.SerializableAttribute()]
     public partial class RegisterRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -89,14 +90,14 @@ namespace GuessWhoClient.UserServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RegisterResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWho.Contracts.Dtos")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RegisterResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
     [System.SerializableAttribute()]
     public partial class RegisterResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long AccountIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -108,7 +109,6 @@ namespace GuessWhoClient.UserServiceRef {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool EmailVerificationRequiredField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long UserIdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -121,7 +121,7 @@ namespace GuessWhoClient.UserServiceRef {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public long AccountId {
             get {
                 return this.AccountIdField;
@@ -173,7 +173,7 @@ namespace GuessWhoClient.UserServiceRef {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public long UserId {
             get {
                 return this.UserIdField;
@@ -198,7 +198,7 @@ namespace GuessWhoClient.UserServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
     [System.SerializableAttribute()]
     public partial class ServiceFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -213,6 +213,9 @@ namespace GuessWhoClient.UserServiceRef {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CorrelationIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExceptionTypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -263,6 +266,169 @@ namespace GuessWhoClient.UserServiceRef {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string ExceptionType {
+            get {
+                return this.ExceptionTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExceptionTypeField, value) != true)) {
+                    this.ExceptionTypeField = value;
+                    this.RaisePropertyChanged("ExceptionType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VerifyEmailRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class VerifyEmailRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long AccountIdField;
+        
+        private string CodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long AccountId {
+            get {
+                return this.AccountIdField;
+            }
+            set {
+                if ((this.AccountIdField.Equals(value) != true)) {
+                    this.AccountIdField = value;
+                    this.RaisePropertyChanged("AccountId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VerifyEmailResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class VerifyEmailResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResendVerificationRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class ResendVerificationRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long AccountIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long AccountId {
+            get {
+                return this.AccountIdField;
+            }
+            set {
+                if ((this.AccountIdField.Equals(value) != true)) {
+                    this.AccountIdField = value;
+                    this.RaisePropertyChanged("AccountId");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -278,11 +444,26 @@ namespace GuessWhoClient.UserServiceRef {
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RegisterUser", ReplyAction="http://tempuri.org/IUserService/RegisterUserResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.UserServiceRef.ServiceFault), Action="http://tempuri.org/IUserService/RegisterUserServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.UserServiceRef.ServiceFault), Action="http://tempuri.org/IUserService/RegisterUserServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         GuessWhoClient.UserServiceRef.RegisterResponse RegisterUser(GuessWhoClient.UserServiceRef.RegisterRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RegisterUser", ReplyAction="http://tempuri.org/IUserService/RegisterUserResponse")]
         System.Threading.Tasks.Task<GuessWhoClient.UserServiceRef.RegisterResponse> RegisterUserAsync(GuessWhoClient.UserServiceRef.RegisterRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCode", ReplyAction="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCodeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.UserServiceRef.ServiceFault), Action="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCodeServiceFau" +
+            "ltFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
+        GuessWhoClient.UserServiceRef.VerifyEmailResponse ConfirmEmailAddressWithVerificationCode(GuessWhoClient.UserServiceRef.VerifyEmailRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCode", ReplyAction="http://tempuri.org/IUserService/ConfirmEmailAddressWithVerificationCodeResponse")]
+        System.Threading.Tasks.Task<GuessWhoClient.UserServiceRef.VerifyEmailResponse> ConfirmEmailAddressWithVerificationCodeAsync(GuessWhoClient.UserServiceRef.VerifyEmailRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ResendEmailVerificationCode", ReplyAction="http://tempuri.org/IUserService/ResendEmailVerificationCodeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.UserServiceRef.ServiceFault), Action="http://tempuri.org/IUserService/ResendEmailVerificationCodeServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
+        void ResendEmailVerificationCode(GuessWhoClient.UserServiceRef.ResendVerificationRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ResendEmailVerificationCode", ReplyAction="http://tempuri.org/IUserService/ResendEmailVerificationCodeResponse")]
+        System.Threading.Tasks.Task ResendEmailVerificationCodeAsync(GuessWhoClient.UserServiceRef.ResendVerificationRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -318,6 +499,22 @@ namespace GuessWhoClient.UserServiceRef {
         
         public System.Threading.Tasks.Task<GuessWhoClient.UserServiceRef.RegisterResponse> RegisterUserAsync(GuessWhoClient.UserServiceRef.RegisterRequest request) {
             return base.Channel.RegisterUserAsync(request);
+        }
+        
+        public GuessWhoClient.UserServiceRef.VerifyEmailResponse ConfirmEmailAddressWithVerificationCode(GuessWhoClient.UserServiceRef.VerifyEmailRequest request) {
+            return base.Channel.ConfirmEmailAddressWithVerificationCode(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoClient.UserServiceRef.VerifyEmailResponse> ConfirmEmailAddressWithVerificationCodeAsync(GuessWhoClient.UserServiceRef.VerifyEmailRequest request) {
+            return base.Channel.ConfirmEmailAddressWithVerificationCodeAsync(request);
+        }
+        
+        public void ResendEmailVerificationCode(GuessWhoClient.UserServiceRef.ResendVerificationRequest request) {
+            base.Channel.ResendEmailVerificationCode(request);
+        }
+        
+        public System.Threading.Tasks.Task ResendEmailVerificationCodeAsync(GuessWhoClient.UserServiceRef.ResendVerificationRequest request) {
+            return base.Channel.ResendEmailVerificationCodeAsync(request);
         }
     }
 }

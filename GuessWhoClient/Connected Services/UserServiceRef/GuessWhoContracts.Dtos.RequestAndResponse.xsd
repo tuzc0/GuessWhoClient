@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="RegisterRequest">
+    <xs:sequence>
+      <xs:element name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element name="Email" nillable="true" type="xs:string" />
+      <xs:element name="Password" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RegisterRequest" nillable="true" type="tns:RegisterRequest" />
+  <xs:complexType name="RegisterResponse">
+    <xs:sequence>
+      <xs:element name="AccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailVerificationRequired" type="xs:boolean" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RegisterResponse" nillable="true" type="tns:RegisterResponse" />
+  <xs:complexType name="VerifyEmailRequest">
+    <xs:sequence>
+      <xs:element name="AccountId" type="xs:long" />
+      <xs:element name="Code" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VerifyEmailRequest" nillable="true" type="tns:VerifyEmailRequest" />
+  <xs:complexType name="VerifyEmailResponse">
+    <xs:sequence>
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VerifyEmailResponse" nillable="true" type="tns:VerifyEmailResponse" />
+  <xs:complexType name="ResendVerificationRequest">
+    <xs:sequence>
+      <xs:element name="AccountId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResendVerificationRequest" nillable="true" type="tns:ResendVerificationRequest" />
+</xs:schema>

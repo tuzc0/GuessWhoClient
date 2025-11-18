@@ -59,6 +59,38 @@
         </Setter>
     </Style>
 
+    <Style x:Key="Btn.Secondary" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+        <Setter Property="Background" Value="{StaticResource Brush.Panel}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Padding" Value="14,10"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="12">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="4"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource Brush.Card}"/>
+                            <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.9"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Geometry x:Key="Geo.Icon.Settings">
         M19.14,12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.4.12-.61l-1.92-3.32c-.11-.21-.36-.3-.58-.22l-2.39.96
         c-.5-.38-1.05-.7-1.64-.94L14.75,2h-5l-.25,2.32c-.59.24-1.14.56-1.64.94l-2.39-.96c-.22-.08-.47.01-.58.22L2.97,7.87
@@ -76,6 +108,115 @@
         <Setter Property="Fill" 
                 Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+
+    <Geometry x:Key="Geo.Icon.ChatBubble">
+        M4,4 h14 a2,2 0 0 1 2,2 v7 a2,2 0 0 1 -2,2 h-6 l-4,4 v-4 h-2
+    a2,2 0 0 1 -2,-2 v-7 a2,2 0 0 1 2,-2 z
+    </Geometry>
+
+    <Style x:Key="Icon.Chat.Outline" TargetType="Path">
+        <Setter Property="Data" Value="{StaticResource Geo.Icon.ChatBubble}"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Fill" Value="Transparent"/>
+        <Setter Property="Stroke"
+            Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, FallbackValue={StaticResource Brush.TextLight}}"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="StrokeLineJoin" Value="Round"/>
+        <Setter Property="StrokeStartLineCap" Value="Round"/>
+        <Setter Property="StrokeEndLineCap" Value="Round"/>
+    </Style>
+
+    <Style x:Key="Icon.Chat.Filled" TargetType="Path" BasedOn="{StaticResource Icon.Chat.Outline}">
+        <Setter Property="Fill"
+            Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}, FallbackValue={StaticResource Brush.TextLight}}"/>
+        <Setter Property="Stroke" Value="Transparent"/>
+    </Style>
+
+    <Geometry x:Key="Geo.Icon.Group">
+        M16,11c1.66,0,3,-1.34,3,-3s-1.34,-3-3,-3-3,1.34-3,3,1.34,3,3,3z
+    M8,11c1.66,0,3,-1.34,3,-3S9.66,5,8,5,5,6.34,5,8,6.34,11,8,11z
+    M8,13c-2.33,0-7,1.17-7,3.5V19h14v-2.5C15,14.17,10.33,13,8,13z
+    M16,13c-.29,0-.62,.02-.97,.05 1.16,.84 1.97,1.97 1.97,3.45V19h6v-2.5
+      c0-2.33-4.67-3.5-7-3.5z
+    </Geometry>
+
+    <Style x:Key="Icon.Group" TargetType="Path">
+        <Setter Property="Data" Value="{StaticResource Geo.Icon.Group}"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Fill"
+            Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button},
+                            FallbackValue={StaticResource Brush.TextLight}}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+
+    <Style x:Key="Icon.Group.Outline" TargetType="Path">
+        <Setter Property="Data" Value="{StaticResource Geo.Icon.Group}"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Width" Value="28"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Fill" Value="Transparent"/>
+        <Setter Property="Stroke"
+            Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button},
+                            FallbackValue={StaticResource Brush.TextLight}}"/>
+        <Setter Property="StrokeThickness" Value="2"/>
+        <Setter Property="StrokeLineJoin" Value="Round"/>
+        <Setter Property="StrokeStartLineCap" Value="Round"/>
+        <Setter Property="StrokeEndLineCap" Value="Round"/>
+    </Style>
+
+    <Geometry x:Key="Geo.Icon.Play.Left">
+        M 0,0 L 1,0.5 L 0,1 Z
+    </Geometry>
+
+    <Style x:Key="Btn.Play.Left" TargetType="Button">
+        <Setter Property="Width" Value="72"/>
+        <Setter Property="Height" Value="72"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Viewbox Margin="8">
+                            <Path x:Name="icon"
+                                  Data="{StaticResource Geo.Icon.Play.Left}"
+                                  Stretch="Fill"
+                                  Fill="{StaticResource Brush.Accent}"
+                                  Stroke="{StaticResource Brush.AccentDark}"
+                                  StrokeThickness="0.10"
+                                  StrokeLineJoin="Round">
+                                <Path.RenderTransform>
+                                    <ScaleTransform ScaleX="-1" ScaleY="1"
+                        CenterX="0.5" CenterY="0.5"/>
+                                </Path.RenderTransform>
+                            </Path>
+                        </Viewbox>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="icon" Property="Fill"
+                                Value="{StaticResource Brush.AccentDark}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="icon" Property="Opacity" Value="0.9"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="icon" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

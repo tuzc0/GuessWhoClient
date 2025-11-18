@@ -1,161 +1,170 @@
-﻿using GuessWhoClient.UserServiceRef; 
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Security;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using GuessWhoClient.Alerts;
+using GuessWhoClient.Dtos;
+using GuessWhoClient.Globalization;
+using GuessWhoClient.InputValidation;
+using GuessWhoClient.UserServiceRef;
+using log4net;
 
 namespace GuessWhoClient
 {
     public partial class CreateAccountWindow : Window
     {
-     
-        private static readonly Regex EmailRegex =
-            new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
+        private const string USER_SERVICE_ENDPOINT_NAME = "NetTcpBinding_IUserService";
+
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(CreateAccountWindow));
+
+        private readonly IAlertService alertService = new MessageBoxAlertService();
+        private readonly ILocalizationService localizationService = new LocalizationService();
 
         public CreateAccountWindow()
         {
             InitializeComponent();
         }
 
-        private async void BtnCreateAccount_Click(object sender, RoutedEventArgs e)
+        private async void OnCreateAccountClick(object sender, RoutedEventArgs e)
         {
-            
-            var email = (txtEmail.Text ?? string.Empty).Trim().ToLowerInvariant();
-            var displayName = (txtDisplayName.Text ?? string.Empty).Trim();
-            var password = txtPassword.Password ?? string.Empty;
-            var confirm = txtConfirmPassword.Password ?? string.Empty;
+            SetCreateAccountButtonEnabled(isEnabled: false);
 
-            var validationError = ValidateForm(email, displayName, password, confirm);
-
-            if (validationError != null)
-            {
-                ShowWarn(validationError);
-                return;
-            }
-
-            btnCreateAccount.IsEnabled = false;
-
-            var client = new UserServiceClient("NetTcp_UserService");
+            UserServiceClient client = null;
 
             try
             {
-                var request = new RegisterRequest
+                RegisterRequest registerRequest = BuildRegisterRequestFromForm();
+                client = new UserServiceClient(USER_SERVICE_ENDPOINT_NAME);
+
+                RegisterResponse registerResponse = await client.RegisterUserAsync(registerRequest);
+
+                alertService.Info(localizationService.Get("UiAccountCreatedForFmt"));
+
+                if (registerResponse.EmailVerificationRequired)
                 {
-                    Email = email,
-                    Password = password,
-                    DisplayName = displayName
-                };
+                    VerifyEmailWindow verifyWindow = new VerifyEmailWindow(
+                        registerResponse.AccountId,
+                        registerResponse.Email,
+                        client);
 
-                var response = await client.RegisterUserAsync(request);
-                var successMsg = string.Format(GetLocalizedText("UiAccountCreatedForFmt"));
+                    bool? dialogResult = verifyWindow.ShowDialog();
 
-                ShowInfo(successMsg);
-                await SafeCloseAsync(client);
+                    if (dialogResult != true)
+                    {
+                        alertService.Warn(localizationService.Get("UiVerificationRequiredToLogin"));
+                    }
+                }
+
+                await CloseUserServiceClientSafelyAsync(client);
+                client = null;
+            }
+            catch (InvalidOperationException ex)
+            {
+                Logger.Warn("Validation error while creating account.", ex);
+                alertService.Warn(ex.Message);
             }
             catch (SecurityNegotiationException ex)
             {
-                client.Abort();
-                ShowError(GetLocalizedText("UiSecurityNegotiationFailed") + "\n\n" + ex.Message);
+                Logger.Error("Security negotiation failed while creating account.", ex);
+
+                string message =
+                    localizationService.Get("UiSecurityNegotiationFailed") +
+                    Environment.NewLine +
+                    Environment.NewLine +
+                    ex.Message;
+
+                alertService.Error(message);
             }
             catch (FaultException<ServiceFault> ex)
             {
-                client.Abort();
-                string key = $"Fault.{ex.Detail.Code}";
-                string text = LocalOrFallback(key, ex.Detail.Message, "FaultUnexpected");
+                Logger.Warn("Service fault while creating account.", ex);
 
-                ShowWarn(text);
+                string faultKey = $"Fault{ex.Detail.Code}";
+                string localizedText = localizationService.LocalOrFallback(
+                    faultKey,
+                    ex.Detail.Message,
+                    "FaultUnexpected");
+
+                alertService.Error(localizedText);
             }
-            catch (TimeoutException)
+            catch (TimeoutException ex)
             {
-                client.Abort();
-                ShowWarn(GetLocalizedText("FaultDatabaseTimeout"));
+                Logger.Error("Timeout while creating account.", ex);
+                alertService.Error(localizationService.Get("FaultDatabaseTimeout"));
             }
             catch (CommunicationException ex)
             {
-                client.Abort();
-                ShowError(GetLocalizedText("UiCommsGeneric") + "\n\n" + ex.Message);
+                Logger.Error("Communication error while creating account.", ex);
+
+                string message =
+                    localizationService.Get("UiCommsGeneric") +
+                    Environment.NewLine +
+                    Environment.NewLine +
+                    ex.Message;
+
+                alertService.Error(message);
             }
             catch (Exception ex)
             {
-                client.Abort();
-                ShowError(GetLocalizedText("FaultUnexpected") + "\n\n" + ex.Message);
+                Logger.Error("Unexpected error while creating account.", ex);
+
+                string message =
+                    localizationService.Get("FaultUnexpected") +
+                    Environment.NewLine +
+                    Environment.NewLine +
+                    ex.Message;
+
+                alertService.Error(message);
             }
             finally
             {
-                btnCreateAccount.IsEnabled = true;
+                if (client != null)
+                {
+                    await CloseUserServiceClientSafelyAsync(client);
+                }
+
+                SetCreateAccountButtonEnabled(isEnabled: true);
             }
         }
 
-        private static void ShowWarn(string message) =>
-            MessageBox.Show(message, GetLocalizedText("UiTitleWarning"), MessageBoxButton.OK, MessageBoxImage.Warning);
-
-        private static void ShowInfo(string message) =>
-            MessageBox.Show(message, GetLocalizedText("UiTitleInfo"), MessageBoxButton.OK, MessageBoxImage.Information);
-
-        private static void ShowError(string message) =>
-            MessageBox.Show(message, GetLocalizedText("UiTitleError"), MessageBoxButton.OK, MessageBoxImage.Error);
-
-        private static string GetLocalizedText(string message)
+        private RegisterRequest BuildRegisterRequestFromForm()
         {
-            return Globalization.LocalizationProvider.Instance[message];
+            AccountProfileInput newAccountProfile = new AccountProfileInput(
+                txtEmail.Text,
+                txtDisplayName.Text,
+                txtPassword.Password,
+                txtConfirmPassword.Password);
+
+            List<string> errors = AccountValidator.ValidateForm(newAccountProfile);
+
+            if (errors.Count > 0)
+            {
+                string errorMessage = string.Join(Environment.NewLine, errors);
+                throw new InvalidOperationException(errorMessage);
+            }
+
+            return new RegisterRequest
+            {
+                Email = newAccountProfile.Email,
+                Password = newAccountProfile.Password,
+                DisplayName = newAccountProfile.DisplayName
+            };
         }
 
-        private static string LocalOrFallback(string key, string serverMessage, string fallbackKey)
+        private void SetCreateAccountButtonEnabled(bool isEnabled)
         {
-            var text = GetLocalizedText(key);
-
-            if (!string.IsNullOrWhiteSpace(serverMessage))
-            {
-                return serverMessage;
-            }
-
-            return GetLocalizedText(fallbackKey);                                   
+            btnCreateAccount.IsEnabled = isEnabled;
         }
 
-        private static string ValidateForm(string email, string displayName, string password, string confirmPassword)
+        private static async Task CloseUserServiceClientSafelyAsync(UserServiceClient client)
         {
-            if (string.IsNullOrWhiteSpace(email))
+            if (client == null)
             {
-                return GetLocalizedText("UiValidationEmailRequired");
+                return;
             }
 
-            if (!EmailRegex.IsMatch(email))
-            {
-                return GetLocalizedText("UiValidationEmailFormat");              
-            }
-
-            if (string.IsNullOrWhiteSpace(displayName))
-            {
-                return GetLocalizedText("UiValidationDisplayNameRequired");      
-            }
-
-            if (displayName.Length > 50)
-            {
-                return GetLocalizedText("UiValidationDisplayNameTooLong");      
-            }
-
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                return GetLocalizedText("UiValidationPasswordRequired");        
-            }
-
-            if (password.Length < 8)
-            {
-                return GetLocalizedText("UiValidationPasswordTooShort");        
-            }
-
-            if (!string.Equals(password, confirmPassword))
-            {
-                return GetLocalizedText("UiValidationPasswordsDontMatch");     
-            }
-
-            return null;
-        }
-
-        private static async Task SafeCloseAsync(UserServiceClient client)
-        {
             try
             {
                 if (client.State == CommunicationState.Faulted)

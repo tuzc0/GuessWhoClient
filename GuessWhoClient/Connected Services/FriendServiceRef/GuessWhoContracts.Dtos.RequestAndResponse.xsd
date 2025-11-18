@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="SearchProfileRequest">
+    <xs:sequence>
+      <xs:element name="DisplayName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchProfileRequest" nillable="true" type="tns:SearchProfileRequest" />
+  <xs:complexType name="SearchProfilesResponse">
+    <xs:sequence>
+      <xs:element name="Profiles" nillable="true" type="tns:ArrayOfUserProfileSearchResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchProfilesResponse" nillable="true" type="tns:SearchProfilesResponse" />
+  <xs:complexType name="ArrayOfUserProfileSearchResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserProfileSearchResult" nillable="true" type="tns:UserProfileSearchResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserProfileSearchResult" nillable="true" type="tns:ArrayOfUserProfileSearchResult" />
+  <xs:complexType name="UserProfileSearchResult">
+    <xs:sequence>
+      <xs:element name="AvatarUrl" nillable="true" type="xs:string" />
+      <xs:element name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserProfileSearchResult" nillable="true" type="tns:UserProfileSearchResult" />
+  <xs:complexType name="SendFriendRequestRequest">
+    <xs:sequence>
+      <xs:element name="FromAccountId" type="xs:long" />
+      <xs:element name="ToUserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendFriendRequestRequest" nillable="true" type="tns:SendFriendRequestRequest" />
+  <xs:complexType name="SendFriendRequestResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AutoAccepted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FriendRequestId" nillable="true" type="xs:string" />
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendFriendRequestResponse" nillable="true" type="tns:SendFriendRequestResponse" />
+  <xs:complexType name="AcceptFriendRequestRequest">
+    <xs:sequence>
+      <xs:element name="AccountId" nillable="true" type="xs:string" />
+      <xs:element name="FriendRequestId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AcceptFriendRequestRequest" nillable="true" type="tns:AcceptFriendRequestRequest" />
+  <xs:complexType name="BasicResponse">
+    <xs:sequence>
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BasicResponse" nillable="true" type="tns:BasicResponse" />
+</xs:schema>
