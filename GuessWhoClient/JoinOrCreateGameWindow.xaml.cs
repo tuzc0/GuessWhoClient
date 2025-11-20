@@ -42,7 +42,9 @@ namespace GuessWhoClient
                 var response = await matchClient.CreateMatchAsync(request);
                 await matchClient.SusbcribeLobbyAsync(response.MatchId);
 
-                var lobby = new GameLobbyWindow(response.MatchId, response.Code, response.Players, matchClient)
+                // --- CORRECCIÓN AQUÍ ---
+                // Agregamos sessionContext.UserId al final
+                var lobby = new GameLobbyWindow(response.MatchId, response.Code, response.Players, matchClient, sessionContext.UserId)
                 {
                     Owner = ownerWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -72,7 +74,7 @@ namespace GuessWhoClient
 
         private async void BtnJoinExistingGame_Click(object sender, RoutedEventArgs e)
         {
-            var ownerWindow = Window.GetWindow(this); 
+            var ownerWindow = Window.GetWindow(this);
 
             try
             {
@@ -93,7 +95,7 @@ namespace GuessWhoClient
                 var response = await matchClient.JoinMatchAsync(request);
                 await matchClient.SusbcribeLobbyAsync(response.MatchId);
 
-                var lobby = new GameLobbyWindow(response.MatchId, response.Code, response.Players, matchClient)
+                var lobby = new GameLobbyWindow(response.MatchId, response.Code, response.Players, matchClient, sessionContext.UserId)
                 {
                     Owner = ownerWindow,
                     WindowStartupLocation = WindowStartupLocation.CenterOwner

@@ -199,7 +199,8 @@
                 <Button Style="{StaticResource Btn.Icon}"
                         Margin="6,0"
                         ToolTip="Amigos"
-                        Width="80">
+                        Width="80"
+                        Click="BtnFriends_Click">
                     <Path Style="{StaticResource Icon.Group}" />
                 </Button>
             </StackPanel>
