@@ -16,14 +16,44 @@
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="Card.FriendManager" TargetType="GroupBox">
-                <Setter Property="Background" Value="{StaticResource Brush.Card}" />
-                <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}" />
-                <Setter Property="BorderThickness" Value="2" />
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="SnapsToDevicePixels" Value="True" />
                 <Setter Property="FontFamily" Value="Consolas" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GroupBox">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{StaticResource Brush.AccentDark}"
+                                    Background="{TemplateBinding Background}">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <ContentPresenter Grid.Row="0"
+                                                        Margin="5,0,0,5" 
+                                                        ContentSource="Header"
+                                                        RecognizesAccessKey="True"
+                                                        TextElement.FontWeight="Bold"
+                                                        TextElement.Foreground="{StaticResource Brush.Accent}"/>
+
+                                    <ContentPresenter Grid.Row="1"
+                                                        Margin="{TemplateBinding Padding}"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Background" Value="{StaticResource Brush.Card}" />
             </Style>
 
             <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -38,7 +68,7 @@
 
             <Style TargetType="{x:Type DataGrid}">
                 <Setter Property="Background" Value="{StaticResource Brush.Card}"/>
-                <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                <Setter Property="GridLinesVisibility" Value="All"/>
                 <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Brush.AccentDark}"/>
                 <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Brush.AccentDark}"/>
                 <Setter Property="AlternationCount" Value="2"/>
@@ -46,6 +76,7 @@
                 <Setter Property="AlternatingRowBackground" Value="{StaticResource Brush.Panel}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HeadersVisibility" Value="Column"/>
             </Style>
 
             <Style TargetType="{x:Type DataGridCell}">
@@ -71,116 +102,138 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="Padding" Value="10,6" />
                 <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="{StaticResource Brush.AccentDark}" />
+                <Setter Property="Foreground" Value="{StaticResource Brush.Bg}" />
+            </Style>
+
+            <Style x:Key="Btn.Accept" TargetType="Button" BasedOn="{StaticResource Btn.Primary}">
+                <Setter Property="Background" Value="#4CAF50" />
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+
+            <Style x:Key="Btn.Reject" TargetType="Button" BasedOn="{StaticResource Btn.Primary}">
+                <Setter Property="Background" Value="#F44336" />
+                <Setter Property="Foreground" Value="White" />
             </Style>
 
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Margin="12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
+    <Grid>
+        <Image x:Name="imgBackground"
+               Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Panel.ZIndex="0">
+            <Image.Effect>
+                <BlurEffect Radius="5"/>
+            </Image.Effect>
+        </Image>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,8">
-            <TextBox x:Name="TxtSearch" Width="360" Height="34" Margin="0,0,8,0"
-                     VerticalContentAlignment="Center" FontSize="14"
-                     ToolTip="Enter display name to search"
-                     FontFamily="{StaticResource Font.Pixel}"
-                     Foreground="{StaticResource Brush.TextLight}"
-                     Background="{StaticResource Brush.Panel}"/>
+        <Rectangle x:Name="rectOverlay"
+                   Fill="{StaticResource Brush.Bg}"
+                   Opacity="0.85"
+                   Panel.ZIndex="1"/>
 
-            <Button Content="Search" Width="120" Height="34" Margin="0,0,8,0"
-                    Style="{StaticResource Btn.Primary}" Click="BtnSearch_Click"/>
+        <Grid Margin="12" Panel.ZIndex="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
 
-            <Button Content="Refresh Requests" Width="160" Height="34"
-                    Style="{StaticResource Btn.Primary}" Click="BtnRefreshRequests_Click"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,8">
+                <TextBox x:Name="TxtSearch" Width="360" Height="34" Margin="0,0,8,0"
+                         VerticalContentAlignment="Center" FontSize="14"
+                         ToolTip="Enter display name to search"
+                         FontFamily="{StaticResource Font.Pixel}"
+                         Foreground="{StaticResource Brush.TextLight}"
+                         Background="{StaticResource Brush.Panel}"/>
 
-            <TextBlock x:Name="LblStatus" Margin="12,0,0,0" VerticalAlignment="Center"
-                       Style="{StaticResource Txt.Status}"/>
-        </StackPanel>
+                <Button Content="Search" Width="120" Height="34" Margin="0,0,8,0"
+                        Style="{StaticResource Btn.Primary}" Click="BtnSearch_Click"/>
 
-        <Grid Grid.Row="1" Margin="0,8,0,8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+                <Button Content="Refresh Requests" Width="160" Height="34"
+                        Style="{StaticResource Btn.Primary}" Click="BtnRefreshRequests_Click"/>
 
-            <GroupBox Header="Search Results" Grid.Column="0" Style="{StaticResource Card.FriendManager}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <TextBlock x:Name="LblStatus" Margin="12,0,0,0" VerticalAlignment="Center"
+                           Style="{StaticResource Txt.Status}"/>
+            </StackPanel>
 
-                    <DataGrid x:Name="DgProfiles"
-                              Grid.Row="0"
-                              AutoGenerateColumns="False"
-                              IsReadOnly="True"
-                              SelectionMode="Single"
-                              Margin="4"
-                              Style="{StaticResource {x:Type DataGrid}}">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Avatar" Width="50" IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Border Width="40" Height="40" Margin="2"
-                                                CornerRadius="5"
-                                                BorderBrush="{StaticResource Brush.AccentDark}"
-                                                BorderThickness="1">
-                                            <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+            <Grid Grid.Row="1" Margin="0,8,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
-                        <Button Content="Send Friend Request" Width="180" Height="32"
-                                Style="{StaticResource Btn.Primary}"
-                                Click="BtnSendRequest_Click"/>
-                    </StackPanel>
-                </Grid>
-            </GroupBox>
+                <GroupBox Header="Search Results" Grid.Column="0" Style="{StaticResource Card.FriendManager}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-            <GroupBox Header="My Friends" Grid.Column="1" Margin="8,0,0,0" Style="{StaticResource Card.FriendManager}">
-                <Grid>
-                    <DataGrid x:Name="DgFriends"
-                              AutoGenerateColumns="False"
-                              IsReadOnly="True"
-                              SelectionMode="Single"
-                              Margin="4"
-                              Style="{StaticResource {x:Type DataGrid}}">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="Avatar" Width="50" IsReadOnly="True">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Border Width="40" Height="40" Margin="2"
-                                                CornerRadius="5"
-                                                BorderBrush="{StaticResource Brush.AccentDark}"
-                                                BorderThickness="1">
-                                            <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
-                                        </Border>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                        <DataGrid x:Name="DgProfiles"
+                                  Grid.Row="0"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  SelectionMode="Single"
+                                  Margin="4"
+                                  Style="{StaticResource {x:Type DataGrid}}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Avatar" Width="50" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="40" Height="40" Margin="2"
+                                                    CornerRadius="5"
+                                                    BorderBrush="{StaticResource Brush.AccentDark}"
+                                                    BorderThickness="1">
+                                                <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-                            <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </GroupBox>
-        </Grid>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
+                            <Button Content="Send Friend Request" Width="180" Height="32"
+                                    Style="{StaticResource Btn.Primary}"
+                                    Click="BtnSendRequest_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
 
-        <Grid Grid.Row="2" Margin="0,8,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                <GroupBox Header="My Friends" Grid.Column="1" Margin="8,0,0,0" Style="{StaticResource Card.FriendManager}">
+                    <Grid>
+                        <DataGrid x:Name="DgFriends"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  SelectionMode="Single"
+                                  Margin="4"
+                                  Style="{StaticResource {x:Type DataGrid}}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Avatar" Width="50" IsReadOnly="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Width="40" Height="40" Margin="2"
+                                                    CornerRadius="5"
+                                                    BorderBrush="{StaticResource Brush.AccentDark}"
+                                                    BorderThickness="1">
+                                                <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-            <GroupBox Header="Received Friend Requests" Grid.Column="0" Style="{StaticResource Card.FriendManager}" Margin="0">
+                                <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+            <GroupBox Header="Received Friend Requests" Grid.Column="0" Grid.Row="2" Style="{StaticResource Card.FriendManager}" Margin="0,8,0,0">
                 <Grid Margin="4">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -202,15 +255,16 @@
 
                     <StackPanel Grid.Column="1" Orientation="Vertical" Margin="8,0,0,0" VerticalAlignment="Top">
                         <Button Content="Accept" Width="120" Height="34" Margin="0,0,0,8"
-                                Background="#4CAF50" Foreground="White" FontWeight="Bold"
+                                Style="{StaticResource Btn.Accept}"
                                 Click="BtnAccept_Click"/>
 
                         <Button Content="Reject" Width="120" Height="34"
-                                Background="#F44336" Foreground="White" FontWeight="Bold"
+                                Style="{StaticResource Btn.Reject}"
                                 Click="BtnReject_Click"/>
                     </StackPanel>
                 </Grid>
             </GroupBox>
+
         </Grid>
     </Grid>
 </Window>

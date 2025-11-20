@@ -1,0 +1,164 @@
+﻿<Window x:Class="WPFGuessWhoClient.FriendsListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Current Friends List"
+        Height="500" Width="450"
+        Background="{StaticResource Brush.Bg}"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/PixelTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="Txt.Title"
+                   TargetType="TextBlock"
+                   BasedOn="{StaticResource Txt.Pixel}">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Margin" Value="0,0,0,8" />
+            </Style>
+
+            <Style x:Key="Txt.DataGridHeader"
+                   TargetType="TextBlock"
+                   BasedOn="{StaticResource Txt.Pixel}">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="{StaticResource Brush.Bg}"/>
+            </Style>
+
+            <Style x:Key="Card.FriendManager" TargetType="GroupBox">
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GroupBox">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{StaticResource Brush.AccentDark}"
+                                    Background="{TemplateBinding Background}">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <ContentPresenter Grid.Row="0"
+                                                      Margin="5,0,0,5" 
+                                                      ContentSource="Header"
+                                                      RecognizesAccessKey="True">
+                                        <ContentPresenter.Resources>
+                                            <Style TargetType="TextBlock" BasedOn="{StaticResource Txt.Title}"/>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
+
+                                    <ContentPresenter Grid.Row="1"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Background" Value="{StaticResource Brush.Card}" />
+            </Style>
+
+            <Style TargetType="{x:Type DataGrid}">
+                <Setter Property="Background" Value="{StaticResource Brush.Card}"/>
+                <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="RowBackground" Value="{StaticResource Brush.Card}"/>
+                <Setter Property="AlternatingRowBackground" Value="{StaticResource Brush.Panel}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+
+            <Style TargetType="{x:Type DataGridColumnHeader}">
+                <Setter Property="Background" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.Bg}"/>
+                <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}"/>
+                <Setter Property="Padding" Value="8,6"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="Btn.Primary" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="10,6" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="{StaticResource Brush.AccentDark}" />
+                <Setter Property="Foreground" Value="{StaticResource Brush.Bg}" />
+            </Style>
+
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Image x:Name="imgBackground"
+               Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Panel.ZIndex="0">
+            <Image.Effect>
+                <BlurEffect Radius="5"/>
+            </Image.Effect>
+        </Image>
+
+        <Rectangle x:Name="rectOverlay"
+                   Fill="{StaticResource Brush.Bg}"
+                   Opacity="0.85"
+                   Panel.ZIndex="1"/>
+
+        <Grid Margin="12" Panel.ZIndex="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Header="FRIENDS" Grid.Row="0" Style="{StaticResource Card.FriendManager}">
+                <DataGrid x:Name="DgFriends"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectionMode="Single"
+                          Margin="4"
+                          Style="{StaticResource {x:Type DataGrid}}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="50" IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border Width="40" Height="40" Margin="2"
+                                            CornerRadius="5"
+                                            BorderBrush="{StaticResource Brush.AccentDark}"
+                                            BorderThickness="1">
+                                        <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <Button Content="Close" 
+                    Grid.Row="1"
+                    Width="100" Height="34"
+                    HorizontalAlignment="Right"
+                    Margin="0,10,4,0"
+                    Style="{StaticResource Btn.Primary}" 
+                    Click="BtnClose_Click"/>
+
+        </Grid>
+    </Grid>
+</Window>

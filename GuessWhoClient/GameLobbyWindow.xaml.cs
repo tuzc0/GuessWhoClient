@@ -1,13 +1,14 @@
-﻿using GuessWhoClient.Interfaces;
-using GuessWhoClient.MatchServiceRef;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
-// Asegúrate de incluir el namespace donde está tu FriendManagerWindow
-using WPFGuessWhoClient;
+using System.Windows.Controls;
+using System.Threading.Tasks;
+using GuessWhoClient.Interfaces;
+using GuessWhoClient.MatchServiceRef;
+using WPFGuessWhoClient; 
 
 namespace GuessWhoClient
 {
@@ -15,21 +16,22 @@ namespace GuessWhoClient
     {
         private readonly MatchServiceClient matchServiceClient;
         private readonly long matchId;
-
-        // 1. Agregamos un campo para guardar el ID del usuario actual
         private readonly long _currentAccountId;
 
         public ObservableCollection<LobbyPlayerDto> Players { get; } = new ObservableCollection<LobbyPlayerDto>();
 
-        // 2. Modificamos el constructor para recibir 'currentAccountId'
         public GameLobbyWindow(long matchId, string code, IEnumerable<LobbyPlayerDto> players, MatchServiceClient matchClient, long currentAccountId)
         {
             InitializeComponent();
 
             this.matchServiceClient = matchClient;
             this.matchId = matchId;
-            this._currentAccountId = currentAccountId; // <--- Lo guardamos aquí
-            tbGameCode.Text = code;
+            this._currentAccountId = currentAccountId;
+
+            if (tbGameCode != null)
+            {
+                tbGameCode.Text = code;
+            }
 
             foreach (var player in players)
             {
@@ -37,6 +39,18 @@ namespace GuessWhoClient
             }
 
             DataContext = this;
+        }
+        private void BtnFriends_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FriendsListWindow friendsWindow = new FriendsListWindow(_currentAccountId);
+                friendsWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Could not open friends list window: {ex.Message}", "Error");
+            }
         }
 
         public void OnPlayerJoined(LobbyPlayerDto player)
@@ -74,7 +88,6 @@ namespace GuessWhoClient
 
         public void OnGameStarted()
         {
-            // Lógica de inicio de juego
         }
 
         protected override async void OnClosed(EventArgs e)
@@ -98,17 +111,6 @@ namespace GuessWhoClient
             {
                 matchServiceClient?.Abort();
             }
-        }
-
-        // 3. Implementamos el botón usando el ID guardado
-        private void BtnFriends_Click(object sender, RoutedEventArgs e)
-        {
-            // Asegúrate de que FriendManagerWindow sea accesible (agrega el using si está en otro namespace)
-            FriendManagerWindow friendsWindow = new FriendManagerWindow(_currentAccountId);
-
-            // Usamos ShowDialog para que sea modal (bloquea el lobby hasta que cierres amigos)
-            // O usa .Show() si quieres que se mantenga abierta al lado.
-            friendsWindow.ShowDialog();
         }
     }
 }

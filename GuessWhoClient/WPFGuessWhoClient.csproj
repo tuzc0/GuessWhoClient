@@ -110,6 +110,9 @@
       <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dtos\AccountProfileInput.cs" />
+    <Compile Include="FriendListWindow.xaml.cs">
+      <DependentUpon>FriendListWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FriendManagerWindowWindow.xaml.cs">
       <DependentUpon>FriendManagerWindowWindow.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FinalMatchStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FriendListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
