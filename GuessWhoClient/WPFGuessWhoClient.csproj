@@ -249,6 +249,12 @@
     <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.BasicResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.GetFriendsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.GetPendingRequestsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.SearchProfilesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

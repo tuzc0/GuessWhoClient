@@ -1,7 +1,10 @@
 ﻿using System;
 using System.ServiceModel;
 using System.Windows;
-using GuessWhoClient.FriendServiceRef; 
+using GuessWhoClient.FriendServiceRef;
+using System.Linq; 
+using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace WPFGuessWhoClient
 {
@@ -23,6 +26,74 @@ namespace WPFGuessWhoClient
             {
                 MessageBox.Show("Error connecting to Friend Service. Check your connection.\n" + ex.Message, "Connection Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.Close();
+            }
+
+            this.Loaded += async (s, e) =>
+            {
+                await LoadFriendsData();
+            };
+        }
+
+        private async Task LoadFriendsData()
+        {
+            await LoadFriendsList();
+            await RefreshPendingRequests();
+        }
+
+        private async Task LoadFriendsList()
+        {
+            try
+            {
+                var request = new GetFriendsRequest { AccountId = _currentAccountId.ToString() };
+                var response = await _service.GetFriendsAsync(request);
+
+                if (response.Friends != null)
+                {
+                    DgFriends.ItemsSource = response.Friends;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading friends list: " + ex.Message, "Friend List Error");
+            }
+        }
+
+        private async Task RefreshPendingRequests()
+        {
+            try
+            {
+                LblStatus.Text = "Refreshing requests...";
+
+                var request = new GetPendingFriendRequestsRequest { AccountId = _currentAccountId.ToString() };
+                var response = await _service.GetPendingRequestsAsync(request);
+
+                if (response.Requests != null)
+                {
+                    var receivedRequests = response.Requests
+                        .Where(r => r.AddresseeUserId == _currentAccountId)
+                        .ToList();
+
+                    DgReceivedRequests.ItemsSource = receivedRequests;
+
+                    int receivedCount = receivedRequests.Count;
+
+                    LblStatus.Text = $"{receivedCount} received requests.";
+                }
+                else
+                {
+                    DgReceivedRequests.ItemsSource = null;
+                    LblStatus.Text = "No pending requests.";
+                }
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                MessageBox.Show($"Server Error:\n{fault.Detail.Message}", "Request Load Failed");
+                LblStatus.Text = "Error loading requests.";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Connection Error:\n{ex.Message}", "Connection Error");
+                LblStatus.Text = "Connection error.";
             }
         }
 
@@ -70,9 +141,8 @@ namespace WPFGuessWhoClient
             }
         }
 
-        private void BtnSendRequest_Click(object sender, RoutedEventArgs e)
+        private async void BtnSendRequest_Click(object sender, RoutedEventArgs e)
         {
-
             var selectedProfile = DgProfiles.SelectedItem as UserProfileSearchResult;
 
             if (selectedProfile == null)
@@ -89,7 +159,7 @@ namespace WPFGuessWhoClient
                     ToUserId = selectedProfile.UserId
                 };
 
-                var response = _service.SendFriendRequest(request);
+                var response = await _service.SendFriendRequestAsync(request);
 
                 if (response.AutoAccepted)
                 {
@@ -101,8 +171,10 @@ namespace WPFGuessWhoClient
                 }
                 else
                 {
-                    MessageBox.Show("Request could not be sent. It might already exist.", "Info");
+                    MessageBox.Show("Request could not be sent. A pending request might already exist.", "Info");
                 }
+
+                await LoadFriendsData();
             }
             catch (FaultException<ServiceFault> fault)
             {
@@ -114,39 +186,29 @@ namespace WPFGuessWhoClient
             }
         }
 
-        private void BtnRefreshRequests_Click(object sender, RoutedEventArgs e)
+        private async void BtnRefreshRequests_Click(object sender, RoutedEventArgs e)
         {
-
-
-            MessageBox.Show("The current Server implementation does not include a method to fetch Pending Requests.\n\n" +
-                            "Please implement 'GetFriendRequests' in the WCF Service to populate this list.",
-                            "Server Limitation", MessageBoxButton.OK, MessageBoxImage.Information);
-
+            await RefreshPendingRequests();
         }
 
-        private void BtnAccept_Click(object sender, RoutedEventArgs e)
+        private async void BtnAccept_Click(object sender, RoutedEventArgs e)
         {
-            ProcessRequest("Accept");
+            await ProcessRequest("Accept", DgReceivedRequests);
         }
 
-        private void BtnReject_Click(object sender, RoutedEventArgs e)
+        private async void BtnReject_Click(object sender, RoutedEventArgs e)
         {
-            ProcessRequest("Reject");
+            await ProcessRequest("Reject", DgReceivedRequests);
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            ProcessRequest("Cancel");
-        }
 
-        private void ProcessRequest(string action)
+        private async Task ProcessRequest(string action, System.Windows.Controls.DataGrid sourceDataGrid)
         {
-
-            var selectedItem = DgRequests.SelectedItem;
+            var selectedItem = sourceDataGrid.SelectedItem;
 
             if (selectedItem == null)
             {
-                MessageBox.Show("Select a request from the Pending list first.", "Validation");
+                MessageBox.Show($"Select a request from the {sourceDataGrid.Name} list first.", "Validation");
                 return;
             }
 
@@ -154,11 +216,11 @@ namespace WPFGuessWhoClient
 
             try
             {
-                requestId = (long)((dynamic)selectedItem).FriendRequestId;
+                requestId = ((FriendRequest)selectedItem).FriendRequestId;
             }
             catch
             {
-                MessageBox.Show("Invalid item selection.", "Error");
+                MessageBox.Show("Invalid item selection. Please ensure you selected a row.", "Error");
                 return;
             }
 
@@ -175,13 +237,10 @@ namespace WPFGuessWhoClient
                 switch (action)
                 {
                     case "Accept":
-                        response = _service.AcceptFriendRequest(request);
+                        response = await _service.AcceptFriendRequestAsync(request);
                         break;
                     case "Reject":
-                        response = _service.RejectFriendRequest(request);
-                        break;
-                    case "Cancel":
-                        response = _service.CancelFriendRequest(request);
+                        response = await _service.RejectFriendRequestAsync(request);
                         break;
                 }
 
@@ -189,6 +248,9 @@ namespace WPFGuessWhoClient
                 {
                     MessageBox.Show($"Request {action}ed successfully.", "Done");
                 }
+
+                await LoadFriendsData();
+
             }
             catch (FaultException<ServiceFault> fault)
             {

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Friend Manager"
-        Height="600" Width="950"
+        Height="650" Width="1000"
+        Background="{StaticResource Brush.Bg}"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -13,6 +14,65 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/PixelTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="Card.FriendManager" TargetType="GroupBox">
+                <Setter Property="Background" Value="{StaticResource Brush.Card}" />
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="FontFamily" Value="Consolas" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+            </Style>
+
+            <Style TargetType="{x:Type DataGridColumnHeader}">
+                <Setter Property="Background" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.Bg}"/>
+                <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}"/>
+                <Setter Property="Padding" Value="4,6"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="{x:Type DataGrid}">
+                <Setter Property="Background" Value="{StaticResource Brush.Card}"/>
+                <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="AlternationCount" Value="2"/>
+                <Setter Property="RowBackground" Value="{StaticResource Brush.Card}"/>
+                <Setter Property="AlternatingRowBackground" Value="{StaticResource Brush.Panel}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+
+            <Style TargetType="{x:Type DataGridCell}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Padding" Value="4,4"/>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{StaticResource Brush.Accent}"/>
+                        <Setter Property="Foreground" Value="{StaticResource Brush.Bg}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="TextBlock" x:Key="Txt.Status" BasedOn="{StaticResource Txt.Pixel}">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+            </Style>
+
+            <Style x:Key="Btn.Primary" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="10,6" />
+                <Setter Property="Cursor" Value="Hand" />
+            </Style>
+
         </ResourceDictionary>
     </Window.Resources>
 
@@ -26,7 +86,10 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,8">
             <TextBox x:Name="TxtSearch" Width="360" Height="34" Margin="0,0,8,0"
                      VerticalContentAlignment="Center" FontSize="14"
-                     ToolTip="Enter display name to search"/>
+                     ToolTip="Enter display name to search"
+                     FontFamily="{StaticResource Font.Pixel}"
+                     Foreground="{StaticResource Brush.TextLight}"
+                     Background="{StaticResource Brush.Panel}"/>
 
             <Button Content="Search" Width="120" Height="34" Margin="0,0,8,0"
                     Style="{StaticResource Btn.Primary}" Click="BtnSearch_Click"/>
@@ -35,7 +98,7 @@
                     Style="{StaticResource Btn.Primary}" Click="BtnRefreshRequests_Click"/>
 
             <TextBlock x:Name="LblStatus" Margin="12,0,0,0" VerticalAlignment="Center"
-                       Style="{StaticResource Txt.Pixel}" FontSize="14" Foreground="#333"/>
+                       Style="{StaticResource Txt.Status}"/>
         </StackPanel>
 
         <Grid Grid.Row="1" Margin="0,8,0,8">
@@ -44,7 +107,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="Search Results" Grid.Column="0" FontFamily="Consolas" FontSize="14">
+            <GroupBox Header="Search Results" Grid.Column="0" Style="{StaticResource Card.FriendManager}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -56,11 +119,22 @@
                               AutoGenerateColumns="False"
                               IsReadOnly="True"
                               SelectionMode="Single"
-                              Margin="4">
+                              Margin="4"
+                              Style="{StaticResource {x:Type DataGrid}}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding UserId}" Width="60"/>
-                            <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Width="*"/>
-                            <DataGridTextColumn Header="Avatar" Binding="{Binding AvatarUrl}" Width="80"/>
+                            <DataGridTemplateColumn Header="Avatar" Width="50" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Width="40" Height="40" Margin="2"
+                                                CornerRadius="5"
+                                                BorderBrush="{StaticResource Brush.AccentDark}"
+                                                BorderThickness="1">
+                                            <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -72,51 +146,71 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="My Friends" Grid.Column="1" FontFamily="Consolas" FontSize="14" Margin="8,0,0,0">
+            <GroupBox Header="My Friends" Grid.Column="1" Margin="8,0,0,0" Style="{StaticResource Card.FriendManager}">
                 <Grid>
-                    <TextBlock Text="Feature not available in current server version."
-                               HorizontalAlignment="Center" VerticalAlignment="Center"
-                               TextWrapping="Wrap" Foreground="Gray" TextAlignment="Center"/>
+                    <DataGrid x:Name="DgFriends"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              Margin="4"
+                              Style="{StaticResource {x:Type DataGrid}}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Avatar" Width="50" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Width="40" Height="40" Margin="2"
+                                                CornerRadius="5"
+                                                BorderBrush="{StaticResource Brush.AccentDark}"
+                                                BorderThickness="1">
+                                            <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </GroupBox>
         </Grid>
 
-        <GroupBox Header="Pending Requests Management" Grid.Row="2" FontFamily="Consolas" FontSize="14">
-            <Grid Margin="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Margin="0,8,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                <DataGrid x:Name="DgRequests"
-                          Grid.Column="0"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
-                          SelectionMode="Single">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Req ID" Binding="{Binding FriendRequestId}" Width="80"/>
-                        <DataGridTextColumn Header="Requester ID" Binding="{Binding RequesterUserId}" Width="120"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
-                        <DataGridTextColumn Header="Date" Binding="{Binding CreatedAt}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+            <GroupBox Header="Received Friend Requests" Grid.Column="0" Style="{StaticResource Card.FriendManager}" Margin="0">
+                <Grid Margin="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="8,0,0,0" VerticalAlignment="Top">
-                    <Button Content="Accept" Width="120" Height="34" Margin="0,0,0,8"
-                            Style="{StaticResource Btn.Primary}" Background="#4CAF50" 
-                            Click="BtnAccept_Click"/>
+                    <DataGrid x:Name="DgReceivedRequests"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              Style="{StaticResource {x:Type DataGrid}}"
+                              Grid.Column="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="From User" Binding="{Binding RequesterDisplayName}" Width="*"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="80"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding CreatedAt, StringFormat=\{0:d/M/yy\}}" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
 
-                    <Button Content="Reject" Width="120" Height="34" Margin="0,0,0,8"
-                            Style="{StaticResource Btn.Primary}" Background="#F44336"
-                            Click="BtnReject_Click"/>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="8,0,0,0" VerticalAlignment="Top">
+                        <Button Content="Accept" Width="120" Height="34" Margin="0,0,0,8"
+                                Background="#4CAF50" Foreground="White" FontWeight="Bold"
+                                Click="BtnAccept_Click"/>
 
-                    <Button Content="Cancel (Mine)" Width="120" Height="34"
-                            Style="{StaticResource Btn.Primary}" Background="#FF9800"
-                            ToolTip="Cancel a request I sent"
-                            Click="BtnCancel_Click"/>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
-
+                        <Button Content="Reject" Width="120" Height="34"
+                                Background="#F44336" Foreground="White" FontWeight="Bold"
+                                Click="BtnReject_Click"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+        </Grid>
     </Grid>
 </Window>
