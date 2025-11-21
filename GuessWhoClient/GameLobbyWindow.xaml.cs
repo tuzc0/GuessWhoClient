@@ -1,11 +1,14 @@
-﻿using GuessWhoClient.Interfaces;
-using GuessWhoClient.MatchServiceRef;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Threading.Tasks;
+using GuessWhoClient.Interfaces;
+using GuessWhoClient.MatchServiceRef;
+using WPFGuessWhoClient; 
 
 namespace GuessWhoClient
 {
@@ -13,23 +16,41 @@ namespace GuessWhoClient
     {
         private readonly MatchServiceClient matchServiceClient;
         private readonly long matchId;
+        private readonly long _currentAccountId;
 
         public ObservableCollection<LobbyPlayerDto> Players { get; } = new ObservableCollection<LobbyPlayerDto>();
 
-        public GameLobbyWindow(long matchId, string code, IEnumerable<LobbyPlayerDto> players, MatchServiceClient matchClient)
+        public GameLobbyWindow(long matchId, string code, IEnumerable<LobbyPlayerDto> players, MatchServiceClient matchClient, long currentAccountId)
         {
             InitializeComponent();
 
             this.matchServiceClient = matchClient;
             this.matchId = matchId;
-            tbGameCode.Text = code;
+            this._currentAccountId = currentAccountId;
+
+            if (tbGameCode != null)
+            {
+                tbGameCode.Text = code;
+            }
 
             foreach (var player in players)
             {
                 Players.Add(player);
             }
 
-            DataContext = this; 
+            DataContext = this;
+        }
+        private void BtnFriends_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                FriendsListWindow friendsWindow = new FriendsListWindow(_currentAccountId);
+                friendsWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Could not open friends list window: {ex.Message}", "Error");
+            }
         }
 
         public void OnPlayerJoined(LobbyPlayerDto player)
@@ -67,7 +88,6 @@ namespace GuessWhoClient
 
         public void OnGameStarted()
         {
-           
         }
 
         protected override async void OnClosed(EventArgs e)

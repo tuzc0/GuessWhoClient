@@ -110,6 +110,12 @@
       <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dtos\AccountProfileInput.cs" />
+    <Compile Include="FriendListWindow.xaml.cs">
+      <DependentUpon>FriendListWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FriendManagerWindowWindow.xaml.cs">
+      <DependentUpon>FriendManagerWindowWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameLobbyWindow.xaml.cs">
       <DependentUpon>GameLobbyWindow.xaml</DependentUpon>
     </Compile>
@@ -142,7 +148,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="FriendListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FriendManagerWindowWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GameLobbyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,6 +254,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.BasicResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.GetFriendsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.GetPendingRequestsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.SearchProfilesResponse.datasource">
