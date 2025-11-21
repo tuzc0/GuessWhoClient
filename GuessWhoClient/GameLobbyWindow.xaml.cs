@@ -1,5 +1,7 @@
-﻿using GuessWhoClient.Interfaces;
+﻿using GuessWhoClient.Callbacks;
+using GuessWhoClient.Interfaces;
 using GuessWhoClient.MatchServiceRef;
+using GuessWhoClient.Session;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,16 +13,19 @@ namespace GuessWhoClient
 {
     public partial class GameLobbyWindow : Window, ILobbyClient
     {
-        private readonly MatchServiceClient matchServiceClient;
+        private MatchServiceClient matchServiceClient;
+        private MatchCallback matchCallback;
         private readonly long matchId;
 
-        public ObservableCollection<LobbyPlayerDto> Players { get; } = new ObservableCollection<LobbyPlayerDto>();
+        public long CurrentUserId => SessionContext.Current.UserId;
 
-        public GameLobbyWindow(long matchId, string code, IEnumerable<LobbyPlayerDto> players, MatchServiceClient matchClient)
+        public ObservableCollection<LobbyPlayerDto> Players { get; } =
+            new ObservableCollection<LobbyPlayerDto>();
+
+        public GameLobbyWindow(long matchId, string code, IEnumerable<LobbyPlayerDto> players)
         {
             InitializeComponent();
 
-            this.matchServiceClient = matchClient;
             this.matchId = matchId;
             tbGameCode.Text = code;
 
@@ -29,8 +34,90 @@ namespace GuessWhoClient
                 Players.Add(player);
             }
 
-            DataContext = this; 
+            DataContext = this;
+
+            Loaded += GameLobbyWindow_Loaded;
         }
+
+        private async void GameLobbyWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // 🔹 callback real que implementa IMatchServiceCallback
+                matchCallback = new MatchCallback(Dispatcher);
+                matchCallback.AttachLobby(this); // para que reenvíe a ILobbyClient (esta ventana)
+
+                var context = new InstanceContext(matchCallback);
+                matchServiceClient = new MatchServiceClient(context, "NetTcpBinding_IMatchService");
+
+                await matchServiceClient.SusbcribeLobbyAsync(matchId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "No fue posible conectarse al lobby.\n" + ex.Message,
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                Close();
+            }
+        }
+
+        private async System.Threading.Tasks.Task LeaveMatchAsync()
+        {
+            if (matchServiceClient == null)
+            {
+                return;
+            }
+
+            try
+            {
+                var request = new LeaveMatchRequest
+                {
+                    MatchId = matchId,
+                    UserId = CurrentUserId
+                };
+
+                BasicResponse response = await matchServiceClient.LeaveMatchAsync(request);
+
+                if (!response.Success)
+                {
+                    MessageBox.Show(
+                        "No se pudo salir correctamente del lobby.",
+                        "Aviso",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                }
+            }
+            catch (FaultException<ServiceFault> fault)
+            {
+                MessageBox.Show(
+                    fault.Detail.Message,
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(
+                    "Ocurrió un error inesperado al salir del lobby.",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        private async void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            btnBack.IsEnabled = false;
+
+            await LeaveMatchAsync();
+
+            Close();
+        }
+
+        #region ILobbyClient
 
         public void OnPlayerJoined(LobbyPlayerDto player)
         {
@@ -67,16 +154,34 @@ namespace GuessWhoClient
 
         public void OnGameStarted()
         {
-           
+            // TODO
         }
+
+        public void OnGameLeft()
+        {
+            // TODO
+        }
+
+        #endregion
 
         protected override async void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
 
+            if (matchServiceClient == null)
+            {
+                return;
+            }
+
             try
             {
-                await matchServiceClient.UnsusbcribeLobbyAsync(matchId);
+                try
+                {
+                    await matchServiceClient.UnsusbcribeLobbyAsync(matchId);
+                }
+                catch
+                {
+                }
 
                 if (matchServiceClient.State == CommunicationState.Faulted)
                 {
@@ -89,7 +194,7 @@ namespace GuessWhoClient
             }
             catch
             {
-                matchServiceClient?.Abort();
+                matchServiceClient.Abort();
             }
         }
     }

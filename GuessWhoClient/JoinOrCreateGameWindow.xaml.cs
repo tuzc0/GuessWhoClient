@@ -1,5 +1,4 @@
 ﻿using GuessWhoClient.Callbacks;
-using GuessWhoClient.FriendServiceRef;
 using GuessWhoClient.MatchServiceRef;
 using GuessWhoClient.Session;
 using System;
@@ -12,20 +11,18 @@ namespace GuessWhoClient
     public partial class JoinOrCreateGameWindow : UserControl
     {
         private readonly SessionContext sessionContext = SessionContext.Current;
-        private MatchCallback matchCallBack;
-        private MatchServiceClient matchClient;
 
         public JoinOrCreateGameWindow()
         {
             InitializeComponent();
-            InitializeMatchClient();
         }
 
-        private void InitializeMatchClient()
+        private MatchServiceClient CreateMatchClient()
         {
-            matchCallBack = new MatchCallback(Dispatcher);
-            var context = new InstanceContext(matchCallBack);
-            matchClient = new MatchServiceClient(context, "NetTcpBinding_IMatchService");
+            var callback = new MatchCallback(Dispatcher);
+            var context = new InstanceContext(callback);
+
+            return new MatchServiceClient(context, "NetTcpBinding_IMatchService");
         }
 
         private async void BtnCreateNewGame_Click(object sender, RoutedEventArgs e)
@@ -39,26 +36,26 @@ namespace GuessWhoClient
                     ProfileId = sessionContext.UserId
                 };
 
-                var response = await matchClient.CreateMatchAsync(request);
-                await matchClient.SusbcribeLobbyAsync(response.MatchId);
-
-                var lobby = new GameLobbyWindow(response.MatchId, response.Code, response.Players, matchClient)
+                using (var client = CreateMatchClient())
                 {
-                    Owner = ownerWindow,
-                    WindowStartupLocation = WindowStartupLocation.CenterOwner
-                };
+                    var response = await client.CreateMatchAsync(request);
 
-                matchCallBack.AttachLobby(lobby);
+                    var lobby = new GameLobbyWindow(response.MatchId, response.Code, response.Players)
+                    {
+                        Owner = ownerWindow,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
 
-                IsEnabled = false;
+                    IsEnabled = false;
 
-                lobby.Closed += (_, __) =>
-                {
-                    IsEnabled = true;
-                    ownerWindow?.Activate();
-                };
+                    lobby.Closed += (_, __) =>
+                    {
+                        IsEnabled = true;
+                        ownerWindow?.Activate();
+                    };
 
-                lobby.Show();
+                    lobby.Show();
+                }
             }
             catch (FaultException<ServiceFault> ex)
             {
@@ -72,7 +69,7 @@ namespace GuessWhoClient
 
         private async void BtnJoinExistingGame_Click(object sender, RoutedEventArgs e)
         {
-            var ownerWindow = Window.GetWindow(this); 
+            var ownerWindow = Window.GetWindow(this);
 
             try
             {
@@ -90,26 +87,26 @@ namespace GuessWhoClient
                     MatchCode = code
                 };
 
-                var response = await matchClient.JoinMatchAsync(request);
-                await matchClient.SusbcribeLobbyAsync(response.MatchId);
-
-                var lobby = new GameLobbyWindow(response.MatchId, response.Code, response.Players, matchClient)
+                using (var client = CreateMatchClient())
                 {
-                    Owner = ownerWindow,
-                    WindowStartupLocation = WindowStartupLocation.CenterOwner
-                };
+                    var response = await client.JoinMatchAsync(request);
 
-                matchCallBack.AttachLobby(lobby);
+                    var lobby = new GameLobbyWindow(response.MatchId, response.Code, response.Players)
+                    {
+                        Owner = ownerWindow,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
 
-                IsEnabled = false;
+                    IsEnabled = false;
 
-                lobby.Closed += (_, __) =>
-                {
-                    IsEnabled = true;
-                    ownerWindow?.Activate();
-                };
+                    lobby.Closed += (_, __) =>
+                    {
+                        IsEnabled = true;
+                        ownerWindow?.Activate();
+                    };
 
-                lobby.Show();
+                    lobby.Show();
+                }
             }
             catch (FaultException<ServiceFault> ex)
             {

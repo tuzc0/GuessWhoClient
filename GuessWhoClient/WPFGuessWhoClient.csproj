@@ -106,6 +106,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Converters\IsLocalPlayerConverter.cs" />
     <Compile Include="CreateAccountWindow.xaml.cs">
       <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
     </Compile>
@@ -289,6 +290,9 @@
     <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Faults.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\MatchServiceRef\service.wsdl" />
     <None Include="Connected Services\MatchServiceRef\service.xsd">
       <SubType>Designer</SubType>
@@ -367,18 +371,6 @@
     <WCFMetadataStorage Include="Connected Services\UserServiceRef\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\LoginServiceRef\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LoginServiceRef\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LoginServiceRef\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\ChatServiceRef\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -438,7 +430,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Connected Services\LoginServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Characters\Mazo1_Adonis_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Alberto_Animado.png" />
@@ -479,6 +473,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatars\Avatar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LoginServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LoginServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

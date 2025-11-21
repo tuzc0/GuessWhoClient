@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="5174e7c7-6865-4b71-8770-1a0dfe2cc355" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="c0ff46be-0897-407a-879d-de1e2ebab2c3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="net.tcp://localhost:8097/LoginService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="04acc121-1256-46b8-b9a0-cd5167cb7b41" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9f04d261-39e7-441e-9ac9-8c9819a5c808" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="b395026f-4317-489a-8cf6-07b506ad5633" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
-    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="ea2ad7e3-5e69-4172-9377-79b9ad15d4c6" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="064c9ab2-4efb-4836-8b53-8ba1a070c696" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="95e2c500-52a7-4e88-a34b-2c7c4b36d81b" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4828ec3c-f052-4dfb-845a-411d28b73811" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="754ba690-e973-456b-8034-2a372e2f39ea" SourceId="1" SourceUrl="net.tcp://localhost:8097/LoginService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -36,6 +36,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" />
@@ -47,11 +48,17 @@
   <wsdl:message name="IMatchService_SusbcribeLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:SusbcribeLobbyResponse" />
   </wsdl:message>
+  <wsdl:message name="IMatchService_SusbcribeLobby_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="IMatchService_UnsusbcribeLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:UnsusbcribeLobby" />
   </wsdl:message>
   <wsdl:message name="IMatchService_UnsusbcribeLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:UnsusbcribeLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_UnsusbcribeLobby_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q2:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_CreateMatch_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateMatch" />
@@ -59,11 +66,17 @@
   <wsdl:message name="IMatchService_CreateMatch_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateMatchResponse" />
   </wsdl:message>
+  <wsdl:message name="IMatchService_CreateMatch_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q3:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="IMatchService_JoinMatch_InputMessage">
     <wsdl:part name="parameters" element="tns:JoinMatch" />
   </wsdl:message>
   <wsdl:message name="IMatchService_JoinMatch_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_JoinMatch_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q4:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_LeaveMatch_InputMessage">
     <wsdl:part name="parameters" element="tns:LeaveMatch" />
@@ -71,17 +84,26 @@
   <wsdl:message name="IMatchService_LeaveMatch_OutputMessage">
     <wsdl:part name="parameters" element="tns:LeaveMatchResponse" />
   </wsdl:message>
+  <wsdl:message name="IMatchService_LeaveMatch_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q5:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="IMatchService_SetPlayerReadyStatus_InputMessage">
     <wsdl:part name="parameters" element="tns:SetPlayerReadyStatus" />
   </wsdl:message>
   <wsdl:message name="IMatchService_SetPlayerReadyStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetPlayerReadyStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="IMatchService_SetPlayerReadyStatus_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q6:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="IMatchService_StartMatch_InputMessage">
     <wsdl:part name="parameters" element="tns:StartMatch" />
   </wsdl:message>
   <wsdl:message name="IMatchService_StartMatch_OutputMessage">
     <wsdl:part name="parameters" element="tns:StartMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_StartMatch_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q7:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_OnPlayerJoined_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnPlayerJoined" />
@@ -96,30 +118,37 @@
     <wsdl:operation name="SusbcribeLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/SusbcribeLobby" message="tns:IMatchService_SusbcribeLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/SusbcribeLobbyResponse" message="tns:IMatchService_SusbcribeLobby_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/SusbcribeLobbyServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_SusbcribeLobby_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="UnsusbcribeLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/UnsusbcribeLobby" message="tns:IMatchService_UnsusbcribeLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/UnsusbcribeLobbyResponse" message="tns:IMatchService_UnsusbcribeLobby_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/UnsusbcribeLobbyServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_UnsusbcribeLobby_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/CreateMatch" message="tns:IMatchService_CreateMatch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/CreateMatchResponse" message="tns:IMatchService_CreateMatch_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/CreateMatchServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_CreateMatch_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="JoinMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/JoinMatch" message="tns:IMatchService_JoinMatch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/JoinMatchResponse" message="tns:IMatchService_JoinMatch_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/JoinMatchServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_JoinMatch_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="LeaveMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/LeaveMatch" message="tns:IMatchService_LeaveMatch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/LeaveMatchResponse" message="tns:IMatchService_LeaveMatch_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/LeaveMatchServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_LeaveMatch_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetPlayerReadyStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/SetPlayerReadyStatus" message="tns:IMatchService_SetPlayerReadyStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/SetPlayerReadyStatusResponse" message="tns:IMatchService_SetPlayerReadyStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/SetPlayerReadyStatusServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_SetPlayerReadyStatus_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="StartMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/StartMatch" message="tns:IMatchService_StartMatch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/StartMatchResponse" message="tns:IMatchService_StartMatch_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/StartMatchServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_StartMatch_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="OnPlayerJoined">
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/OnPlayerJoined" message="tns:IMatchService_OnPlayerJoined_OutputCallbackMessage" />
@@ -143,6 +172,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="UnsusbcribeLobby">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/UnsusbcribeLobby" style="document" />
@@ -152,6 +184,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="CreateMatch">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/CreateMatch" style="document" />
@@ -161,6 +196,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="JoinMatch">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/JoinMatch" style="document" />
@@ -170,6 +208,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="LeaveMatch">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/LeaveMatch" style="document" />
@@ -179,6 +220,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SetPlayerReadyStatus">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/SetPlayerReadyStatus" style="document" />
@@ -188,6 +232,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="StartMatch">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/StartMatch" style="document" />
@@ -197,6 +244,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="OnPlayerJoined">
       <soap12:operation soapAction="http://tempuri.org/IMatchService/OnPlayerJoined" style="document" />

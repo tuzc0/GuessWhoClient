@@ -25,6 +25,7 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="15fe0299-40e4-4ae1-bf4f-da2711cf7be5" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0202b3aa-7c60-4c3a-82a2-56adad4ef92f" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="53441253-c723-4ab3-9c38-c42b573b9026" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Faults.xsd" MetadataType="Schema" ID="93c2a627-7283-4610-bac1-66fb3b42ca85" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
     <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="7f5fd14c-7817-43b7-b248-f1f61ec1cc25" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
     <MetadataFile FileName="GuessWhoContracts.Dtos.Dto.xsd" MetadataType="Schema" ID="4eb5dcbf-bace-4d63-8b9c-b2567c9f03ab" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
   </Metadata>

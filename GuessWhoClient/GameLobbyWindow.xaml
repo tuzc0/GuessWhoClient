@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:conv="clr-namespace:GuessWhoClient.Converters"
         mc:Ignorable="d"
         Title="GameLobbyWindow"
-        Height="460"
-        Width="730"
+        Height="720" Width="1120"
         Background="{StaticResource Brush.Bg}"
         WindowStartupLocation="CenterScreen">
 
@@ -101,8 +101,10 @@
             </Style>
 
             <Style x:Key="ReadyToggle" TargetType="ToggleButton">
-                <Setter Property="MinWidth" Value="72" />
-                <Setter Property="Padding" Value="8,4" />
+                <Setter Property="MinWidth" Value="120" />
+                <Setter Property="MinHeight" Value="40" />
+                <Setter Property="Padding" Value="12,6" />
+                <Setter Property="FontSize" Value="18" />
                 <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}" />
                 <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}" />
                 <Setter Property="Background" Value="{StaticResource Brush.Panel}" />
@@ -111,7 +113,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="ToggleButton">
-                            <Border CornerRadius="8"
+                            <Border CornerRadius="10"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}">
@@ -135,7 +137,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="56" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="32" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -207,7 +209,7 @@
 
         <Border Grid.Row="1"
                 Grid.Column="0"
-                Margin="0,8,8,8"
+                Margin="0,8,8,1"
                 Style="{StaticResource Card}">
             <Grid>
                 <Grid.RowDefinitions>
@@ -222,21 +224,22 @@
                               ItemsSource="{Binding Players}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="0,4"
-                                  Height="50">
+                            <Grid Margin="0,6"
+                                  Height="72">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="72" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Border Grid.Column="0"
-                                        Width="46"
-                                        Height="46"
-                                        CornerRadius="8"
+                                        Width="64"
+                                        Height="64"
+                                        CornerRadius="10"
                                         Background="{StaticResource Brush.Panel}"
                                         BorderBrush="{StaticResource Brush.AccentDark}"
-                                        BorderThickness="2">
+                                        BorderThickness="2"
+                                        Margin="0,0,8,0">
                                     <Image Source="{Binding AvatarSource}"
                                            Stretch="UniformToFill" />
                                 </Border>
@@ -245,6 +248,7 @@
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center">
                                     <TextBlock Style="{StaticResource Txt.Pixel}"
+                                               FontSize="20"
                                                Text="{Binding DisplayName, FallbackValue=Jugador}" />
                                 </StackPanel>
 
@@ -254,7 +258,8 @@
                                     <ToggleButton Style="{StaticResource ReadyToggle}"
                                                   Margin="0,0,6,0"
                                                   Content="{Binding ReadyLabel, FallbackValue=Listo}"
-                                                  IsChecked="{Binding IsReady, Mode=TwoWay}" />
+                                                  IsChecked="{Binding IsReady, Mode=TwoWay}">
+                                    </ToggleButton>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -271,7 +276,7 @@
 
         <Border Grid.Row="1"
                 Grid.Column="1"
-                Margin="8,8,0,8"
+                Margin="8,8,0,4"
                 Style="{StaticResource Card}">
             <Grid>
                 <Grid.RowDefinitions>
@@ -376,5 +381,8 @@
                 </StackPanel>
             </Grid>
         </Border>
+
+        <Button x:Name="btnBack" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Style="{StaticResource Btn.Play.Left}" Click="btnBack_Click"/>
+
     </Grid>
 </Window>
