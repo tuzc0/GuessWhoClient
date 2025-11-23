@@ -27,7 +27,7 @@ namespace GuessWhoClient.InputValidation
             "Display name cannot be longer than 50 characters.";
         private const string ERROR_DISPLAY_NAME_INVALID_CHARS =
             "Display name can only contain letters, numbers and spaces.";
-        
+
         private const string ERROR_PASSWORD_REQUIRED =
             "Password is required.";
         private const string ERROR_PASSWORD_LENGTH =

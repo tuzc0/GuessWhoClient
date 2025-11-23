@@ -9,6 +9,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFGuessWhoClient;
 
 namespace GuessWhoClient
 {
@@ -28,9 +29,13 @@ namespace GuessWhoClient
             InitializeComponent();
 
             this.matchId = matchId;
-            tbGameCode.Text = code;
 
-            foreach (var player in players)
+            if (tbGameCode != null)
+            {
+                tbGameCode.Text = code;
+            }
+
+            foreach (LobbyPlayerDto player in players)
             {
                 Players.Add(player);
             }
@@ -44,9 +49,9 @@ namespace GuessWhoClient
         {
             try
             {
-                // 🔹 callback real que implementa IMatchServiceCallback
+                // callback real que implementa IMatchServiceCallback
                 matchCallback = new MatchCallback(Dispatcher);
-                matchCallback.AttachLobby(this); // para que reenvíe a ILobbyClient (esta ventana)
+                matchCallback.AttachLobby(this); // para reenviar a ILobbyClient (esta ventana)
 
                 var context = new InstanceContext(matchCallback);
                 matchServiceClient = new MatchServiceClient(context, "NetTcpBinding_IMatchService");
@@ -118,6 +123,24 @@ namespace GuessWhoClient
             Close();
         }
 
+        private void BtnFriends_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Usa el usuario actual de sesión
+                FriendsListWindow friendsWindow = new FriendsListWindow(CurrentUserId);
+                friendsWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"Could not open friends list window: {ex.Message}",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
         #region ILobbyClient
 
         public void OnPlayerJoined(LobbyPlayerDto player)
@@ -130,7 +153,7 @@ namespace GuessWhoClient
 
         public void OnPlayerLeft(LobbyPlayerDto player)
         {
-            var existing = Players.FirstOrDefault(p => p.UserId == player.UserId);
+            LobbyPlayerDto existing = Players.FirstOrDefault(p => p.UserId == player.UserId);
 
             if (existing != null)
             {
@@ -143,7 +166,7 @@ namespace GuessWhoClient
 
         public void OnReadyChanged(LobbyPlayerDto player)
         {
-            var existing = Players.FirstOrDefault(p => p.UserId == player.UserId);
+            LobbyPlayerDto existing = Players.FirstOrDefault(p => p.UserId == player.UserId);
             if (existing != null)
             {
                 Application.Current.Dispatcher.Invoke(() =>
@@ -155,12 +178,12 @@ namespace GuessWhoClient
 
         public void OnGameStarted()
         {
-            // TODO
+            // TODO: lógica cuando el servidor empiece la partida
         }
 
         public void OnGameLeft()
         {
-            // TODO
+            // TODO: lógica si el servidor avisa que se cerró la partida
         }
 
         #endregion
@@ -182,6 +205,7 @@ namespace GuessWhoClient
                 }
                 catch
                 {
+                    // ignorar errores de unsubscribe
                 }
 
                 if (matchServiceClient.State == CommunicationState.Faulted)

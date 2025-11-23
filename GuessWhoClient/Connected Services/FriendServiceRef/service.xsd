@@ -71,4 +71,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetFriends">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="request" nillable="true" type="q11:GetFriendsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFriendsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="GetFriendsResult" nillable="true" type="q12:GetFriendsResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPendingRequests">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="request" nillable="true" type="q13:GetPendingFriendRequestsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPendingRequestsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="GetPendingRequestsResult" nillable="true" type="q14:GetPendingRequestsResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

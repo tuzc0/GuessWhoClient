@@ -54,4 +54,45 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BasicResponse" nillable="true" type="tns:BasicResponse" />
+  <xs:complexType name="GetFriendsRequest">
+    <xs:sequence>
+      <xs:element name="AccountId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetFriendsRequest" nillable="true" type="tns:GetFriendsRequest" />
+  <xs:complexType name="GetFriendsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Friends" nillable="true" type="tns:ArrayOfUserProfileSearchResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetFriendsResponse" nillable="true" type="tns:GetFriendsResponse" />
+  <xs:complexType name="GetPendingFriendRequestsRequest">
+    <xs:sequence>
+      <xs:element name="AccountId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetPendingFriendRequestsRequest" nillable="true" type="tns:GetPendingFriendRequestsRequest" />
+  <xs:complexType name="GetPendingRequestsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Requests" nillable="true" type="tns:ArrayOfFriendRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetPendingRequestsResponse" nillable="true" type="tns:GetPendingRequestsResponse" />
+  <xs:complexType name="ArrayOfFriendRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequest" nillable="true" type="tns:FriendRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFriendRequest" nillable="true" type="tns:ArrayOfFriendRequest" />
+  <xs:complexType name="FriendRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AddresseeUserId" type="xs:long" />
+      <xs:element minOccurs="0" name="CreatedAt" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FriendRequestId" type="xs:long" />
+      <xs:element minOccurs="0" name="RequesterDisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequesterUserId" type="xs:long" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FriendRequest" nillable="true" type="tns:FriendRequest" />
 </xs:schema>

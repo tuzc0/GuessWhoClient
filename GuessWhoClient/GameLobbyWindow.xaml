@@ -201,9 +201,11 @@
                 <Button Style="{StaticResource Btn.Icon}"
                         Margin="6,0"
                         ToolTip="Amigos"
-                        Width="80">
+                        Width="80"
+                        Click="BtnFriends_Click">
                     <Path Style="{StaticResource Icon.Group}" />
                 </Button>
+
             </StackPanel>
         </DockPanel>
 
@@ -258,8 +260,7 @@
                                     <ToggleButton Style="{StaticResource ReadyToggle}"
                                                   Margin="0,0,6,0"
                                                   Content="{Binding ReadyLabel, FallbackValue=Listo}"
-                                                  IsChecked="{Binding IsReady, Mode=TwoWay}">
-                                    </ToggleButton>
+                                                  IsChecked="{Binding IsReady, Mode=TwoWay}" />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -382,7 +383,14 @@
             </Grid>
         </Border>
 
-        <Button x:Name="btnBack" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" Style="{StaticResource Btn.Play.Left}" Click="btnBack_Click"/>
+        <Button x:Name="btnBack"
+                Grid.Row="2"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,0"
+                Style="{StaticResource Btn.Play.Left}"
+                Click="btnBack_Click" />
 
     </Grid>
 </Window>

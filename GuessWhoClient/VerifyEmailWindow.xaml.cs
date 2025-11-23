@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GuessWhoClient.UserServiceRef;
+using System;
 using System.Linq;
 using System.ServiceModel;
 using System.Text.RegularExpressions;
@@ -52,6 +53,7 @@ namespace GuessWhoClient
         private readonly string email;
         private readonly UserServiceClient client;
         private readonly DispatcherTimer cooldownTimer = new DispatcherTimer();
+        private DateTime cooldownUntil;
 
         private readonly IAlertService alertService = new MessageBoxAlertService();
         private readonly ILocalizationService localizationService = new LocalizationService();
@@ -87,6 +89,9 @@ namespace GuessWhoClient
             SetVerificationButtonsEnabled(isEnabled: false);
 
             Logger.InfoFormat(LOG_VERIFY_STARTED, accountId);
+
+            btnVerify.IsEnabled = false;
+            btnResend.IsEnabled = false;
 
             try
             {
@@ -188,6 +193,7 @@ namespace GuessWhoClient
                         accountId, ex.Detail.Code), ex);
                 
                 ShowWarn(text);
+                btnResend.IsEnabled = CanResend();
             }
             catch (TimeoutException ex)
             {
@@ -273,7 +279,7 @@ namespace GuessWhoClient
             }
 
             gameWindow.LoadLoginWindow();
-        }
+            }
 
         private static bool AllowsNextCodeInput(TextBox codeTextBox, string incomingText)
         {
@@ -339,7 +345,7 @@ namespace GuessWhoClient
                     GetLocalizedText(UI_RESEND_IN_FMT_KEY),
                     Math.Ceiling(remaining.TotalSeconds));
             }
-        }
+            }
 
         private bool CanResend()
         {
@@ -382,7 +388,7 @@ namespace GuessWhoClient
         private string LocalOrFallback(string key, string serverMessage, string fallbackKey)
         {
             if (!string.IsNullOrWhiteSpace(serverMessage))
-            {
+        {
                 return serverMessage;
             }
 

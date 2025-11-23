@@ -86,6 +86,24 @@
   <wsdl:message name="IFriendService_CancelFriendRequest_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q5:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="IFriendService_GetFriends_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriends" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_GetFriends_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_GetFriends_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q6:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_GetPendingRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPendingRequests" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_GetPendingRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPendingRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_GetPendingRequests_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q7:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IFriendService">
     <wsdl:operation name="SearchProfiles">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/SearchProfiles" message="tns:IFriendService_SearchProfiles_InputMessage" />
@@ -111,6 +129,16 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/CancelFriendRequest" message="tns:IFriendService_CancelFriendRequest_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendService/CancelFriendRequestResponse" message="tns:IFriendService_CancelFriendRequest_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IFriendService/CancelFriendRequestServiceFaultFault" name="ServiceFaultFault" message="tns:IFriendService_CancelFriendRequest_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriends">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/GetFriends" message="tns:IFriendService_GetFriends_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendService/GetFriendsResponse" message="tns:IFriendService_GetFriends_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendService/GetFriendsServiceFaultFault" name="ServiceFaultFault" message="tns:IFriendService_GetFriends_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/GetPendingRequests" message="tns:IFriendService_GetPendingRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendService/GetPendingRequestsResponse" message="tns:IFriendService_GetPendingRequests_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendService/GetPendingRequestsServiceFaultFault" name="ServiceFaultFault" message="tns:IFriendService_GetPendingRequests_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IFriendService" type="tns:IFriendService">
@@ -177,6 +205,30 @@
         <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="GetFriends">
+      <soap12:operation soapAction="http://tempuri.org/IFriendService/GetFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPendingRequests">
+      <soap12:operation soapAction="http://tempuri.org/IFriendService/GetPendingRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="FriendService">
     <wsdl:port name="NetTcpBinding_IFriendService" binding="tns:NetTcpBinding_IFriendService">
@@ -184,7 +236,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8099/FriendService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-MG984O4N\CLAUDIO</Upn>
+          <Upn>LAPTOP-9IURR4LD\wilma</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
