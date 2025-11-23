@@ -20,21 +20,14 @@ namespace GuessWhoClient
 
             if (sessionContext.UserId == 0)
             {
-                var loginWindow = new LoginWindow
+                var loginWindow = Window.GetWindow(this) as GameWindow;
+
+                if (loginWindow == null)
                 {
-                    Owner = ownerWindow,
-                    WindowStartupLocation = WindowStartupLocation.CenterOwner
-                };
+                    return;
+                }
 
-                IsEnabled = false;
-
-                loginWindow.Closed += (_, __) =>
-                {
-                    IsEnabled = true;
-                    ownerWindow?.Activate();
-                };
-
-                loginWindow.Show();
+                loginWindow.LoadLoginWindow();
             }
             else
             {

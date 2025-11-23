@@ -13,6 +13,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
     </xsd:schema>
@@ -23,10 +24,14 @@
   <wsdl:message name="ILoginService_LoginUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginUserResponse" />
   </wsdl:message>
+  <wsdl:message name="ILoginService_LoginUser_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="LoginUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginUser" message="tns:ILoginService_LoginUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginUserResponse" message="tns:ILoginService_LoginUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LoginUserServiceFaultFault" name="ServiceFaultFault" message="tns:ILoginService_LoginUser_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILoginService" type="tns:ILoginService">
@@ -41,6 +46,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="LoginService">

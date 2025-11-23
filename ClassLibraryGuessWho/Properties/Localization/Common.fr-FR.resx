@@ -126,6 +126,16 @@
   <data name="BtnLogin" xml:space="preserve">
     <value>Connexion</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BtnResendCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnVerifyCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="chkShowPasswords" xml:space="preserve">
+    <value>Afficher le mot de passe</value>
+  </data>
   <data name="FaultDatabaseConnection" xml:space="preserve">
     <value>Impossible de se connecter à la base de données</value>
   </data>
@@ -156,6 +166,9 @@
   <data name="LblUser" xml:space="preserve">
     <value>Utilisateur</value>
   </data>
+  <data name="LblVerificationCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="LinkCreate" xml:space="preserve">
     <value>Créer un compte</value>
   </data>
@@ -167,6 +180,9 @@
   </data>
   <data name="UiCommsGeneric" xml:space="preserve">
     <value>Impossible de communiquer avec le service</value>
+  </data>
+  <data name="UiResendInFmt" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="UiSecurityNegotiationFailed" xml:space="preserve">
     <value>L’authentification du transport (Windows) a échoué. Vérifiez que le service est en cours d’exécution</value>
@@ -200,5 +216,23 @@
   </data>
   <data name="UiValidationPasswordTooShort" xml:space="preserve">
     <value>Le mot de passe doit comporter au moins 8 caractères</value>
+  </data>
+  <data name="UIVerificationCodeExpired" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="UIVerificationCodeInvalid" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="UIVerificationCodeRequired" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="UIVerificationResent" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="UiVerificationSentFmt" xml:space="preserve">
+    <value>Nous avons envoyé un code de vérification à votre adresse e-mail : {0}</value>
+  </data>
+  <data name="UIVerificationSuccess" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

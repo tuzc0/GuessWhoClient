@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using GuessWhoClient.UserServiceRef;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace GuessWhoClient.Windows
@@ -8,7 +9,34 @@ namespace GuessWhoClient.Windows
         public GameWindow()
         {
             InitializeComponent();
-            LoadMainMenu();
+            LoadLoginWindow();
+        }
+
+        public void LoadLoginWindow()
+        {
+            ScreenHost.Children.Clear();
+
+            var loginScreen = new LoginWindow();
+            
+            ScreenHost.Children.Add(loginScreen);
+        }
+
+        public void LoadCreateAccountWindow()
+        {
+            ScreenHost.Children.Clear();
+            
+            var createAccountScreen = new CreateAccountWindow();
+            
+            ScreenHost.Children.Add(createAccountScreen);
+        }
+
+        public void LoadVerifyEmailWindow(long accountId, string email, UserServiceClient client)
+        {
+            ScreenHost.Children.Clear();
+
+            var verifyEmailScreen = new VerifyEmailWindow(accountId, email, client);
+            
+            ScreenHost.Children.Add(verifyEmailScreen);
         }
 
         public void LoadMainMenu()

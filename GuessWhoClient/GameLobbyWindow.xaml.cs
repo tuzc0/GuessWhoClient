@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace GuessWhoClient
@@ -64,7 +65,7 @@ namespace GuessWhoClient
             }
         }
 
-        private async System.Threading.Tasks.Task LeaveMatchAsync()
+        private async Task LeaveMatchAsync()
         {
             if (matchServiceClient == null)
             {

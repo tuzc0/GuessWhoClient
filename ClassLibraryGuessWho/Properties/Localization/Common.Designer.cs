@@ -88,6 +88,33 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Resend code.
+        /// </summary>
+        public static string BtnResendCode {
+            get {
+                return ResourceManager.GetString("BtnResendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verify.
+        /// </summary>
+        public static string BtnVerifyCode {
+            get {
+                return ResourceManager.GetString("BtnVerifyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Show Passwords.
+        /// </summary>
+        public static string chkShowPasswords {
+            get {
+                return ResourceManager.GetString("chkShowPasswords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Unable to connect to the database.
         /// </summary>
         public static string FaultDatabaseConnection {
@@ -178,6 +205,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Verification code.
+        /// </summary>
+        public static string LblVerificationCode {
+            get {
+                return ResourceManager.GetString("LblVerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create account.
         /// </summary>
         public static string LinkCreate {
@@ -210,6 +246,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiCommsGeneric {
             get {
                 return ResourceManager.GetString("UiCommsGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You can resend the code in {0} seconds.
+        /// </summary>
+        public static string UiResendInFmt {
+            get {
+                return ResourceManager.GetString("UiResendInFmt", resourceCulture);
             }
         }
         
@@ -309,6 +354,60 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiValidationPasswordTooShort {
             get {
                 return ResourceManager.GetString("UiValidationPasswordTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code has expired.
+        /// </summary>
+        public static string UIVerificationCodeExpired {
+            get {
+                return ResourceManager.GetString("UIVerificationCodeExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code is not valid.
+        /// </summary>
+        public static string UIVerificationCodeInvalid {
+            get {
+                return ResourceManager.GetString("UIVerificationCodeInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please enter the verification code.
+        /// </summary>
+        public static string UIVerificationCodeRequired {
+            get {
+                return ResourceManager.GetString("UIVerificationCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We have sent a new verification code to your email.
+        /// </summary>
+        public static string UIVerificationResent {
+            get {
+                return ResourceManager.GetString("UIVerificationResent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We have sent a verification code to your email: {0}.
+        /// </summary>
+        public static string UiVerificationSentFmt {
+            get {
+                return ResourceManager.GetString("UiVerificationSentFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your email has been successfully verified.
+        /// </summary>
+        public static string UIVerificationSuccess {
+            get {
+                return ResourceManager.GetString("UIVerificationSuccess", resourceCulture);
             }
         }
     }

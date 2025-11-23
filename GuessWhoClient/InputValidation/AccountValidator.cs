@@ -12,6 +12,8 @@ namespace GuessWhoClient.InputValidation
         private const int PASSWORD_MIN_LENGTH = 8;
         private const int PASSWORD_MAX_LENGTH = 64;
 
+        private const int REGEX_VALIDATION_TIMEOUT_MS = 250;
+
         private const string ERROR_EMAIL_REQUIRED =
             "Email is required.";
         private const string ERROR_EMAIL_TOO_LONG =
@@ -25,7 +27,7 @@ namespace GuessWhoClient.InputValidation
             "Display name cannot be longer than 50 characters.";
         private const string ERROR_DISPLAY_NAME_INVALID_CHARS =
             "Display name can only contain letters, numbers and spaces.";
-
+        
         private const string ERROR_PASSWORD_REQUIRED =
             "Password is required.";
         private const string ERROR_PASSWORD_LENGTH =
@@ -40,10 +42,22 @@ namespace GuessWhoClient.InputValidation
             "Password and confirmation password do not match.";
 
         private static readonly Regex EmailRegex =
-            new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
+            new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled,
+                TimeSpan.FromMilliseconds(REGEX_VALIDATION_TIMEOUT_MS));
 
         private static readonly Regex DisplayNameRegex =
-            new Regex(@"^[A-Za-z0-9 ]+$", RegexOptions.Compiled);
+            new Regex(@"^[A-Za-z0-9 ]+$", RegexOptions.Compiled,
+                TimeSpan.FromMilliseconds(REGEX_VALIDATION_TIMEOUT_MS));
+
+        public static List<string> ValidateLoginForm(LoginInput login)
+        {
+            var errors = new List<string>();
+
+            ValidateEmail(login.Email, errors);
+            ValidatePassword(login.Password, null, errors);
+            
+            return errors;
+        }
 
         public static List<string> ValidateForm(AccountProfileInput accountProfile)
         {

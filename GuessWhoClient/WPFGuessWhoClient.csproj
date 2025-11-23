@@ -111,6 +111,7 @@
       <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dtos\AccountProfileInput.cs" />
+    <Compile Include="Dtos\LoginInput.cs" />
     <Compile Include="GameLobbyWindow.xaml.cs">
       <DependentUpon>GameLobbyWindow.xaml</DependentUpon>
     </Compile>
@@ -127,6 +128,8 @@
       <DependentUpon>VerifyEmailWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ScreensType\GameScreenType.cs" />
+    <Compile Include="Windows\ScreensUtilities\PasswordVisibilityHelper.cs" />
+    <Compile Include="Windows\ScreensUtilities\ServiceClientGuard.cs" />
     <Page Include="ChangePasswordDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -266,6 +269,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\LoginServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LoginServiceRef\GuessWhoContracts.Faults.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LoginServiceRef\service.wsdl" />
@@ -483,5 +489,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
