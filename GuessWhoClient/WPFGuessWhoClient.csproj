@@ -484,14 +484,43 @@
     <Resource Include="Images\Characters\Mazo1_Rodrigo_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Samuel_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Shai_Animado.png" />
-    <Resource Include="Images\Characters\Mazo1_Terry_Animado.png" />
-    <Resource Include="Images\Characters\Mazo1_Will_Animado.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatars\Avatar1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatars\Avatar2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Characters\Mazo1_Adriana_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Alicia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Ana_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Caleb_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Camila_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Carolina_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Charles_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Charlotte_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Daniel_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Elena_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Emma_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Isis_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Karen_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Lois_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Lucia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Luke_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Max_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Maya_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Nathaly_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Rick_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Sara_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Sergio_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Shawn_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Sofia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Sonia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Tom_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Trae_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Tyrese_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Wilma_Animado.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
