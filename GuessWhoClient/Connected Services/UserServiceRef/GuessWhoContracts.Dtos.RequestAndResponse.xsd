@@ -37,4 +37,25 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ResendVerificationRequest" nillable="true" type="tns:ResendVerificationRequest" />
+  <xs:complexType name="PasswordRecoveryRequest">
+    <xs:sequence>
+      <xs:element name="Email" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PasswordRecoveryRequest" nillable="true" type="tns:PasswordRecoveryRequest" />
+  <xs:complexType name="PasswordRecoveryResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PasswordRecoveryResponse" nillable="true" type="tns:PasswordRecoveryResponse" />
+  <xs:complexType name="UpdatePasswordRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VerificationCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdatePasswordRequest" nillable="true" type="tns:UpdatePasswordRequest" />
 </xs:schema>

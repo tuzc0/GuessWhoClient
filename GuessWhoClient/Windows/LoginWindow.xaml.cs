@@ -196,7 +196,7 @@ namespace GuessWhoClient.Windows
 
             accountWindow.LoadCreateAccountWindow();
         }
-
+        
         private void LoadMainMenuWindow()
         {
             var mainWindow = Window.GetWindow(this) as GameWindow;
@@ -211,7 +211,10 @@ namespace GuessWhoClient.Windows
 
         private void ForgotPassword_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            throw new NotImplementedException(FORGOT_PASSWORD_NOT_IMPLEMENTED_MESSAGE);
+            if (ucRecoverPassword != null)
+            {
+                ucRecoverPassword.Visibility = Visibility.Visible;
+            }
         }
     }
 }

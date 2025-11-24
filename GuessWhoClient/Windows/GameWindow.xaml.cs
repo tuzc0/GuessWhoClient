@@ -61,7 +61,7 @@ namespace GuessWhoClient.Windows
         {
             ScreenHost.Children.Clear();
 
-            var profileScreen = new Profile();
+            var profileScreen = new ProfileWindow();
             
             ScreenHost.Children.Add(profileScreen);
         }

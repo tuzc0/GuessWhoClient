@@ -5,29 +5,6 @@
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
         </msb:BinaryEncoding>
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256>
-                </sp:Basic256>
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict>
-                </sp:Strict>
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing>
         </wsaw:UsingAddressing>
       </wsp:All>
@@ -68,6 +45,24 @@
   <wsdl:message name="IUserService_ResendEmailVerificationCode_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q3:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="IUserService_SendPasswordRecoveryCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendPasswordRecoveryCode" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_SendPasswordRecoveryCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendPasswordRecoveryCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_SendPasswordRecoveryCode_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q4:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePasswordWithVerificationCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePasswordWithVerificationCode" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePasswordWithVerificationCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePasswordWithVerificationCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePasswordWithVerificationCode_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q5:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
     <wsdl:operation name="RegisterUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/RegisterUser" message="tns:IUserService_RegisterUser_InputMessage" />
@@ -83,6 +78,16 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/ResendEmailVerificationCode" message="tns:IUserService_ResendEmailVerificationCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/ResendEmailVerificationCodeResponse" message="tns:IUserService_ResendEmailVerificationCode_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/ResendEmailVerificationCodeServiceFaultFault" name="ServiceFaultFault" message="tns:IUserService_ResendEmailVerificationCode_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendPasswordRecoveryCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/SendPasswordRecoveryCode" message="tns:IUserService_SendPasswordRecoveryCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/SendPasswordRecoveryCodeResponse" message="tns:IUserService_SendPasswordRecoveryCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/SendPasswordRecoveryCodeServiceFaultFault" name="ServiceFaultFault" message="tns:IUserService_SendPasswordRecoveryCode_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePasswordWithVerificationCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCode" message="tns:IUserService_UpdatePasswordWithVerificationCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCodeResponse" message="tns:IUserService_UpdatePasswordWithVerificationCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCodeServiceFaultFault" name="ServiceFaultFault" message="tns:IUserService_UpdatePasswordWithVerificationCode_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IUserService" type="tns:IUserService">
@@ -125,15 +130,36 @@
         <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="SendPasswordRecoveryCode">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/SendPasswordRecoveryCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePasswordWithVerificationCode">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="UserService">
     <wsdl:port name="NetTcpBinding_IUserService" binding="tns:NetTcpBinding_IUserService">
       <soap12:address location="net.tcp://localhost:8095/UserService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8095/UserService</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-MG984O4N\CLAUDIO</Upn>
-        </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
