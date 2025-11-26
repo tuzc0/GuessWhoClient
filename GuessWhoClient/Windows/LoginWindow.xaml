@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:localization="clr-namespace:GuessWhoClient.Globalization"
              xmlns:main="clr-namespace:GuessWhoClient">
+    
     <Grid Margin="24,24,24,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -127,7 +128,7 @@
         <main:RecoverPasswordWindow x:Name="ucRecoverPassword"
                                     Grid.Row="0"
                                     Grid.RowSpan="3"
-                                    Visibility="Collapsed"/>
+                                    Visibility="Collapsed" />
 
     </Grid>
 </UserControl>

@@ -1,4 +1,6 @@
-﻿using GuessWhoClient.UserServiceRef;
+﻿using GuessWhoClient.Dtos;
+using GuessWhoClient.UserServiceRef;
+using log4net.Repository.Hierarchy;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,6 +12,7 @@ namespace GuessWhoClient.Windows
         {
             InitializeComponent();
             LoadLoginWindow();
+            //LoadChooseCharacterScreen();
         }
 
         public void LoadLoginWindow()
@@ -78,6 +81,34 @@ namespace GuessWhoClient.Windows
         {
             ScreenHost.Children.Clear();
             ScreenHost.Children.Add(screen);
+        }
+
+        public void CreateGamePlayWindow(GamePlayParameters parameters)
+        {
+            var gamePlayWindow = new GamePlayWindow(parameters)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
+            gamePlayWindow.Closed += (_, __) =>
+            {
+                Show();
+                LoadJoinOrCreateGameScreen();
+            };
+
+            Hide();
+            gamePlayWindow.Show();
+        }
+
+        public void LoadChooseCharacterScreen()
+        {
+            ScreenHost.Children.Clear();
+
+            var chooseCharacterScreen = new ChooseCharacterWindow();
+
+            ScreenHost.Children.Add(chooseCharacterScreen);
+
         }
     }
 }

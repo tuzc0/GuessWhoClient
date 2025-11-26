@@ -1,21 +1,11 @@
-﻿<Window x:Class="GuessWhoClient.GameLobbyWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:conv="clr-namespace:GuessWhoClient.Converters"
-        mc:Ignorable="d"
-        Title="GameLobbyWindow"
-        Height="720" Width="1120"
-        Background="{StaticResource Brush.Bg}"
-        WindowStartupLocation="CenterScreen">
+﻿<UserControl x:Class="GuessWhoClient.GameLobbyWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:GuessWhoClient.Converters">
 
-    <Window.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/PixelTheme.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-
+            <converters:IsLocalPlayerConverter x:Key="IsLocalPlayerConverter" />
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
             <Style x:Key="Card" TargetType="Border">
@@ -131,7 +121,7 @@
                 </Setter>
             </Style>
         </ResourceDictionary>
-    </Window.Resources>
+    </UserControl.Resources>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -209,6 +199,7 @@
             </StackPanel>
         </DockPanel>
 
+        <!-- PANEL IZQUIERDO: JUGADORES -->
         <Border Grid.Row="1"
                 Grid.Column="0"
                 Margin="0,8,8,1"
@@ -257,10 +248,30 @@
                                 <StackPanel Grid.Column="2"
                                             Orientation="Horizontal"
                                             VerticalAlignment="Center">
-                                    <ToggleButton Style="{StaticResource ReadyToggle}"
-                                                  Margin="0,0,6,0"
+                                    <ToggleButton Margin="0,0,6,0"
                                                   Content="{Binding ReadyLabel, FallbackValue=Listo}"
-                                                  IsChecked="{Binding IsReady, Mode=TwoWay}" />
+                                                  IsChecked="{Binding IsReady, Mode=TwoWay}">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton"
+                                                   BasedOn="{StaticResource ReadyToggle}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Value="True">
+                                                        <DataTrigger.Binding>
+                                                            <MultiBinding Converter="{StaticResource IsLocalPlayerConverter}">
+                                                                <!-- UserId del jugador de la fila -->
+                                                                <Binding Path="UserId" />
+                                                                <!-- CurrentUserId del GameLobbyWindow -->
+                                                                <Binding Path="CurrentUserId"
+                                                                         RelativeSource="{RelativeSource AncestorType=UserControl}" />
+                                                            </MultiBinding>
+                                                        </DataTrigger.Binding>
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -275,6 +286,7 @@
             </Grid>
         </Border>
 
+        <!-- PANEL DERECHO: CONFIGURACIÓN -->
         <Border Grid.Row="1"
                 Grid.Column="1"
                 Margin="8,8,0,4"
@@ -373,11 +385,14 @@
                         <Run />
                     </TextBlock>
 
+                    <!-- START solo visible para el host -->
                     <Button Content="START"
                             Style="{StaticResource Btn.Primary}"
                             MinWidth="140"
                             MinHeight="44"
                             IsEnabled="{Binding CanStart}"
+                            Visibility="{Binding IsCurrentUserHost,
+                                                 Converter={StaticResource BoolToVis}}"
                             Command="{Binding StartCommand}" />
                 </StackPanel>
             </Grid>
@@ -390,7 +405,6 @@
                 VerticalAlignment="Bottom"
                 Margin="0,0,0,0"
                 Style="{StaticResource Btn.Play.Left}"
-                Click="btnBack_Click" />
-
+                Click="BtnBack_Click" />
     </Grid>
-</Window>
+</UserControl>

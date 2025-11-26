@@ -65,6 +65,7 @@
     <Compile Include="Alerts\IAlertService.cs" />
     <Compile Include="Alerts\MessageBoxAlertService.cs" />
     <Compile Include="Assets\AvatarAssets.cs" />
+    <Compile Include="Assets\CharacterAsserts.cs" />
     <Compile Include="Callbacks\ChatCallback.cs" />
     <Compile Include="Callbacks\MatchCallback.cs" />
     <Compile Include="ChangePasswordDialog.xaml.cs">
@@ -112,6 +113,8 @@
     </Compile>
     <Compile Include="Dtos\AccountProfileInput.cs" />
     <Compile Include="Dtos\LoginInput.cs" />
+    <Compile Include="Dtos\CharacterCard.cs" />
+    <Compile Include="Dtos\GamePlayParameters.cs" />
     <Compile Include="FriendListWindow.xaml.cs">
       <DependentUpon>FriendListWindow.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,9 @@
     <Compile Include="Session\SessionContext.cs" />
     <Compile Include="VerifyEmailWindow.xaml.cs">
       <DependentUpon>VerifyEmailWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\GamePlayWindow.xaml.cs">
+      <DependentUpon>GamePlayWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ScreensType\GameScreenType.cs" />
     <Compile Include="Windows\ScreensUtilities\PasswordVisibilityHelper.cs" />
@@ -173,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RecoverPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\GamePlayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -257,7 +267,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <!-- Chat service metadata -->
     <None Include="Connected Services\ChatServiceRef\service.wsdl" />
     <None Include="Connected Services\ChatServiceRef\service.xsd">
       <SubType>Designer</SubType>
@@ -265,7 +274,6 @@
     <None Include="Connected Services\ChatServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <!-- Friend service datasources & schemas -->
     <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.BasicResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -294,7 +302,6 @@
     <None Include="Connected Services\FriendServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <!-- Login service datasources & schemas -->
     <None Include="Connected Services\LoginServiceRef\GuessWhoClient.LoginServiceRef.LoginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -311,7 +318,6 @@
     <None Include="Connected Services\LoginServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <!-- Match service datasources & schemas -->
     <None Include="Connected Services\MatchServiceRef\GuessWhoClient.MatchServiceRef.BasicResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -337,7 +343,6 @@
     <None Include="Connected Services\MatchServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <!-- Update service datasources & schemas -->
     <None Include="Connected Services\UpdateServiceRef\GuessWhoClient.UpdateServiceRef.BasicResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -363,7 +368,6 @@
     <None Include="Connected Services\UserServiceRef\GuessWhoClient.UserServiceRef.PasswordRecoveryResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <!-- User service datasources & schemas -->
     <None Include="Connected Services\UserServiceRef\GuessWhoClient.UserServiceRef.RegisterResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -486,12 +490,6 @@
     <Resource Include="Images\Characters\Mazo1_Shai_Animado.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Avatars\Avatar1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Avatars\Avatar2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Characters\Mazo1_Adriana_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Alicia_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Ana_Animado.png" />
@@ -521,6 +519,10 @@
     <Resource Include="Images\Characters\Mazo1_Trae_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Tyrese_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Wilma_Animado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Avatars\Avatar1.png" />
+    <Resource Include="Images\Avatars\Avatar2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,331 +1,89 @@
-﻿<Window x:Class="GuessWhoClient.ChooseCharacterWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="Select character"
-        Height="600" Width="900"
-        WindowStartupLocation="CenterScreen">
+﻿<UserControl x:Class="GuessWhoClient.ChooseCharacterWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="600"
+             d:DesignWidth="900">
 
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/PixelTheme.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+    <Border x:Name="brdMainContainer"
+            CornerRadius="20"
+            Background="#34495E"
+            Padding="25"
+            Margin="40"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Panel.ZIndex="2">
 
-    <Grid Cursor="Hand">
-        <Image x:Name="imgBackground"
-               Source="/Images/mainMenu.jpeg"
-               Stretch="UniformToFill"
-               Panel.ZIndex="0">
-            <Image.Effect>
-                <BlurEffect Radius="5"/>
-            </Image.Effect>
-        </Image>
+        <Grid Background="{StaticResource Brush.Bg}"
+              Opacity="0.88"
+              Margin="-25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Rectangle x:Name="rectOverlay"
-                   Fill="{StaticResource Brush.Bg}"
-                   Opacity="0.6"
-                   Panel.ZIndex="1"/>
+            <TextBlock Grid.Row="0"
+                       Text="SELECT YOUR CHARACTER"
+                       Style="{StaticResource Txt.Pixel}"
+                       Foreground="{StaticResource Brush.Accent}"
+                       FontSize="32"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20" />
 
+            <!-- AQUÍ VA LA CUADRÍCULA DINÁMICA DE 36 CARTAS -->
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Characters}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="6"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top"
+                                         Margin="10" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
 
-        <Border x:Name="brdMainContainer"
-                CornerRadius="20"
-                Background="#34495E"
-                Padding="25"
-                Margin="40"
-                BorderBrush="#3498DB"
-                BorderThickness="2"
-                Panel.ZIndex="2">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#3498DB"
+                                    BorderThickness="2"
+                                    CornerRadius="8"
+                                    Background="#34495E"
+                                    Margin="6"
+                                    Width="100"
+                                    Height="130"
+                                    Cursor="Hand"
+                                    MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
+                                <Image Source="{Binding ImagePath}"
+                                       Stretch="UniformToFill" />
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
-            <Grid Background="{StaticResource Brush.Bg}" Opacity="0.88" Margin="-25">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,15,0,0">
+                <Button x:Name="btnConfirm"
+                        Content="CONFIRM SELECTION"
+                        Style="{StaticResource Btn.Primary}"
+                        Width="200"
+                        Height="50"
+                        Margin="0,0,15,0"
+                        Click="BtnConfirm_Click" />
 
-                <TextBlock Grid.Row="0"
-                           Text="SELECT YOUR CHARACTER"
-                           Style="{StaticResource Txt.Pixel}"
-                           Foreground="{StaticResource Brush.Accent}"
-                           FontSize="32"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,20"/>
-
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <UniformGrid Columns="6" Rows="4"
-                                 HorizontalAlignment="Center"
-                                 VerticalAlignment="Top"
-                                 Margin="10">
-
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#3498DB" BorderThickness="2" CornerRadius="8" 
-                                Background="#34495E" Margin="6" Width="100" Height="130"
-                                Cursor="Hand" MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
-                            <TextBlock Foreground="White"
-                                       FontSize="10"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"/>
-                        </Border>
-                    </UniformGrid>
-                </ScrollViewer>
-
-                <StackPanel Grid.Row="2" 
-                            Orientation="Horizontal" 
-                            HorizontalAlignment="Center"
-                            Margin="0,15,0,0">
-                    <Button x:Name="btnConfirm"
-                            Content="CONFIRM SELECTION"
-                            Style="{StaticResource Btn.Primary}"
-                            Width="200" Height="50"
-                            Margin="0,0,15,0"
-                            Click="BtnConfirm_Click"/>
-
-                    <Button x:Name="btnCancel"
-                            Content="CANCEL"
-                            Style="{StaticResource Btn.Primary}"
-                            Width="120" Height="50"
-                            Click="BtnCancel_Click"/>
-                </StackPanel>
-            </Grid>
-        </Border>
-    </Grid>
-</Window>
+                <Button x:Name="btnCancel"
+                        Content="CANCEL"
+                        Style="{StaticResource Btn.Primary}"
+                        Width="120"
+                        Height="50"
+                        Click="BtnCancel_Click" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
