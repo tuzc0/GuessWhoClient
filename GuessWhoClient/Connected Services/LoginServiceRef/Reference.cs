@@ -167,11 +167,105 @@ namespace GuessWhoClient.LoginServiceRef {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
+    [System.SerializableAttribute()]
+    public partial class ServiceFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorrelationIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExceptionTypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public string CorrelationId {
+            get {
+                return this.CorrelationIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorrelationIdField, value) != true)) {
+                    this.CorrelationIdField = value;
+                    this.RaisePropertyChanged("CorrelationId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string ExceptionType {
+            get {
+                return this.ExceptionTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExceptionTypeField, value) != true)) {
+                    this.ExceptionTypeField = value;
+                    this.RaisePropertyChanged("ExceptionType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LoginServiceRef.ILoginService")]
     public interface ILoginService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/LoginUser", ReplyAction="http://tempuri.org/ILoginService/LoginUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.LoginServiceRef.ServiceFault), Action="http://tempuri.org/ILoginService/LoginUserServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         GuessWhoClient.LoginServiceRef.LoginResponse LoginUser(GuessWhoClient.LoginServiceRef.LoginRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/LoginUser", ReplyAction="http://tempuri.org/ILoginService/LoginUserResponse")]

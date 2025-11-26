@@ -9,6 +9,8 @@ namespace GuessWhoClient
     {
         private readonly SessionContext sessionContext = SessionContext.Current;
 
+        private const int NO_LOGGED_USER_ID = 0;
+
         public MainMenuScreen()
         {
             InitializeComponent();
@@ -16,36 +18,20 @@ namespace GuessWhoClient
 
         private void BtnProfile_Click(object sender, RoutedEventArgs e)
         {
-            Window ownerWindow = Window.GetWindow(this);
+            var gameWindow = Window.GetWindow(this) as GameWindow;
 
-            if (sessionContext.UserId == 0)
+            if (gameWindow == null)
             {
-                var loginWindow = new LoginWindow
-                {
-                    Owner = ownerWindow,
-                    WindowStartupLocation = WindowStartupLocation.CenterOwner
-                };
+                return;
+            }
 
-                IsEnabled = false;
-
-                loginWindow.Closed += (_, __) =>
-                {
-                    IsEnabled = true;
-                    ownerWindow?.Activate();
-                };
-
-                loginWindow.Show();
+            if (sessionContext.UserId == NO_LOGGED_USER_ID)
+            {
+                gameWindow.LoadLoginWindow();
             }
             else
             {
-                var profileWindow = Window.GetWindow(this) as GameWindow;
-
-                if (profileWindow == null)
-                {
-                    return;
-                }
-
-                profileWindow.LoadUpdateProfileScreen();
+                gameWindow.LoadUpdateProfileScreen();
             }
         }
 

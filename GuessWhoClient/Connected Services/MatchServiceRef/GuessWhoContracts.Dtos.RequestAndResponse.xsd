@@ -41,7 +41,7 @@
   <xs:element name="JoinMatchResponse" nillable="true" type="tns:JoinMatchResponse" />
   <xs:complexType name="LeaveMatchRequest">
     <xs:sequence>
-      <xs:element name="MatchId" type="xs:int" />
+      <xs:element name="MatchId" type="xs:long" />
       <xs:element name="UserId" type="xs:long" />
     </xs:sequence>
   </xs:complexType>

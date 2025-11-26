@@ -18,18 +18,13 @@
             <Style x:Key="Txt.Title"
                    TargetType="TextBlock"
                    BasedOn="{StaticResource Txt.Pixel}">
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="Margin" Value="0,0,0,8" />
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="Foreground" Value="{StaticResource Brush.Accent}" />
+                <Setter Property="Margin" Value="0,0,0,16" />
+                <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
 
-            <Style x:Key="Txt.DataGridHeader"
-                   TargetType="TextBlock"
-                   BasedOn="{StaticResource Txt.Pixel}">
-                <Setter Property="FontSize" Value="14" />
-                <Setter Property="Foreground" Value="{StaticResource Brush.Bg}"/>
-            </Style>
-
-            <Style x:Key="Card.FriendManager" TargetType="GroupBox">
+            <Style x:Key="Card.FriendsList" TargetType="GroupBox">
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="SnapsToDevicePixels" Value="True" />
                 <Setter Property="FontFamily" Value="Consolas" />
@@ -54,7 +49,11 @@
                                                       ContentSource="Header"
                                                       RecognizesAccessKey="True">
                                         <ContentPresenter.Resources>
-                                            <Style TargetType="TextBlock" BasedOn="{StaticResource Txt.Title}"/>
+                                            <Style TargetType="TextBlock" BasedOn="{StaticResource Txt.Pixel}">
+                                                <Setter Property="FontSize" Value="18" />
+                                                <Setter Property="Foreground" Value="{StaticResource Brush.AccentDark}" />
+                                                <Setter Property="Margin" Value="0"/>
+                                            </Style>
                                         </ContentPresenter.Resources>
                                     </ContentPresenter>
 
@@ -80,6 +79,7 @@
                 <Setter Property="AlternatingRowBackground" Value="{StaticResource Brush.Panel}"/>
                 <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="HeadersVisibility" Value="Column"/>
             </Style>
 
             <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -90,6 +90,19 @@
                 <Setter Property="BorderBrush" Value="{StaticResource Brush.AccentDark}"/>
                 <Setter Property="BorderThickness" Value="0,0,1,1"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="{x:Type DataGridCell}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Padding" Value="4,4"/>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{StaticResource Brush.Accent}"/>
+                        <Setter Property="Foreground" Value="{StaticResource Brush.Bg}"/>
+                    </Trigger>
+                </Style.Triggers>
             </Style>
 
             <Style x:Key="Btn.Primary" TargetType="Button">
@@ -119,46 +132,65 @@
                    Opacity="0.85"
                    Panel.ZIndex="1"/>
 
-        <Grid Margin="12" Panel.ZIndex="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                CornerRadius="16"
+                Background="{StaticResource Brush.Panel}"
+                BorderBrush="{StaticResource Brush.AccentDark}"
+                BorderThickness="3"
+                Padding="20"
+                Width="420"
+                Height="480"
+                Panel.ZIndex="2">
 
-            <GroupBox Header="FRIENDS" Grid.Row="0" Style="{StaticResource Card.FriendManager}">
-                <DataGrid x:Name="DgFriends"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
-                          SelectionMode="Single"
-                          Margin="4"
-                          Style="{StaticResource {x:Type DataGrid}}">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="50" IsReadOnly="True">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Border Width="40" Height="40" Margin="2"
-                                            CornerRadius="5"
-                                            BorderBrush="{StaticResource Brush.AccentDark}"
-                                            BorderThickness="1">
-                                        <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
-                                    </Border>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                        <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </GroupBox>
+                <TextBlock Grid.Row="0"
+                           Text="MY FRIENDS"
+                           Style="{StaticResource Txt.Title}"
+                           Margin="0,0,0,12"/>
 
-            <Button Content="Close" 
-                    Grid.Row="1"
-                    Width="100" Height="34"
-                    HorizontalAlignment="Right"
-                    Margin="0,10,4,0"
-                    Style="{StaticResource Btn.Primary}" 
-                    Click="BtnClose_Click"/>
+                <GroupBox Header="Online Status" 
+                          Grid.Row="1" 
+                          Style="{StaticResource Card.FriendsList}"
+                          Margin="0,0,0,12">
+                    <DataGrid x:Name="DgFriends"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              Style="{StaticResource {x:Type DataGrid}}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="50" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Width="40" Height="40" Margin="2"
+                                                CornerRadius="5"
+                                                BorderBrush="{StaticResource Brush.AccentDark}"
+                                                BorderThickness="1">
+                                            <Image Source="{Binding AvatarUrl}" Stretch="UniformToFill"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-        </Grid>
+                            <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+
+                <Button Content="Close" 
+                        Grid.Row="2"
+                        Width="100" Height="34"
+                        HorizontalAlignment="Right"
+                        Margin="0,10,4,0"
+                        Style="{StaticResource Btn.Primary}" 
+                        Click="BtnClose_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

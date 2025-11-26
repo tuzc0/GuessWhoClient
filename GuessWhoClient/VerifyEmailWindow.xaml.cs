@@ -7,136 +7,273 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using GuessWhoClient.Alerts;
+using GuessWhoClient.Globalization;
+using GuessWhoClient.Utilities;
+using GuessWhoClient.Windows;
+using log4net;
 
 namespace GuessWhoClient
 {
-    public partial class VerifyEmailWindow : Window
+    public partial class VerifyEmailWindow : UserControl
     {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(VerifyEmailWindow));
+
+        private const int COOLDOWN_SECONDS = 60;
+        private const int VERIFICATION_CODE_MAX_LENGTH = 6;
+        private const int REGEX_TIMEOUT_MILLISECONDS = 250;
+
+        private const string VERIFICATION_CODE_REGEX_PATTERN = @"^\d{6}$";
+
+        private const string UI_VERIFICATION_SENT_FMT_KEY = "UiVerificationSentFmt";
+        private const string UI_VERIFICATION_SUCCESS_KEY = "UIVerificationSuccess";
+        private const string UI_VALIDATION_SIX_DIGITS_KEY = "UiValidationSixDigits";
+        private const string FAULT_INVALID_OR_EXPIRED_CODE_KEY = "FaultInvalidOrExpiredCode";
+        private const string FAULT_UNEXPECTED_KEY = "FaultUnexpected";
+        private const string FAULT_DATABASE_TIMEOUT_KEY = "FaultDatabaseTimeout";
+        private const string UI_COMMS_GENERIC_KEY = "UiCommsGeneric";
+        private const string UI_MAIN_WINDOW_NOT_FOUND_KEY = "UiMainWindowNotFound";
+        private const string UI_RESEND_IN_FMT_KEY = "UiResendInFmt";
+        private const string FAULT_KEY_PREFIX = "Fault.";
+
+        private const string LOG_VERIFY_STARTED = "Starting email verification for AccountId={0}.";
+        private const string LOG_VERIFY_SUCCESS = "Email verification succeeded for AccountId={0}.";
+        private const string LOG_VERIFY_FAILED_INVALID_CODE = 
+            "Email verification failed due to invalid or expired code for AccountId={0}.";
+        private const string LOG_RESEND_STARTED = "Resend verification code requested for AccountId={0}.";
+        private const string LOG_RESEND_SUCCESS = "Verification code resent successfully for AccountId={0}.";
+        private const string LOG_RESEND_COOLDOWN_STARTED =
+            "Cooldown started for resend operation. AccountId={0}, CooldownSeconds={1}.";
+        private const string LOG_WINDOW_UNLOADED =
+            "VerifyEmailWindow unloaded. Disposing UserServiceClient for AccountId={0}.";
+
         private readonly long accountId;
-        private readonly string email;
         private readonly UserServiceClient client;
         private readonly DispatcherTimer cooldownTimer = new DispatcherTimer();
-        private DateTime cooldownUntil;
 
-        private static readonly Regex SixDigits = new Regex(@"^\d{6}$", RegexOptions.Compiled);
+        private readonly IAlertService alertService = new MessageBoxAlertService();
+        private readonly ILocalizationService localizationService = new LocalizationService();
+
+        private DateTime cooldownUntilUtc;
+        private bool isClientClosed;
+
+        private static readonly Regex VerificationCodeRegex =
+            new Regex(VERIFICATION_CODE_REGEX_PATTERN,
+                RegexOptions.Compiled, TimeSpan.FromMilliseconds(REGEX_TIMEOUT_MILLISECONDS));
 
         public VerifyEmailWindow(long accountId, string email, UserServiceClient client)
         {
             InitializeComponent();
+
             this.accountId = accountId;
-            this.email = email;
             this.client = client;
 
-            txtInfo.Text = string.Format(GetLocalizedText("UiVerificationSentFmt"), this.email);
-            txtCode.PreviewTextInput += TxtCode_PreviewTextInput;
-            DataObject.AddPastingHandler(txtCode, TxtCode_OnPasting);
-            txtCode.Focus();
-
-            cooldownTimer.Interval = TimeSpan.FromSeconds(1);
-            cooldownTimer.Tick += CooldownTimer_Tick;
+            string template = localizationService.Get(UI_VERIFICATION_SENT_FMT_KEY);
+            txtInfo.Text = string.Format(template, email);
         }
 
         private async void BtnVerify_Click(object sender, RoutedEventArgs e)
         {
-            var code = (txtCode.Text ?? string.Empty).Trim();
+            SetVerificationButtonsEnabled(isEnabled: false);
 
-            if (!SixDigits.IsMatch(code))
-            {
-                ShowWarn(GetLocalizedText("UiValidationSixDigits"));
-                txtCode.Focus();
-                return;
-            }
+            Logger.InfoFormat(LOG_VERIFY_STARTED, accountId);
 
             btnVerify.IsEnabled = false;
             btnResend.IsEnabled = false;
 
             try
             {
-                var resp = await client.ConfirmEmailAddressWithVerificationCodeAsync(
-                    new VerifyEmailRequest { AccountId = accountId, Code = code });
+                VerifyEmailRequest request = BuildVerifyEmailRequestOrThrow();
 
-                if (resp.Success)
+                var response = await client.ConfirmEmailAddressWithVerificationCodeAsync(request);
+
+                if (response.Success)
                 {
-                    ShowInfo(GetLocalizedText("UiVerificationSuccess"));
-                    DialogResult = true;
-                    Close();
+                    Logger.InfoFormat(LOG_VERIFY_SUCCESS, accountId);
+                    ShowInfo(GetLocalizedText(UI_VERIFICATION_SUCCESS_KEY));
+
+                    await ServiceClientGuard.CloseSafelyAsync(client);
+                    isClientClosed = true;
+
+                    LoadLoginWindow();
                 }
                 else
                 {
-                    ShowWarn(GetLocalizedText("FaultInvalidOrExpiredCode"));
+                    Logger.WarnFormat(LOG_VERIFY_FAILED_INVALID_CODE, accountId);
+                    ShowWarn(GetLocalizedText(FAULT_INVALID_OR_EXPIRED_CODE_KEY));
                 }
+            }
+            catch (InvalidOperationException ex)
+            {
+                ShowWarn(ex.Message);
+                txtCode.Focus();
             }
             catch (FaultException<ServiceFault> ex)
             {
-                string key = $"Fault.{ex.Detail.Code}";
-                string text = LocalOrFallback(key, ex.Detail.Message, "FaultUnexpected");
+                string key = FAULT_KEY_PREFIX + ex.Detail.Code;
+                string text = LocalOrFallback(key, ex.Detail.Message, FAULT_UNEXPECTED_KEY);
+
+                Logger.Warn(
+                    string.Format(
+                        "Service fault during email verification. AccountId={0}, Code={1}.",
+                        accountId, ex.Detail.Code), ex);
+                
                 ShowWarn(text);
             }
-            catch (TimeoutException)
+            catch (TimeoutException ex)
             {
-                ShowWarn(GetLocalizedText("FaultDatabaseTimeout"));
+                Logger.Error(
+                    string.Format("Timeout while verifying email for AccountId={0}.", accountId), ex);
+                
+                ShowWarn(GetLocalizedText(FAULT_DATABASE_TIMEOUT_KEY));
             }
             catch (CommunicationException ex)
             {
-                ShowError(GetLocalizedText("UiCommsGeneric") + "\n\n" + ex.Message);
+                Logger.Error(
+                    string.Format("Communication error while verifying email for AccountId={0}.", accountId), ex);
+                
+                string message =
+                    GetLocalizedText(UI_COMMS_GENERIC_KEY) + Environment.NewLine + Environment.NewLine +
+                    ex.Message;
+                ShowError(message);
             }
             catch (Exception ex)
             {
-                ShowError(GetLocalizedText("FaultUnexpected") + "\n\n" + ex.Message);
+                Logger.Error(string.Format("Unexpected error while verifying email for AccountId={0}.", accountId), ex);
+
+                string message =
+                    GetLocalizedText(FAULT_UNEXPECTED_KEY) + Environment.NewLine + Environment.NewLine + ex.Message;
+                ShowError(message);
             }
             finally
             {
-                btnVerify.IsEnabled = true;
-                btnResend.IsEnabled = CanResend();
+                SetVerificationButtonsEnabled(isEnabled: true);
             }
         }
 
         private async void BtnResend_Click(object sender, RoutedEventArgs e)
         {
-            btnResend.IsEnabled = false;
+            SetVerificationButtonsEnabled(isEnabled: false);
+
+            Logger.InfoFormat(LOG_RESEND_STARTED, accountId);
 
             try
             {
-                await client.ResendEmailVerificationCodeAsync(
-                    new ResendVerificationRequest { AccountId = accountId });
+                ResendVerificationRequest request = BuildResendVerificationRequest();
 
-                cooldownUntil = DateTime.UtcNow.AddSeconds(60);
+                await client.ResendEmailVerificationCodeAsync(request);
+
+                Logger.InfoFormat(LOG_RESEND_SUCCESS, accountId);
+
+                cooldownUntilUtc = DateTime.UtcNow.AddSeconds(COOLDOWN_SECONDS);
                 cooldownTimer.Start();
+
+                Logger.InfoFormat(LOG_RESEND_COOLDOWN_STARTED, accountId, COOLDOWN_SECONDS);
+
                 UpdateStatus();
             }
             catch (FaultException<ServiceFault> ex)
             {
-                string key = $"Fault.{ex.Detail.Code}";
-                string text = LocalOrFallback(key, ex.Detail.Message, "FaultUnexpected");
+                string key = FAULT_KEY_PREFIX + ex.Detail.Code;
+                string text = LocalOrFallback(key, ex.Detail.Message, FAULT_UNEXPECTED_KEY);
+
+                Logger.Warn(string.Format("Service fault while resending verification code. AccountId={0}, Code={1}.",
+                        accountId, ex.Detail.Code), ex);
+                
                 ShowWarn(text);
                 btnResend.IsEnabled = CanResend();
             }
-            catch (TimeoutException)
+            catch (TimeoutException ex)
             {
-                ShowWarn(GetLocalizedText("FaultDatabaseTimeout"));
-                btnResend.IsEnabled = CanResend();
+                Logger.Error(string.Format("Timeout while resending verification code for AccountId={0}.", accountId),
+                    ex);
+                
+                ShowWarn(GetLocalizedText(FAULT_DATABASE_TIMEOUT_KEY));
             }
             catch (CommunicationException ex)
             {
-                ShowError(GetLocalizedText("UiCommsGeneric") + "\n\n" + ex.Message);
-                btnResend.IsEnabled = CanResend();
+                Logger.Error(string.Format("Communication error while resending verification code for AccountId={0}.",
+                        accountId), ex);
+                
+                string message =
+                    GetLocalizedText(UI_COMMS_GENERIC_KEY) + Environment.NewLine + Environment.NewLine +
+                    ex.Message;
+                ShowError(message);
             }
             catch (Exception ex)
             {
-                ShowError(GetLocalizedText("FaultUnexpected") + "\n\n" + ex.Message);
-                btnResend.IsEnabled = CanResend();
+                Logger.Error(
+                    string.Format("Unexpected error while resending verification code for AccountId={0}.",accountId),
+                    ex);
+
+                string message =
+                    GetLocalizedText(FAULT_UNEXPECTED_KEY) + Environment.NewLine +Environment.NewLine +
+                    ex.Message;
+                ShowError(message);
+            }
+            finally
+            {
+                SetVerificationButtonsEnabled(isEnabled: true);
             }
         }
 
-        private static bool AllowsNextCodeInput(TextBox codeTextBox, string incomingText)
+        private VerifyEmailRequest BuildVerifyEmailRequestOrThrow()
         {
+            string code = (txtCode.Text ?? string.Empty).Trim();
 
-            if (incomingText == null)
+            if (!VerificationCodeRegex.IsMatch(code))
             {
-                incomingText = string.Empty;
+                throw new InvalidOperationException(GetLocalizedText(UI_VALIDATION_SIX_DIGITS_KEY));
             }
 
-            if (incomingText.Any(c => !char.IsDigit(c)))
+            return new VerifyEmailRequest
+            {
+                AccountId = accountId,
+                Code = code
+            };
+        }
+
+        private ResendVerificationRequest BuildResendVerificationRequest()
+        {
+            return new ResendVerificationRequest
+            {
+                AccountId = accountId
+            };
+        }
+
+        private void SetVerificationButtonsEnabled(bool isEnabled)
+        {
+            btnVerify.IsEnabled = isEnabled;
+
+            if (isEnabled)
+            {
+                btnResend.IsEnabled = CanResend();
+            }
+            else
+            {
+                btnResend.IsEnabled = false;
+            }
+        }
+
+        private void LoadLoginWindow()
+        {
+            var gameWindow = Window.GetWindow(this) as GameWindow;
+
+            if (gameWindow == null)
+            {
+                Logger.Error("GameWindow not found when trying to load LoginWindow from VerifyEmailWindow.");
+                ShowError(GetLocalizedText(UI_MAIN_WINDOW_NOT_FOUND_KEY));
+                return;
+            }
+
+            gameWindow.LoadLoginWindow();
+            }
+
+        private static bool AllowsNextCodeInput(TextBox codeTextBox, string incomingText)
+        {
+            string safeIncomingText = incomingText ?? string.Empty;
+
+            if (safeIncomingText.Any(character => !char.IsDigit(character)))
             {
                 return false;
             }
@@ -144,23 +281,26 @@ namespace GuessWhoClient
             int selectionStart = codeTextBox.SelectionStart;
             int selectionLength = codeTextBox.SelectionLength;
 
-            string proposedText = (codeTextBox.Text ?? string.Empty)
-                .Remove(selectionStart, selectionLength)
-                .Insert(selectionStart, incomingText);
+            string currentText = codeTextBox.Text ?? string.Empty;
 
-            return proposedText.Length <= 6 && proposedText.All(char.IsDigit);
+            string proposedText = currentText
+                .Remove(selectionStart, selectionLength)
+                .Insert(selectionStart, safeIncomingText);
+
+            return proposedText.Length <= VERIFICATION_CODE_MAX_LENGTH &&
+                   proposedText.All(char.IsDigit);
         }
 
-        private void TxtCode_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private static void TxtCode_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var codeTextBox = (TextBox)sender;
             e.Handled = !AllowsNextCodeInput(codeTextBox, e.Text);
         }
 
-        private void TxtCode_OnPasting(object sender, DataObjectPastingEventArgs e)
+        private static void TxtCodeOnPasting(object sender, DataObjectPastingEventArgs e)
         {
             var codeTextBox = (TextBox)sender;
-            var pastedText = e.DataObject.GetData(typeof(string)) as string ?? string.Empty;
+            string pastedText = e.DataObject.GetData(typeof(string)) as string ?? string.Empty;
 
             if (!AllowsNextCodeInput(codeTextBox, pastedText))
             {
@@ -168,13 +308,14 @@ namespace GuessWhoClient
             }
         }
 
-        private void CooldownTimer_Tick(object sender, EventArgs e)
+        private void CooldownTimerTick(object sender, EventArgs e)
         {
-            if (DateTime.UtcNow >= cooldownUntil)
+            if (DateTime.UtcNow >= cooldownUntilUtc)
             {
                 cooldownTimer.Stop();
-                txtStatus.Text = "";
-                btnResend.IsEnabled = true;
+                txtStatus.Text = string.Empty;
+
+                SetVerificationButtonsEnabled(isEnabled: true);
             }
             else
             {
@@ -184,33 +325,72 @@ namespace GuessWhoClient
 
         private void UpdateStatus()
         {
-            var remaining = cooldownUntil - DateTime.UtcNow;
+            TimeSpan remaining = cooldownUntilUtc - DateTime.UtcNow;
 
             if (remaining.TotalSeconds > 0)
             {
-                txtStatus.Text = string.Format(GetLocalizedText("UiResendInFmt"), Math.Ceiling(remaining.TotalSeconds));
+                txtStatus.Text = string.Format(
+                    GetLocalizedText(UI_RESEND_IN_FMT_KEY),
+                    Math.Ceiling(remaining.TotalSeconds));
+            }
+            }
+
+        private bool CanResend()
+        {
+            return !cooldownTimer.IsEnabled;
+        }
+
+        private async void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            cooldownTimer.Stop();
+
+            if (!isClientClosed)
+            {
+                Logger.InfoFormat(LOG_WINDOW_UNLOADED, accountId);
+
+                await ServiceClientGuard.CloseSafelyAsync(client);
+                isClientClosed = true;
             }
         }
 
-        private bool CanResend() => !cooldownTimer.IsEnabled;
-
-        private static void ShowWarn(string message) =>
-            MessageBox.Show(message, GetLocalizedText("UiTitleWarning"), MessageBoxButton.OK, MessageBoxImage.Warning);
-
-        private static void ShowInfo(string message) =>
-            MessageBox.Show(message, GetLocalizedText("UiTitleInfo"), MessageBoxButton.OK, MessageBoxImage.Information);
-
-        private static void ShowError(string message) =>
-            MessageBox.Show(message, GetLocalizedText("UiTitleError"), MessageBoxButton.OK, MessageBoxImage.Error);
-
-        private static string GetLocalizedText(string key) =>
-            Globalization.LocalizationProvider.Instance[key];
-
-        private static string LocalOrFallback(string key, string serverMessage, string fallbackKey)
+        private void ShowWarn(string message)
         {
-            var text = GetLocalizedText(key);
-            if (!string.IsNullOrWhiteSpace(serverMessage)) return serverMessage;
+            alertService.Warn(message);
+        }
+
+        private void ShowInfo(string message)
+        {
+            alertService.Info(message);
+        }
+
+        private void ShowError(string message)
+        {
+            alertService.Error(message);
+        }
+
+        private string GetLocalizedText(string key)
+        {
+            return localizationService.Get(key);
+        }
+
+        private string LocalOrFallback(string key, string serverMessage, string fallbackKey)
+        {
+            if (!string.IsNullOrWhiteSpace(serverMessage))
+            {
+                return serverMessage;
+            }
+
+            var localized = GetLocalizedText(key);
+
+            if (!string.IsNullOrWhiteSpace(localized) && localized != key)
+            {
+                return localized;
+            }
+
             return GetLocalizedText(fallbackKey);
         }
+
     }
 }
+
+

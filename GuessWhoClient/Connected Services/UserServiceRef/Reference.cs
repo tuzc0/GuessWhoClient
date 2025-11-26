@@ -439,6 +439,191 @@ namespace GuessWhoClient.UserServiceRef {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PasswordRecoveryRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class PasswordRecoveryRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private string EmailField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PasswordRecoveryResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class PasswordRecoveryResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpdatePasswordRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class UpdatePasswordRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NewPasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VerificationCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NewPassword {
+            get {
+                return this.NewPasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NewPasswordField, value) != true)) {
+                    this.NewPasswordField = value;
+                    this.RaisePropertyChanged("NewPassword");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string VerificationCode {
+            get {
+                return this.VerificationCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VerificationCodeField, value) != true)) {
+                    this.VerificationCodeField = value;
+                    this.RaisePropertyChanged("VerificationCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UserServiceRef.IUserService")]
     public interface IUserService {
@@ -464,6 +649,21 @@ namespace GuessWhoClient.UserServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/ResendEmailVerificationCode", ReplyAction="http://tempuri.org/IUserService/ResendEmailVerificationCodeResponse")]
         System.Threading.Tasks.Task ResendEmailVerificationCodeAsync(GuessWhoClient.UserServiceRef.ResendVerificationRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SendPasswordRecoveryCode", ReplyAction="http://tempuri.org/IUserService/SendPasswordRecoveryCodeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.UserServiceRef.ServiceFault), Action="http://tempuri.org/IUserService/SendPasswordRecoveryCodeServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
+        GuessWhoClient.UserServiceRef.PasswordRecoveryResponse SendPasswordRecoveryCode(GuessWhoClient.UserServiceRef.PasswordRecoveryRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SendPasswordRecoveryCode", ReplyAction="http://tempuri.org/IUserService/SendPasswordRecoveryCodeResponse")]
+        System.Threading.Tasks.Task<GuessWhoClient.UserServiceRef.PasswordRecoveryResponse> SendPasswordRecoveryCodeAsync(GuessWhoClient.UserServiceRef.PasswordRecoveryRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCode", ReplyAction="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCodeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.UserServiceRef.ServiceFault), Action="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCodeServiceFaultFau" +
+            "lt", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
+        bool UpdatePasswordWithVerificationCode(GuessWhoClient.UserServiceRef.UpdatePasswordRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCode", ReplyAction="http://tempuri.org/IUserService/UpdatePasswordWithVerificationCodeResponse")]
+        System.Threading.Tasks.Task<bool> UpdatePasswordWithVerificationCodeAsync(GuessWhoClient.UserServiceRef.UpdatePasswordRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -515,6 +715,22 @@ namespace GuessWhoClient.UserServiceRef {
         
         public System.Threading.Tasks.Task ResendEmailVerificationCodeAsync(GuessWhoClient.UserServiceRef.ResendVerificationRequest request) {
             return base.Channel.ResendEmailVerificationCodeAsync(request);
+        }
+        
+        public GuessWhoClient.UserServiceRef.PasswordRecoveryResponse SendPasswordRecoveryCode(GuessWhoClient.UserServiceRef.PasswordRecoveryRequest request) {
+            return base.Channel.SendPasswordRecoveryCode(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoClient.UserServiceRef.PasswordRecoveryResponse> SendPasswordRecoveryCodeAsync(GuessWhoClient.UserServiceRef.PasswordRecoveryRequest request) {
+            return base.Channel.SendPasswordRecoveryCodeAsync(request);
+        }
+        
+        public bool UpdatePasswordWithVerificationCode(GuessWhoClient.UserServiceRef.UpdatePasswordRequest request) {
+            return base.Channel.UpdatePasswordWithVerificationCode(request);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdatePasswordWithVerificationCodeAsync(GuessWhoClient.UserServiceRef.UpdatePasswordRequest request) {
+            return base.Channel.UpdatePasswordWithVerificationCodeAsync(request);
         }
     }
 }

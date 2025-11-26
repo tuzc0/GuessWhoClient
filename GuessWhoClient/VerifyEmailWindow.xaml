@@ -1,88 +1,84 @@
-﻿<Window x:Class="GuessWhoClient.VerifyEmailWindow"
+﻿<UserControl x:Class="GuessWhoClient.VerifyEmailWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Verificar correo" Height="220" Width="380"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
-        SnapsToDevicePixels="True" TextOptions.TextRenderingMode="Aliased"
-        Background="{StaticResource Brush.Bg}">
-
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/PixelTheme.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
-            <Style x:Key="Input.Pixel" TargetType="TextBox">
-                <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}"/>
-                <Setter Property="FontSize" Value="14"/>
-                <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
-                <Setter Property="Background" Value="{StaticResource Brush.Card}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource Brush.Accent}"/>
-                <Setter Property="BorderThickness" Value="2"/>
-                <Setter Property="Padding" Value="8,6"/>
-                <Setter Property="CaretBrush" Value="{StaticResource Brush.TextLight}"/>
-                <Setter Property="SelectionBrush" Value="{StaticResource Brush.Accent}"/>
-            </Style>
-
-            <Style x:Key="Txt.Pixel.Small" TargetType="TextBlock" BasedOn="{StaticResource Txt.Pixel}">
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="Opacity" Value="0.85"/>
-            </Style>
-        </ResourceDictionary>
-    </Window.Resources>
+             xmlns:localization="clr-namespace:GuessWhoClient.Globalization">
 
     <Grid Margin="16">
-        <Border Background="{StaticResource Brush.Panel}" CornerRadius="12" Padding="16">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-                <TextBlock x:Name="txtInfo"
-                           Grid.Row="0"
-                           Style="{StaticResource Txt.Pixel}"
-                           TextWrapping="Wrap"
-                           Margin="0,0,0,15"
-                           Text="Te enviamos un código de 6 dígitos a tu correo."/>
+        <TextBlock x:Name="txtInfo"
+                   Grid.Row="0"
+                   Foreground="{StaticResource Brush.Accent}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Margin="32,24,32,24"
+                   FontSize="28"
+                   Text="{Binding [UiVerificationSentFmt], Source={x:Static localization:LocalizationProvider.Instance}}" />
 
-                <TextBox x:Name="txtCode"
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Width="420">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Style="{StaticResource Txt.Pixel.Small}"
+                       Text="{Binding [LblVerificationCode], Source={x:Static localization:LocalizationProvider.Instance}}"
+                       HorizontalAlignment="Center"
+                       FontSize="24"
+                       Margin="0,0,0,6" />
+
+            <TextBox x:Name="txtCode"
                          Grid.Row="1"
                          Style="{StaticResource Input.Pixel}"
-                         Width="160" 
+                     Width="350"
                          MaxLength="6"
+                     HorizontalAlignment="Center"
                          VerticalContentAlignment="Center"
-                         PreviewTextInput="TxtCode_PreviewTextInput"/>
+                     Margin="0,0,0,4"
+                     PreviewTextInput="TxtCode_PreviewTextInput" />
 
-                <TextBlock x:Name="txtStatus"
-                           Grid.Row="3"
+            <TextBlock x:Name="txtStatus"
+                       Grid.Row="2"
                            Style="{StaticResource Txt.Pixel.Small}"
-                           Margin="0,10,0,6"/>
+                       Margin="0,8,0,0"
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center" />
 
-                <StackPanel Grid.Row="4"
+            <StackPanel Grid.Row="4"
                             Orientation="Horizontal"
-                            HorizontalAlignment="Center" Margin="0,0,0,0" Width="323">
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,8">
 
-                    <Button x:Name="btnVerify"
+                <Button x:Name="btnVerify"
                             Style="{StaticResource Btn.Primary}"
-                            Content="VERIFICAR"
-                            Width="120"
-                            Click="BtnVerify_Click"
-                            Margin="20,0,20,0"/>
+                        Content="{Binding [BtnVerifyCode], Source={x:Static localization:LocalizationProvider.Instance}}"
+                        Width="160"
+                        Height="52"
+                        Margin="12,0,12,0"
+                        Click="BtnVerify_Click" />
 
-                    <Button x:Name="btnResend"
+                <Button x:Name="btnResend"
                             Style="{StaticResource Btn.Primary}"
                             Background="{StaticResource Brush.Card}"
                             Foreground="{StaticResource Brush.TextLight}"
-                            Content="REENVIAR"
-                            Width="110"
-                            Click="BtnResend_Click"
-                            Margin="20,0,20,0"/>
-                </StackPanel>
-            </Grid>
-        </Border>
+                        Content="{Binding [BtnResendCode], Source={x:Static localization:LocalizationProvider.Instance}}"
+                        Width="160"
+                        Height="52"
+                        Margin="12,0,12,0"
+                        Click="BtnResend_Click" />
+            </StackPanel>
+        </Grid>
     </Grid>
-</Window>
+</UserControl>

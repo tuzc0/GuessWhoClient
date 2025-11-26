@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Security;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using GuessWhoClient.Alerts;
 using GuessWhoClient.Dtos;
 using GuessWhoClient.Globalization;
 using GuessWhoClient.InputValidation;
 using GuessWhoClient.UserServiceRef;
+using GuessWhoClient.Utilities;
+using GuessWhoClient.Windows;
 using log4net;
 
 namespace GuessWhoClient
 {
-    public partial class CreateAccountWindow : Window
+    public partial class CreateAccountWindow : UserControl
     {
-        private const string USER_SERVICE_ENDPOINT_NAME = "NetTcpBinding_IUserService";
-
         private static readonly ILog Logger = LogManager.GetLogger(typeof(CreateAccountWindow));
+
+        private const string USER_SERVICE_ENDPOINT_NAME = "NetTcpBinding_IUserService";
+        private const string UI_ACCOUNT_CREATED_FOR_FMT_KEY = "UiAccountCreatedForFmt";
+        private const string UI_SECURITY_NEGOTIATION_FAILED_KEY = "UiSecurityNegotiationFailed";
+        private const string UI_COMMS_GENERIC_KEY = "UiCommsGeneric";
+        private const string FAULT_UNEXPECTED_KEY = "FaultUnexpected";
+        private const string FAULT_DATABASE_TIMEOUT_KEY = "FaultDatabaseTimeout";
+        private const string VERIFY_EMAIL_HOST_NOT_FOUND_KEY = "UiVerifyEmailHostWindowNotFound";
+
+        private const string VERIFY_EMAIL_HOST_NOT_FOUND_FALLBACK_MESSAGE =
+            "No se encontró la ventana principal para continuar con la verificación de correo.";
 
         private readonly IAlertService alertService = new MessageBoxAlertService();
         private readonly ILocalizationService localizationService = new LocalizationService();
@@ -31,34 +42,30 @@ namespace GuessWhoClient
         {
             SetCreateAccountButtonEnabled(isEnabled: false);
 
-            UserServiceClient client = null;
+            UserServiceClient userServiceClient = null;
 
             try
             {
                 RegisterRequest registerRequest = BuildRegisterRequestFromForm();
-                client = new UserServiceClient(USER_SERVICE_ENDPOINT_NAME);
+                userServiceClient = new UserServiceClient(USER_SERVICE_ENDPOINT_NAME);
 
-                RegisterResponse registerResponse = await client.RegisterUserAsync(registerRequest);
+                RegisterResponse registerResponse = await userServiceClient.RegisterUserAsync(registerRequest);
 
-                alertService.Info(localizationService.Get("UiAccountCreatedForFmt"));
+                alertService.Info(localizationService.Get(UI_ACCOUNT_CREATED_FOR_FMT_KEY));
 
                 if (registerResponse.EmailVerificationRequired)
                 {
-                    VerifyEmailWindow verifyWindow = new VerifyEmailWindow(
+                    bool isVerifyEmailWindowLoaded = LoadVerifyEmailWindow(
                         registerResponse.AccountId,
                         registerResponse.Email,
-                        client);
+                        userServiceClient);
 
-                    bool? dialogResult = verifyWindow.ShowDialog();
-
-                    if (dialogResult != true)
+                    if (isVerifyEmailWindowLoaded)
                     {
-                        alertService.Warn(localizationService.Get("UiVerificationRequiredToLogin"));
+                        userServiceClient = null;
+                        return;
                     }
                 }
-
-                await CloseUserServiceClientSafelyAsync(client);
-                client = null;
             }
             catch (InvalidOperationException ex)
             {
@@ -69,11 +76,9 @@ namespace GuessWhoClient
             {
                 Logger.Error("Security negotiation failed while creating account.", ex);
 
-                string message =
-                    localizationService.Get("UiSecurityNegotiationFailed") +
-                    Environment.NewLine +
-                    Environment.NewLine +
-                    ex.Message;
+                string message = BuildLocalizedErrorMessageWithException(
+                    UI_SECURITY_NEGOTIATION_FAILED_KEY,
+                    ex);
 
                 alertService.Error(message);
             }
@@ -85,24 +90,22 @@ namespace GuessWhoClient
                 string localizedText = localizationService.LocalOrFallback(
                     faultKey,
                     ex.Detail.Message,
-                    "FaultUnexpected");
+                    FAULT_UNEXPECTED_KEY);
 
                 alertService.Error(localizedText);
             }
             catch (TimeoutException ex)
             {
                 Logger.Error("Timeout while creating account.", ex);
-                alertService.Error(localizationService.Get("FaultDatabaseTimeout"));
+                alertService.Error(localizationService.Get(FAULT_DATABASE_TIMEOUT_KEY));
             }
             catch (CommunicationException ex)
             {
                 Logger.Error("Communication error while creating account.", ex);
 
-                string message =
-                    localizationService.Get("UiCommsGeneric") +
-                    Environment.NewLine +
-                    Environment.NewLine +
-                    ex.Message;
+                string message = BuildLocalizedErrorMessageWithException(
+                    UI_COMMS_GENERIC_KEY,
+                    ex);
 
                 alertService.Error(message);
             }
@@ -110,19 +113,17 @@ namespace GuessWhoClient
             {
                 Logger.Error("Unexpected error while creating account.", ex);
 
-                string message =
-                    localizationService.Get("FaultUnexpected") +
-                    Environment.NewLine +
-                    Environment.NewLine +
-                    ex.Message;
+                string message = BuildLocalizedErrorMessageWithException(
+                    FAULT_UNEXPECTED_KEY,
+                    ex);
 
                 alertService.Error(message);
             }
             finally
             {
-                if (client != null)
+                if (userServiceClient != null)
                 {
-                    await CloseUserServiceClientSafelyAsync(client);
+                    await ServiceClientGuard.CloseSafelyAsync(userServiceClient);
                 }
 
                 SetCreateAccountButtonEnabled(isEnabled: true);
@@ -131,11 +132,11 @@ namespace GuessWhoClient
 
         private RegisterRequest BuildRegisterRequestFromForm()
         {
-            AccountProfileInput newAccountProfile = new AccountProfileInput(
+            var newAccountProfile = new AccountProfileInput(
                 txtEmail.Text,
                 txtDisplayName.Text,
-                txtPassword.Password,
-                txtConfirmPassword.Password);
+                pwdPassword.Password,
+                pwdConfirmPassword.Password);
 
             List<string> errors = AccountValidator.ValidateForm(newAccountProfile);
 
@@ -158,28 +159,122 @@ namespace GuessWhoClient
             btnCreateAccount.IsEnabled = isEnabled;
         }
 
-        private static async Task CloseUserServiceClientSafelyAsync(UserServiceClient client)
+        private void ChkShowPasswords_Checked(object sender, RoutedEventArgs e)
         {
-            if (client == null)
+            UpdatePasswordsVisibilityFromCheckBoxState();
+        }
+
+        private void ChkShowPasswords_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UpdatePasswordsVisibilityFromCheckBoxState();
+        }
+
+        private void PwdPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
+
+            var visibilityContext = new ChangePasswordVisibility(
+                isPasswordVisible,
+                pwdPassword,
+                txtPasswordVisible);
+
+            PasswordVisibilityHelper.SyncPasswordToText(visibilityContext);
+        }
+
+        private void TxtPasswordVisible_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
+
+            var visibilityContext = new ChangePasswordVisibility(
+                isPasswordVisible,
+                pwdPassword,
+                txtPasswordVisible);
+
+            PasswordVisibilityHelper.SyncTextToPassword(visibilityContext);
+        }
+
+        private void PwdPasswordConfirm_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
+
+            var visibilityContext = new ChangePasswordVisibility(
+                isPasswordVisible,
+                pwdConfirmPassword,
+                txtConfirmPasswordVisible);
+
+            PasswordVisibilityHelper.SyncPasswordToText(visibilityContext);
+        }
+
+        private void TxtPasswordConfirmVisible_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
+
+            var visibilityContext = new ChangePasswordVisibility(
+                isPasswordVisible,
+                pwdConfirmPassword,
+                txtConfirmPasswordVisible);
+
+            PasswordVisibilityHelper.SyncTextToPassword(visibilityContext);
+        }
+
+        private void UpdatePasswordsVisibilityFromCheckBoxState()
+        {
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
+
+            var mainPasswordContext = new ChangePasswordVisibility(
+                isPasswordVisible,
+                pwdPassword,
+                txtPasswordVisible);
+
+            PasswordVisibilityHelper.TogglePasswordPair(mainPasswordContext);
+
+            var confirmPasswordContext = new ChangePasswordVisibility(
+                isPasswordVisible,
+                pwdConfirmPassword,
+                txtConfirmPasswordVisible);
+
+            PasswordVisibilityHelper.TogglePasswordPair(confirmPasswordContext);
+        }
+
+        private bool LoadVerifyEmailWindow(long accountId, string email, UserServiceClient userServiceClient)
+        {
+            bool isVerifyEmailWindowLoaded = false;
+
+            var gameWindow = Window.GetWindow(this) as GameWindow;
+
+            if (gameWindow == null)
             {
-                return;
+                string message = localizationService.LocalOrFallback(
+                    VERIFY_EMAIL_HOST_NOT_FOUND_KEY,
+                    VERIFY_EMAIL_HOST_NOT_FOUND_FALLBACK_MESSAGE,
+                    VERIFY_EMAIL_HOST_NOT_FOUND_KEY);
+
+                alertService.Error(message);
+                Logger.Error("GameWindow not found when trying to load VerifyEmailWindow.");
+            }
+            else
+            {
+                gameWindow.LoadVerifyEmailWindow(accountId, email, userServiceClient);
+                isVerifyEmailWindowLoaded = true;
             }
 
-            try
-            {
-                if (client.State == CommunicationState.Faulted)
-                {
-                    client.Abort();
-                }
-                else
-                {
-                    await Task.Run(() => client.Close());
-                }
-            }
-            catch
-            {
-                client.Abort();
-            }
+            return isVerifyEmailWindowLoaded;
+        }
+
+        private void OnCancelClick(object sender, RoutedEventArgs e)
+        {
+            var gameWindow = Window.GetWindow(this) as GameWindow;
+            gameWindow?.LoadLoginWindow();
+        }
+
+        private string BuildLocalizedErrorMessageWithException(string resourceKey, Exception ex)
+        {
+            string header = localizationService.Get(resourceKey);
+
+            return header +
+                   Environment.NewLine +
+                   Environment.NewLine +
+                   ex.Message;
         }
     }
 }

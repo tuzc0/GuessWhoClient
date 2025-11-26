@@ -6,10 +6,6 @@ using System.Windows;
 using GuessWhoClient.Alerts;
 using GuessWhoClient.Globalization;
 using GuessWhoClient.FriendServiceRef;
-using GuessWhoClient.Dtos;
-using log4net;
-using System.Windows.Controls;
-using System.Collections.Generic;
 
 using ServiceFault = GuessWhoClient.FriendServiceRef.ServiceFault;
 

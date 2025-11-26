@@ -202,7 +202,7 @@ namespace WPFGuessWhoClient
         }
 
 
-        private async Task ProcessRequest(string action, System.Windows.Controls.DataGrid sourceDataGrid)
+        private async Task ProcessRequest(string action, DataGrid sourceDataGrid)
         {
             var selectedItem = sourceDataGrid.SelectedItem;
 

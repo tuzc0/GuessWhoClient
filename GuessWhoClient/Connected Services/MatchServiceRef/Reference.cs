@@ -15,6 +15,99 @@ namespace GuessWhoClient.MatchServiceRef {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
+    [System.SerializableAttribute()]
+    public partial class ServiceFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CorrelationIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExceptionTypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public string CorrelationId {
+            get {
+                return this.CorrelationIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CorrelationIdField, value) != true)) {
+                    this.CorrelationIdField = value;
+                    this.RaisePropertyChanged("CorrelationId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string ExceptionType {
+            get {
+                return this.ExceptionTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExceptionTypeField, value) != true)) {
+                    this.ExceptionTypeField = value;
+                    this.RaisePropertyChanged("ExceptionType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CreateMatchRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
         "")]
     [System.SerializableAttribute()]
@@ -553,7 +646,7 @@ namespace GuessWhoClient.MatchServiceRef {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private int MatchIdField;
+        private long MatchIdField;
         
         private long UserIdField;
         
@@ -568,7 +661,7 @@ namespace GuessWhoClient.MatchServiceRef {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public int MatchId {
+        public long MatchId {
             get {
                 return this.MatchIdField;
             }
@@ -776,42 +869,49 @@ namespace GuessWhoClient.MatchServiceRef {
     public interface IMatchService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/SusbcribeLobby", ReplyAction="http://tempuri.org/IMatchService/SusbcribeLobbyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/SusbcribeLobbyServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         void SusbcribeLobby(long matchId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/SusbcribeLobby", ReplyAction="http://tempuri.org/IMatchService/SusbcribeLobbyResponse")]
         System.Threading.Tasks.Task SusbcribeLobbyAsync(long matchId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/UnsusbcribeLobby", ReplyAction="http://tempuri.org/IMatchService/UnsusbcribeLobbyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/UnsusbcribeLobbyServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         void UnsusbcribeLobby(long matchId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/UnsusbcribeLobby", ReplyAction="http://tempuri.org/IMatchService/UnsusbcribeLobbyResponse")]
         System.Threading.Tasks.Task UnsusbcribeLobbyAsync(long matchId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/CreateMatch", ReplyAction="http://tempuri.org/IMatchService/CreateMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/CreateMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         GuessWhoClient.MatchServiceRef.CreateMatchResponse CreateMatch(GuessWhoClient.MatchServiceRef.CreateMatchRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/CreateMatch", ReplyAction="http://tempuri.org/IMatchService/CreateMatchResponse")]
         System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.CreateMatchResponse> CreateMatchAsync(GuessWhoClient.MatchServiceRef.CreateMatchRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/JoinMatch", ReplyAction="http://tempuri.org/IMatchService/JoinMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/JoinMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         GuessWhoClient.MatchServiceRef.JoinMatchResponse JoinMatch(GuessWhoClient.MatchServiceRef.JoinMatchRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/JoinMatch", ReplyAction="http://tempuri.org/IMatchService/JoinMatchResponse")]
         System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.JoinMatchResponse> JoinMatchAsync(GuessWhoClient.MatchServiceRef.JoinMatchRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/LeaveMatch", ReplyAction="http://tempuri.org/IMatchService/LeaveMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/LeaveMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         GuessWhoClient.MatchServiceRef.BasicResponse LeaveMatch(GuessWhoClient.MatchServiceRef.LeaveMatchRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/LeaveMatch", ReplyAction="http://tempuri.org/IMatchService/LeaveMatchResponse")]
         System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> LeaveMatchAsync(GuessWhoClient.MatchServiceRef.LeaveMatchRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/SetPlayerReadyStatus", ReplyAction="http://tempuri.org/IMatchService/SetPlayerReadyStatusResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/SetPlayerReadyStatusServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         GuessWhoClient.MatchServiceRef.BasicResponse SetPlayerReadyStatus(GuessWhoClient.MatchServiceRef.SetPlayerReadyStatusRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/SetPlayerReadyStatus", ReplyAction="http://tempuri.org/IMatchService/SetPlayerReadyStatusResponse")]
         System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> SetPlayerReadyStatusAsync(GuessWhoClient.MatchServiceRef.SetPlayerReadyStatusRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/StartMatch", ReplyAction="http://tempuri.org/IMatchService/StartMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/StartMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
         GuessWhoClient.MatchServiceRef.BasicResponse StartMatch(GuessWhoClient.MatchServiceRef.StartMatchRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/StartMatch", ReplyAction="http://tempuri.org/IMatchService/StartMatchResponse")]

@@ -24,6 +24,36 @@
         <Setter Property="TextOptions.TextRenderingMode" Value="Aliased"/>
     </Style>
 
+    <Style x:Key="Input.Pixel" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+        <Setter Property="Background" Value="{StaticResource Brush.Card}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Brush.Accent}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="CaretBrush" Value="{StaticResource Brush.TextLight}"/>
+        <Setter Property="SelectionBrush" Value="{StaticResource Brush.Accent}"/>
+    </Style>
+
+    <Style x:Key="Input.Pixel.Password" TargetType="PasswordBox">
+        <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+        <Setter Property="Background" Value="{StaticResource Brush.Card}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Brush.Accent}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="CaretBrush" Value="{StaticResource Brush.TextLight}"/>
+        <Setter Property="SelectionBrush" Value="{StaticResource Brush.Accent}"/>
+    </Style>
+
+
+    <Style x:Key="Txt.Pixel.Small" TargetType="TextBlock" BasedOn="{StaticResource Txt.Pixel}">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Opacity" Value="0.85"/>
+    </Style>
+
     <Style x:Key="Btn.Primary" TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource Brush.Bg}"/>
         <Setter Property="Background" Value="{StaticResource Brush.Accent}"/>
@@ -90,6 +120,60 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="Chk.Pixel" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource Brush.TextLight}"/>
+        <Setter Property="FontFamily" Value="{StaticResource Font.Pixel}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Brush.Accent}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal">
+                        <Border x:Name="CheckboxBox"
+                                Width="18"
+                                Height="18"
+                                Margin="0,0,8,0"
+                                Background="{StaticResource Brush.Panel}"
+                                BorderBrush="{StaticResource Brush.Accent}"
+                                BorderThickness="2">
+                            <Path x:Name="CheckMark"
+                                  Data="M2,8 L6,12 L14,2"
+                                  Stroke="{StaticResource Brush.TextLight}"
+                                  StrokeThickness="2"
+                                  StrokeLineJoin="Round"
+                                  StrokeStartLineCap="Round"
+                                  StrokeEndLineCap="Round"
+                                  Visibility="Collapsed"/>
+                        </Border>
+
+                        <ContentPresenter VerticalAlignment="Center"
+                                          RecognizesAccessKey="True"/>
+                    </StackPanel>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CheckboxBox" Property="Background"
+                                    Value="{StaticResource Brush.Card}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
     <Geometry x:Key="Geo.Icon.Settings">
         M19.14,12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58c.18-.14.23-.4.12-.61l-1.92-3.32c-.11-.21-.36-.3-.58-.22l-2.39.96

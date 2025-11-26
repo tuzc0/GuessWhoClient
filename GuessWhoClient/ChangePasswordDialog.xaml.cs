@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GuessWhoClient.Dtos;
+using GuessWhoClient.InputValidation;
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -7,14 +10,14 @@ namespace GuessWhoClient
     public partial class ChangePasswordDialog : UserControl
     {
         private const string VALIDATION_TITLE = "Validation";
-        private const string ERROR_NEW_PASSWORD_EMPTY = "New password cannot be empty.";
-        private const string ERROR_PASSWORD_MISMATCH = "New password and confirmation do not match.";
 
         public event EventHandler<bool> PasswordChangeDialogClosed;
 
         public string CurrentPassword => pbCurrent?.Password ?? string.Empty;
-        public string NewPassword => pbNew?.Password ?? string.Empty;
-        public string ConfirmNewPassword => pbConfirm?.Password ?? string.Empty;
+        public string NewPassword => pbNewPassword?.Password ?? string.Empty;
+        public string ConfirmNewPassword => pbConfirmPassword?.Password ?? string.Empty;
+
+        public PasswordChangeRequest PasswordChangeRequest { get; private set; }
 
         public ChangePasswordDialog()
         {
@@ -26,33 +29,33 @@ namespace GuessWhoClient
 
         private void OnOkButtonClick(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(NewPassword))
+            var validationErrors = AccountValidator.ValidatePasswordChange(
+                NewPassword,
+                ConfirmNewPassword);
+
+            if (validationErrors.Any())
             {
                 MessageBox.Show(
-                    ERROR_NEW_PASSWORD_EMPTY,
+                    string.Join(Environment.NewLine, validationErrors),
                     VALIDATION_TITLE,
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
 
+                PasswordChangeRequest = null;
                 return;
             }
 
-            if (!string.Equals(NewPassword, ConfirmNewPassword, StringComparison.Ordinal))
-            {
-                MessageBox.Show(
-                    ERROR_PASSWORD_MISMATCH,
-                    VALIDATION_TITLE,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-
-                return;
-            }
+            PasswordChangeRequest = new PasswordChangeRequest(
+                CurrentPassword,
+                NewPassword,
+                ConfirmNewPassword);
 
             PasswordChangeDialogClosed?.Invoke(this, true);
         }
 
         private void OnCancelButtonClick(object sender, RoutedEventArgs e)
         {
+            PasswordChangeRequest = null;
             PasswordChangeDialogClosed?.Invoke(this, false);
         }
     }

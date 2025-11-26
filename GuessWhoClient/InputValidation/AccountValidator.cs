@@ -12,6 +12,8 @@ namespace GuessWhoClient.InputValidation
         private const int PASSWORD_MIN_LENGTH = 8;
         private const int PASSWORD_MAX_LENGTH = 64;
 
+        private const int REGEX_VALIDATION_TIMEOUT_MS = 250;
+
         private const string ERROR_EMAIL_REQUIRED =
             "Email is required.";
         private const string ERROR_EMAIL_TOO_LONG =
@@ -40,10 +42,22 @@ namespace GuessWhoClient.InputValidation
             "Password and confirmation password do not match.";
 
         private static readonly Regex EmailRegex =
-            new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled);
+            new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.Compiled,
+                TimeSpan.FromMilliseconds(REGEX_VALIDATION_TIMEOUT_MS));
 
         private static readonly Regex DisplayNameRegex =
-            new Regex(@"^[A-Za-z0-9 ]+$", RegexOptions.Compiled);
+            new Regex(@"^[A-Za-z0-9 ]+$", RegexOptions.Compiled,
+                TimeSpan.FromMilliseconds(REGEX_VALIDATION_TIMEOUT_MS));
+
+        public static List<string> ValidateLoginForm(LoginInput login)
+        {
+            var errors = new List<string>();
+
+            ValidateEmail(login.Email, errors);
+            ValidatePassword(login.Password, null, errors);
+            
+            return errors;
+        }
 
         public static List<string> ValidateForm(AccountProfileInput accountProfile)
         {
@@ -53,6 +67,23 @@ namespace GuessWhoClient.InputValidation
             ValidateDisplayName(accountProfile.DisplayName, errors);
             ValidatePassword(accountProfile.Password, accountProfile.ConfirmPassword, errors);
 
+            return errors;
+        }
+
+        public static List<string> ValidateProfileWithoutPassword(AccountProfileInput accountProfile)
+        {
+            var errors = new List<string>();
+
+            ValidateEmail(accountProfile.Email, errors);
+            ValidateDisplayName(accountProfile.DisplayName, errors);
+
+            return errors;
+        }
+
+        public static List<string> ValidatePasswordChange(string newPassword, string confirmPassword)
+        {
+            var errors = new List<string>();
+            ValidatePassword(newPassword, confirmPassword, errors);
             return errors;
         }
 

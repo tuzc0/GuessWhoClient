@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using GuessWhoClient.Dtos;
+using GuessWhoClient.UserServiceRef;
+using log4net.Repository.Hierarchy;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace GuessWhoClient.Windows
@@ -8,7 +11,35 @@ namespace GuessWhoClient.Windows
         public GameWindow()
         {
             InitializeComponent();
-            LoadMainMenu();
+            LoadLoginWindow();
+            //LoadChooseCharacterScreen();
+        }
+
+        public void LoadLoginWindow()
+        {
+            ScreenHost.Children.Clear();
+
+            var loginScreen = new LoginWindow();
+            
+            ScreenHost.Children.Add(loginScreen);
+        }
+
+        public void LoadCreateAccountWindow()
+        {
+            ScreenHost.Children.Clear();
+            
+            var createAccountScreen = new CreateAccountWindow();
+            
+            ScreenHost.Children.Add(createAccountScreen);
+        }
+
+        public void LoadVerifyEmailWindow(long accountId, string email, UserServiceClient client)
+        {
+            ScreenHost.Children.Clear();
+
+            var verifyEmailScreen = new VerifyEmailWindow(accountId, email, client);
+            
+            ScreenHost.Children.Add(verifyEmailScreen);
         }
 
         public void LoadMainMenu()
@@ -33,7 +64,7 @@ namespace GuessWhoClient.Windows
         {
             ScreenHost.Children.Clear();
 
-            var profileScreen = new Profile();
+            var profileScreen = new ProfileWindow();
             
             ScreenHost.Children.Add(profileScreen);
         }
@@ -50,6 +81,34 @@ namespace GuessWhoClient.Windows
         {
             ScreenHost.Children.Clear();
             ScreenHost.Children.Add(screen);
+        }
+
+        public void CreateGamePlayWindow(GamePlayParameters parameters)
+        {
+            var gamePlayWindow = new GamePlayWindow(parameters)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
+            gamePlayWindow.Closed += (_, __) =>
+            {
+                Show();
+                LoadJoinOrCreateGameScreen();
+            };
+
+            Hide();
+            gamePlayWindow.Show();
+        }
+
+        public void LoadChooseCharacterScreen()
+        {
+            ScreenHost.Children.Clear();
+
+            var chooseCharacterScreen = new ChooseCharacterWindow();
+
+            ScreenHost.Children.Add(chooseCharacterScreen);
+
         }
     }
 }

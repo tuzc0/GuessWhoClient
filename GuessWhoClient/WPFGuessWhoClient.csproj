@@ -65,6 +65,7 @@
     <Compile Include="Alerts\IAlertService.cs" />
     <Compile Include="Alerts\MessageBoxAlertService.cs" />
     <Compile Include="Assets\AvatarAssets.cs" />
+    <Compile Include="Assets\CharacterAsserts.cs" />
     <Compile Include="Callbacks\ChatCallback.cs" />
     <Compile Include="Callbacks\MatchCallback.cs" />
     <Compile Include="ChangePasswordDialog.xaml.cs">
@@ -72,6 +73,9 @@
     </Compile>
     <Compile Include="ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChooseAvatarWindow.xaml.cs">
+      <DependentUpon>ChooseAvatarWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChooseCharacterWindow.xaml.cs">
       <DependentUpon>ChooseCharacterWindow.xaml</DependentUpon>
@@ -106,10 +110,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\IsLocalPlayerConverter.cs" />
     <Compile Include="CreateAccountWindow.xaml.cs">
       <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dtos\AccountProfileInput.cs" />
+    <Compile Include="Dtos\AvatarCard.cs" />
+    <Compile Include="Dtos\AvatarChangeRequest.cs" />
+    <Compile Include="Dtos\LoginInput.cs" />
+    <Compile Include="Dtos\CharacterCard.cs" />
+    <Compile Include="Dtos\GamePlayParameters.cs" />
+    <Compile Include="Dtos\PasswordChangeRequest.cs" />
     <Compile Include="FriendListWindow.xaml.cs">
       <DependentUpon>FriendListWindow.xaml</DependentUpon>
     </Compile>
@@ -121,22 +133,35 @@
     </Compile>
     <Compile Include="Globalization\ILocalizationService.cs" />
     <Compile Include="Globalization\LocalizationService.cs" />
+    <Compile Include="Globalization\LocalizationProvider.cs" />
     <Compile Include="InputValidation\AccountValidator.cs" />
     <Compile Include="Interfaces\IGameScreenManager.cs" />
     <Compile Include="Interfaces\ILobbyClient.cs" />
     <Compile Include="JoinOrCreateGameWindow.xaml.cs">
       <DependentUpon>JoinOrCreateGameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RecoverPasswordWindow.xaml.cs">
+      <DependentUpon>RecoverPasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Session\SessionContext.cs" />
     <Compile Include="VerifyEmailWindow.xaml.cs">
       <DependentUpon>VerifyEmailWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\GamePlayWindow.xaml.cs">
+      <DependentUpon>GamePlayWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ScreensType\GameScreenType.cs" />
+    <Compile Include="Windows\ScreensUtilities\PasswordVisibilityHelper.cs" />
+    <Compile Include="Windows\ScreensUtilities\ServiceClientGuard.cs" />
     <Page Include="ChangePasswordDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChooseAvatarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,6 +189,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RecoverPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\GamePlayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,32 +213,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="FinalMatchStatistics.xaml.cs">
-      <DependentUpon>FinalMatchStatistics.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Globalization\LocalizationProvider.cs" />
-    <Compile Include="Windows\GameWindow.xaml.cs">
-      <DependentUpon>GameWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainMenuWindow.xaml.cs">
-      <DependentUpon>MainMenuWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="MatchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Profile.xaml">
+    <Page Include="ProfileWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,13 +233,33 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FinalMatchStatistics.xaml.cs">
+      <DependentUpon>FinalMatchStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenuWindow.xaml.cs">
+      <DependentUpon>MainMenuWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MatchWindow.xaml.cs">
       <DependentUpon>MatchWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Profile.xaml.cs">
-      <DependentUpon>Profile.xaml</DependentUpon>
+    <Compile Include="ProfileWindow.xaml.cs">
+      <DependentUpon>ProfileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -287,6 +319,9 @@
     <None Include="Connected Services\LoginServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\LoginServiceRef\GuessWhoContracts.Faults.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\LoginServiceRef\service.wsdl" />
     <None Include="Connected Services\LoginServiceRef\service.xsd">
       <SubType>Designer</SubType>
@@ -307,6 +342,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Faults.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MatchServiceRef\service.wsdl" />
@@ -337,6 +375,9 @@
     </None>
     <None Include="Connected Services\UpdateServiceRef\service1.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserServiceRef\GuessWhoClient.UserServiceRef.PasswordRecoveryResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\UserServiceRef\GuessWhoClient.UserServiceRef.RegisterResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -387,78 +428,45 @@
     <WCFMetadataStorage Include="Connected Services\UserServiceRef\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\LoginServiceRef\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LoginServiceRef\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\LoginServiceRef\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\ChatServiceRef\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Connected Services\FriendServiceRef\configuration91.svcinfo" />
+    <None Include="Connected Services\MatchServiceRef\configuration91.svcinfo" />
+    <None Include="Connected Services\UpdateServiceRef\configuration91.svcinfo" />
+    <None Include="Connected Services\UserServiceRef\configuration91.svcinfo" />
+    <None Include="Connected Services\LoginServiceRef\configuration91.svcinfo" />
     <None Include="Connected Services\ChatServiceRef\configuration.svcinfo" />
+    <None Include="Connected Services\FriendServiceRef\configuration.svcinfo" />
+    <None Include="Connected Services\MatchServiceRef\configuration.svcinfo" />
+    <None Include="Connected Services\UpdateServiceRef\configuration.svcinfo" />
+    <None Include="Connected Services\UserServiceRef\configuration.svcinfo" />
+    <None Include="Connected Services\LoginServiceRef\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\FriendServiceRef\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\FriendServiceRef\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\FriendServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MatchServiceRef\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\MatchServiceRef\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Connected Services\LoginServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Connected Services\MatchServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UpdateServiceRef\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UpdateServiceRef\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\UpdateServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UserServiceRef\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\UserServiceRef\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Connected Services\UserServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\Characters\Mazo1_Adonis_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Alberto_Animado.png" />
@@ -491,13 +499,40 @@
     <Resource Include="Images\Characters\Mazo1_Rodrigo_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Samuel_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Shai_Animado.png" />
-    <Resource Include="Images\Characters\Mazo1_Terry_Animado.png" />
-    <Resource Include="Images\Characters\Mazo1_Will_Animado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Characters\Mazo1_Adriana_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Alicia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Ana_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Caleb_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Camila_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Carolina_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Charles_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Charlotte_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Daniel_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Elena_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Emma_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Isis_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Karen_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Lois_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Lucia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Luke_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Max_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Maya_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Nathaly_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Rick_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Sara_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Sergio_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Shawn_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Sofia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Sonia_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Tom_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Trae_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Tyrese_Animado.png" />
+    <Resource Include="Images\Characters\Mazo1_Wilma_Animado.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Avatars\Avatar1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Avatars\Avatar2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,29 +5,6 @@
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
         </msb:BinaryEncoding>
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256>
-                </sp:Basic256>
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict>
-                </sp:Strict>
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing>
         </wsaw:UsingAddressing>
       </wsp:All>
@@ -36,6 +13,7 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
     </xsd:schema>
@@ -46,10 +24,14 @@
   <wsdl:message name="ILoginService_LoginUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:LoginUserResponse" />
   </wsdl:message>
+  <wsdl:message name="ILoginService_LoginUser_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="LoginUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginUser" message="tns:ILoginService_LoginUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LoginUserResponse" message="tns:ILoginService_LoginUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LoginUserServiceFaultFault" name="ServiceFaultFault" message="tns:ILoginService_LoginUser_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILoginService" type="tns:ILoginService">
@@ -64,6 +46,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="LoginService">
@@ -71,9 +56,6 @@
       <soap12:address location="net.tcp://localhost:8097/LoginService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:8097/LoginService</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>LAPTOP-MG984O4N\CLAUDIO</Upn>
-        </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
