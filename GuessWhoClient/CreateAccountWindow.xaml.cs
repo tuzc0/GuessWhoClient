@@ -171,7 +171,7 @@ namespace GuessWhoClient
 
         private void PwdPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            bool isPasswordVisible = chkShowPasswords.IsChecked == true;
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
 
             var visibilityContext = new ChangePasswordVisibility(
                 isPasswordVisible,
@@ -183,7 +183,7 @@ namespace GuessWhoClient
 
         private void TxtPasswordVisible_TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool isPasswordVisible = chkShowPasswords.IsChecked == true;
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
 
             var visibilityContext = new ChangePasswordVisibility(
                 isPasswordVisible,
@@ -195,7 +195,7 @@ namespace GuessWhoClient
 
         private void PwdPasswordConfirm_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            bool isPasswordVisible = chkShowPasswords.IsChecked == true;
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
 
             var visibilityContext = new ChangePasswordVisibility(
                 isPasswordVisible,
@@ -207,7 +207,7 @@ namespace GuessWhoClient
 
         private void TxtPasswordConfirmVisible_TextChanged(object sender, TextChangedEventArgs e)
         {
-            bool isPasswordVisible = chkShowPasswords.IsChecked == true;
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
 
             var visibilityContext = new ChangePasswordVisibility(
                 isPasswordVisible,
@@ -219,7 +219,7 @@ namespace GuessWhoClient
 
         private void UpdatePasswordsVisibilityFromCheckBoxState()
         {
-            bool isPasswordVisible = chkShowPasswords.IsChecked == true;
+            bool isPasswordVisible = chkShowPasswords.IsChecked ?? false;
 
             var mainPasswordContext = new ChangePasswordVisibility(
                 isPasswordVisible,
