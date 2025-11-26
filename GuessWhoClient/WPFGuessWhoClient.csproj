@@ -74,6 +74,9 @@
     <Compile Include="ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChooseAvatarWindow.xaml.cs">
+      <DependentUpon>ChooseAvatarWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ChooseCharacterWindow.xaml.cs">
       <DependentUpon>ChooseCharacterWindow.xaml</DependentUpon>
     </Compile>
@@ -107,14 +110,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\IsLocalPlayerConverter.cs" />
     <Compile Include="CreateAccountWindow.xaml.cs">
       <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dtos\AccountProfileInput.cs" />
+    <Compile Include="Dtos\AvatarCard.cs" />
+    <Compile Include="Dtos\AvatarChangeRequest.cs" />
     <Compile Include="Dtos\LoginInput.cs" />
     <Compile Include="Dtos\CharacterCard.cs" />
     <Compile Include="Dtos\GamePlayParameters.cs" />
+    <Compile Include="Dtos\PasswordChangeRequest.cs" />
     <Compile Include="FriendListWindow.xaml.cs">
       <DependentUpon>FriendListWindow.xaml</DependentUpon>
     </Compile>
@@ -151,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ChooseAvatarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

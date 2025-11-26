@@ -199,7 +199,6 @@
             </StackPanel>
         </DockPanel>
 
-        <!-- PANEL IZQUIERDO: JUGADORES -->
         <Border Grid.Row="1"
                 Grid.Column="0"
                 Margin="0,8,8,1"
@@ -286,7 +285,6 @@
             </Grid>
         </Border>
 
-        <!-- PANEL DERECHO: CONFIGURACIÓN -->
         <Border Grid.Row="1"
                 Grid.Column="1"
                 Margin="8,8,0,4"
@@ -385,7 +383,6 @@
                         <Run />
                     </TextBlock>
 
-                    <!-- START solo visible para el host -->
                     <Button Content="START"
                             Style="{StaticResource Btn.Primary}"
                             MinWidth="140"

@@ -70,6 +70,23 @@ namespace GuessWhoClient.InputValidation
             return errors;
         }
 
+        public static List<string> ValidateProfileWithoutPassword(AccountProfileInput accountProfile)
+        {
+            var errors = new List<string>();
+
+            ValidateEmail(accountProfile.Email, errors);
+            ValidateDisplayName(accountProfile.DisplayName, errors);
+
+            return errors;
+        }
+
+        public static List<string> ValidatePasswordChange(string newPassword, string confirmPassword)
+        {
+            var errors = new List<string>();
+            ValidatePassword(newPassword, confirmPassword, errors);
+            return errors;
+        }
+
         private static void ValidateEmail(string email, ICollection<string> errors)
         {
             if (string.IsNullOrWhiteSpace(email))

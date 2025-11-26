@@ -26,7 +26,6 @@ namespace GuessWhoClient.Windows
         private const string LOGIN_SERVICE_UNAVAILABLE_MESSAGE = "Login service not available.";
         private const string LOGIN_UNEXPECTED_ERROR_PREFIX = "Unexpected error: ";
 
-        private const string FORGOT_PASSWORD_NOT_IMPLEMENTED_MESSAGE = "Forgot Password functionality is not implemented yet.";
         private const string LOG_LOGIN_INVALID_CREDENTIALS = "Login failed due to invalid credentials.";
         private const string LOG_LOGIN_VALIDATION_ERROR = "Validation error while building login request.";
         private const string LOG_LOGIN_SERVICE_FAULT = "Service fault received from LoginService.";

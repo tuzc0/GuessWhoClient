@@ -33,7 +33,6 @@
                        HorizontalAlignment="Center"
                        Margin="0,0,0,20" />
 
-            <!-- AQUÍ VA LA CUADRÍCULA DINÁMICA DE 36 CARTAS -->
             <ScrollViewer Grid.Row="1"
                           VerticalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding Characters}">

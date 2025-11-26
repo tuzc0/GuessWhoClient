@@ -16,10 +16,7 @@
             <SolidColorBrush x:Key="Brush.CardFrameInner" Color="#F39C12"/>
             <SolidColorBrush x:Key="Brush.CardInside"     Color="#F3C46A"/>
 
-            <Style x:Key="Txt.CardName"
-                   TargetType="TextBlock"
-                   BasedOn="{StaticResource Txt.Pixel}">
-                
+            <Style x:Key="Txt.CardName" TargetType="TextBlock" BasedOn="{StaticResource Txt.Pixel}">
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="TextAlignment" Value="Center"/>
                 <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
@@ -93,47 +90,63 @@
                                 Margin="2,2,2,8"
                                 BorderBrush="#C9A26C"
                                 BorderThickness="2">
-                            <Grid>
-                                <Border CornerRadius="8"
-                                        Margin="3"
-                                        Background="#22000000"/>
 
-                                <Grid>
-                                    <Ellipse Width="180"
-                                             Height="180"
-                                             Stroke="Transparent"
-                                             StrokeThickness="4"
-                                             Fill="Transparent"
-                                             HorizontalAlignment="Center"
-                                             VerticalAlignment="Center">
-                                        <Ellipse.Effect>
-                                            <DropShadowEffect BlurRadius="8"
-                                                              ShadowDepth="2"
-                                                              Direction="320"
-                                                              Opacity="0.8"
-                                                              Color="#AA000000"/>
-                                        </Ellipse.Effect>
-                                    </Ellipse>
+                            <Border CornerRadius="8"
+                                    Margin="3"
+                                    Background="#22000000">
 
-                                    <Image x:Name="imgAvatar"
-                                           Stretch="Uniform"
-                                           ClipToBounds="True"
-                                           Width="172"
-                                           Height="172"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           Source="{Binding AvatarImageSource}"
-                                           RenderOptions.BitmapScalingMode="NearestNeighbor">
+                                <Grid Margin="8">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
-                                        <Image.Clip>
-                                            <EllipseGeometry 
-                                                Center="86,86" 
-                                                RadiusX="86" 
-                                                RadiusY="86"/>
-                                        </Image.Clip>
-                                    </Image>
+                                    <Grid Grid.Row="0">
+                                        <Ellipse Width="180"
+                                                 Height="180"
+                                                 Stroke="Transparent"
+                                                 StrokeThickness="4"
+                                                 Fill="Transparent"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center">
+
+                                            <Ellipse.Effect>
+                                                <DropShadowEffect BlurRadius="8"
+                                                                  ShadowDepth="2"
+                                                                  Direction="320"
+                                                                  Opacity="0.8"
+                                                                  Color="#AA000000"/>
+                                            </Ellipse.Effect>
+                                        </Ellipse>
+
+                                        <Image x:Name="imgAvatar"
+                                               Stretch="Uniform"
+                                               ClipToBounds="True"
+                                               Width="172"
+                                               Height="172"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Source="{Binding AvatarImageSource}"
+                                               RenderOptions.BitmapScalingMode="NearestNeighbor">
+
+                                            <Image.Clip>
+                                                <EllipseGeometry Center="86,86"
+                                                                 RadiusX="86"
+                                                                 RadiusY="86"/>
+                                            </Image.Clip>
+                                        </Image>
+                                    </Grid>
+
+                                    <Button x:Name="btnChangeAvatar"
+                                            Grid.Row="1"
+                                            Width="140"
+                                            Height="36"
+                                            Margin="0,12,0,4"
+                                            HorizontalAlignment="Center"
+                                            Content="Change"
+                                            Style="{StaticResource Btn.Primary}" />
                                 </Grid>
-                            </Grid>
+                            </Border>
                         </Border>
 
                         <Border Grid.Row="1"
@@ -213,7 +226,8 @@
                          Grid.Column="1"
                          Margin="0,4,0,4"
                          Height="30"
-                         Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}">
+                         Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
+                         MaxLength="50">
                     
                     <TextBox.Style>
                         <Style TargetType="TextBox">

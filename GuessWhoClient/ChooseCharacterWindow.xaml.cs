@@ -1,5 +1,5 @@
 ﻿using GuessWhoClient.Assets;
-using GuessWhoClient.Dtos; // aquí debería estar CharacterCard
+using GuessWhoClient.Dtos;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;

@@ -25,5 +25,10 @@ namespace GuessWhoClient.Assets
 
             return null;
         }
+
+        public static IReadOnlyDictionary<string, string> GetAllAvatars()
+        {
+            return avatarById;
+        }
     }
 }

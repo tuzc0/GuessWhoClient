@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="GuessWhoClient.ChooseAvatarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:GuessWhoClient.Converters"
+        xmlns:local="clr-namespace:GuessWhoClient">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border x:Name="brdMainContainer" 
+            CornerRadius="20"
+            Background="#34495E"
+            Padding="25"
+            Margin="40"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Panel.ZIndex="2">
+        
+        <Grid Background="{StaticResource Brush.Bg}"
+              Opacity="0.88"
+              Margin="-25">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            
+            <TextBlock Grid.Row="0"
+                       Text="Select your avatar"
+                       Style="{StaticResource Txt.Pixel}"
+                       Foreground="{StaticResource Brush.Accent}"
+                       FontSize="32"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20" />
+
+            <ScrollViewer Grid.Row="1"
+              VerticalScrollBarVisibility="Auto">
+
+                <ItemsControl ItemsSource="{Binding AvatarCards}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Top"
+                             Margin="20" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#3498DB"
+                BorderThickness="2"
+                CornerRadius="8"
+                Background="#34495E"
+                Margin="10"
+                Width="160"
+                Height="200"
+                Cursor="Hand"
+                MouseLeftButtonDown="CharacterCard_MouseLeftButtonDown">
+
+                                <!-- Estilo para manejar la opacidad según IsSelected -->
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <!-- opacidad por defecto (no seleccionado) -->
+                                        <Setter Property="Opacity" Value="0.4" />
+
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                <!-- cuando está seleccionado -->
+                                                <Setter Property="Opacity" Value="1" />
+                                                <!-- opcional: cambiar borde para resaltarlo más -->
+                                                <!-- <Setter Property="BorderBrush" Value="#FFD9A441" /> -->
+                                                <!-- <Setter Property="BorderThickness" Value="3" /> -->
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+
+                                <Image Source="{Binding ImagePath}"
+                   Stretch="Uniform"
+                   Margin="10" />
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+            </ScrollViewer>
+
+            <!-- Botones abajo a la derecha -->
+            <StackPanel Grid.Row="2"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            Margin="0,15,40,20">
+                <Button x:Name="btnCancel"
+            Content="CANCEL"
+            Style="{StaticResource Btn.Primary}"
+            Width="120"
+            Height="50"
+            Margin="0,0,10,0"
+            Click="CancelButton_Click" />
+
+                <Button x:Name="btnSelect"
+        Content="SELECT"
+        Style="{StaticResource Btn.Primary}"
+        Width="140"
+        Height="50"
+        Visibility="{Binding HasSelection,
+                             Converter={StaticResource BoolToVisibilityConverter}}"
+        Click="SelectAvatarButton_Click" />
+
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
+
+</UserControl>
