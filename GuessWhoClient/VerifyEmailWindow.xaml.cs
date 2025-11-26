@@ -9,7 +9,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using GuessWhoClient.Alerts;
 using GuessWhoClient.Globalization;
-using GuessWhoClient.UserServiceRef;
 using GuessWhoClient.Utilities;
 using GuessWhoClient.Windows;
 using log4net;
@@ -20,7 +19,6 @@ namespace GuessWhoClient
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(VerifyEmailWindow));
 
-        private const int TIMER_INTERVAL_SECONDS = 1;
         private const int COOLDOWN_SECONDS = 60;
         private const int VERIFICATION_CODE_MAX_LENGTH = 6;
         private const int REGEX_TIMEOUT_MILLISECONDS = 250;
@@ -50,10 +48,8 @@ namespace GuessWhoClient
             "VerifyEmailWindow unloaded. Disposing UserServiceClient for AccountId={0}.";
 
         private readonly long accountId;
-        private readonly string email;
         private readonly UserServiceClient client;
         private readonly DispatcherTimer cooldownTimer = new DispatcherTimer();
-        private DateTime cooldownUntil;
 
         private readonly IAlertService alertService = new MessageBoxAlertService();
         private readonly ILocalizationService localizationService = new LocalizationService();
@@ -70,18 +66,10 @@ namespace GuessWhoClient
             InitializeComponent();
 
             this.accountId = accountId;
-            this.email = email;
             this.client = client;
 
             string template = localizationService.Get(UI_VERIFICATION_SENT_FMT_KEY);
             txtInfo.Text = string.Format(template, email);
-
-            txtCode.PreviewTextInput += TxtCode_PreviewTextInput;
-            DataObject.AddPastingHandler(txtCode, TxtCodeOnPasting);
-            txtCode.Focus();
-
-            cooldownTimer.Interval = TimeSpan.FromSeconds(TIMER_INTERVAL_SECONDS);
-            cooldownTimer.Tick += CooldownTimerTick;
         }
 
         private async void BtnVerify_Click(object sender, RoutedEventArgs e)
@@ -303,13 +291,13 @@ namespace GuessWhoClient
                    proposedText.All(char.IsDigit);
         }
 
-        private void TxtCode_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private static void TxtCode_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var codeTextBox = (TextBox)sender;
             e.Handled = !AllowsNextCodeInput(codeTextBox, e.Text);
         }
 
-        private void TxtCodeOnPasting(object sender, DataObjectPastingEventArgs e)
+        private static void TxtCodeOnPasting(object sender, DataObjectPastingEventArgs e)
         {
             var codeTextBox = (TextBox)sender;
             string pastedText = e.DataObject.GetData(typeof(string)) as string ?? string.Empty;
@@ -388,12 +376,20 @@ namespace GuessWhoClient
         private string LocalOrFallback(string key, string serverMessage, string fallbackKey)
         {
             if (!string.IsNullOrWhiteSpace(serverMessage))
-        {
+            {
                 return serverMessage;
+            }
+
+            var localized = GetLocalizedText(key);
+
+            if (!string.IsNullOrWhiteSpace(localized) && localized != key)
+            {
+                return localized;
             }
 
             return GetLocalizedText(fallbackKey);
         }
+
     }
 }
 

@@ -43,6 +43,8 @@ namespace GuessWhoClient
         private const string TIMEOUT_GENERIC_MESSAGE = "The operation timed out while communicating with the server.";
         private const string COMMUNICATION_GENERIC_ERROR_MESSAGE = "A communication error occurred while contacting the server.";
 
+        private const string FAULT_UNEXPECTED_KEY = "FaultUnexpected";
+
         private readonly IAlertService alertService = new MessageBoxAlertService();
         private readonly ILocalizationService localizationService = new LocalizationService();
 
@@ -164,7 +166,7 @@ namespace GuessWhoClient
                 string localizedText = localizationService.LocalOrFallback(
                     faultKey,
                     ex.Detail.Message,
-                    "FaultUnexpected");
+                    FAULT_UNEXPECTED_KEY);
 
                 alertService.Error(localizedText);
             }
@@ -237,7 +239,7 @@ namespace GuessWhoClient
                 string localizedText = localizationService.LocalOrFallback(
                     faultKey,
                     ex.Detail.Message,
-                    "FaultUnexpected");
+                    FAULT_UNEXPECTED_KEY);
 
                 alertService.Error(localizedText);
             }
@@ -351,7 +353,7 @@ namespace GuessWhoClient
                 string localizedText = localizationService.LocalOrFallback(
                     faultKey,
                     ex.Detail.Message,
-                    "FaultUnexpected");
+                    FAULT_UNEXPECTED_KEY);
 
                 alertService.Error(localizedText);
             }
@@ -463,7 +465,7 @@ namespace GuessWhoClient
                 string localizedText = localizationService.LocalOrFallback(
                     faultKey,
                     ex.Detail.Message,
-                    "FaultUnexpected");
+                    FAULT_UNEXPECTED_KEY);
 
                 alertService.Error(localizedText);
             }
@@ -543,7 +545,7 @@ namespace GuessWhoClient
                 string localizedText = localizationService.LocalOrFallback(
                     faultKey,
                     ex.Detail.Message,
-                    "FaultUnexpected");
+                    FAULT_UNEXPECTED_KEY);
 
                 alertService.Error(localizedText);
             }
