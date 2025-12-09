@@ -120,14 +120,38 @@
   <data name="AppTitle" xml:space="preserve">
     <value>GUESS WHO?</value>
   </data>
+  <data name="BtnAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="BtnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="BtnClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
   <data name="BtnCreateAccount" xml:space="preserve">
     <value>Create account</value>
   </data>
   <data name="BtnLogin" xml:space="preserve">
     <value>Login</value>
   </data>
+  <data name="BtnOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="BtnRefreshRequests" xml:space="preserve">
+    <value>Refresh Requests</value>
+  </data>
+  <data name="BtnReject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
   <data name="BtnResendCode" xml:space="preserve">
     <value>Resend code</value>
+  </data>
+  <data name="BtnSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="BtnSendFriendRequest" xml:space="preserve">
+    <value>Send Friend Request</value>
   </data>
   <data name="BtnVerifyCode" xml:space="preserve">
     <value>Verify</value>
@@ -153,17 +177,56 @@
   <data name="FaultUnexpected" xml:space="preserve">
     <value>An unexpected error occurred</value>
   </data>
+  <data name="GrpOnlineStatus" xml:space="preserve">
+    <value>Online Status</value>
+  </data>
+  <data name="GrpSearchResults" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+  <data name="LblAvatar" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="LblChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="LblConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
   <data name="LblConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
+  </data>
+  <data name="LblCurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="LblDate" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="LblEmail" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="LblFromUser" xml:space="preserve">
+    <value>From User</value>
+  </data>
+  <data name="LblMyFriends" xml:space="preserve">
+    <value>My Friends</value>
+  </data>
+  <data name="LblNewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
   <data name="LblPassword" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="LblReceivedFriendRequests" xml:space="preserve">
+    <value>Received Friend Requests</value>
+  </data>
+  <data name="LblStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="LblUser" xml:space="preserve">
     <value>User</value>
+  </data>
+  <data name="LblUsername" xml:space="preserve">
+    <value>Username </value>
   </data>
   <data name="LblVerificationCode" xml:space="preserve">
     <value>Verification code</value>
@@ -173,6 +236,9 @@
   </data>
   <data name="LinkForgot" xml:space="preserve">
     <value>I forgot my password</value>
+  </data>
+  <data name="TooltipSearch" xml:space="preserve">
+    <value>Enter display name to search</value>
   </data>
   <data name="UiAccountCreatedForFmt" xml:space="preserve">
     <value>Account created</value>
@@ -233,5 +299,116 @@
   </data>
   <data name="UIVerificationSuccess" xml:space="preserve">
     <value>Your email has been successfully verified</value>
+  </data>
+  <data name="WinTitleFriendManager" xml:space="preserve">
+    <value>Friend Manager</value>
+  </data>
+  <data name="WinTitleFriends" xml:space="preserve">
+    <value>Current Friends List</value>
+  </data>
+  <data name="BtnNewGame" xml:space="preserve">
+    <value>New Game</value>
+  </data>
+  <data name="LblMatch" xml:space="preserve">
+    <value>Match</value>
+  </data>
+  <data name="LblMatchCode" xml:space="preserve">
+    <value>Match Code</value>
+  </data>
+  <data name="BtnJoinGame" xml:space="preserve">
+    <value>Join Game</value>
+  </data>
+  <data name="WinTitleProfile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="LblDisplayName" xml:space="preserve">
+    <value>Display name</value>
+  </data>
+  <data name="LblPasswordHidden" xml:space="preserve">
+    <value>Not displayed</value>
+  </data>
+  <data name="BtnChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="BtnDeleteAccount" xml:space="preserve">
+    <value>Delete Account</value>
+  </data>
+  <data name="BtnEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="BtnSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="GrpMyFriends" xml:space="preserve">
+    <value>My Friends</value>
+  </data>
+  <data name="WinTitleRecoverPassword" xml:space="preserve">
+    <value>Recover Password</value>
+  </data>
+  <data name="BtnSendCode" xml:space="preserve">
+    <value>Send Code</value>
+  </data>
+  <data name="USER_REQUEST_NULL" xml:space="preserve">
+    <value>Registration data is missing. Please fill in the form and try again.</value>
+  </data>
+  <data name="USER_REGISTER_EMAIL_ALREADY_EXISTS" xml:space="preserve">
+    <value>This email address is already registered. Try signing in or use a different email.</value>
+  </data>
+  <data name="USER_REGISTER_DATA_INTEGRITY_VIOLATION" xml:space="preserve">
+    <value>Registration could not be completed due to a configuration error in the server. Please try again later.</value>
+  </data>
+  <data name="DATABASE_COMMAND_TIMEOUT" xml:space="preserve">
+    <value>The server did not respond in time. This may be due to network issues or the server being busy. Please check your internet connection and try again.</value>
+  </data>
+  <data name="DATABASE_CONNECTION_FAILURE" xml:space="preserve">
+    <value>The server could not connect to the database. Please try again later.</value>
+  </data>
+  <data name="USER_REGISTER_UNEXPECTED_ERROR" xml:space="preserve">
+    <value>An unexpected error occurred while creating your account. Please try again later.</value>
+  </data>
+  <data name="EMAIL_VERIFICATION_CODE_INVALID_OR_EXPIRED" xml:space="preserve">
+    <value> A valid verification process was not found. Please try sending a code again.</value>
+  </data>
+  <data name="EMAIL_VERIFICATION_CODE_EXPIRED" xml:space="preserve">
+    <value>The verification code has expired. Please request a new code.</value>
+  </data>
+  <data name="EMAIL_VERIFICATION_CODE_INVALID_TOKEN" xml:space="preserve">
+    <value>The verification code is invalid. Please check the code and try again.</value>
+  </data>
+  <data name="ACCOUNT_NOT_FOUND" xml:space="preserve">
+    <value>Account not found. Please check your email and try again, or create a new account.</value>
+  </data>
+  <data name="EMAIL_VERIFICATION_RESEND_TOO_FREQUENT" xml:space="preserve">
+    <value>You requested a code recently. Please wait a moment and try again.</value>
+  </data>
+  <data name="EMAIL_VERIFICATION_RESEND_HOURLY_LIMIT_EXCEEDED" xml:space="preserve">
+    <value>You have reached the hourly limit for resending verification codes. Please try again later.</value>
+  </data>
+  <data name="EMAIL_RECIPIENT_INVALID" xml:space="preserve">
+    <value>The destination email address is not valid. Check it and try again.</value>
+  </data>
+  <data name="EMAIL_VERIFICATION_CODE_INVALID_FORMAT" xml:space="preserve">
+    <value>An invalid code format was generated. The verification code must be a sequence of exactly 6 numeric digits. Please try again.</value>
+  </data>
+  <data name="EMAIL_SMTP_CONFIGURATION_MISSING" xml:space="preserve">
+    <value>Email service temporarily unavailable. We are currently unable to send the verification code due to an internal server configuration issue. Please try again.</value>
+  </data>
+  <data name="EMAIL_SMTP_AUTHENTICATION_FAILED" xml:space="preserve">
+    <value>Email authentication failed. We are temporarily unable to send the verification code due to an internal security issue. Please try again.</value>
+  </data>
+  <data name="EMAIL_SMTP_CONFIGURATION_ERROR" xml:space="preserve">
+    <value>Email service is currently unavailable. We are unable to send the verification code due to a server configuration issue. Please try again in a few minutes.</value>
+  </data>
+  <data name="EMAIL_SMTP_UNAVAILABLE" xml:space="preserve">
+    <value>Email service temporarily unavailable. We are unable to send the verification code right now. Please wait a few minutes and try again.</value>
+  </data>
+  <data name="EMAIL_SEND_FAILED" xml:space="preserve">
+    <value>Email sending failed. We encountered an unexpected error while sending the verification code. Please try again in a few moments.</value>
+  </data>
+  <data name="CRYPTO_RANDOM_GENERATOR_UNAVAILABLE" xml:space="preserve">
+    <value>The system could not generate a secure verification code. Please try again later.</value>
+  </data>
+  <data name="VERIFICATION_CODE_GENERATION_FAILED" xml:space="preserve">
+    <value>We could not generate a verification code. Please try again.</value>
   </data>
 </root>

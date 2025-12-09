@@ -1,13 +1,14 @@
 ﻿<UserControl x:Class="GuessWhoClient.JoinOrCreateGameWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:localization="clr-namespace:GuessWhoClient.Globalization">
 
     <Grid Cursor="Hand">
         <StackPanel VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Width="400">
 
-            <TextBlock Text="Match"
+            <TextBlock Text="{Binding [LblMatch], Source={x:Static localization:LocalizationProvider.Instance}}"
                        Style="{StaticResource Txt.Pixel}"
                        Foreground="{StaticResource Brush.Accent}"
                        FontSize="64"
@@ -15,13 +16,13 @@
                        Margin="0,0,0,40"/>
 
             <Button x:Name="btnCreateNewGame"
-                    Content="New Game"
+                    Content="{Binding [BtnNewGame], Source={x:Static localization:LocalizationProvider.Instance}}"
                     Style="{StaticResource Btn.Primary}"
                     Width="350" Height="80"
                     Margin="0,0,0,80"
                     Click="BtnCreateNewGame_Click"/>
 
-            <TextBlock Text="Code"
+            <TextBlock Text="{Binding [LblMatchCode], Source={x:Static localization:LocalizationProvider.Instance}}"
                        Style="{StaticResource Txt.Pixel}"
                        Foreground="{StaticResource Brush.Accent}"
                        FontSize="24"
@@ -33,7 +34,7 @@
                      MaxLength="6"/>
 
             <Button x:Name="btnJoinExistingGame"
-                    Content="Join Game"
+                    Content="{Binding [BtnJoinGame], Source={x:Static localization:LocalizationProvider.Instance}}"
                     Style="{StaticResource Btn.Primary}"
                     Width="350" Height="80"
                     Margin="0,0,0,15"
@@ -41,6 +42,7 @@
         </StackPanel>
 
         <Button x:Name="btnBack"
+                Content="{Binding [BtnBack], Source={x:Static localization:LocalizationProvider.Instance}}"
                 Style="{StaticResource Btn.Play.Left}"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"

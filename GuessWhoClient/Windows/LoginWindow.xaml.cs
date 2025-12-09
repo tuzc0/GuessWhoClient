@@ -12,6 +12,7 @@ using GuessWhoClient.Session;
 using GuessWhoClient.Utilities;
 using log4net;
 
+
 namespace GuessWhoClient.Windows
 {
     public partial class LoginWindow : UserControl

@@ -120,14 +120,38 @@
   <data name="AppTitle" xml:space="preserve">
     <value>DEVINETTE</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BtnAccept" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnCancel" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnClose" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="BtnCreateAccount" xml:space="preserve">
     <value>Créer un compte</value>
   </data>
   <data name="BtnLogin" xml:space="preserve">
     <value>Connexion</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BtnOk" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnRefreshRequests" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnReject" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="BtnResendCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnSearch" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnSendFriendRequest" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
   <data name="BtnVerifyCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
@@ -154,17 +178,56 @@
   <data name="FaultUnexpected" xml:space="preserve">
     <value>Une erreur inattendue s’est produite</value>
   </data>
+  <data name="GrpOnlineStatus" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="GrpSearchResults" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblAvatar" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblChangePassword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblConfirmNewPassword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="LblConfirmPassword" xml:space="preserve">
     <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="LblCurrentPassword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblDate" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="LblEmail" xml:space="preserve">
     <value>E-mail</value>
   </data>
+  <data name="LblFromUser" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblMyFriends" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblNewPassword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="LblPassword" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
+  <data name="LblReceivedFriendRequests" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblStatus" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="LblUser" xml:space="preserve">
     <value>Utilisateur</value>
+  </data>
+  <data name="LblUsername" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="LblVerificationCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
@@ -174,6 +237,9 @@
   </data>
   <data name="LinkForgot" xml:space="preserve">
     <value>J’ai oublié mon mot de passe</value>
+  </data>
+  <data name="TooltipSearch" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="UiAccountCreatedForFmt" xml:space="preserve">
     <value>Compte créé</value>
@@ -233,6 +299,117 @@
     <value>Nous avons envoyé un code de vérification à votre adresse e-mail : {0}</value>
   </data>
   <data name="UIVerificationSuccess" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="WinTitleFriendManager" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="WinTitleFriends" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnNewGame" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblMatch" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblMatchCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnJoinGame" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="WinTitleProfile" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblDisplayName" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="LblPasswordHidden" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnChangePassword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnDeleteAccount" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnEdit" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnSave" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="GrpMyFriends" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="WinTitleRecoverPassword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="BtnSendCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="USER_REQUEST_NULL" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="USER_REGISTER_EMAIL_ALREADY_EXISTS" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="USER_REGISTER_DATA_INTEGRITY_VIOLATION" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="DATABASE_COMMAND_TIMEOUT" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="DATABASE_CONNECTION_FAILURE" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="USER_REGISTER_UNEXPECTED_ERROR" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_VERIFICATION_CODE_INVALID_OR_EXPIRED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_VERIFICATION_CODE_EXPIRED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_VERIFICATION_CODE_INVALID_TOKEN" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="ACCOUNT_NOT_FOUND" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_VERIFICATION_RESEND_TOO_FREQUENT" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_VERIFICATION_RESEND_HOURLY_LIMIT_EXCEEDED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_RECIPIENT_INVALID" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_VERIFICATION_CODE_INVALID_FORMAT" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_SMTP_CONFIGURATION_MISSING" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_SMTP_AUTHENTICATION_FAILED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_SMTP_CONFIGURATION_ERROR" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_SMTP_UNAVAILABLE" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="EMAIL_SEND_FAILED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CRYPTO_RANDOM_GENERATOR_UNAVAILABLE" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="VERIFICATION_CODE_GENERATION_FAILED" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

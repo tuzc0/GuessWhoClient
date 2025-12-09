@@ -61,11 +61,56 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Account not found. Please check your email and try again, or create a new account..
+        /// </summary>
+        public static string ACCOUNT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ACCOUNT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a GUESS WHO?.
         /// </summary>
         public static string AppTitle {
             get {
                 return ResourceManager.GetString("AppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Accept.
+        /// </summary>
+        public static string BtnAccept {
+            get {
+                return ResourceManager.GetString("BtnAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string BtnCancel {
+            get {
+                return ResourceManager.GetString("BtnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change Password.
+        /// </summary>
+        public static string BtnChangePassword {
+            get {
+                return ResourceManager.GetString("BtnChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Close.
+        /// </summary>
+        public static string BtnClose {
+            get {
+                return ResourceManager.GetString("BtnClose", resourceCulture);
             }
         }
         
@@ -79,6 +124,33 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Delete Account.
+        /// </summary>
+        public static string BtnDeleteAccount {
+            get {
+                return ResourceManager.GetString("BtnDeleteAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Edit.
+        /// </summary>
+        public static string BtnEdit {
+            get {
+                return ResourceManager.GetString("BtnEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Join Game.
+        /// </summary>
+        public static string BtnJoinGame {
+            get {
+                return ResourceManager.GetString("BtnJoinGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Login.
         /// </summary>
         public static string BtnLogin {
@@ -88,11 +160,83 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a New Game.
+        /// </summary>
+        public static string BtnNewGame {
+            get {
+                return ResourceManager.GetString("BtnNewGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a OK.
+        /// </summary>
+        public static string BtnOk {
+            get {
+                return ResourceManager.GetString("BtnOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Refresh Requests.
+        /// </summary>
+        public static string BtnRefreshRequests {
+            get {
+                return ResourceManager.GetString("BtnRefreshRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reject.
+        /// </summary>
+        public static string BtnReject {
+            get {
+                return ResourceManager.GetString("BtnReject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Resend code.
         /// </summary>
         public static string BtnResendCode {
             get {
                 return ResourceManager.GetString("BtnResendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Save.
+        /// </summary>
+        public static string BtnSave {
+            get {
+                return ResourceManager.GetString("BtnSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search.
+        /// </summary>
+        public static string BtnSearch {
+            get {
+                return ResourceManager.GetString("BtnSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send Code.
+        /// </summary>
+        public static string BtnSendCode {
+            get {
+                return ResourceManager.GetString("BtnSendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send Friend Request.
+        /// </summary>
+        public static string BtnSendFriendRequest {
+            get {
+                return ResourceManager.GetString("BtnSendFriendRequest", resourceCulture);
             }
         }
         
@@ -111,6 +255,141 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string chkShowPasswords {
             get {
                 return ResourceManager.GetString("chkShowPasswords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The system could not generate a secure verification code. Please try again later..
+        /// </summary>
+        public static string CRYPTO_RANDOM_GENERATOR_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("CRYPTO_RANDOM_GENERATOR_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server did not respond in time. This may be due to network issues or the server being busy. Please check your internet connection and try again..
+        /// </summary>
+        public static string DATABASE_COMMAND_TIMEOUT {
+            get {
+                return ResourceManager.GetString("DATABASE_COMMAND_TIMEOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The server could not connect to the database. Please try again later..
+        /// </summary>
+        public static string DATABASE_CONNECTION_FAILURE {
+            get {
+                return ResourceManager.GetString("DATABASE_CONNECTION_FAILURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The destination email address is not valid. Check it and try again..
+        /// </summary>
+        public static string EMAIL_RECIPIENT_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_RECIPIENT_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email sending failed. We encountered an unexpected error while sending the verification code. Please try again in a few moments..
+        /// </summary>
+        public static string EMAIL_SEND_FAILED {
+            get {
+                return ResourceManager.GetString("EMAIL_SEND_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email authentication failed. We are temporarily unable to send the verification code due to an internal security issue. Please try again..
+        /// </summary>
+        public static string EMAIL_SMTP_AUTHENTICATION_FAILED {
+            get {
+                return ResourceManager.GetString("EMAIL_SMTP_AUTHENTICATION_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email service is currently unavailable. We are unable to send the verification code due to a server configuration issue. Please try again in a few minutes..
+        /// </summary>
+        public static string EMAIL_SMTP_CONFIGURATION_ERROR {
+            get {
+                return ResourceManager.GetString("EMAIL_SMTP_CONFIGURATION_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email service temporarily unavailable. We are currently unable to send the verification code due to an internal server configuration issue. Please try again..
+        /// </summary>
+        public static string EMAIL_SMTP_CONFIGURATION_MISSING {
+            get {
+                return ResourceManager.GetString("EMAIL_SMTP_CONFIGURATION_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email service temporarily unavailable. We are unable to send the verification code right now. Please wait a few minutes and try again..
+        /// </summary>
+        public static string EMAIL_SMTP_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("EMAIL_SMTP_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code has expired. Please request a new code..
+        /// </summary>
+        public static string EMAIL_VERIFICATION_CODE_EXPIRED {
+            get {
+                return ResourceManager.GetString("EMAIL_VERIFICATION_CODE_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An invalid code format was generated. The verification code must be a sequence of exactly 6 numeric digits. Please try again..
+        /// </summary>
+        public static string EMAIL_VERIFICATION_CODE_INVALID_FORMAT {
+            get {
+                return ResourceManager.GetString("EMAIL_VERIFICATION_CODE_INVALID_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a  A valid verification process was not found. Please try sending a code again..
+        /// </summary>
+        public static string EMAIL_VERIFICATION_CODE_INVALID_OR_EXPIRED {
+            get {
+                return ResourceManager.GetString("EMAIL_VERIFICATION_CODE_INVALID_OR_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code is invalid. Please check the code and try again..
+        /// </summary>
+        public static string EMAIL_VERIFICATION_CODE_INVALID_TOKEN {
+            get {
+                return ResourceManager.GetString("EMAIL_VERIFICATION_CODE_INVALID_TOKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have reached the hourly limit for resending verification codes. Please try again later..
+        /// </summary>
+        public static string EMAIL_VERIFICATION_RESEND_HOURLY_LIMIT_EXCEEDED {
+            get {
+                return ResourceManager.GetString("EMAIL_VERIFICATION_RESEND_HOURLY_LIMIT_EXCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You requested a code recently. Please wait a moment and try again..
+        /// </summary>
+        public static string EMAIL_VERIFICATION_RESEND_TOO_FREQUENT {
+            get {
+                return ResourceManager.GetString("EMAIL_VERIFICATION_RESEND_TOO_FREQUENT", resourceCulture);
             }
         }
         
@@ -169,11 +448,92 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a My Friends.
+        /// </summary>
+        public static string GrpMyFriends {
+            get {
+                return ResourceManager.GetString("GrpMyFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Online Status.
+        /// </summary>
+        public static string GrpOnlineStatus {
+            get {
+                return ResourceManager.GetString("GrpOnlineStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search Results.
+        /// </summary>
+        public static string GrpSearchResults {
+            get {
+                return ResourceManager.GetString("GrpSearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Avatar.
+        /// </summary>
+        public static string LblAvatar {
+            get {
+                return ResourceManager.GetString("LblAvatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change password.
+        /// </summary>
+        public static string LblChangePassword {
+            get {
+                return ResourceManager.GetString("LblChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirm new password.
+        /// </summary>
+        public static string LblConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("LblConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirm Password.
         /// </summary>
         public static string LblConfirmPassword {
             get {
                 return ResourceManager.GetString("LblConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Current password.
+        /// </summary>
+        public static string LblCurrentPassword {
+            get {
+                return ResourceManager.GetString("LblCurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Date.
+        /// </summary>
+        public static string LblDate {
+            get {
+                return ResourceManager.GetString("LblDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Display name.
+        /// </summary>
+        public static string LblDisplayName {
+            get {
+                return ResourceManager.GetString("LblDisplayName", resourceCulture);
             }
         }
         
@@ -187,6 +547,51 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a From User.
+        /// </summary>
+        public static string LblFromUser {
+            get {
+                return ResourceManager.GetString("LblFromUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match.
+        /// </summary>
+        public static string LblMatch {
+            get {
+                return ResourceManager.GetString("LblMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match Code.
+        /// </summary>
+        public static string LblMatchCode {
+            get {
+                return ResourceManager.GetString("LblMatchCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a My Friends.
+        /// </summary>
+        public static string LblMyFriends {
+            get {
+                return ResourceManager.GetString("LblMyFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New password.
+        /// </summary>
+        public static string LblNewPassword {
+            get {
+                return ResourceManager.GetString("LblNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         public static string LblPassword {
@@ -196,11 +601,47 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Not displayed.
+        /// </summary>
+        public static string LblPasswordHidden {
+            get {
+                return ResourceManager.GetString("LblPasswordHidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Received Friend Requests.
+        /// </summary>
+        public static string LblReceivedFriendRequests {
+            get {
+                return ResourceManager.GetString("LblReceivedFriendRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Status.
+        /// </summary>
+        public static string LblStatus {
+            get {
+                return ResourceManager.GetString("LblStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a User.
         /// </summary>
         public static string LblUser {
             get {
                 return ResourceManager.GetString("LblUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username .
+        /// </summary>
+        public static string LblUsername {
+            get {
+                return ResourceManager.GetString("LblUsername", resourceCulture);
             }
         }
         
@@ -228,6 +669,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string LinkForgot {
             get {
                 return ResourceManager.GetString("LinkForgot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Enter display name to search.
+        /// </summary>
+        public static string TooltipSearch {
+            get {
+                return ResourceManager.GetString("TooltipSearch", resourceCulture);
             }
         }
         
@@ -408,6 +858,87 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UIVerificationSuccess {
             get {
                 return ResourceManager.GetString("UIVerificationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registration could not be completed due to a configuration error in the server. Please try again later..
+        /// </summary>
+        public static string USER_REGISTER_DATA_INTEGRITY_VIOLATION {
+            get {
+                return ResourceManager.GetString("USER_REGISTER_DATA_INTEGRITY_VIOLATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This email address is already registered. Try signing in or use a different email..
+        /// </summary>
+        public static string USER_REGISTER_EMAIL_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("USER_REGISTER_EMAIL_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred while creating your account. Please try again later..
+        /// </summary>
+        public static string USER_REGISTER_UNEXPECTED_ERROR {
+            get {
+                return ResourceManager.GetString("USER_REGISTER_UNEXPECTED_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registration data is missing. Please fill in the form and try again..
+        /// </summary>
+        public static string USER_REQUEST_NULL {
+            get {
+                return ResourceManager.GetString("USER_REQUEST_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We could not generate a verification code. Please try again..
+        /// </summary>
+        public static string VERIFICATION_CODE_GENERATION_FAILED {
+            get {
+                return ResourceManager.GetString("VERIFICATION_CODE_GENERATION_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend Manager.
+        /// </summary>
+        public static string WinTitleFriendManager {
+            get {
+                return ResourceManager.GetString("WinTitleFriendManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Current Friends List.
+        /// </summary>
+        public static string WinTitleFriends {
+            get {
+                return ResourceManager.GetString("WinTitleFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Profile.
+        /// </summary>
+        public static string WinTitleProfile {
+            get {
+                return ResourceManager.GetString("WinTitleProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recover Password.
+        /// </summary>
+        public static string WinTitleRecoverPassword {
+            get {
+                return ResourceManager.GetString("WinTitleRecoverPassword", resourceCulture);
             }
         }
     }

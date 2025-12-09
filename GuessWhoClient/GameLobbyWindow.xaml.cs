@@ -2,6 +2,7 @@
 using GuessWhoClient.Interfaces;
 using GuessWhoClient.MatchServiceRef;
 using GuessWhoClient.Session;
+using GuessWhoClient.UserServiceRef;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using WPFGuessWhoClient;
+using GuessWhoClient.Globalization; // Añadido para LocalizationProvider
 
 namespace GuessWhoClient
 {
@@ -17,9 +19,9 @@ namespace GuessWhoClient
     {
         private MatchServiceClient matchServiceClient;
         private MatchCallback matchCallback;
-        private readonly long matchId;
+        private readonly long matchId; // matchId es long
 
-        public long CurrentUserId => SessionContext.Current.UserId;
+        public long CurrentUserId => SessionContext.Current.UserId; // UserId es long
 
         public ObservableCollection<LobbyPlayerDto> Players { get; } =
             new ObservableCollection<LobbyPlayerDto>();
@@ -49,9 +51,8 @@ namespace GuessWhoClient
         {
             try
             {
-                // callback real que implementa IMatchServiceCallback
                 matchCallback = new MatchCallback(Dispatcher);
-                matchCallback.AttachLobby(this); // para reenviar a ILobbyClient (esta ventana)
+                matchCallback.AttachLobby(this);
 
                 var context = new InstanceContext(matchCallback);
                 matchServiceClient = new MatchServiceClient(context, "NetTcpBinding_IMatchService");
@@ -60,9 +61,12 @@ namespace GuessWhoClient
             }
             catch (Exception ex)
             {
+                string errorTitle = LocalizationProvider.Instance["UiTitleError"];
+                string errorMessage = LocalizationProvider.Instance["LobbyConnectionFailed"] + "\n" + ex.Message;
+
                 MessageBox.Show(
-                    "No fue posible conectarse al lobby.\n" + ex.Message,
-                    "Error",
+                    errorMessage,
+                    errorTitle,
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
 
@@ -81,34 +85,44 @@ namespace GuessWhoClient
             {
                 var request = new LeaveMatchRequest
                 {
-                    MatchId = matchId,
-                    UserId = CurrentUserId
+                    MatchId = (int)matchId, // CORRECCIÓN 1: long a int
+                    UserId = (int)CurrentUserId // CORRECCIÓN 2: long a int
                 };
 
                 BasicResponse response = await matchServiceClient.LeaveMatchAsync(request);
 
                 if (!response.Success)
                 {
+                    string warningTitle = LocalizationProvider.Instance["UiTitleWarning"];
+                    string warningMessage = LocalizationProvider.Instance["LobbyLeaveFailed"];
+
                     MessageBox.Show(
-                        "No se pudo salir correctamente del lobby.",
-                        "Aviso",
+                        warningMessage,
+                        warningTitle,
                         MessageBoxButton.OK,
                         MessageBoxImage.Warning);
                 }
             }
-            catch (FaultException<ServiceFault> fault)
+            // Uso de ServiceFault de UserServiceRef y corrección de internacionalización
+            catch (FaultException<UserServiceRef.ServiceFault> fault)
             {
+                string errorTitle = LocalizationProvider.Instance["UiTitleError"];
+                string faultMessage = LocalizationProvider.Instance[fault.Detail.Message];
+
                 MessageBox.Show(
-                    fault.Detail.Message,
-                    "Error",
+                    faultMessage,
+                    errorTitle,
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
             catch (Exception)
             {
+                string errorTitle = LocalizationProvider.Instance["UiTitleError"];
+                string errorMessage = LocalizationProvider.Instance["LobbyUnexpectedLeaveError"];
+
                 MessageBox.Show(
-                    "Ocurrió un error inesperado al salir del lobby.",
-                    "Error",
+                    errorMessage,
+                    errorTitle,
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
@@ -127,15 +141,18 @@ namespace GuessWhoClient
         {
             try
             {
-                // Usa el usuario actual de sesión
-                FriendsListWindow friendsWindow = new FriendsListWindow(CurrentUserId);
+                // CORRECCIÓN 3: long a int para FriendsListWindow
+                FriendsListWindow friendsWindow = new FriendsListWindow((int)CurrentUserId);
                 friendsWindow.ShowDialog();
             }
             catch (Exception ex)
             {
+                string errorTitle = LocalizationProvider.Instance["UiTitleError"];
+                string errorMessage = LocalizationProvider.Instance["FriendsListOpenError"] + $" {ex.Message}";
+
                 MessageBox.Show(
-                    $"Could not open friends list window: {ex.Message}",
-                    "Error",
+                    errorMessage,
+                    errorTitle,
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }

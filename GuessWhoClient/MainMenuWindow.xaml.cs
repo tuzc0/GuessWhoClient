@@ -54,6 +54,19 @@ namespace GuessWhoClient
             gameWindow.LoadJoinOrCreateGameScreen();
         }
 
+        private void BtnLeaderboards_Click(object sender, RoutedEventArgs e)
+        {
+            var ownerWindow = Window.GetWindow(this);
+
+            var leaderboardWindow = new LeaderboardWindow
+            {
+                Owner = ownerWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
+            leaderboardWindow.ShowDialog();
+        }
+
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();

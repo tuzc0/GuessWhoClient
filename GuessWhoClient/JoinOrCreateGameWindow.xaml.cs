@@ -5,6 +5,7 @@ using System;
 using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
+using GuessWhoClient.UserServiceRef;
 
 namespace GuessWhoClient
 {

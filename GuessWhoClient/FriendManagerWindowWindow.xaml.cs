@@ -261,5 +261,10 @@ namespace WPFGuessWhoClient
                 MessageBox.Show($"Error:\n{ex.Message}", "Error");
             }
         }
+
+        private void DgProfiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

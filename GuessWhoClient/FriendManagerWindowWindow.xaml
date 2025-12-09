@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:GuessWhoClient.Globalization"
         mc:Ignorable="d"
-        Title="Friend Manager"
+        Title="{Binding [WinTitleFriendManager], Source={x:Static localization:LocalizationProvider.Instance}}"
         Height="650" Width="1000"
         Background="{StaticResource Brush.Bg}"
         WindowStartupLocation="CenterScreen">
@@ -115,14 +116,25 @@
     </Window.Resources>
 
     <Grid>
+        <Image Source="/Images/mainMenu.jpeg"
+               Stretch="UniformToFill"
+               Panel.ZIndex="0">
+            <Image.Effect>
+                <BlurEffect Radius="5"/>
+            </Image.Effect>
+        </Image>
+
+        <Rectangle Fill="{StaticResource Brush.Bg}" Opacity="0.6" Panel.ZIndex="1"/>
+
         <Border HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 CornerRadius="16"
-                Background="{StaticResource Brush.Bg}"
-                BorderBrush="{StaticResource Brush.AccentDark}"
-                BorderThickness="3"
+                Background="#34495E"
+                BorderBrush="#3498DB"
+                BorderThickness="2"
                 Padding="20"
-                Width="980" MaxHeight="620">
+                Width="980" MaxHeight="620"
+                Panel.ZIndex="2">
 
             <ScrollViewer VerticalScrollBarVisibility="Auto" 
                           HorizontalScrollBarVisibility="Disabled">
@@ -137,15 +149,15 @@
                     <StackPanel Orientation="Horizontal" Grid.Row="0" VerticalAlignment="Center" Margin="0,0,0,16">
                         <TextBox x:Name="TxtSearch" Width="360" Height="34" Margin="0,0,8,0"
                                  VerticalContentAlignment="Center" FontSize="14"
-                                 ToolTip="Enter display name to search"
+                                 ToolTip="{Binding [TooltipSearch], Source={x:Static localization:LocalizationProvider.Instance}}"
                                  FontFamily="{StaticResource Font.Pixel}"
                                  Foreground="{StaticResource Brush.TextLight}"
                                  Background="{StaticResource Brush.Panel}"/>
 
-                        <Button Content="Search" Width="120" Height="34" Margin="0,0,8,0"
+                        <Button Content="{Binding [BtnSearch], Source={x:Static localization:LocalizationProvider.Instance}}" Width="120" Height="34" Margin="0,0,8,0"
                                 Style="{StaticResource Btn.Primary}" Click="BtnSearch_Click"/>
 
-                        <Button Content="Refresh Requests" Width="160" Height="34"
+                        <Button Content="{Binding [BtnRefreshRequests], Source={x:Static localization:LocalizationProvider.Instance}}" Width="160" Height="34"
                                 Style="{StaticResource Btn.Primary}" Click="BtnRefreshRequests_Click"/>
 
                         <TextBlock x:Name="LblStatus" Margin="12,0,0,0" VerticalAlignment="Center"
@@ -158,7 +170,7 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <GroupBox Header="Search Results" Grid.Column="0" Style="{StaticResource Card.FriendManager}">
+                        <GroupBox Header="{Binding [GrpSearchResults], Source={x:Static localization:LocalizationProvider.Instance}}" Grid.Column="0" Style="{StaticResource Card.FriendManager}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -171,9 +183,9 @@
                                           IsReadOnly="True"
                                           SelectionMode="Single"
                                           Margin="4"
-                                          Style="{StaticResource {x:Type DataGrid}}">
+                                          Style="{StaticResource {x:Type DataGrid}}" SelectionChanged="DgProfiles_SelectionChanged">
                                     <DataGrid.Columns>
-                                        <DataGridTemplateColumn Header="Avatar" Width="50" IsReadOnly="True">
+                                        <DataGridTemplateColumn Header="{Binding [LblAvatar], Source={x:Static localization:LocalizationProvider.Instance}}" Width="50" IsReadOnly="True">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <Border Width="40" Height="40" Margin="2"
@@ -185,19 +197,19 @@
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
+                                        <DataGridTextColumn Header="{Binding [LblUser], Source={x:Static localization:LocalizationProvider.Instance}}" Binding="{Binding DisplayName}" Width="*"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
 
                                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
-                                    <Button Content="Send Friend Request" Width="180" Height="32"
+                                    <Button Content="{Binding [BtnSendFriendRequest], Source={x:Static localization:LocalizationProvider.Instance}}" Width="180" Height="32"
                                             Style="{StaticResource Btn.Primary}"
                                             Click="BtnSendRequest_Click"/>
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
 
-                        <GroupBox Header="My Friends" Grid.Column="1" Margin="8,0,0,0" Style="{StaticResource Card.FriendManager}">
+                        <GroupBox Header="{Binding [GrpMyFriends], Source={x:Static localization:LocalizationProvider.Instance}}" Grid.Column="1" Margin="8,0,0,0" Style="{StaticResource Card.FriendManager}">
                             <DataGrid x:Name="DgFriends"
                                       AutoGenerateColumns="False"
                                       IsReadOnly="True"
@@ -205,7 +217,7 @@
                                       Margin="4"
                                       Style="{StaticResource {x:Type DataGrid}}">
                                 <DataGrid.Columns>
-                                    <DataGridTemplateColumn Header="Avatar" Width="50" IsReadOnly="True">
+                                    <DataGridTemplateColumn Header="{Binding [LblAvatar], Source={x:Static localization:LocalizationProvider.Instance}}" Width="50" IsReadOnly="True">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Border Width="40" Height="40" Margin="2"
@@ -217,13 +229,13 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
+                                    <DataGridTextColumn Header="{Binding [LblUser], Source={x:Static localization:LocalizationProvider.Instance}}" Binding="{Binding DisplayName}" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </GroupBox>
                     </Grid>
 
-                    <GroupBox Header="Received Friend Requests" Grid.Column="0" Grid.Row="2" Style="{StaticResource Card.FriendManager}" Margin="0,8,0,0">
+                    <GroupBox Header="{Binding [LblReceivedFriendRequests], Source={x:Static localization:LocalizationProvider.Instance}}" Grid.Column="0" Grid.Row="2" Style="{StaticResource Card.FriendManager}" Margin="0,8,0,0">
                         <Grid Margin="4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -237,18 +249,18 @@
                                       Style="{StaticResource {x:Type DataGrid}}"
                                       Grid.Column="0">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="From User" Binding="{Binding RequesterDisplayName}" Width="*"/>
-                                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="80"/>
-                                    <DataGridTextColumn Header="Date" Binding="{Binding CreatedAt, StringFormat=\{0:d/M/yy\}}" Width="100"/>
+                                    <DataGridTextColumn Header="{Binding [lblFromUser], Source={x:Static localization:LocalizationProvider.Instance}}" Binding="{Binding RequesterDisplayName}" Width="*"/>
+                                    <DataGridTextColumn Header="{Binding [lblStatus], Source={x:Static localization:LocalizationProvider.Instance}}" Binding="{Binding Status}" Width="80"/>
+                                    <DataGridTextColumn Header="{Binding [lblDate], Source={x:Static localization:LocalizationProvider.Instance}}" Binding="{Binding CreatedAt, StringFormat=\{0:d/M/yy\}}" Width="100"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
                             <StackPanel Grid.Column="1" Orientation="Vertical" Margin="8,0,0,0" VerticalAlignment="Top">
-                                <Button Content="Accept" Width="120" Height="34" Margin="0,0,0,8"
+                                <Button Content="{Binding [BtnAccept], Source={x:Static localization:LocalizationProvider.Instance}}" Width="120" Height="34" Margin="0,0,0,8"
                                         Style="{StaticResource Btn.Accept}"
                                         Click="BtnAccept_Click"/>
 
-                                <Button Content="Reject" Width="120" Height="34"
+                                <Button Content="{Binding [BtnReject], Source={x:Static localization:LocalizationProvider.Instance}}" Width="120" Height="34"
                                         Style="{StaticResource Btn.Reject}"
                                         Click="BtnReject_Click"/>
                             </StackPanel>

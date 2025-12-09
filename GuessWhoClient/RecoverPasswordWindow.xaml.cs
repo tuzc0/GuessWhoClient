@@ -17,9 +17,6 @@ namespace GuessWhoClient
             InitializeComponent();
         }
 
-        // -----------------------------------------------------------
-        // PASO 1: ENVIAR EL CÓDIGO
-        // -----------------------------------------------------------
         private async void OnSendCodeClick(object sender, RoutedEventArgs e)
         {
             string email = txtEmail.Text.Trim();
@@ -45,7 +42,6 @@ namespace GuessWhoClient
                     {
                         MessageBox.Show(response.Message);
 
-                        // Ocultamos paso 1, mostramos paso 2
                         pnlEmailStep.Visibility = Visibility.Collapsed;
                         pnlPasswordStep.Visibility = Visibility.Visible;
 
@@ -123,7 +119,6 @@ namespace GuessWhoClient
             }
             catch (FaultException<ServiceFault> ex)
             {
-                // Mostramos el mensaje específico del servidor (ej. "Código inválido")
                 MessageBox.Show(ex.Detail.Message);
             }
             catch (Exception ex)
@@ -138,7 +133,6 @@ namespace GuessWhoClient
 
         private void OnCancelClick(object sender, RoutedEventArgs e)
         {
-            // Reseteamos la vista por si vuelve a entrar
             pnlEmailStep.Visibility = Visibility.Visible;
             pnlPasswordStep.Visibility = Visibility.Collapsed;
             txtEmail.IsEnabled = true;

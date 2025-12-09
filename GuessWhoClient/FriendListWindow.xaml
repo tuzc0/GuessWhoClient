@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localization="clr-namespace:GuessWhoClient.Globalization"
         mc:Ignorable="d"
-        Title="Current Friends List"
+        Title="{Binding [WinTitleFriends], Source={x:Static localization:LocalizationProvider.Instance}}"
         Height="500" Width="450"
         Background="{StaticResource Brush.Bg}"
         WindowStartupLocation="CenterScreen">
@@ -151,11 +152,11 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0"
-                           Text="MY FRIENDS"
+                           Text="{Binding [LblMyFriends], Source={x:Static localization:LocalizationProvider.Instance}}"
                            Style="{StaticResource Txt.Title}"
                            Margin="0,0,0,12"/>
 
-                <GroupBox Header="Online Status" 
+                <GroupBox Header="{Binding [GrpOnlineStatus], Source={x:Static localization:LocalizationProvider.Instance}}"
                           Grid.Row="1" 
                           Style="{StaticResource Card.FriendsList}"
                           Margin="0,0,0,12">
@@ -178,12 +179,14 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTextColumn Header="Username" Binding="{Binding DisplayName}" Width="*"/>
+                            <DataGridTextColumn Header="{Binding [LblUser], Source={x:Static localization:LocalizationProvider.Instance}}" 
+                                                Binding="{Binding DisplayName}" 
+                                                Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
 
-                <Button Content="Close" 
+                <Button Content="{Binding [BtnClose], Source={x:Static localization:LocalizationProvider.Instance}}"
                         Grid.Row="2"
                         Width="100" Height="34"
                         HorizontalAlignment="Right"

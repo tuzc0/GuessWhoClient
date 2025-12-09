@@ -86,6 +86,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\LeaderboardServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LoginServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -130,6 +135,9 @@
     <Compile Include="JoinOrCreateGameWindow.xaml.cs">
       <DependentUpon>JoinOrCreateGameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LeaderboardWindow.xaml.cs">
+      <DependentUpon>LeaderboardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RecoverPasswordWindow.xaml.cs">
       <DependentUpon>RecoverPasswordWindow.xaml</DependentUpon>
     </Compile>
@@ -169,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="JoinOrCreateGameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LeaderboardWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -294,14 +306,30 @@
     <None Include="Connected Services\FriendServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\LeaderboardServiceRef\GuessWhoClient.LeaderboardServiceRef.GetLeaderboardResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\GuessWhoContracts.Dtos.Dto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\GuessWhoContracts.Faults.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\service.wsdl" />
+    <None Include="Connected Services\LeaderboardServiceRef\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <!-- Login service datasources & schemas -->
     <None Include="Connected Services\LoginServiceRef\GuessWhoClient.LoginServiceRef.LoginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\LoginServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\LoginServiceRef\GuessWhoContracts.Faults.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LoginServiceRef\service.wsdl" />
@@ -325,9 +353,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Faults.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MatchServiceRef\service.wsdl" />
@@ -407,6 +432,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ChatServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\FriendServiceRef\" />
+    <WCFMetadataStorage Include="Connected Services\LeaderboardServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\LoginServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\MatchServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\UpdateServiceRef\" />
@@ -521,6 +547,18 @@
     <Resource Include="Images\Characters\Mazo1_Trae_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Tyrese_Animado.png" />
     <Resource Include="Images\Characters\Mazo1_Wilma_Animado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LeaderboardServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LeaderboardServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LeaderboardServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
