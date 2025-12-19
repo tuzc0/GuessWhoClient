@@ -138,7 +138,6 @@
         <DockPanel Grid.Row="0"
                    Grid.ColumnSpan="2"
                    LastChildFill="False">
-
             <TextBlock DockPanel.Dock="Left"
                        Style="{StaticResource Txt.Pixel}"
                        FontSize="40"
@@ -149,7 +148,6 @@
             <StackPanel DockPanel.Dock="Right"
                         Orientation="Horizontal"
                         Width="271">
-
                 <Button Style="{StaticResource Btn.Icon}"
                         Margin="6,0"
                         ToolTip="Ajustes"
@@ -168,7 +166,6 @@
                             <Path Style="{StaticResource Icon.Chat.Outline}"
                                   Width="24"
                                   Height="24" />
-
                             <Ellipse Width="2.6"
                                      Height="2.6"
                                      Canvas.Left="8"
@@ -195,7 +192,6 @@
                         Click="BtnFriends_Click">
                     <Path Style="{StaticResource Icon.Group}" />
                 </Button>
-
             </StackPanel>
         </DockPanel>
 
@@ -213,7 +209,7 @@
                            Style="{StaticResource Txt.Title}" />
 
                 <ItemsControl Grid.Row="1"
-                              ItemsSource="{Binding Players}">
+                              ItemsSource="{Binding LobbyPlayers}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,6"
@@ -221,7 +217,6 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="72" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Border Grid.Column="0"
@@ -232,7 +227,7 @@
                                         BorderBrush="{StaticResource Brush.AccentDark}"
                                         BorderThickness="2"
                                         Margin="0,0,8,0">
-                                    <Image Source="{Binding AvatarSource}"
+                                    <Image Source="{Binding AvatarPath}"
                                            Stretch="UniformToFill" />
                                 </Border>
 
@@ -242,35 +237,6 @@
                                     <TextBlock Style="{StaticResource Txt.Pixel}"
                                                FontSize="20"
                                                Text="{Binding DisplayName, FallbackValue=Jugador}" />
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="2"
-                                            Orientation="Horizontal"
-                                            VerticalAlignment="Center">
-                                    <ToggleButton Margin="0,0,6,0"
-                                                  Content="{Binding ReadyLabel, FallbackValue=Listo}"
-                                                  IsChecked="{Binding IsReady, Mode=TwoWay}">
-                                        <ToggleButton.Style>
-                                            <Style TargetType="ToggleButton"
-                                                   BasedOn="{StaticResource ReadyToggle}">
-                                                <Setter Property="Visibility" Value="Collapsed" />
-                                                <Style.Triggers>
-                                                    <DataTrigger Value="True">
-                                                        <DataTrigger.Binding>
-                                                            <MultiBinding Converter="{StaticResource IsLocalPlayerConverter}">
-                                                                <!-- UserId del jugador de la fila -->
-                                                                <Binding Path="UserId" />
-                                                                <!-- CurrentUserId del GameLobbyWindow -->
-                                                                <Binding Path="CurrentUserId"
-                                                                         RelativeSource="{RelativeSource AncestorType=UserControl}" />
-                                                            </MultiBinding>
-                                                        </DataTrigger.Binding>
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </ToggleButton.Style>
-                                    </ToggleButton>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -313,6 +279,8 @@
                             <ToggleButton Style="{StaticResource ChipToggle}"
                                           Content="{Binding Name}"
                                           IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                          IsEnabled="{Binding DataContext.IsCurrentUserHost,
+                                                              RelativeSource={RelativeSource AncestorType=UserControl}}"
                                           Command="{Binding DataContext.SelectModeCommand,
                                                             RelativeSource={RelativeSource AncestorType=Window}}"
                                           CommandParameter="{Binding}" />
@@ -322,13 +290,13 @@
 
                 <StackPanel Grid.Row="2"
                             Margin="0,10,0,10">
-
                     <CheckBox x:Name="chkPrivate"
                               Margin="0,0,0,8"
                               Content="Privada"
                               Foreground="{StaticResource Brush.TextLight}"
                               FontFamily="{StaticResource Font.Pixel}"
-                              IsChecked="{Binding IsPrivate}" />
+                              IsChecked="{Binding IsPrivate}"
+                              IsEnabled="{Binding IsCurrentUserHost}" />
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Style="{StaticResource Txt.Pixel}"
@@ -342,58 +310,57 @@
                                   Foreground="{StaticResource Brush.TextLight}"
                                   Background="{StaticResource Brush.Panel}"
                                   BorderBrush="{StaticResource Brush.AccentDark}"
-                                  BorderThickness="2" />
+                                  BorderThickness="2"
+                                  IsEnabled="{Binding IsCurrentUserHost}" />
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Grid.Row="3"
                             Margin="0,0,7,0"
                             Orientation="Horizontal"
-                            HorizontalAlignment="Right"
-                            RenderTransformOrigin="0.44,0.489">
+                            HorizontalAlignment="Right">
 
-                    <TextBlock Style="{StaticResource Txt.Pixel}"
-                               Height="22"
-                               Width="50"
-                               Margin="0,0,12,0"
-                               VerticalAlignment="Center"
-                               Opacity="0.9"
-                               Visibility="{Binding CanStart,
-                                                    Converter={StaticResource BoolToVis},
-                                                    ConverterParameter=False}">
-                        <Run Text="Code" />
-                        <Run Language="es-es" Text=":" />
-                        <LineBreak />
-                        <Run />
-                    </TextBlock>
-
-                    <TextBlock x:Name="tbGameCode"
-                               Style="{StaticResource Txt.Pixel}"
-                               Height="22"
-                               Width="50"
-                               Margin="0,0,12,0"
-                               VerticalAlignment="Center"
-                               Opacity="0.9"
-                               Visibility="{Binding CanStart,
-                                                    Converter={StaticResource BoolToVis},
-                                                    ConverterParameter=False}">
-                        <Run Text="" />
-                        <Run Language="es-es" />
-                        <LineBreak />
-                        <Run />
-                    </TextBlock>
+                    <ToggleButton x:Name="btnReadyBottom"
+                                  Content="LISTO"
+                                  MinWidth="140"
+                                  MinHeight="44"
+                                  Click="ReadyToggle_Checked"
+                                  IsChecked="{Binding IsCurrentPlayerReady, Mode=OneWay}">
+                        
+                        <ToggleButton.Style>
+                            <Style TargetType="ToggleButton"
+                                   BasedOn="{StaticResource ReadyToggle}">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsCurrentUserHost}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
 
                     <Button Content="START"
                             Style="{StaticResource Btn.Primary}"
                             MinWidth="140"
                             MinHeight="44"
+                            Margin="8,0,0,0"
                             IsEnabled="{Binding CanStart}"
                             Visibility="{Binding IsCurrentUserHost,
                                                  Converter={StaticResource BoolToVis}}"
-                            Command="{Binding StartCommand}" />
+                            Click="BtnStart_Click" />
                 </StackPanel>
             </Grid>
         </Border>
+
+        <TextBlock Grid.Row="2"
+                   Grid.Column="1"
+                   HorizontalAlignment="Right"
+                   Margin="0,0,16,8"
+                   Style="{StaticResource Txt.Pixel}">
+            <Run Text="Code: " />
+            <Run Text="{Binding MatchCode, Mode=OneWay}" />
+        </TextBlock>
 
         <Button x:Name="btnBack"
                 Grid.Row="2"

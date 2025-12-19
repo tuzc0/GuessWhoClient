@@ -2,7 +2,7 @@
 {
     public sealed class CharacterCard
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string ImagePath { get; set; }
     }
 }

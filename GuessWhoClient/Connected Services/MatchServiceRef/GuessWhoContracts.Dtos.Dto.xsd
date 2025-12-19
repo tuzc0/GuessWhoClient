@@ -8,6 +8,7 @@
   <xs:element name="ArrayOfLobbyPlayerDto" nillable="true" type="tns:ArrayOfLobbyPlayerDto" />
   <xs:complexType name="LobbyPlayerDto">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AvatarId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsHost" type="xs:boolean" />
       <xs:element minOccurs="0" name="IsReady" type="xs:boolean" />

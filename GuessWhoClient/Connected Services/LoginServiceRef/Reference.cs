@@ -23,9 +23,9 @@ namespace GuessWhoClient.LoginServiceRef {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private string PasswordField;
+        private string EmailField;
         
-        private string UserField;
+        private string PasswordField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -38,6 +38,19 @@ namespace GuessWhoClient.LoginServiceRef {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public string Password {
             get {
                 return this.PasswordField;
@@ -46,19 +59,6 @@ namespace GuessWhoClient.LoginServiceRef {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string User {
-            get {
-                return this.UserField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
                 }
             }
         }
@@ -260,6 +260,96 @@ namespace GuessWhoClient.LoginServiceRef {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LogoutRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class LogoutRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long UserProfileIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long UserProfileId {
+            get {
+                return this.UserProfileIdField;
+            }
+            set {
+                if ((this.UserProfileIdField.Equals(value) != true)) {
+                    this.UserProfileIdField = value;
+                    this.RaisePropertyChanged("UserProfileId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BasicResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
+        "")]
+    [System.SerializableAttribute()]
+    public partial class BasicResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private bool SuccessField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LoginServiceRef.ILoginService")]
     public interface ILoginService {
@@ -270,6 +360,13 @@ namespace GuessWhoClient.LoginServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/LoginUser", ReplyAction="http://tempuri.org/ILoginService/LoginUserResponse")]
         System.Threading.Tasks.Task<GuessWhoClient.LoginServiceRef.LoginResponse> LoginUserAsync(GuessWhoClient.LoginServiceRef.LoginRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/LogoutUser", ReplyAction="http://tempuri.org/ILoginService/LogoutUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.LoginServiceRef.ServiceFault), Action="http://tempuri.org/ILoginService/LogoutUserServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
+        GuessWhoClient.LoginServiceRef.BasicResponse LogoutUser(GuessWhoClient.LoginServiceRef.LogoutRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/LogoutUser", ReplyAction="http://tempuri.org/ILoginService/LogoutUserResponse")]
+        System.Threading.Tasks.Task<GuessWhoClient.LoginServiceRef.BasicResponse> LogoutUserAsync(GuessWhoClient.LoginServiceRef.LogoutRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -305,6 +402,14 @@ namespace GuessWhoClient.LoginServiceRef {
         
         public System.Threading.Tasks.Task<GuessWhoClient.LoginServiceRef.LoginResponse> LoginUserAsync(GuessWhoClient.LoginServiceRef.LoginRequest request) {
             return base.Channel.LoginUserAsync(request);
+        }
+        
+        public GuessWhoClient.LoginServiceRef.BasicResponse LogoutUser(GuessWhoClient.LoginServiceRef.LogoutRequest request) {
+            return base.Channel.LogoutUser(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoClient.LoginServiceRef.BasicResponse> LogoutUserAsync(GuessWhoClient.LoginServiceRef.LogoutRequest request) {
+            return base.Channel.LogoutUserAsync(request);
         }
     }
 }

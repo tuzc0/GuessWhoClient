@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="CreateMatchRequest">
     <xs:sequence>
       <xs:element name="ProfileId" type="xs:long" />
@@ -12,7 +13,7 @@
       <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CreateAtUtc" type="xs:dateTime" />
       <xs:element minOccurs="0" name="MatchId" type="xs:long" />
-      <xs:element minOccurs="0" name="Mode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mode" type="xs:unsignedByte" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" minOccurs="0" name="Players" nillable="true" type="q1:ArrayOfLobbyPlayerDto" />
       <xs:element minOccurs="0" name="StatusId" type="xs:unsignedByte" />
       <xs:element minOccurs="0" name="Visibility" type="xs:unsignedByte" />
@@ -32,7 +33,7 @@
       <xs:element minOccurs="0" name="CreateAtUtc" type="xs:dateTime" />
       <xs:element minOccurs="0" name="HostUserId" type="xs:long" />
       <xs:element minOccurs="0" name="MatchId" type="xs:long" />
-      <xs:element minOccurs="0" name="Mode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mode" type="xs:unsignedByte" />
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" minOccurs="0" name="Players" nillable="true" type="q2:ArrayOfLobbyPlayerDto" />
       <xs:element minOccurs="0" name="StatusId" type="xs:unsignedByte" />
       <xs:element minOccurs="0" name="Visibility" type="xs:unsignedByte" />
@@ -55,15 +56,43 @@
   <xs:complexType name="SetPlayerReadyStatusRequest">
     <xs:sequence>
       <xs:element minOccurs="0" name="IsReady" type="xs:boolean" />
-      <xs:element minOccurs="0" name="MatchId" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
       <xs:element minOccurs="0" name="UserId" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SetPlayerReadyStatusRequest" nillable="true" type="tns:SetPlayerReadyStatusRequest" />
   <xs:complexType name="StartMatchRequest">
     <xs:sequence>
-      <xs:element name="MatchId" type="xs:int" />
+      <xs:element name="MatchId" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="StartMatchRequest" nillable="true" type="tns:StartMatchRequest" />
+  <xs:complexType name="EndMatchRequest">
+    <xs:sequence>
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="WinnerUserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EndMatchRequest" nillable="true" type="tns:EndMatchRequest" />
+  <xs:complexType name="ChooseSecretCharacterRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CharacterId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChooseSecretCharacterRequest" nillable="true" type="tns:ChooseSecretCharacterRequest" />
+  <xs:complexType name="GetMatchDeckRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="NumberOfCardsInDeck" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetMatchDeckRequest" nillable="true" type="tns:GetMatchDeckRequest" />
+  <xs:complexType name="MatchDeckResponse">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CharacterIds" nillable="true" type="q3:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchDeckResponse" nillable="true" type="tns:MatchDeckResponse" />
 </xs:schema>

@@ -291,7 +291,7 @@ namespace GuessWhoClient
                    proposedText.All(char.IsDigit);
         }
 
-        private static void TxtCode_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TxtCode_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var codeTextBox = (TextBox)sender;
             e.Handled = !AllowsNextCodeInput(codeTextBox, e.Text);

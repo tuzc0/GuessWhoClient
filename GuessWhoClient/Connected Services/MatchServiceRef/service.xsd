@@ -2,30 +2,6 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" />
-  <xs:element name="SusbcribeLobby">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="matchId" type="xs:long" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SusbcribeLobbyResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnsusbcribeLobby">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="matchId" type="xs:long" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UnsusbcribeLobbyResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="CreateMatch">
     <xs:complexType>
       <xs:sequence>
@@ -96,24 +72,120 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="EndMatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="request" nillable="true" type="q11:EndMatchRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndMatchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="EndMatchResult" nillable="true" type="q12:BasicResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChooseSecretCharacter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="request" nillable="true" type="q13:ChooseSecretCharacterRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChooseSecretCharacterResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="ChooseSecretCharacterResult" nillable="true" type="q14:BasicResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMatchDeck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="request" nillable="true" type="q15:GetMatchDeckRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMatchDeckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" minOccurs="0" name="GetMatchDeckResult" nillable="true" type="q16:MatchDeckResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubscribeLobby">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="matchId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubscribeLobbyResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnsubscribeLobby">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="matchId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UnsubscribeLobbyResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="OnPlayerJoined">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" minOccurs="0" name="player" nillable="true" type="q11:LobbyPlayerDto" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" minOccurs="0" name="player" nillable="true" type="q17:LobbyPlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnPlayerLeft">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" minOccurs="0" name="player" nillable="true" type="q12:LobbyPlayerDto" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" minOccurs="0" name="player" nillable="true" type="q18:LobbyPlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnReadyChanged">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" minOccurs="0" name="player" nillable="true" type="q13:LobbyPlayerDto" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" minOccurs="0" name="player" nillable="true" type="q19:LobbyPlayerDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnSecretCharacterChosen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="matchId" type="xs:long" />
+        <xs:element minOccurs="0" name="userId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnAllSecretCharactersChosen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="matchId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnGameStarted">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="matchId" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnGameEnded">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="matchId" type="xs:long" />
+        <xs:element minOccurs="0" name="winnerUserId" type="xs:long" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

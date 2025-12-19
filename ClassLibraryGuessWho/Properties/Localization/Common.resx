@@ -234,4 +234,7 @@
   <data name="UIVerificationSuccess" xml:space="preserve">
     <value>Your email has been successfully verified</value>
   </data>
+  <data name="USER_REQUEST_NULL" xml:space="preserve">
+    <value>Registration data is missing. Please fill in the form and try again.</value>
+  </data>
 </root>

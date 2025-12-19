@@ -235,4 +235,7 @@
   <data name="UIVerificationSuccess" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="USER_REQUEST_NULL" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
 </root>

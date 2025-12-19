@@ -66,8 +66,8 @@
 
             <StackPanel Grid.Row="2"
                         Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="0,15,0,0">
+                        HorizontalAlignment="Right"
+                        Margin="0,15,15,10">
                 <Button x:Name="btnConfirm"
                         Content="CONFIRM SELECTION"
                         Style="{StaticResource Btn.Primary}"
@@ -81,6 +81,7 @@
                         Style="{StaticResource Btn.Primary}"
                         Width="120"
                         Height="50"
+                        Visibility="Collapsed"
                         Click="BtnCancel_Click" />
             </StackPanel>
         </Grid>

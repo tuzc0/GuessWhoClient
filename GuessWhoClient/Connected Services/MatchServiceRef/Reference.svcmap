@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="03738b0a-c24d-438c-a0e0-13ae981cd9af" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="e11e8f58-5031-4ccf-a4ad-01b8c5b44425" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,13 @@
     <MetadataSource Address="net.tcp://localhost:8100/MatchService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="15fe0299-40e4-4ae1-bf4f-da2711cf7be5" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0202b3aa-7c60-4c3a-82a2-56adad4ef92f" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="53441253-c723-4ab3-9c38-c42b573b9026" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
-    <MetadataFile FileName="GuessWhoContracts.Faults.xsd" MetadataType="Schema" ID="93c2a627-7283-4610-bac1-66fb3b42ca85" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
-    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="7f5fd14c-7817-43b7-b248-f1f61ec1cc25" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
-    <MetadataFile FileName="GuessWhoContracts.Dtos.Dto.xsd" MetadataType="Schema" ID="4eb5dcbf-bace-4d63-8b9c-b2567c9f03ab" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="23fd22bf-d07b-4d84-8ebb-7b465e6af53e" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="4fed4051-0fa5-4e01-93fc-6a2ff6c70237" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="99641a66-837c-41a9-98ae-6a787af3fb61" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="b2206a1f-1a86-4b9c-81ac-c2f9c67d3891" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Dtos.Dto.xsd" MetadataType="Schema" ID="721c23b7-e0b6-4ea4-877c-f3794302ad43" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Faults.xsd" MetadataType="Schema" ID="c8c703f8-019a-4211-b752-c8e396a153d1" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="103121a6-9865-4e2b-ad7e-9a24901e4378" SourceId="1" SourceUrl="net.tcp://localhost:8100/MatchService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

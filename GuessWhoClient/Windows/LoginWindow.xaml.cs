@@ -20,7 +20,8 @@ namespace GuessWhoClient.Windows
 
         private const string LOGIN_SERVICE_ENDPOINT_NAME = "NetTcpBinding_ILoginService";
 
-        private const string LOGIN_SUCCESS_MESSAGE_FORMAT = "Welcome, {0}!";
+        private const string LOGIN_ERROR_MESSAGE_FORMAT = "Error";
+        private const string LOGIN_SUCCESS_MESSAGE_FORMAT = "Welcome";
         private const string LOGIN_INVALID_CREDENTIALS_MESSAGE = "Invalid credentials.";
         private const string LOGIN_SECURITY_ERROR_MESSAGE = "Security error connecting to the service.";
         private const string LOGIN_SERVICE_UNAVAILABLE_MESSAGE = "Login service not available.";
@@ -36,7 +37,6 @@ namespace GuessWhoClient.Windows
         private const int NO_VALIDATION_ERRORS_COUNT = 0;
 
         private readonly SessionContext sessionContext = SessionContext.Current;
-        private readonly IAlertService alertService = new MessageBoxAlertService();
 
         public LoginWindow()
         {
@@ -66,41 +66,41 @@ namespace GuessWhoClient.Windows
 
                     sessionContext.SignIn(userId, displayName, email, isValidUser);
 
-                    alertService.Info(string.Format(LOGIN_SUCCESS_MESSAGE_FORMAT, displayName));
+                    GameMessageBox.ShowInfo(LOGIN_SUCCESS_MESSAGE_FORMAT + displayName, LOGIN_SUCCESS_MESSAGE_FORMAT);
 
                     LoadMainMenuWindow();
                 }
                 else
                 {
                     Logger.Warn(LOG_LOGIN_INVALID_CREDENTIALS);
-                    alertService.Error(LOGIN_INVALID_CREDENTIALS_MESSAGE);
+                    GameMessageBox.ShowError(LOGIN_INVALID_CREDENTIALS_MESSAGE, LOGIN_INVALID_CREDENTIALS_MESSAGE);
                 }
             }
             catch (InvalidOperationException ex)
             {
                 Logger.Warn(LOG_LOGIN_VALIDATION_ERROR, ex);
-                alertService.Warn(ex.Message);
+                GameMessageBox.ShowError(ex.Message, LOGIN_ERROR_MESSAGE_FORMAT);
             }
             catch (FaultException<ServiceFault> ex)
             {
                 Logger.Warn(LOG_LOGIN_SERVICE_FAULT, ex);
-                alertService.Error(ex.Detail.Message);
+                GameMessageBox.ShowError(ex.Detail.Message, LOGIN_ERROR_MESSAGE_FORMAT);
             }
             catch (MessageSecurityException ex)
             {
                 Logger.Error(LOG_LOGIN_SECURITY_ERROR, ex);
-                alertService.Error(LOGIN_SECURITY_ERROR_MESSAGE);
+                GameMessageBox.ShowError(LOGIN_SECURITY_ERROR_MESSAGE, LOGIN_ERROR_MESSAGE_FORMAT);
             }
             catch (EndpointNotFoundException ex)
             {
                 Logger.Error(LOG_LOGIN_ENDPOINT_NOT_FOUND, ex);
-                alertService.Error(LOGIN_SERVICE_UNAVAILABLE_MESSAGE);
+                GameMessageBox.ShowError(LOGIN_SERVICE_UNAVAILABLE_MESSAGE, LOGIN_ERROR_MESSAGE_FORMAT);
             }
             catch (Exception ex)
             {
                 Logger.Error(LOG_LOGIN_UNEXPECTED_ERROR, ex);
-                alertService.Error(
-                    LOGIN_UNEXPECTED_ERROR_PREFIX + ex.Message);
+                GameMessageBox.ShowError(
+                    LOGIN_UNEXPECTED_ERROR_PREFIX + ex.Message, LOGIN_ERROR_MESSAGE_FORMAT);
             }
             finally
             {
@@ -128,7 +128,7 @@ namespace GuessWhoClient.Windows
 
             return new LoginRequest
             {
-                User = loginInput.Email,
+                Email = loginInput.Email,
                 Password = loginInput.Password
             };
         }

@@ -410,5 +410,14 @@ namespace ClassLibraryGuessWho.Properties.Localization {
                 return ResourceManager.GetString("UIVerificationSuccess", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Registration data is missing. Please fill in the form and try again..
+        /// </summary>
+        public static string USER_REQUEST_NULL {
+            get {
+                return ResourceManager.GetString("USER_REQUEST_NULL", resourceCulture);
+            }
+        }
     }
 }

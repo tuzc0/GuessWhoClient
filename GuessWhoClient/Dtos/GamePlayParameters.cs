@@ -1,20 +1,17 @@
-﻿using GuessWhoClient.MatchServiceRef;
+﻿using GuessWhoClient.Dtos;
 using System;
 using System.Collections.Generic;
 
-namespace GuessWhoClient.Dtos
+public sealed class GamePlayParameters
 {
-    public sealed class GamePlayParameters
-    {
-        public long MatchId { get; }
-        public string MatchCode { get; }
-        public IReadOnlyList<LobbyPlayerDto> Players { get; }
+    public long MatchId { get; }
+    public string MatchCode { get; }
+    public IReadOnlyList<ClientLobbyPlayerDto> Players { get; }
 
-        public GamePlayParameters(long matchId, string matchCode, IReadOnlyList<LobbyPlayerDto> players)
-        {
-            MatchId = matchId;
-            MatchCode = matchCode ?? string.Empty;
-            Players = players ?? Array.Empty<LobbyPlayerDto>();
-        }
+    public GamePlayParameters(long matchId, string matchCode, IReadOnlyList<ClientLobbyPlayerDto> players)
+    {
+        MatchId = matchId;
+        MatchCode = matchCode;
+        Players = players ?? Array.Empty<ClientLobbyPlayerDto>();
     }
 }

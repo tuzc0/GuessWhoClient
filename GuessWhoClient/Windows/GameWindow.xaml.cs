@@ -12,7 +12,6 @@ namespace GuessWhoClient.Windows
         {
             InitializeComponent();
             LoadLoginWindow();
-            //LoadChooseCharacterScreen();
         }
 
         public void LoadLoginWindow()
@@ -99,16 +98,6 @@ namespace GuessWhoClient.Windows
 
             Hide();
             gamePlayWindow.Show();
-        }
-
-        public void LoadChooseCharacterScreen()
-        {
-            ScreenHost.Children.Clear();
-
-            var chooseCharacterScreen = new ChooseCharacterWindow();
-
-            ScreenHost.Children.Add(chooseCharacterScreen);
-
         }
     }
 }

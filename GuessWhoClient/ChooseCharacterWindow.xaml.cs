@@ -1,6 +1,6 @@
-﻿using GuessWhoClient.Assets;
-using GuessWhoClient.Dtos;
-using System.Collections.ObjectModel;
+﻿using GuessWhoClient.Dtos;
+using GuessWhoClient.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,62 +9,110 @@ namespace GuessWhoClient
 {
     public partial class ChooseCharacterWindow : UserControl
     {
-        public ObservableCollection<CharacterCard> Characters { get; } =
-            new ObservableCollection<CharacterCard>();
+        private readonly ChooseCharacterViewModel viewModel;
 
-        public CharacterCard SelectedCharacter { get; private set; }
+        private Border lastSelectedBorder;
+        private bool hasConfirmedSelection;
 
-        public ChooseCharacterWindow()
+        public ChooseCharacterWindow(ChooseCharacterViewModel viewModel)
         {
+            this.viewModel = viewModel
+                ?? throw new ArgumentNullException(nameof(viewModel));
+
             InitializeComponent();
-            DataContext = this;
-            LoadCharacters();
-        }
+            DataContext = this.viewModel;
 
-        private void LoadCharacters()
-        {
-            var paths = CharacterAssets.GetAllCharacterPaths();
-
-            for (int index = 0; index < paths.Count; index++)
-            {
-                Characters.Add(new CharacterCard
-                {
-                    Id = index + 1,
-                    ImagePath = paths[index]
-                });
-            }
+            btnCancel.Visibility = Visibility.Collapsed;
         }
 
         private void CharacterCard_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (hasConfirmedSelection || viewModel.IsSelectionLocked)
+            {
+                return;
+            }
+
             if (sender is Border border && border.DataContext is CharacterCard character)
             {
-                SelectedCharacter = character;
-                // aquí puedes marcar visualmente la selección si quieres
+                if (lastSelectedBorder != null)
+                {
+                    lastSelectedBorder.Opacity = 1.0;
+                }
+
+                border.Opacity = 0.5;
+                lastSelectedBorder = border;
+
+                viewModel.SelectedCharacter = character;
             }
         }
 
-        private void BtnConfirm_Click(object sender, RoutedEventArgs e)
+        private async void BtnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedCharacter == null)
+            if (viewModel.SelectedCharacter == null)
             {
                 MessageBox.Show(
-                    "Selecciona un personaje antes de continuar.",
-                    "Aviso",
+                    "Debes seleccionar un personaje antes de confirmar.",
+                    "Selección requerida",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                return;
+            }
+
+            var confirmResult = MessageBox.Show(
+                "¿Estás seguro de que quieres elegir este personaje como tu personaje secreto?\n" +
+                "Después de confirmar ya no podrás cambiarlo.",
+                "Confirmar selección",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (confirmResult != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            var result = await viewModel.ConfirmSelectionAsync();
+
+            if (!result.Success)
+            {
+                MessageBox.Show(
+                    result.ErrorMessage,
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+
+                return;
+            }
+
+            hasConfirmedSelection = true;
+
+            btnConfirm.Visibility = Visibility.Collapsed;
+            btnCancel.Visibility = Visibility.Visible;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewModel.IsSelectionLocked)
+            {
+                MessageBox.Show(
+                    "La partida está a punto de comenzar, ya no puedes cambiar tu personaje.",
+                    "Cambio no permitido",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
                 return;
             }
 
-            // TODO: usar SelectedCharacter (enviar al server, guardar, etc.)
-        }
+            hasConfirmedSelection = false;
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            // Como es UserControl, normalmente el dueño (Window) decide qué hacer.
-            // Si lo alojas dentro de un Window, podrías cerrar así:
-            var parentWindow = Window.GetWindow(this);
-            parentWindow?.Close();
+            if (lastSelectedBorder != null)
+            {
+                lastSelectedBorder.Opacity = 1.0;
+                lastSelectedBorder = null;
+            }
+
+            viewModel.SelectedCharacter = null;
+
+            btnCancel.Visibility = Visibility.Collapsed;
+            btnConfirm.Visibility = Visibility.Visible;
         }
     }
 }
