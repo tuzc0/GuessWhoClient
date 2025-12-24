@@ -1,6 +1,6 @@
-﻿using GuessWhoClient.Dtos;
+﻿using GuessWhoClient.Domain.Models;
+using GuessWhoClient.Application.Mappers;
 using GuessWhoClient.Interfaces;
-using GuessWhoClient.Mappers;
 using GuessWhoClient.MatchServiceRef;
 using log4net;
 using System;
@@ -11,9 +11,9 @@ namespace GuessWhoClient.Session.Controllers
 {
     public sealed class MatchSessionController : IMatchSessionController, IDisposable
     {
-        public event Action<ClientLobbyPlayerDto> PlayerJoined;
-        public event Action<ClientLobbyPlayerDto> PlayerLeft;
-        public event Action<ClientLobbyPlayerDto> ReadyChanged;
+        public event Action<LobbyPlayer> PlayerJoined;
+        public event Action<LobbyPlayer> PlayerLeft;
+        public event Action<LobbyPlayer> ReadyChanged;
         public event Action GameStarted;
         public event Action<long, long> SecretCharacterChosen;
         public event Action<long> AllSecretCharactersChosen;
@@ -511,12 +511,8 @@ namespace GuessWhoClient.Session.Controllers
                     return;
                 }
 
-                ClientLobbyPlayerDto clientDto = LobbyPlayerMapper.ToClient(player);
-
-                Logger.InfoFormat("Callback OnPlayerJoined received. MatchId={0}, UserId={1}",
-                    clientDto.MatchId, clientDto.UserId, clientDto.Avatar);
-
-                matchSessionController.PlayerJoined?.Invoke(clientDto);
+                LobbyPlayer lobbyPlayer = LobbyPlayerMapper.ToDomain(player);
+                matchSessionController.PlayerJoined?.Invoke(lobbyPlayer);
             }
 
             public void OnPlayerLeft(LobbyPlayerDto player)
@@ -526,12 +522,12 @@ namespace GuessWhoClient.Session.Controllers
                     return;
                 }
 
-                ClientLobbyPlayerDto clientDto = LobbyPlayerMapper.ToClient(player);
+                LobbyPlayer lobbyPlayer = LobbyPlayerMapper.ToDomain(player);
 
                 Logger.InfoFormat("Callback OnPlayerLeft received. MatchId={0}, UserId={1}",
-                    clientDto.MatchId, clientDto.UserId);
+                    lobbyPlayer.MatchId, lobbyPlayer.UserId);
 
-                matchSessionController.PlayerLeft?.Invoke(clientDto);
+                matchSessionController.PlayerLeft?.Invoke(lobbyPlayer);
             }
 
             public void OnReadyChanged(LobbyPlayerDto player)
@@ -541,12 +537,12 @@ namespace GuessWhoClient.Session.Controllers
                     return;
                 }
 
-                ClientLobbyPlayerDto clientDto = LobbyPlayerMapper.ToClient(player);
+                LobbyPlayer lobbyPlayer = LobbyPlayerMapper.ToDomain(player);
 
                 Logger.InfoFormat("Callback OnReadyChanged received. MatchId={0}, UserId={1}, IsReady={2}",
-                    clientDto.MatchId, clientDto.UserId, clientDto.IsReady);
+                    lobbyPlayer.MatchId, lobbyPlayer.UserId, lobbyPlayer.IsReady);
 
-                matchSessionController.ReadyChanged?.Invoke(clientDto);
+                matchSessionController.ReadyChanged?.Invoke(lobbyPlayer);
             }
 
             public void OnSecretCharacterChosen(long matchId, long userId)

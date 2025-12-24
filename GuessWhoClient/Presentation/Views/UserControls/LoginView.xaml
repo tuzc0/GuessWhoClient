@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="GuessWhoClient.Presentation.Views.UserControls.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:localization="clr-namespace:GuessWhoClient.Globalization"
+             xmlns:behaviors="clr-namespace:GuessWhoClient.Presentation.Behaviors"
+             xmlns:main="clr-namespace:GuessWhoClient.Presentation.Views.UserControls">
+    
+    <Grid Margin="24,24,24,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                CornerRadius="16"
+                Padding="12"
+                HorizontalAlignment="Stretch"
+                Margin="15,0,15,24">
+            <Viewbox Stretch="Uniform" MaxHeight="72">
+                <TextBlock Style="{StaticResource Txt.Pixel}"
+                           Text="{Binding [AppTitle], Source={x:Static localization:LocalizationProvider.Instance}}"
+                           Foreground="{StaticResource Brush.Accent}"/>
+            </Viewbox>
+        </Border>
+
+        <Border Grid.Row="1"
+                CornerRadius="16"
+                Padding="24"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                Margin="15,120,15,32">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="12"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Style="{StaticResource Txt.Pixel}"
+                           Text="{Binding [LblEmail], Source={x:Static localization:LocalizationProvider.Instance}}"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+
+                <TextBox x:Name="txtEmailUser"
+                         MaxLength="254"
+                         Grid.Row="0"
+                         Grid.Column="2"
+                         Style="{StaticResource Input.Pixel}"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                           Style="{StaticResource Txt.Pixel}"
+                           Text="{Binding [LblPassword], Source={x:Static localization:LocalizationProvider.Instance}}"
+                           FontSize="18"
+                           VerticalAlignment="Center"/>
+
+                <Grid Grid.Row="2" Grid.Column="2">
+                    <PasswordBox x:Name="pwdPassword"
+                                 Height="32"
+                                 MaxLength="64"
+                                 behaviors:PasswordVisibilityBehavior.VisibleTextBox="{Binding ElementName=txtPasswordVisible}"
+                                 behaviors:PasswordVisibilityBehavior.IsPasswordVisible="{Binding IsPasswordVisible, Mode=TwoWay}"
+                                 Style="{StaticResource Input.Pixel.Password}" />
+                    <TextBox x:Name="txtPasswordVisible"
+                             Height="32"
+                             MaxLength="64"
+                             behaviors:PasswordVisibilityBehavior.PasswordBox="{Binding ElementName=pwdPassword}"
+                             behaviors:PasswordVisibilityBehavior.IsTextVisible="{Binding IsPasswordVisible, Mode=TwoWay}"
+                             Visibility="Collapsed"
+                             Style="{StaticResource Input.Pixel}" />
+                </Grid>
+
+                <CheckBox x:Name="chkShowPasswords"
+                          Grid.Row="3"
+                          Grid.Column="2"
+                          Style="{StaticResource Chk.Pixel}"
+                          Content="{Binding [chkShowPasswords], Source={x:Static localization:LocalizationProvider.Instance}}"
+                          Margin="0,4,0,0"
+                          HorizontalAlignment="Left"
+                          IsChecked="{Binding IsPasswordVisible, Mode=TwoWay}" />
+
+                <Button x:Name="btnLogin"
+                        Grid.Row="5"
+                        Grid.ColumnSpan="3"
+                        Margin="0,0,0,0"
+                        Content="{Binding [BtnLogin], Source={x:Static localization:LocalizationProvider.Instance}}"
+                        Style="{StaticResource Btn.Primary}"
+                        Height="48"
+                        Width="200"
+                        HorizontalAlignment="Center"
+                        Click="BtnLogin_Click"/>
+            </Grid>
+        </Border>
+
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,4">
+
+            <TextBlock Style="{StaticResource Txt.Pixel}"
+                       Text="{Binding [LinkCreate], Source={x:Static localization:LocalizationProvider.Instance}}"
+                       FontSize="20"
+                       Cursor="Hand"
+                       Margin="0,0,8,0"
+                       MouseLeftButtonUp="CreateAccount_Click"/>
+
+            <TextBlock Style="{StaticResource Txt.Pixel}"
+                       Text="•"
+                       Margin="4,0"/>
+
+            <TextBlock Style="{StaticResource Txt.Pixel}"
+                       Text="{Binding [LinkForgot], Source={x:Static localization:LocalizationProvider.Instance}}"
+                       FontSize="20"
+                       Cursor="Hand"
+                       Margin="8,0,0,0"
+                       MouseLeftButtonUp="ForgotPassword_Click"/>
+        </StackPanel>
+
+        <main:RecoverPasswordView x:Name="ucRecoverPassword"
+                          Grid.Row="0"
+                          Grid.RowSpan="3"
+                          Visibility="Collapsed" />
+
+    </Grid>
+</UserControl>

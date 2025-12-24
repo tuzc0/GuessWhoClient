@@ -1,14 +1,14 @@
-﻿using GuessWhoClient.Dtos;
+﻿using GuessWhoClient.MatchServiceRef;
 
 namespace GuessWhoClient.Interfaces
 {
     public interface ILobbyClient
     {
-        void OnPlayerJoined(ClientLobbyPlayerDto player);
+        void OnPlayerJoined(LobbyPlayerDto player);
 
-        void OnPlayerLeft(ClientLobbyPlayerDto player);
+        void OnPlayerLeft(LobbyPlayerDto player);
 
-        void OnReadyChanged(ClientLobbyPlayerDto player);
+        void OnReadyChanged(LobbyPlayerDto player);
 
         void OnGameStarted();
 

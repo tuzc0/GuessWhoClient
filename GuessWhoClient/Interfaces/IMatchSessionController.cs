@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GuessWhoClient.Dtos;
+using GuessWhoClient.Domain.Models;
 
 namespace GuessWhoClient.Interfaces
 {
@@ -23,9 +23,9 @@ namespace GuessWhoClient.Interfaces
 
         Task CloseAsync();
 
-        event Action<ClientLobbyPlayerDto> PlayerJoined;
-        event Action<ClientLobbyPlayerDto> PlayerLeft;
-        event Action<ClientLobbyPlayerDto> ReadyChanged;
+        event Action<LobbyPlayer> PlayerJoined;
+        event Action<LobbyPlayer> PlayerLeft;
+        event Action<LobbyPlayer> ReadyChanged;
         event Action GameStarted;
         event Action<long, long> SecretCharacterChosen;  
         event Action<long> AllSecretCharactersChosen;    

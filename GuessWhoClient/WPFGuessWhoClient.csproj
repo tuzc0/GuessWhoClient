@@ -38,12 +38,28 @@
     <Reference Include="log4net, Version=3.2.0.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.3.2.0\lib\net462\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=10.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.10.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=10.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.10.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=10.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.10.0.1\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -62,24 +78,49 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Alerts\GameMessageBox.cs" />
-    <Compile Include="Alerts\IAlertService.cs" />
-    <Compile Include="Alerts\MessageBoxAlertService.cs" />
+    <Compile Include="Application\Mappers\LobbyPlayerMapper.cs" />
+    <Compile Include="Application\Mappers\ServiceFaultsMapper.cs" />
+    <Compile Include="Application\Results\OperationResult.cs" />
+    <Compile Include="Application\Results\RegisterUserResult.cs" />
+    <Compile Include="Application\Services\IUserAppService.cs" />
+    <Compile Include="Application\Services\UserAppService.cs" />
+    <Compile Include="Domain\Models\LobbyPlayer.cs" />
+    <Compile Include="Domain\Models\UserRegistrationDraft.cs" />
+    <Compile Include="Domain\Models\UserRegistrationInput.cs" />
+    <Compile Include="Domain\Validation\IValidationMessageMapper.cs" />
+    <Compile Include="Domain\Validation\UserRegistrationRules.cs" />
+    <Compile Include="Domain\Validation\ValidationError.cs" />
+    <Compile Include="Domain\Validation\ValidationMessageMapper.cs" />
+    <Compile Include="Infraestructure\Session\ISessionStore.cs" />
+    <Compile Include="Infraestructure\Wcf\EndPoints.cs" />
+    <Compile Include="Infraestructure\Wcf\MatchServiceClientFactory.cs" />
+    <Compile Include="Infraestructure\Wcf\UserServiceClientFactory.cs" />
+    <Compile Include="Infraestructure\Wcf\WcfExceptionMapper.cs" />
+    <Compile Include="Presentation\Behaviors\PasswordVisibilityBehavior.cs" />
+    <Compile Include="Presentation\Navegation\IGameScreenManager.cs" />
+    <Compile Include="Presentation\Services\Alerts\GameMessageBox.cs" />
+    <Compile Include="Presentation\Services\Alerts\IAlertService.cs" />
+    <Compile Include="Presentation\Services\Alerts\MessageBoxAlertService.cs" />
     <Compile Include="Assets\AvatarAssets.cs" />
     <Compile Include="Assets\CharacterAsserts.cs" />
     <Compile Include="Callbacks\ChatCallback.cs" />
     <Compile Include="Callbacks\MatchCallback.cs" />
-    <Compile Include="ChangePasswordDialog.xaml.cs">
-      <DependentUpon>ChangePasswordDialog.xaml</DependentUpon>
+    <Compile Include="Presentation\Services\Errors\IUiErrorMapper.cs" />
+    <Compile Include="Presentation\Services\Errors\UiErrorMapper.cs" />
+    <Compile Include="Presentation\ViewsModels\Base\AsyncRelayCommand.cs" />
+    <Compile Include="Presentation\ViewsModels\Base\DataErrors.cs" />
+    <Compile Include="Presentation\ViewsModels\Base\ViewModelBase.cs" />
+    <Compile Include="Presentation\Views\UserControls\ChangePasswordView.xaml.cs">
+      <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChooseAvatarWindow.xaml.cs">
-      <DependentUpon>ChooseAvatarWindow.xaml</DependentUpon>
+    <Compile Include="Presentation\Views\UserControls\ChooseAvatarView.xaml.cs">
+      <DependentUpon>ChooseAvatarView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChooseCharacterWindow.xaml.cs">
-      <DependentUpon>ChooseCharacterWindow.xaml</DependentUpon>
+    <Compile Include="Presentation\Views\UserControls\ChooseCharacterView.xaml.cs">
+      <DependentUpon>ChooseCharacterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\ChatServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -113,58 +154,55 @@
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\IsLocalPlayerConverter.cs" />
-    <Compile Include="CreateAccountWindow.xaml.cs">
-      <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
+    <Compile Include="Presentation\Views\UserControls\CreateAccountView.xaml.cs">
+      <DependentUpon>CreateAccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dtos\AccountProfileInput.cs" />
-    <Compile Include="Dtos\AvatarCard.cs" />
-    <Compile Include="Dtos\AvatarChangeRequest.cs" />
-    <Compile Include="Dtos\ClientLobbyPlayerDto.cs" />
-    <Compile Include="Dtos\LoginInput.cs" />
-    <Compile Include="Dtos\CharacterCard.cs" />
-    <Compile Include="Dtos\GamePlayParameters.cs" />
-    <Compile Include="Dtos\PasswordChangeRequest.cs" />
+    <Compile Include="Presentation\Forms\AccountProfileInput.cs" />
+    <Compile Include="Domain\Models\AvatarCard.cs" />
+    <Compile Include="Application\Contracts\AvatarChangeRequest.cs" />
+    <Compile Include="Presentation\Forms\LoginInput.cs" />
+    <Compile Include="Domain\Models\CharacterCard.cs" />
+    <Compile Include="Domain\Models\GamePlayParameters.cs" />
+    <Compile Include="Application\Contracts\PasswordChangeRequest.cs" />
     <Compile Include="FriendListWindow.xaml.cs">
       <DependentUpon>FriendListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FriendManagerWindowWindow.xaml.cs">
       <DependentUpon>FriendManagerWindowWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameLobbyWindow.xaml.cs">
-      <DependentUpon>GameLobbyWindow.xaml</DependentUpon>
+    <Compile Include="Presentation\Views\UserControls\GameLobbyView.xaml.cs">
+      <DependentUpon>GameLobbyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Globalization\ILocalizationService.cs" />
     <Compile Include="Globalization\LocalizationService.cs" />
     <Compile Include="Globalization\LocalizationProvider.cs" />
-    <Compile Include="InputValidation\AccountValidator.cs" />
+    <Compile Include="Domain\Validation\AccountValidator.cs" />
     <Compile Include="Interfaces\IGameScreenManager.cs" />
     <Compile Include="Interfaces\ILobbyClient.cs" />
     <Compile Include="Interfaces\IMatchSessionController.cs" />
-    <Compile Include="JoinOrCreateGameWindow.xaml.cs">
-      <DependentUpon>JoinOrCreateGameWindow.xaml</DependentUpon>
+    <Compile Include="Presentation\Views\UserControls\JoinOrCreateGameView.xaml.cs">
+      <DependentUpon>JoinOrCreateGameView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Mappers\LobbyPlayerMapper.cs" />
-    <Compile Include="RecoverPasswordWindow.xaml.cs">
-      <DependentUpon>RecoverPasswordWindow.xaml</DependentUpon>
+    <Compile Include="Presentation\Views\UserControls\RecoverPasswordView.xaml.cs">
+      <DependentUpon>RecoverPasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Session\Controllers\MatchSessionController.cs" />
-    <Compile Include="Session\SessionContext.cs" />
-    <Compile Include="VerifyEmailWindow.xaml.cs">
-      <DependentUpon>VerifyEmailWindow.xaml</DependentUpon>
+    <Compile Include="Infraestructure\Session\SessionContext.cs" />
+    <Compile Include="Presentation\Views\UserControls\VerifyEmailView.xaml.cs">
+      <DependentUpon>VerifyEmailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ChooseCharactersViewModel.cs" />
-    <Compile Include="ViewModels\LobbyViewModel.cs" />
-    <Compile Include="ViewModels\OperationResult.cs" />
-    <Compile Include="Windows\GameMessageWindow.xaml.cs">
+    <Compile Include="Presentation\ViewsModels\Auth\ChooseCharactersViewModel.cs" />
+    <Compile Include="Presentation\ViewsModels\Auth\CreateAccountViewModel.cs" />
+    <Compile Include="Presentation\ViewsModels\Auth\LobbyViewModel.cs" />
+    <Compile Include="Presentation\Views\Windows\GameMessageWindow.xaml.cs">
       <DependentUpon>GameMessageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\GamePlayWindow.xaml.cs">
+    <Compile Include="Presentation\Views\Windows\GamePlayWindow.xaml.cs">
       <DependentUpon>GamePlayWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ScreensType\GameScreenType.cs" />
-    <Compile Include="Windows\ScreensUtilities\PasswordVisibilityHelper.cs" />
-    <Compile Include="Windows\ScreensUtilities\ServiceClientGuard.cs" />
-    <Page Include="ChangePasswordDialog.xaml">
+    <Compile Include="Presentation\Navegation\GameScreenType.cs" />
+    <Compile Include="Infraestructure\Wcf\ServiceClientGuard.cs" />
+    <Page Include="Presentation\Views\UserControls\ChangePasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,15 +210,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChooseAvatarWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\ChooseAvatarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ChooseCharacterWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\ChooseCharacterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FinalMatchStatistics.xaml">
+    <Page Include="Presentation\Views\UserControls\FinalMatchStatistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,47 +230,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GameLobbyWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\GameLobbyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="JoinOrCreateGameWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\JoinOrCreateGameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RecoverPasswordWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\RecoverPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\GameMessageWindow.xaml">
+    <Page Include="Presentation\Views\Windows\GameMessageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\GamePlayWindow.xaml">
+    <Page Include="Presentation\Views\Windows\GamePlayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\GameWindow.xaml">
+    <Page Include="Presentation\Views\Windows\GameWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LoginWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainMenuWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\MainMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="MatchWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProfileWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\UpdateProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -240,11 +274,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CreateAccountWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\CreateAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="VerifyEmailWindow.xaml">
+    <Page Include="Presentation\Views\UserControls\VerifyEmailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,29 +286,25 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="FinalMatchStatistics.xaml.cs">
+    <Compile Include="Presentation\Views\UserControls\FinalMatchStatistics.xaml.cs">
       <DependentUpon>FinalMatchStatistics.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\GameWindow.xaml.cs">
+    <Compile Include="Presentation\Views\Windows\GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    <Compile Include="Presentation\Views\UserControls\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainMenuWindow.xaml.cs">
-      <DependentUpon>MainMenuWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Presentation\Views\UserControls\MainMenuView.xaml.cs">
+      <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MatchWindow.xaml.cs">
       <DependentUpon>MatchWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProfileWindow.xaml.cs">
-      <DependentUpon>ProfileWindow.xaml</DependentUpon>
+    <Compile Include="Presentation\Views\UserControls\UpdateProfileView.xaml.cs">
+      <DependentUpon>UpdateProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -565,5 +595,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

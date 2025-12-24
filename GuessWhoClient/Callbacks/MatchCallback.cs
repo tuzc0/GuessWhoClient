@@ -3,9 +3,6 @@ using System.Windows.Threading;
 using GuessWhoClient.Interfaces;
 using GuessWhoClient.MatchServiceRef;
 
-using ClientLobbyPlayerDto = GuessWhoClient.Dtos.ClientLobbyPlayerDto;
-using ServiceLobbyPlayerDto = GuessWhoClient.MatchServiceRef.LobbyPlayerDto;
-
 namespace GuessWhoClient.Callbacks
 {
     public sealed class MatchCallback : IMatchServiceCallback
@@ -23,14 +20,14 @@ namespace GuessWhoClient.Callbacks
             this.lobbyClient = lobbyClient ?? throw new ArgumentNullException(nameof(lobbyClient));
         }
 
-        public void OnPlayerJoined(ServiceLobbyPlayerDto player)
+        public void OnPlayerJoined(LobbyPlayerDto player)
         {
             if (lobbyClient == null || player == null)
             {
                 return;
             }
 
-            ClientLobbyPlayerDto clientPlayer = MapToClientDto(player);
+            LobbyPlayerDto clientPlayer = MapToClientDto(player);
 
             dispatcher.Invoke(() =>
             {
@@ -38,14 +35,14 @@ namespace GuessWhoClient.Callbacks
             });
         }
 
-        public void OnPlayerLeft(ServiceLobbyPlayerDto player)
+        public void OnPlayerLeft(LobbyPlayerDto player)
         {
             if (lobbyClient == null || player == null)
             {
                 return;
             }
 
-            ClientLobbyPlayerDto clientPlayer = MapToClientDto(player);
+            LobbyPlayerDto clientPlayer = MapToClientDto(player);
 
             dispatcher.Invoke(() =>
             {
@@ -53,14 +50,14 @@ namespace GuessWhoClient.Callbacks
             });
         }
 
-        public void OnReadyChanged(ServiceLobbyPlayerDto player)
+        public void OnReadyChanged(LobbyPlayerDto player)
         {
             if (lobbyClient == null || player == null)
             {
                 return;
             }
 
-            ClientLobbyPlayerDto clientPlayer = MapToClientDto(player);
+            LobbyPlayerDto clientPlayer = MapToClientDto(player);
 
             dispatcher.Invoke(() =>
             {
@@ -122,14 +119,14 @@ namespace GuessWhoClient.Callbacks
             });
         }
 
-        private static ClientLobbyPlayerDto MapToClientDto(ServiceLobbyPlayerDto servicePlayer)
+        private static LobbyPlayerDto MapToClientDto(LobbyPlayerDto servicePlayer)
         {
             if (servicePlayer == null)
             {
                 throw new ArgumentNullException(nameof(servicePlayer));
             }
 
-            return new ClientLobbyPlayerDto
+            return new LobbyPlayerDto
             {
                 MatchId = servicePlayer.MatchId,
                 UserId = servicePlayer.UserId,
