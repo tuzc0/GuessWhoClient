@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" />
+  <xs:complexType name="CreateMatchRequest">
+    <xs:sequence>
+      <xs:element name="ProfileId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateMatchRequest" nillable="true" type="tns:CreateMatchRequest" />
+  <xs:complexType name="JoinMatchRequest">
+    <xs:sequence>
+      <xs:element name="MatchCode" nillable="true" type="xs:string" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JoinMatchRequest" nillable="true" type="tns:JoinMatchRequest" />
+  <xs:complexType name="JoinMatchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateAtUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HostUserId" type="xs:long" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="Mode" type="xs:unsignedByte" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="Players" nillable="true" type="q1:ArrayOfLobbyPlayerDto" />
+      <xs:element minOccurs="0" name="StatusId" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="Visibility" type="xs:unsignedByte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JoinMatchResponse" nillable="true" type="tns:JoinMatchResponse" />
+  <xs:complexType name="LeaveMatchRequest">
+    <xs:sequence>
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LeaveMatchRequest" nillable="true" type="tns:LeaveMatchRequest" />
+  <xs:complexType name="SetPlayerReadyStatusRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsReady" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SetPlayerReadyStatusRequest" nillable="true" type="tns:SetPlayerReadyStatusRequest" />
+  <xs:complexType name="SubscribeLobbyRequest">
+    <xs:sequence>
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SubscribeLobbyRequest" nillable="true" type="tns:SubscribeLobbyRequest" />
+  <xs:complexType name="UnsubscribeLobbyRequest">
+    <xs:sequence>
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UnsubscribeLobbyRequest" nillable="true" type="tns:UnsubscribeLobbyRequest" />
+  <xs:complexType name="StartMatchRequest">
+    <xs:sequence>
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StartMatchRequest" nillable="true" type="tns:StartMatchRequest" />
+  <xs:complexType name="EndMatchRequest">
+    <xs:sequence>
+      <xs:element name="HostUserId" type="xs:long" />
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="WinnerUserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EndMatchRequest" nillable="true" type="tns:EndMatchRequest" />
+  <xs:complexType name="ChooseSecretCharacterRequest">
+    <xs:sequence>
+      <xs:element name="CharacterId" nillable="true" type="xs:string" />
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ChooseSecretCharacterRequest" nillable="true" type="tns:ChooseSecretCharacterRequest" />
+  <xs:complexType name="GetOrCreateMatchDeckRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="ModeId" type="xs:unsignedByte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetOrCreateMatchDeckRequest" nillable="true" type="tns:GetOrCreateMatchDeckRequest" />
+  <xs:complexType name="AskQuestionRequest">
+    <xs:sequence>
+      <xs:element name="AttributeId" type="xs:int" />
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AskQuestionRequest" nillable="true" type="tns:AskQuestionRequest" />
+  <xs:complexType name="AnswerQuestionRequest">
+    <xs:sequence>
+      <xs:element name="AnswerOptionId" type="xs:int" />
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AnswerQuestionRequest" nillable="true" type="tns:AnswerQuestionRequest" />
+  <xs:complexType name="PassTurnRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExpectedRowVersion" nillable="true" type="xs:base64Binary" />
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PassTurnRequest" nillable="true" type="tns:PassTurnRequest" />
+  <xs:complexType name="ClaimTimeoutRequest">
+    <xs:sequence>
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClaimTimeoutRequest" nillable="true" type="tns:ClaimTimeoutRequest" />
+  <xs:complexType name="FinalGuessRequest">
+    <xs:sequence>
+      <xs:element name="GuessedCharacterId" nillable="true" type="xs:string" />
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FinalGuessRequest" nillable="true" type="tns:FinalGuessRequest" />
+</xs:schema>

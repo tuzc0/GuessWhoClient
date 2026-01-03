@@ -25,8 +25,10 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="46503dcb-15fe-40a8-b531-331a7a5b038b" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0735a7f6-6ac1-407b-8546-4f5569e75295" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="731d41a1-43ea-45b2-bc8b-fe07a89d11d3" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
-    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="122fc0d8-2ea5-43ca-881b-b97365fcc453" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
-    <MetadataFile FileName="GuessWhoContracts.Faults.xsd" MetadataType="Schema" ID="3e0d0fa6-9fcb-48e9-998f-c9fb3d5d9d3a" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Requests.xsd" MetadataType="Schema" ID="8ad8e3dd-fb6a-4ac3-8899-c6e3c5ee10d8" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Response.xsd" MetadataType="Schema" ID="8a672f7b-5574-4e60-9aec-13f128c83c7c" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Faults.xsd" MetadataType="Schema" ID="c1f7fc15-c402-4c05-9d19-c0ece4cfc2d4" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="2f6cfbc9-9bd0-4989-8f2b-4595a2a29a7a" SourceId="1" SourceUrl="net.tcp://localhost:8095/UserService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

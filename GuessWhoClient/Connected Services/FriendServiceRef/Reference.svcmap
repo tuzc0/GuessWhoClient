@@ -25,8 +25,11 @@
     <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="77d38f15-e0d3-44ce-87de-a1a0fe2b85b0" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="a7a76f08-c05d-4a28-b5a1-529a4462800d" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="7b5548c9-913b-463d-8325-c8e21f714575" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
-    <MetadataFile FileName="GuessWhoContracts.Dtos.RequestAndResponse.xsd" MetadataType="Schema" ID="daa71abf-12b2-40ee-80d6-80a9e32b6d16" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
-    <MetadataFile FileName="GuessWhoContracts.Faults.xsd" MetadataType="Schema" ID="c4c41299-b5f0-4824-95e8-df1fdf0c1e2d" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Request.xsd" MetadataType="Schema" ID="5830b020-1486-47b9-94f4-a59f6a61be19" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Response.xsd" MetadataType="Schema" ID="ed43b284-e3fd-4235-af15-abfcb8e1f6a0" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Requests.xsd" MetadataType="Schema" ID="af377499-61fc-4b0d-a103-1d466959af1b" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Faults.xsd" MetadataType="Schema" ID="622cdb8d-810c-4e6a-81af-ab697392566c" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="b8e121ec-490b-4132-ad85-242e3f1335c7" SourceId="1" SourceUrl="net.tcp://localhost:8099/FriendService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -13,9 +13,12 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Request" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IFriendService_SearchProfiles_InputMessage">
@@ -25,7 +28,7 @@
     <wsdl:part name="parameters" element="tns:SearchProfilesResponse" />
   </wsdl:message>
   <wsdl:message name="IFriendService_SearchProfiles_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q1:ServiceFault" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q1:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IFriendService_SendFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:SendFriendRequest" />
@@ -34,7 +37,7 @@
     <wsdl:part name="parameters" element="tns:SendFriendRequestResponse" />
   </wsdl:message>
   <wsdl:message name="IFriendService_SendFriendRequest_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q2:ServiceFault" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q2:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IFriendService_AcceptFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
@@ -43,7 +46,7 @@
     <wsdl:part name="parameters" element="tns:AcceptFriendRequestResponse" />
   </wsdl:message>
   <wsdl:message name="IFriendService_AcceptFriendRequest_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q3:ServiceFault" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q3:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IFriendService_RejectFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:RejectFriendRequest" />
@@ -52,7 +55,7 @@
     <wsdl:part name="parameters" element="tns:RejectFriendRequestResponse" />
   </wsdl:message>
   <wsdl:message name="IFriendService_RejectFriendRequest_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q4:ServiceFault" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q4:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IFriendService_CancelFriendRequest_InputMessage">
     <wsdl:part name="parameters" element="tns:CancelFriendRequest" />
@@ -61,7 +64,7 @@
     <wsdl:part name="parameters" element="tns:CancelFriendRequestResponse" />
   </wsdl:message>
   <wsdl:message name="IFriendService_CancelFriendRequest_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q5:ServiceFault" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q5:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IFriendService_GetFriends_InputMessage">
     <wsdl:part name="parameters" element="tns:GetFriends" />
@@ -70,7 +73,7 @@
     <wsdl:part name="parameters" element="tns:GetFriendsResponse" />
   </wsdl:message>
   <wsdl:message name="IFriendService_GetFriends_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q6:ServiceFault" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q6:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IFriendService_GetPendingRequests_InputMessage">
     <wsdl:part name="parameters" element="tns:GetPendingRequests" />
@@ -79,7 +82,7 @@
     <wsdl:part name="parameters" element="tns:GetPendingRequestsResponse" />
   </wsdl:message>
   <wsdl:message name="IFriendService_GetPendingRequests_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q7:ServiceFault" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q7:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="IFriendService">
     <wsdl:operation name="SearchProfiles">

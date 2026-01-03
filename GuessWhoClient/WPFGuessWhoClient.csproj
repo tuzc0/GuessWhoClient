@@ -79,23 +79,14 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="Application\Mappers\LobbyPlayerMapper.cs" />
-    <Compile Include="Application\Mappers\ServiceFaultsMapper.cs" />
     <Compile Include="Application\Results\OperationResult.cs" />
     <Compile Include="Application\Results\RegisterUserResult.cs" />
     <Compile Include="Application\Services\IUserAppService.cs" />
     <Compile Include="Application\Services\UserAppService.cs" />
     <Compile Include="Domain\Models\LobbyPlayer.cs" />
-    <Compile Include="Domain\Models\UserRegistrationDraft.cs" />
     <Compile Include="Domain\Models\UserRegistrationInput.cs" />
     <Compile Include="Domain\Validation\IValidationMessageMapper.cs" />
-    <Compile Include="Domain\Validation\UserRegistrationRules.cs" />
-    <Compile Include="Domain\Validation\ValidationError.cs" />
     <Compile Include="Domain\Validation\ValidationMessageMapper.cs" />
-    <Compile Include="Infraestructure\Session\ISessionStore.cs" />
-    <Compile Include="Infraestructure\Wcf\EndPoints.cs" />
-    <Compile Include="Infraestructure\Wcf\MatchServiceClientFactory.cs" />
-    <Compile Include="Infraestructure\Wcf\UserServiceClientFactory.cs" />
-    <Compile Include="Infraestructure\Wcf\WcfExceptionMapper.cs" />
     <Compile Include="Presentation\Behaviors\PasswordVisibilityBehavior.cs" />
     <Compile Include="Presentation\Navegation\IGameScreenManager.cs" />
     <Compile Include="Presentation\Services\Alerts\GameMessageBox.cs" />
@@ -330,25 +321,19 @@
     <None Include="Connected Services\ChatServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.BasicResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.GetFriendsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.GetPendingRequestsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.SearchProfilesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.SendFriendRequestResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
+    <None Include="Connected Services\FriendServiceRef\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoContracts.Faults.xsd">
+    <None Include="Connected Services\FriendServiceRef\GuessWhoCore.Contracts.Faults.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoCore.Contracts.Request.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoCore.Contracts.Requests.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoCore.Contracts.Response.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FriendServiceRef\service.wsdl" />
@@ -358,16 +343,19 @@
     <None Include="Connected Services\FriendServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LoginServiceRef\GuessWhoClient.LoginServiceRef.BasicResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\LoginServiceRef\GuessWhoClient.LoginServiceRef.LoginResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\LoginServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
+    <None Include="Connected Services\LoginServiceRef\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LoginServiceRef\GuessWhoContracts.Faults.xsd">
+    <None Include="Connected Services\LoginServiceRef\GuessWhoCore.Contracts.Faults.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LoginServiceRef\GuessWhoCore.Contracts.Request.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LoginServiceRef\GuessWhoCore.Contracts.Requests.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LoginServiceRef\GuessWhoCore.Contracts.Response.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LoginServiceRef\service.wsdl" />
@@ -380,25 +368,13 @@
     <None Include="Connected Services\MatchServiceRef\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\MatchServiceRef\GuessWhoClient.MatchServiceRef.BasicResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MatchServiceRef\GuessWhoClient.MatchServiceRef.CreateMatchResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MatchServiceRef\GuessWhoClient.MatchServiceRef.JoinMatchResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MatchServiceRef\GuessWhoClient.MatchServiceRef.MatchDeckResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Dtos.Dto.xsd">
+    <None Include="Connected Services\MatchServiceRef\GuessWhoCore.Contracts.Faults.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
+    <None Include="Connected Services\MatchServiceRef\GuessWhoCore.Contracts.Requests.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\MatchServiceRef\GuessWhoContracts.Faults.xsd">
+    <None Include="Connected Services\MatchServiceRef\GuessWhoCore.Contracts.Response.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MatchServiceRef\service.wsdl" />
@@ -408,19 +384,16 @@
     <None Include="Connected Services\MatchServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UpdateServiceRef\GuessWhoClient.UpdateServiceRef.BasicResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UpdateServiceRef\GuessWhoClient.UpdateServiceRef.GetProfileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UpdateServiceRef\GuessWhoClient.UpdateServiceRef.UpdateProfileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UpdateServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
+    <None Include="Connected Services\UpdateServiceRef\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UpdateServiceRef\GuessWhoContracts.Faults.xsd">
+    <None Include="Connected Services\UpdateServiceRef\GuessWhoCore.Contracts.Faults.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UpdateServiceRef\GuessWhoCore.Contracts.Requests.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UpdateServiceRef\GuessWhoCore.Contracts.Response.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UpdateServiceRef\service.wsdl" />
@@ -430,19 +403,16 @@
     <None Include="Connected Services\UpdateServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceRef\GuessWhoClient.UserServiceRef.PasswordRecoveryResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UserServiceRef\GuessWhoClient.UserServiceRef.RegisterResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UserServiceRef\GuessWhoClient.UserServiceRef.VerifyEmailResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\UserServiceRef\GuessWhoContracts.Dtos.RequestAndResponse.xsd">
+    <None Include="Connected Services\UserServiceRef\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\UserServiceRef\GuessWhoContracts.Faults.xsd">
+    <None Include="Connected Services\UserServiceRef\GuessWhoCore.Contracts.Faults.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserServiceRef\GuessWhoCore.Contracts.Requests.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\UserServiceRef\GuessWhoCore.Contracts.Response.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\UserServiceRef\service.wsdl" />
@@ -453,6 +423,23 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Requests.JoinMatchResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.BasicResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.ClaimTimeoutResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.CreateMatchResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.FinalGuessResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.GetFriendsResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.GetPendingRequestsResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.GetProfileResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.LoginResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.MatchDeckResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.PassTurnResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.PasswordRecoveryResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.RegisterResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.SearchProfilesResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.SendFriendRequestResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.UpdateProfileResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.VerifyEmailResponse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -462,6 +449,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\GuessWhoServer\GuessWhoCore\GuessWhoCore.csproj">
+      <Project>{e0c21307-032a-49c0-a33d-e6ca2f6c0e5e}</Project>
+      <Name>GuessWhoCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClassLibraryGuessWho\ClassLibraryGuessWho.csproj">
       <Project>{44e7e4ec-8faf-47a3-8fe0-09069937c3b5}</Project>
       <Name>ClassLibraryGuessWho</Name>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" />
+  <xs:complexType name="SearchProfilesResponse">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" name="Profiles" nillable="true" type="q1:ArrayOfUserProfileSearchResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchProfilesResponse" nillable="true" type="tns:SearchProfilesResponse" />
+  <xs:complexType name="SendFriendRequestResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AutoAccepted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FriendRequestId" nillable="true" type="xs:string" />
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendFriendRequestResponse" nillable="true" type="tns:SendFriendRequestResponse" />
+  <xs:complexType name="BasicResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MeesageKey" nillable="true" type="xs:string" />
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BasicResponse" nillable="true" type="tns:BasicResponse" />
+  <xs:complexType name="GetFriendsResponse">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="Friends" nillable="true" type="q2:ArrayOfUserProfileSearchResult" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetFriendsResponse" nillable="true" type="tns:GetFriendsResponse" />
+  <xs:complexType name="GetPendingRequestsResponse">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="Requests" nillable="true" type="q3:ArrayOfFriendRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetPendingRequestsResponse" nillable="true" type="tns:GetPendingRequestsResponse" />
+</xs:schema>

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="CreateMatchResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateAtUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HostProfileId" type="xs:long" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="ModeId" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="StatusId" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="VisibilityId" type="xs:unsignedByte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateMatchResponse" nillable="true" type="tns:CreateMatchResponse" />
+  <xs:complexType name="ArrayOfLobbyPlayerDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LobbyPlayerDto" nillable="true" type="tns:LobbyPlayerDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLobbyPlayerDto" nillable="true" type="tns:ArrayOfLobbyPlayerDto" />
+  <xs:complexType name="LobbyPlayerDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AvatarId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsHost" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsReady" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="SlotNumber" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LobbyPlayerDto" nillable="true" type="tns:LobbyPlayerDto" />
+  <xs:complexType name="BasicResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MeesageKey" nillable="true" type="xs:string" />
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BasicResponse" nillable="true" type="tns:BasicResponse" />
+  <xs:complexType name="MatchDeckResponse">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CharacterIds" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchDeckResponse" nillable="true" type="tns:MatchDeckResponse" />
+  <xs:complexType name="PassTurnResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsTimeOut" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LimitSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="MeesageKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SecondsConsumed" type="xs:int" />
+      <xs:element name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TurnState" nillable="true" type="tns:TurnStateDto" />
+      <xs:element minOccurs="0" name="WinnerUserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PassTurnResponse" nillable="true" type="tns:PassTurnResponse" />
+  <xs:complexType name="TurnStateDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CurrentPosition" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="CurrentUserId" type="xs:long" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="TurnNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="TurnStartedAtUtc" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TurnStateDto" nillable="true" type="tns:TurnStateDto" />
+  <xs:complexType name="ClaimTimeoutResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LimitSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="MeesageKey" nillable="true" type="xs:string" />
+      <xs:element name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TimedOutUserId" type="xs:long" />
+      <xs:element minOccurs="0" name="TotalSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="WinnerUserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ClaimTimeoutResponse" nillable="true" type="tns:ClaimTimeoutResponse" />
+  <xs:complexType name="FinalGuessResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsCorrect" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MeesageKey" nillable="true" type="xs:string" />
+      <xs:element name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="WinnerUserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FinalGuessResponse" nillable="true" type="tns:FinalGuessResponse" />
+</xs:schema>

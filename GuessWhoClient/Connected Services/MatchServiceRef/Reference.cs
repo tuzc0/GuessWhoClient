@@ -9,1209 +9,130 @@
 //------------------------------------------------------------------------------
 
 namespace GuessWhoClient.MatchServiceRef {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateMatchRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class CreateMatchRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private long ProfileIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long ProfileId {
-            get {
-                return this.ProfileIdField;
-            }
-            set {
-                if ((this.ProfileIdField.Equals(value) != true)) {
-                    this.ProfileIdField = value;
-                    this.RaisePropertyChanged("ProfileId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateMatchResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class CreateMatchResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime CreateAtUtcField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long MatchIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte ModeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GuessWhoClient.MatchServiceRef.LobbyPlayerDto[] PlayersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte StatusIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte VisibilityField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code {
-            get {
-                return this.CodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
-                    this.CodeField = value;
-                    this.RaisePropertyChanged("Code");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreateAtUtc {
-            get {
-                return this.CreateAtUtcField;
-            }
-            set {
-                if ((this.CreateAtUtcField.Equals(value) != true)) {
-                    this.CreateAtUtcField = value;
-                    this.RaisePropertyChanged("CreateAtUtc");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte Mode {
-            get {
-                return this.ModeField;
-            }
-            set {
-                if ((this.ModeField.Equals(value) != true)) {
-                    this.ModeField = value;
-                    this.RaisePropertyChanged("Mode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GuessWhoClient.MatchServiceRef.LobbyPlayerDto[] Players {
-            get {
-                return this.PlayersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PlayersField, value) != true)) {
-                    this.PlayersField = value;
-                    this.RaisePropertyChanged("Players");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte StatusId {
-            get {
-                return this.StatusIdField;
-            }
-            set {
-                if ((this.StatusIdField.Equals(value) != true)) {
-                    this.StatusIdField = value;
-                    this.RaisePropertyChanged("StatusId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte Visibility {
-            get {
-                return this.VisibilityField;
-            }
-            set {
-                if ((this.VisibilityField.Equals(value) != true)) {
-                    this.VisibilityField = value;
-                    this.RaisePropertyChanged("Visibility");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LobbyPlayerDto", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto")]
-    [System.SerializableAttribute()]
-    public partial class LobbyPlayerDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AvatarIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DisplayNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsHostField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsReadyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long MatchIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte SlotNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AvatarId {
-            get {
-                return this.AvatarIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AvatarIdField, value) != true)) {
-                    this.AvatarIdField = value;
-                    this.RaisePropertyChanged("AvatarId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string DisplayName {
-            get {
-                return this.DisplayNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DisplayNameField, value) != true)) {
-                    this.DisplayNameField = value;
-                    this.RaisePropertyChanged("DisplayName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsHost {
-            get {
-                return this.IsHostField;
-            }
-            set {
-                if ((this.IsHostField.Equals(value) != true)) {
-                    this.IsHostField = value;
-                    this.RaisePropertyChanged("IsHost");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsReady {
-            get {
-                return this.IsReadyField;
-            }
-            set {
-                if ((this.IsReadyField.Equals(value) != true)) {
-                    this.IsReadyField = value;
-                    this.RaisePropertyChanged("IsReady");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte SlotNumber {
-            get {
-                return this.SlotNumberField;
-            }
-            set {
-                if ((this.SlotNumberField.Equals(value) != true)) {
-                    this.SlotNumberField = value;
-                    this.RaisePropertyChanged("SlotNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-    [System.SerializableAttribute()]
-    public partial class ServiceFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CorrelationIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ExceptionTypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code {
-            get {
-                return this.CodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
-                    this.CodeField = value;
-                    this.RaisePropertyChanged("Code");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string CorrelationId {
-            get {
-                return this.CorrelationIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CorrelationIdField, value) != true)) {
-                    this.CorrelationIdField = value;
-                    this.RaisePropertyChanged("CorrelationId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string ExceptionType {
-            get {
-                return this.ExceptionTypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ExceptionTypeField, value) != true)) {
-                    this.ExceptionTypeField = value;
-                    this.RaisePropertyChanged("ExceptionType");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="JoinMatchRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class JoinMatchRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string MatchCodeField;
-        
-        private long UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string MatchCode {
-            get {
-                return this.MatchCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MatchCodeField, value) != true)) {
-                    this.MatchCodeField = value;
-                    this.RaisePropertyChanged("MatchCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="JoinMatchResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class JoinMatchResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime CreateAtUtcField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long HostUserIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long MatchIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte ModeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GuessWhoClient.MatchServiceRef.LobbyPlayerDto[] PlayersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte StatusIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private byte VisibilityField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code {
-            get {
-                return this.CodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
-                    this.CodeField = value;
-                    this.RaisePropertyChanged("Code");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreateAtUtc {
-            get {
-                return this.CreateAtUtcField;
-            }
-            set {
-                if ((this.CreateAtUtcField.Equals(value) != true)) {
-                    this.CreateAtUtcField = value;
-                    this.RaisePropertyChanged("CreateAtUtc");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long HostUserId {
-            get {
-                return this.HostUserIdField;
-            }
-            set {
-                if ((this.HostUserIdField.Equals(value) != true)) {
-                    this.HostUserIdField = value;
-                    this.RaisePropertyChanged("HostUserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte Mode {
-            get {
-                return this.ModeField;
-            }
-            set {
-                if ((this.ModeField.Equals(value) != true)) {
-                    this.ModeField = value;
-                    this.RaisePropertyChanged("Mode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GuessWhoClient.MatchServiceRef.LobbyPlayerDto[] Players {
-            get {
-                return this.PlayersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PlayersField, value) != true)) {
-                    this.PlayersField = value;
-                    this.RaisePropertyChanged("Players");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte StatusId {
-            get {
-                return this.StatusIdField;
-            }
-            set {
-                if ((this.StatusIdField.Equals(value) != true)) {
-                    this.StatusIdField = value;
-                    this.RaisePropertyChanged("StatusId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public byte Visibility {
-            get {
-                return this.VisibilityField;
-            }
-            set {
-                if ((this.VisibilityField.Equals(value) != true)) {
-                    this.VisibilityField = value;
-                    this.RaisePropertyChanged("Visibility");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LeaveMatchRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class LeaveMatchRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private long MatchIdField;
-        
-        private long UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BasicResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class BasicResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private bool SuccessField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public bool Success {
-            get {
-                return this.SuccessField;
-            }
-            set {
-                if ((this.SuccessField.Equals(value) != true)) {
-                    this.SuccessField = value;
-                    this.RaisePropertyChanged("Success");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SetPlayerReadyStatusRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class SetPlayerReadyStatusRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsReadyField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long MatchIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsReady {
-            get {
-                return this.IsReadyField;
-            }
-            set {
-                if ((this.IsReadyField.Equals(value) != true)) {
-                    this.IsReadyField = value;
-                    this.RaisePropertyChanged("IsReady");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StartMatchRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class StartMatchRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private long MatchIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EndMatchRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class EndMatchRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private long MatchIdField;
-        
-        private long WinnerUserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long WinnerUserId {
-            get {
-                return this.WinnerUserIdField;
-            }
-            set {
-                if ((this.WinnerUserIdField.Equals(value) != true)) {
-                    this.WinnerUserIdField = value;
-                    this.RaisePropertyChanged("WinnerUserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ChooseSecretCharacterRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class ChooseSecretCharacterRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CharacterIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long MatchIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CharacterId {
-            get {
-                return this.CharacterIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CharacterIdField, value) != true)) {
-                    this.CharacterIdField = value;
-                    this.RaisePropertyChanged("CharacterId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetMatchDeckRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class GetMatchDeckRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long MatchIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NumberOfCardsInDeckField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long MatchId {
-            get {
-                return this.MatchIdField;
-            }
-            set {
-                if ((this.MatchIdField.Equals(value) != true)) {
-                    this.MatchIdField = value;
-                    this.RaisePropertyChanged("MatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int NumberOfCardsInDeck {
-            get {
-                return this.NumberOfCardsInDeckField;
-            }
-            set {
-                if ((this.NumberOfCardsInDeckField.Equals(value) != true)) {
-                    this.NumberOfCardsInDeckField = value;
-                    this.RaisePropertyChanged("NumberOfCardsInDeck");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MatchDeckResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class MatchDeckResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string[] CharacterIdsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string[] CharacterIds {
-            get {
-                return this.CharacterIdsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CharacterIdsField, value) != true)) {
-                    this.CharacterIdsField = value;
-                    this.RaisePropertyChanged("CharacterIds");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MatchServiceRef.IMatchService", CallbackContract=typeof(GuessWhoClient.MatchServiceRef.IMatchServiceCallback))]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MatchServiceRef.IMatchService", CallbackContract=typeof(GuessWhoClient.MatchServiceRef.IMatchServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IMatchService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/CreateMatch", ReplyAction="http://tempuri.org/IMatchService/CreateMatchResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/CreateMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.MatchServiceRef.CreateMatchResponse CreateMatch(GuessWhoClient.MatchServiceRef.CreateMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/CreateMatch", ReplyAction="http://tempuri.org/IMatchLobbyOperations/CreateMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/CreateMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.CreateMatchResponse CreateMatch(GuessWhoCore.Contracts.Requests.CreateMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/CreateMatch", ReplyAction="http://tempuri.org/IMatchService/CreateMatchResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.CreateMatchResponse> CreateMatchAsync(GuessWhoClient.MatchServiceRef.CreateMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/CreateMatch", ReplyAction="http://tempuri.org/IMatchLobbyOperations/CreateMatchResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.CreateMatchResponse> CreateMatchAsync(GuessWhoCore.Contracts.Requests.CreateMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/JoinMatch", ReplyAction="http://tempuri.org/IMatchService/JoinMatchResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/JoinMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.MatchServiceRef.JoinMatchResponse JoinMatch(GuessWhoClient.MatchServiceRef.JoinMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/JoinMatch", ReplyAction="http://tempuri.org/IMatchLobbyOperations/JoinMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/JoinMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Requests.JoinMatchResponse JoinMatch(GuessWhoCore.Contracts.Requests.JoinMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/JoinMatch", ReplyAction="http://tempuri.org/IMatchService/JoinMatchResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.JoinMatchResponse> JoinMatchAsync(GuessWhoClient.MatchServiceRef.JoinMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/JoinMatch", ReplyAction="http://tempuri.org/IMatchLobbyOperations/JoinMatchResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Requests.JoinMatchResponse> JoinMatchAsync(GuessWhoCore.Contracts.Requests.JoinMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/LeaveMatch", ReplyAction="http://tempuri.org/IMatchService/LeaveMatchResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/LeaveMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.MatchServiceRef.BasicResponse LeaveMatch(GuessWhoClient.MatchServiceRef.LeaveMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/LeaveMatch", ReplyAction="http://tempuri.org/IMatchLobbyOperations/LeaveMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/LeaveMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse LeaveMatch(GuessWhoCore.Contracts.Requests.LeaveMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/LeaveMatch", ReplyAction="http://tempuri.org/IMatchService/LeaveMatchResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> LeaveMatchAsync(GuessWhoClient.MatchServiceRef.LeaveMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/LeaveMatch", ReplyAction="http://tempuri.org/IMatchLobbyOperations/LeaveMatchResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> LeaveMatchAsync(GuessWhoCore.Contracts.Requests.LeaveMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/SetPlayerReadyStatus", ReplyAction="http://tempuri.org/IMatchService/SetPlayerReadyStatusResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/SetPlayerReadyStatusServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.MatchServiceRef.BasicResponse SetPlayerReadyStatus(GuessWhoClient.MatchServiceRef.SetPlayerReadyStatusRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SetPlayerReadyStatus", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SetPlayerReadyStatusResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/SetPlayerReadyStatusServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse SetPlayerReadyStatus(GuessWhoCore.Contracts.Requests.SetPlayerReadyStatusRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/SetPlayerReadyStatus", ReplyAction="http://tempuri.org/IMatchService/SetPlayerReadyStatusResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> SetPlayerReadyStatusAsync(GuessWhoClient.MatchServiceRef.SetPlayerReadyStatusRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SetPlayerReadyStatus", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SetPlayerReadyStatusResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SetPlayerReadyStatusAsync(GuessWhoCore.Contracts.Requests.SetPlayerReadyStatusRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/StartMatch", ReplyAction="http://tempuri.org/IMatchService/StartMatchResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/StartMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.MatchServiceRef.BasicResponse StartMatch(GuessWhoClient.MatchServiceRef.StartMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SubscribeLobby", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SubscribeLobbyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/SubscribeLobbyServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse SubscribeLobby(GuessWhoCore.Contracts.Requests.SubscribeLobbyRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/StartMatch", ReplyAction="http://tempuri.org/IMatchService/StartMatchResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> StartMatchAsync(GuessWhoClient.MatchServiceRef.StartMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SubscribeLobby", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SubscribeLobbyResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SubscribeLobbyAsync(GuessWhoCore.Contracts.Requests.SubscribeLobbyRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/EndMatch", ReplyAction="http://tempuri.org/IMatchService/EndMatchResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/EndMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.MatchServiceRef.BasicResponse EndMatch(GuessWhoClient.MatchServiceRef.EndMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/UnsubscribeLobby", ReplyAction="http://tempuri.org/IMatchLobbyOperations/UnsubscribeLobbyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/UnsubscribeLobbyServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse UnsubscribeLobby(GuessWhoCore.Contracts.Requests.UnsubscribeLobbyRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/EndMatch", ReplyAction="http://tempuri.org/IMatchService/EndMatchResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> EndMatchAsync(GuessWhoClient.MatchServiceRef.EndMatchRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/UnsubscribeLobby", ReplyAction="http://tempuri.org/IMatchLobbyOperations/UnsubscribeLobbyResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> UnsubscribeLobbyAsync(GuessWhoCore.Contracts.Requests.UnsubscribeLobbyRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/ChooseSecretCharacter", ReplyAction="http://tempuri.org/IMatchService/ChooseSecretCharacterResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/ChooseSecretCharacterServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.MatchServiceRef.BasicResponse ChooseSecretCharacter(GuessWhoClient.MatchServiceRef.ChooseSecretCharacterRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/StartMatch", ReplyAction="http://tempuri.org/IMatchGameplayOperations/StartMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/StartMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse StartMatch(GuessWhoCore.Contracts.Requests.StartMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/ChooseSecretCharacter", ReplyAction="http://tempuri.org/IMatchService/ChooseSecretCharacterResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> ChooseSecretCharacterAsync(GuessWhoClient.MatchServiceRef.ChooseSecretCharacterRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/StartMatch", ReplyAction="http://tempuri.org/IMatchGameplayOperations/StartMatchResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> StartMatchAsync(GuessWhoCore.Contracts.Requests.StartMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetMatchDeck", ReplyAction="http://tempuri.org/IMatchService/GetMatchDeckResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/GetMatchDeckServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.MatchServiceRef.MatchDeckResponse GetMatchDeck(GuessWhoClient.MatchServiceRef.GetMatchDeckRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/EndMatch", ReplyAction="http://tempuri.org/IMatchGameplayOperations/EndMatchResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/EndMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse EndMatch(GuessWhoCore.Contracts.Requests.EndMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/GetMatchDeck", ReplyAction="http://tempuri.org/IMatchService/GetMatchDeckResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.MatchDeckResponse> GetMatchDeckAsync(GuessWhoClient.MatchServiceRef.GetMatchDeckRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/EndMatch", ReplyAction="http://tempuri.org/IMatchGameplayOperations/EndMatchResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> EndMatchAsync(GuessWhoCore.Contracts.Requests.EndMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/SubscribeLobby", ReplyAction="http://tempuri.org/IMatchService/SubscribeLobbyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/SubscribeLobbyServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        void SubscribeLobby(long matchId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/ChooseSecretCharacter", ReplyAction="http://tempuri.org/IMatchGameplayOperations/ChooseSecretCharacterResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/ChooseSecretCharacterServiceFaultFaul" +
+            "t", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse ChooseSecretCharacter(GuessWhoCore.Contracts.Requests.ChooseSecretCharacterRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/SubscribeLobby", ReplyAction="http://tempuri.org/IMatchService/SubscribeLobbyResponse")]
-        System.Threading.Tasks.Task SubscribeLobbyAsync(long matchId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/ChooseSecretCharacter", ReplyAction="http://tempuri.org/IMatchGameplayOperations/ChooseSecretCharacterResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> ChooseSecretCharacterAsync(GuessWhoCore.Contracts.Requests.ChooseSecretCharacterRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/UnsubscribeLobby", ReplyAction="http://tempuri.org/IMatchService/UnsubscribeLobbyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.MatchServiceRef.ServiceFault), Action="http://tempuri.org/IMatchService/UnsubscribeLobbyServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        void UnsubscribeLobby(long matchId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/GetMatchDeck", ReplyAction="http://tempuri.org/IMatchGameplayOperations/GetMatchDeckResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/GetMatchDeckServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.MatchDeckResponse GetMatchDeck(GuessWhoCore.Contracts.Requests.GetOrCreateMatchDeckRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchService/UnsubscribeLobby", ReplyAction="http://tempuri.org/IMatchService/UnsubscribeLobbyResponse")]
-        System.Threading.Tasks.Task UnsubscribeLobbyAsync(long matchId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/GetMatchDeck", ReplyAction="http://tempuri.org/IMatchGameplayOperations/GetMatchDeckResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.MatchDeckResponse> GetMatchDeckAsync(GuessWhoCore.Contracts.Requests.GetOrCreateMatchDeckRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/AskQuestion", ReplyAction="http://tempuri.org/IMatchGameplayOperations/AskQuestionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/AskQuestionServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse AskQuestion(GuessWhoCore.Contracts.Requests.AskQuestionRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/AskQuestion", ReplyAction="http://tempuri.org/IMatchGameplayOperations/AskQuestionResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> AskQuestionAsync(GuessWhoCore.Contracts.Requests.AskQuestionRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/AnswerQuestion", ReplyAction="http://tempuri.org/IMatchGameplayOperations/AnswerQuestionResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/AnswerQuestionServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse AnswerQuestion(GuessWhoCore.Contracts.Requests.AnswerQuestionRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/AnswerQuestion", ReplyAction="http://tempuri.org/IMatchGameplayOperations/AnswerQuestionResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> AnswerQuestionAsync(GuessWhoCore.Contracts.Requests.AnswerQuestionRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/PassTurn", ReplyAction="http://tempuri.org/IMatchGameplayOperations/PassTurnResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/PassTurnServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.PassTurnResponse PassTurn(GuessWhoCore.Contracts.Requests.PassTurnRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/PassTurn", ReplyAction="http://tempuri.org/IMatchGameplayOperations/PassTurnResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.PassTurnResponse> PassTurnAsync(GuessWhoCore.Contracts.Requests.PassTurnRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/ClaimTimeout", ReplyAction="http://tempuri.org/IMatchGameplayOperations/ClaimTimeoutResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/ClaimTimeoutServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.ClaimTimeoutResponse ClaimTimeout(GuessWhoCore.Contracts.Requests.ClaimTimeoutRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/ClaimTimeout", ReplyAction="http://tempuri.org/IMatchGameplayOperations/ClaimTimeoutResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.ClaimTimeoutResponse> ClaimTimeoutAsync(GuessWhoCore.Contracts.Requests.ClaimTimeoutRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/FinalGuess", ReplyAction="http://tempuri.org/IMatchGameplayOperations/FinalGuessResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/FinalGuessServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.FinalGuessResponse FinalGuess(GuessWhoCore.Contracts.Requests.FinalGuessRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/FinalGuess", ReplyAction="http://tempuri.org/IMatchGameplayOperations/FinalGuessResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.FinalGuessResponse> FinalGuessAsync(GuessWhoCore.Contracts.Requests.FinalGuessRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IMatchServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/OnPlayerJoined")]
-        void OnPlayerJoined(GuessWhoClient.MatchServiceRef.LobbyPlayerDto player);
+        void OnPlayerJoined(GuessWhoCore.Contracts.Response.LobbyPlayerDto player);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/OnPlayerLeft")]
-        void OnPlayerLeft(GuessWhoClient.MatchServiceRef.LobbyPlayerDto player);
+        void OnPlayerLeft(GuessWhoCore.Contracts.Response.LobbyPlayerDto player);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/OnReadyChanged")]
-        void OnReadyChanged(GuessWhoClient.MatchServiceRef.LobbyPlayerDto player);
+        void OnReadyChanged(GuessWhoCore.Contracts.Response.LobbyPlayerDto player);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/OnSecretCharacterChosen")]
         void OnSecretCharacterChosen(long matchId, long userId);
@@ -1224,6 +145,12 @@ namespace GuessWhoClient.MatchServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/OnGameEnded")]
         void OnGameEnded(long matchId, long winnerUserId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/OnQuestionAsked")]
+        void OnQuestionAsked(long matchId, long askingUserId, long attributeId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMatchService/OnQuestionAnswered")]
+        void OnQuestionAnswered(long matchId, long answeringUserId, int answerOptionId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1254,84 +181,124 @@ namespace GuessWhoClient.MatchServiceRef {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public GuessWhoClient.MatchServiceRef.CreateMatchResponse CreateMatch(GuessWhoClient.MatchServiceRef.CreateMatchRequest request) {
+        public GuessWhoCore.Contracts.Response.CreateMatchResponse CreateMatch(GuessWhoCore.Contracts.Requests.CreateMatchRequest request) {
             return base.Channel.CreateMatch(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.CreateMatchResponse> CreateMatchAsync(GuessWhoClient.MatchServiceRef.CreateMatchRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.CreateMatchResponse> CreateMatchAsync(GuessWhoCore.Contracts.Requests.CreateMatchRequest request) {
             return base.Channel.CreateMatchAsync(request);
         }
         
-        public GuessWhoClient.MatchServiceRef.JoinMatchResponse JoinMatch(GuessWhoClient.MatchServiceRef.JoinMatchRequest request) {
+        public GuessWhoCore.Contracts.Requests.JoinMatchResponse JoinMatch(GuessWhoCore.Contracts.Requests.JoinMatchRequest request) {
             return base.Channel.JoinMatch(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.JoinMatchResponse> JoinMatchAsync(GuessWhoClient.MatchServiceRef.JoinMatchRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Requests.JoinMatchResponse> JoinMatchAsync(GuessWhoCore.Contracts.Requests.JoinMatchRequest request) {
             return base.Channel.JoinMatchAsync(request);
         }
         
-        public GuessWhoClient.MatchServiceRef.BasicResponse LeaveMatch(GuessWhoClient.MatchServiceRef.LeaveMatchRequest request) {
+        public GuessWhoCore.Contracts.Response.BasicResponse LeaveMatch(GuessWhoCore.Contracts.Requests.LeaveMatchRequest request) {
             return base.Channel.LeaveMatch(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> LeaveMatchAsync(GuessWhoClient.MatchServiceRef.LeaveMatchRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> LeaveMatchAsync(GuessWhoCore.Contracts.Requests.LeaveMatchRequest request) {
             return base.Channel.LeaveMatchAsync(request);
         }
         
-        public GuessWhoClient.MatchServiceRef.BasicResponse SetPlayerReadyStatus(GuessWhoClient.MatchServiceRef.SetPlayerReadyStatusRequest request) {
+        public GuessWhoCore.Contracts.Response.BasicResponse SetPlayerReadyStatus(GuessWhoCore.Contracts.Requests.SetPlayerReadyStatusRequest request) {
             return base.Channel.SetPlayerReadyStatus(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> SetPlayerReadyStatusAsync(GuessWhoClient.MatchServiceRef.SetPlayerReadyStatusRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SetPlayerReadyStatusAsync(GuessWhoCore.Contracts.Requests.SetPlayerReadyStatusRequest request) {
             return base.Channel.SetPlayerReadyStatusAsync(request);
         }
         
-        public GuessWhoClient.MatchServiceRef.BasicResponse StartMatch(GuessWhoClient.MatchServiceRef.StartMatchRequest request) {
+        public GuessWhoCore.Contracts.Response.BasicResponse SubscribeLobby(GuessWhoCore.Contracts.Requests.SubscribeLobbyRequest request) {
+            return base.Channel.SubscribeLobby(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SubscribeLobbyAsync(GuessWhoCore.Contracts.Requests.SubscribeLobbyRequest request) {
+            return base.Channel.SubscribeLobbyAsync(request);
+        }
+        
+        public GuessWhoCore.Contracts.Response.BasicResponse UnsubscribeLobby(GuessWhoCore.Contracts.Requests.UnsubscribeLobbyRequest request) {
+            return base.Channel.UnsubscribeLobby(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> UnsubscribeLobbyAsync(GuessWhoCore.Contracts.Requests.UnsubscribeLobbyRequest request) {
+            return base.Channel.UnsubscribeLobbyAsync(request);
+        }
+        
+        public GuessWhoCore.Contracts.Response.BasicResponse StartMatch(GuessWhoCore.Contracts.Requests.StartMatchRequest request) {
             return base.Channel.StartMatch(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> StartMatchAsync(GuessWhoClient.MatchServiceRef.StartMatchRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> StartMatchAsync(GuessWhoCore.Contracts.Requests.StartMatchRequest request) {
             return base.Channel.StartMatchAsync(request);
         }
         
-        public GuessWhoClient.MatchServiceRef.BasicResponse EndMatch(GuessWhoClient.MatchServiceRef.EndMatchRequest request) {
+        public GuessWhoCore.Contracts.Response.BasicResponse EndMatch(GuessWhoCore.Contracts.Requests.EndMatchRequest request) {
             return base.Channel.EndMatch(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> EndMatchAsync(GuessWhoClient.MatchServiceRef.EndMatchRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> EndMatchAsync(GuessWhoCore.Contracts.Requests.EndMatchRequest request) {
             return base.Channel.EndMatchAsync(request);
         }
         
-        public GuessWhoClient.MatchServiceRef.BasicResponse ChooseSecretCharacter(GuessWhoClient.MatchServiceRef.ChooseSecretCharacterRequest request) {
+        public GuessWhoCore.Contracts.Response.BasicResponse ChooseSecretCharacter(GuessWhoCore.Contracts.Requests.ChooseSecretCharacterRequest request) {
             return base.Channel.ChooseSecretCharacter(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.BasicResponse> ChooseSecretCharacterAsync(GuessWhoClient.MatchServiceRef.ChooseSecretCharacterRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> ChooseSecretCharacterAsync(GuessWhoCore.Contracts.Requests.ChooseSecretCharacterRequest request) {
             return base.Channel.ChooseSecretCharacterAsync(request);
         }
         
-        public GuessWhoClient.MatchServiceRef.MatchDeckResponse GetMatchDeck(GuessWhoClient.MatchServiceRef.GetMatchDeckRequest request) {
+        public GuessWhoCore.Contracts.Response.MatchDeckResponse GetMatchDeck(GuessWhoCore.Contracts.Requests.GetOrCreateMatchDeckRequest request) {
             return base.Channel.GetMatchDeck(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.MatchServiceRef.MatchDeckResponse> GetMatchDeckAsync(GuessWhoClient.MatchServiceRef.GetMatchDeckRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.MatchDeckResponse> GetMatchDeckAsync(GuessWhoCore.Contracts.Requests.GetOrCreateMatchDeckRequest request) {
             return base.Channel.GetMatchDeckAsync(request);
         }
         
-        public void SubscribeLobby(long matchId) {
-            base.Channel.SubscribeLobby(matchId);
+        public GuessWhoCore.Contracts.Response.BasicResponse AskQuestion(GuessWhoCore.Contracts.Requests.AskQuestionRequest request) {
+            return base.Channel.AskQuestion(request);
         }
         
-        public System.Threading.Tasks.Task SubscribeLobbyAsync(long matchId) {
-            return base.Channel.SubscribeLobbyAsync(matchId);
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> AskQuestionAsync(GuessWhoCore.Contracts.Requests.AskQuestionRequest request) {
+            return base.Channel.AskQuestionAsync(request);
         }
         
-        public void UnsubscribeLobby(long matchId) {
-            base.Channel.UnsubscribeLobby(matchId);
+        public GuessWhoCore.Contracts.Response.BasicResponse AnswerQuestion(GuessWhoCore.Contracts.Requests.AnswerQuestionRequest request) {
+            return base.Channel.AnswerQuestion(request);
         }
         
-        public System.Threading.Tasks.Task UnsubscribeLobbyAsync(long matchId) {
-            return base.Channel.UnsubscribeLobbyAsync(matchId);
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> AnswerQuestionAsync(GuessWhoCore.Contracts.Requests.AnswerQuestionRequest request) {
+            return base.Channel.AnswerQuestionAsync(request);
+        }
+        
+        public GuessWhoCore.Contracts.Response.PassTurnResponse PassTurn(GuessWhoCore.Contracts.Requests.PassTurnRequest request) {
+            return base.Channel.PassTurn(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.PassTurnResponse> PassTurnAsync(GuessWhoCore.Contracts.Requests.PassTurnRequest request) {
+            return base.Channel.PassTurnAsync(request);
+        }
+        
+        public GuessWhoCore.Contracts.Response.ClaimTimeoutResponse ClaimTimeout(GuessWhoCore.Contracts.Requests.ClaimTimeoutRequest request) {
+            return base.Channel.ClaimTimeout(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.ClaimTimeoutResponse> ClaimTimeoutAsync(GuessWhoCore.Contracts.Requests.ClaimTimeoutRequest request) {
+            return base.Channel.ClaimTimeoutAsync(request);
+        }
+        
+        public GuessWhoCore.Contracts.Response.FinalGuessResponse FinalGuess(GuessWhoCore.Contracts.Requests.FinalGuessRequest request) {
+            return base.Channel.FinalGuess(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.FinalGuessResponse> FinalGuessAsync(GuessWhoCore.Contracts.Requests.FinalGuessRequest request) {
+            return base.Channel.FinalGuessAsync(request);
         }
     }
 }

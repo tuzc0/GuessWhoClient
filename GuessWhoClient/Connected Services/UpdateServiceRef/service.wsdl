@@ -13,9 +13,11 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUpdateProfileService_GetProfile_InputMessage">
@@ -25,7 +27,7 @@
     <wsdl:part name="parameters" element="tns:GetProfileResponse" />
   </wsdl:message>
   <wsdl:message name="IUpdateProfileService_GetProfile_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q1:ServiceFault" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q1:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IUpdateProfileService_UpdateUserProfile_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateUserProfile" />
@@ -34,7 +36,7 @@
     <wsdl:part name="parameters" element="tns:UpdateUserProfileResponse" />
   </wsdl:message>
   <wsdl:message name="IUpdateProfileService_UpdateUserProfile_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q2:ServiceFault" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q2:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IUpdateProfileService_DeleteUserProfile_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserProfile" />
@@ -43,7 +45,7 @@
     <wsdl:part name="parameters" element="tns:DeleteUserProfileResponse" />
   </wsdl:message>
   <wsdl:message name="IUpdateProfileService_DeleteUserProfile_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q3:ServiceFault" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q3:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="IUpdateProfileService">
     <wsdl:operation name="GetProfile">

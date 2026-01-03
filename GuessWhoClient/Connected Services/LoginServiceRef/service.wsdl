@@ -13,9 +13,12 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Request" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILoginService_LoginUser_InputMessage">
@@ -25,7 +28,7 @@
     <wsdl:part name="parameters" element="tns:LoginUserResponse" />
   </wsdl:message>
   <wsdl:message name="ILoginService_LoginUser_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q1:ServiceFault" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q1:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="ILoginService_LogoutUser_InputMessage">
     <wsdl:part name="parameters" element="tns:LogoutUser" />
@@ -34,7 +37,7 @@
     <wsdl:part name="parameters" element="tns:LogoutUserResponse" />
   </wsdl:message>
   <wsdl:message name="ILoginService_LogoutUser_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults" name="detail" element="q2:ServiceFault" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q2:ServiceFault" />
   </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="LoginUser">

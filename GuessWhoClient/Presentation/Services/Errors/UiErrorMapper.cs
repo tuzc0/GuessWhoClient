@@ -3,7 +3,7 @@ using System.ServiceModel.Security;
 using log4net;
 using System;
 using System.ServiceModel;
-using GuessWhoClient.UserServiceRef;
+using GuessWhoCore.Contracts.Faults;
 
 namespace GuessWhoClient.Presentation.Services.Errors
 {

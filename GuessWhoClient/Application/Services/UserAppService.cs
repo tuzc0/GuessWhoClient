@@ -2,6 +2,8 @@
 using GuessWhoClient.Domain.Models;
 using GuessWhoClient.Presentation.Infrastructure;
 using GuessWhoClient.UserServiceRef;
+using GuessWhoCore.Contracts.Requests;
+using GuessWhoCore.Contracts.Response;
 using System.Threading.Tasks;
 
 namespace GuessWhoClient.Application.Services

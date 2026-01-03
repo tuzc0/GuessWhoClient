@@ -9,870 +9,60 @@
 //------------------------------------------------------------------------------
 
 namespace GuessWhoClient.FriendServiceRef {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SearchProfileRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class SearchProfileRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string DisplayNameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string DisplayName {
-            get {
-                return this.DisplayNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DisplayNameField, value) != true)) {
-                    this.DisplayNameField = value;
-                    this.RaisePropertyChanged("DisplayName");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SearchProfilesResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class SearchProfilesResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private GuessWhoClient.FriendServiceRef.UserProfileSearchResult[] ProfilesField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public GuessWhoClient.FriendServiceRef.UserProfileSearchResult[] Profiles {
-            get {
-                return this.ProfilesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ProfilesField, value) != true)) {
-                    this.ProfilesField = value;
-                    this.RaisePropertyChanged("Profiles");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserProfileSearchResult", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class UserProfileSearchResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string AvatarUrlField;
-        
-        private string DisplayNameField;
-        
-        private long UserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string AvatarUrl {
-            get {
-                return this.AvatarUrlField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AvatarUrlField, value) != true)) {
-                    this.AvatarUrlField = value;
-                    this.RaisePropertyChanged("AvatarUrl");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string DisplayName {
-            get {
-                return this.DisplayNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DisplayNameField, value) != true)) {
-                    this.DisplayNameField = value;
-                    this.RaisePropertyChanged("DisplayName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-    [System.SerializableAttribute()]
-    public partial class ServiceFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CorrelationIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ExceptionTypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Code {
-            get {
-                return this.CodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CodeField, value) != true)) {
-                    this.CodeField = value;
-                    this.RaisePropertyChanged("Code");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string CorrelationId {
-            get {
-                return this.CorrelationIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CorrelationIdField, value) != true)) {
-                    this.CorrelationIdField = value;
-                    this.RaisePropertyChanged("CorrelationId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string ExceptionType {
-            get {
-                return this.ExceptionTypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ExceptionTypeField, value) != true)) {
-                    this.ExceptionTypeField = value;
-                    this.RaisePropertyChanged("ExceptionType");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SendFriendRequestRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class SendFriendRequestRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private long FromAccountIdField;
-        
-        private long ToUserIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long FromAccountId {
-            get {
-                return this.FromAccountIdField;
-            }
-            set {
-                if ((this.FromAccountIdField.Equals(value) != true)) {
-                    this.FromAccountIdField = value;
-                    this.RaisePropertyChanged("FromAccountId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long ToUserId {
-            get {
-                return this.ToUserIdField;
-            }
-            set {
-                if ((this.ToUserIdField.Equals(value) != true)) {
-                    this.ToUserIdField = value;
-                    this.RaisePropertyChanged("ToUserId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SendFriendRequestResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class SendFriendRequestResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool AutoAcceptedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FriendRequestIdField;
-        
-        private bool SuccessField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool AutoAccepted {
-            get {
-                return this.AutoAcceptedField;
-            }
-            set {
-                if ((this.AutoAcceptedField.Equals(value) != true)) {
-                    this.AutoAcceptedField = value;
-                    this.RaisePropertyChanged("AutoAccepted");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FriendRequestId {
-            get {
-                return this.FriendRequestIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FriendRequestIdField, value) != true)) {
-                    this.FriendRequestIdField = value;
-                    this.RaisePropertyChanged("FriendRequestId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public bool Success {
-            get {
-                return this.SuccessField;
-            }
-            set {
-                if ((this.SuccessField.Equals(value) != true)) {
-                    this.SuccessField = value;
-                    this.RaisePropertyChanged("Success");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AcceptFriendRequestRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class AcceptFriendRequestRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string AccountIdField;
-        
-        private string FriendRequestIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string AccountId {
-            get {
-                return this.AccountIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccountIdField, value) != true)) {
-                    this.AccountIdField = value;
-                    this.RaisePropertyChanged("AccountId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string FriendRequestId {
-            get {
-                return this.FriendRequestIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FriendRequestIdField, value) != true)) {
-                    this.FriendRequestIdField = value;
-                    this.RaisePropertyChanged("FriendRequestId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BasicResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class BasicResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private bool SuccessField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public bool Success {
-            get {
-                return this.SuccessField;
-            }
-            set {
-                if ((this.SuccessField.Equals(value) != true)) {
-                    this.SuccessField = value;
-                    this.RaisePropertyChanged("Success");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetFriendsRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class GetFriendsRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string AccountIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string AccountId {
-            get {
-                return this.AccountIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccountIdField, value) != true)) {
-                    this.AccountIdField = value;
-                    this.RaisePropertyChanged("AccountId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetFriendsResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class GetFriendsResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GuessWhoClient.FriendServiceRef.UserProfileSearchResult[] FriendsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GuessWhoClient.FriendServiceRef.UserProfileSearchResult[] Friends {
-            get {
-                return this.FriendsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FriendsField, value) != true)) {
-                    this.FriendsField = value;
-                    this.RaisePropertyChanged("Friends");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetPendingFriendRequestsRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class GetPendingFriendRequestsRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private string AccountIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public string AccountId {
-            get {
-                return this.AccountIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccountIdField, value) != true)) {
-                    this.AccountIdField = value;
-                    this.RaisePropertyChanged("AccountId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GetPendingRequestsResponse", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class GetPendingRequestsResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GuessWhoClient.FriendServiceRef.FriendRequest[] RequestsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GuessWhoClient.FriendServiceRef.FriendRequest[] Requests {
-            get {
-                return this.RequestsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RequestsField, value) != true)) {
-                    this.RequestsField = value;
-                    this.RaisePropertyChanged("Requests");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequest", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.RequestAndResponse" +
-        "")]
-    [System.SerializableAttribute()]
-    public partial class FriendRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long AddresseeUserIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime CreatedAtField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long FriendRequestIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RequesterDisplayNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private long RequesterUserIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StatusField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long AddresseeUserId {
-            get {
-                return this.AddresseeUserIdField;
-            }
-            set {
-                if ((this.AddresseeUserIdField.Equals(value) != true)) {
-                    this.AddresseeUserIdField = value;
-                    this.RaisePropertyChanged("AddresseeUserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreatedAt {
-            get {
-                return this.CreatedAtField;
-            }
-            set {
-                if ((this.CreatedAtField.Equals(value) != true)) {
-                    this.CreatedAtField = value;
-                    this.RaisePropertyChanged("CreatedAt");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long FriendRequestId {
-            get {
-                return this.FriendRequestIdField;
-            }
-            set {
-                if ((this.FriendRequestIdField.Equals(value) != true)) {
-                    this.FriendRequestIdField = value;
-                    this.RaisePropertyChanged("FriendRequestId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RequesterDisplayName {
-            get {
-                return this.RequesterDisplayNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RequesterDisplayNameField, value) != true)) {
-                    this.RequesterDisplayNameField = value;
-                    this.RaisePropertyChanged("RequesterDisplayName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public long RequesterUserId {
-            get {
-                return this.RequesterUserIdField;
-            }
-            set {
-                if ((this.RequesterUserIdField.Equals(value) != true)) {
-                    this.RequesterUserIdField = value;
-                    this.RaisePropertyChanged("RequesterUserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FriendServiceRef.IFriendService")]
     public interface IFriendService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/SearchProfiles", ReplyAction="http://tempuri.org/IFriendService/SearchProfilesResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.FriendServiceRef.ServiceFault), Action="http://tempuri.org/IFriendService/SearchProfilesServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.FriendServiceRef.SearchProfilesResponse SearchProfiles(GuessWhoClient.FriendServiceRef.SearchProfileRequest request);
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IFriendService/SearchProfilesServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.SearchProfilesResponse SearchProfiles(GuessWhoCore.Contracts.Request.SearchProfileRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/SearchProfiles", ReplyAction="http://tempuri.org/IFriendService/SearchProfilesResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.SearchProfilesResponse> SearchProfilesAsync(GuessWhoClient.FriendServiceRef.SearchProfileRequest request);
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.SearchProfilesResponse> SearchProfilesAsync(GuessWhoCore.Contracts.Request.SearchProfileRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendService/SendFriendRequestResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.FriendServiceRef.ServiceFault), Action="http://tempuri.org/IFriendService/SendFriendRequestServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.FriendServiceRef.SendFriendRequestResponse SendFriendRequest(GuessWhoClient.FriendServiceRef.SendFriendRequestRequest request);
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IFriendService/SendFriendRequestServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.SendFriendRequestResponse SendFriendRequest(GuessWhoCore.Contracts.Requests.SendFriendRequestRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendService/SendFriendRequestResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.SendFriendRequestResponse> SendFriendRequestAsync(GuessWhoClient.FriendServiceRef.SendFriendRequestRequest request);
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.SendFriendRequestResponse> SendFriendRequestAsync(GuessWhoCore.Contracts.Requests.SendFriendRequestRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendService/AcceptFriendRequestResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.FriendServiceRef.ServiceFault), Action="http://tempuri.org/IFriendService/AcceptFriendRequestServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.FriendServiceRef.BasicResponse AcceptFriendRequest(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request);
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IFriendService/AcceptFriendRequestServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse AcceptFriendRequest(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendService/AcceptFriendRequestResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.BasicResponse> AcceptFriendRequestAsync(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request);
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> AcceptFriendRequestAsync(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/RejectFriendRequest", ReplyAction="http://tempuri.org/IFriendService/RejectFriendRequestResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.FriendServiceRef.ServiceFault), Action="http://tempuri.org/IFriendService/RejectFriendRequestServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.FriendServiceRef.BasicResponse RejectFriendRequest(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request);
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IFriendService/RejectFriendRequestServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse RejectFriendRequest(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/RejectFriendRequest", ReplyAction="http://tempuri.org/IFriendService/RejectFriendRequestResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.BasicResponse> RejectFriendRequestAsync(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request);
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> RejectFriendRequestAsync(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/CancelFriendRequest", ReplyAction="http://tempuri.org/IFriendService/CancelFriendRequestResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.FriendServiceRef.ServiceFault), Action="http://tempuri.org/IFriendService/CancelFriendRequestServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.FriendServiceRef.BasicResponse CancelFriendRequest(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request);
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IFriendService/CancelFriendRequestServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse CancelFriendRequest(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/CancelFriendRequest", ReplyAction="http://tempuri.org/IFriendService/CancelFriendRequestResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.BasicResponse> CancelFriendRequestAsync(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request);
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> CancelFriendRequestAsync(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetFriends", ReplyAction="http://tempuri.org/IFriendService/GetFriendsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.FriendServiceRef.ServiceFault), Action="http://tempuri.org/IFriendService/GetFriendsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.FriendServiceRef.GetFriendsResponse GetFriends(GuessWhoClient.FriendServiceRef.GetFriendsRequest request);
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IFriendService/GetFriendsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.GetFriendsResponse GetFriends(GuessWhoCore.Contracts.Requests.GetFriendsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetFriends", ReplyAction="http://tempuri.org/IFriendService/GetFriendsResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.GetFriendsResponse> GetFriendsAsync(GuessWhoClient.FriendServiceRef.GetFriendsRequest request);
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.GetFriendsResponse> GetFriendsAsync(GuessWhoCore.Contracts.Requests.GetFriendsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetPendingRequests", ReplyAction="http://tempuri.org/IFriendService/GetPendingRequestsResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoClient.FriendServiceRef.ServiceFault), Action="http://tempuri.org/IFriendService/GetPendingRequestsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Faults")]
-        GuessWhoClient.FriendServiceRef.GetPendingRequestsResponse GetPendingRequests(GuessWhoClient.FriendServiceRef.GetPendingFriendRequestsRequest request);
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IFriendService/GetPendingRequestsServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.GetPendingRequestsResponse GetPendingRequests(GuessWhoCore.Contracts.Requests.GetPendingFriendRequestsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetPendingRequests", ReplyAction="http://tempuri.org/IFriendService/GetPendingRequestsResponse")]
-        System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.GetPendingRequestsResponse> GetPendingRequestsAsync(GuessWhoClient.FriendServiceRef.GetPendingFriendRequestsRequest request);
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.GetPendingRequestsResponse> GetPendingRequestsAsync(GuessWhoCore.Contracts.Requests.GetPendingFriendRequestsRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -902,59 +92,59 @@ namespace GuessWhoClient.FriendServiceRef {
                 base(binding, remoteAddress) {
         }
         
-        public GuessWhoClient.FriendServiceRef.SearchProfilesResponse SearchProfiles(GuessWhoClient.FriendServiceRef.SearchProfileRequest request) {
+        public GuessWhoCore.Contracts.Response.SearchProfilesResponse SearchProfiles(GuessWhoCore.Contracts.Request.SearchProfileRequest request) {
             return base.Channel.SearchProfiles(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.SearchProfilesResponse> SearchProfilesAsync(GuessWhoClient.FriendServiceRef.SearchProfileRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.SearchProfilesResponse> SearchProfilesAsync(GuessWhoCore.Contracts.Request.SearchProfileRequest request) {
             return base.Channel.SearchProfilesAsync(request);
         }
         
-        public GuessWhoClient.FriendServiceRef.SendFriendRequestResponse SendFriendRequest(GuessWhoClient.FriendServiceRef.SendFriendRequestRequest request) {
+        public GuessWhoCore.Contracts.Response.SendFriendRequestResponse SendFriendRequest(GuessWhoCore.Contracts.Requests.SendFriendRequestRequest request) {
             return base.Channel.SendFriendRequest(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.SendFriendRequestResponse> SendFriendRequestAsync(GuessWhoClient.FriendServiceRef.SendFriendRequestRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.SendFriendRequestResponse> SendFriendRequestAsync(GuessWhoCore.Contracts.Requests.SendFriendRequestRequest request) {
             return base.Channel.SendFriendRequestAsync(request);
         }
         
-        public GuessWhoClient.FriendServiceRef.BasicResponse AcceptFriendRequest(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request) {
+        public GuessWhoCore.Contracts.Response.BasicResponse AcceptFriendRequest(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request) {
             return base.Channel.AcceptFriendRequest(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.BasicResponse> AcceptFriendRequestAsync(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> AcceptFriendRequestAsync(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request) {
             return base.Channel.AcceptFriendRequestAsync(request);
         }
         
-        public GuessWhoClient.FriendServiceRef.BasicResponse RejectFriendRequest(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request) {
+        public GuessWhoCore.Contracts.Response.BasicResponse RejectFriendRequest(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request) {
             return base.Channel.RejectFriendRequest(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.BasicResponse> RejectFriendRequestAsync(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> RejectFriendRequestAsync(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request) {
             return base.Channel.RejectFriendRequestAsync(request);
         }
         
-        public GuessWhoClient.FriendServiceRef.BasicResponse CancelFriendRequest(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request) {
+        public GuessWhoCore.Contracts.Response.BasicResponse CancelFriendRequest(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request) {
             return base.Channel.CancelFriendRequest(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.BasicResponse> CancelFriendRequestAsync(GuessWhoClient.FriendServiceRef.AcceptFriendRequestRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> CancelFriendRequestAsync(GuessWhoCore.Contracts.Requests.FriendRequestOperationRequest request) {
             return base.Channel.CancelFriendRequestAsync(request);
         }
         
-        public GuessWhoClient.FriendServiceRef.GetFriendsResponse GetFriends(GuessWhoClient.FriendServiceRef.GetFriendsRequest request) {
+        public GuessWhoCore.Contracts.Response.GetFriendsResponse GetFriends(GuessWhoCore.Contracts.Requests.GetFriendsRequest request) {
             return base.Channel.GetFriends(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.GetFriendsResponse> GetFriendsAsync(GuessWhoClient.FriendServiceRef.GetFriendsRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.GetFriendsResponse> GetFriendsAsync(GuessWhoCore.Contracts.Requests.GetFriendsRequest request) {
             return base.Channel.GetFriendsAsync(request);
         }
         
-        public GuessWhoClient.FriendServiceRef.GetPendingRequestsResponse GetPendingRequests(GuessWhoClient.FriendServiceRef.GetPendingFriendRequestsRequest request) {
+        public GuessWhoCore.Contracts.Response.GetPendingRequestsResponse GetPendingRequests(GuessWhoCore.Contracts.Requests.GetPendingFriendRequestsRequest request) {
             return base.Channel.GetPendingRequests(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoClient.FriendServiceRef.GetPendingRequestsResponse> GetPendingRequestsAsync(GuessWhoClient.FriendServiceRef.GetPendingFriendRequestsRequest request) {
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.GetPendingRequestsResponse> GetPendingRequestsAsync(GuessWhoCore.Contracts.Requests.GetPendingFriendRequestsRequest request) {
             return base.Channel.GetPendingRequestsAsync(request);
         }
     }

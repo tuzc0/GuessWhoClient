@@ -2,6 +2,8 @@
 using GuessWhoClient.Domain.Models;
 using GuessWhoClient.Domain.Validation;
 using GuessWhoClient.Presentation.ViewsModels.Base;
+using GuessWhoCore.Validation;
+using GuessWhoCore.Validation.ValidationDTOs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
