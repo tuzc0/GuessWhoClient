@@ -2,6 +2,6 @@
 {
     public interface IUiFaultMapper
     {
-        bool TryMap(string faultCode, out string uiKey);
+        UiKeyMapping Map(string faultCode);
     }
 }

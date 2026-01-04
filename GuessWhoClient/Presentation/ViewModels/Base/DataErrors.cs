@@ -45,7 +45,9 @@ namespace GuessWhoClient.Presentation.ViewsModels.Base
 
                 for (int index = 0; index < messages.Count; index++)
                 {
-                    AddErrorInternal(propertyName, messages[index]);
+                    string message = messages[index];
+
+                    AddErrorInternal(propertyName, message);
                 }
 
                 ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
@@ -64,6 +66,11 @@ namespace GuessWhoClient.Presentation.ViewsModels.Base
             {
                 propertyErrors.Add(errorMessage);
             }
+        }
+
+        public void ClearAllErrors()
+        {
+            ClearAllErrorsInternal();
         }
 
         private void ClearAllErrorsInternal()
