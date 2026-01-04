@@ -1,4 +1,4 @@
-﻿namespace GuessWhoClient.Windows.ScreensType
+﻿namespace GuessWhoClient.Presentation.Navegation
 {
     public enum GameScreenType
     {

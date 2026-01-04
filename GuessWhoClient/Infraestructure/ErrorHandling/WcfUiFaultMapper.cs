@@ -13,35 +13,34 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling
         private const string KEY_SECURITY_ERROR = "UiSecurityError";
         private const string KEY_TIMEOUT = "UiTimeout";
 
-        public bool TryMap(string faultCode, out string uiKey)
+        public UiKeyMapping Map(string faultCode)
         {
-            uiKey = null;
+            if (string.IsNullOrWhiteSpace(faultCode))
+            {
+                return UiKeyMapping.Unmapped();
+            }
 
             if (string.Equals(faultCode, CODE_ENDPOINT_NOT_FOUND, StringComparison.Ordinal))
             {
-                uiKey = KEY_SERVICE_UNAVAILABLE;
-                return true;
+                return UiKeyMapping.Mapped(KEY_SERVICE_UNAVAILABLE);
             }
 
             if (string.Equals(faultCode, CODE_SECURITY_ERROR, StringComparison.Ordinal))
             {
-                uiKey = KEY_SECURITY_ERROR;
-                return true;
+                return UiKeyMapping.Mapped(KEY_SECURITY_ERROR);
             }
 
             if (string.Equals(faultCode, CODE_TIMEOUT, StringComparison.Ordinal))
             {
-                uiKey = KEY_TIMEOUT;
-                return true;
+                return UiKeyMapping.Mapped(KEY_TIMEOUT);
             }
 
             if (string.Equals(faultCode, CODE_COMMUNICATION, StringComparison.Ordinal))
             {
-                uiKey = KEY_SERVICE_UNAVAILABLE;
-                return true;
+                return UiKeyMapping.Mapped(KEY_SERVICE_UNAVAILABLE);
             }
 
-            return false;
+            return UiKeyMapping.Unmapped();
         }
     }
 }

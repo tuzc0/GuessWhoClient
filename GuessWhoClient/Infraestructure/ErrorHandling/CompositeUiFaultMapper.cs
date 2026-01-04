@@ -11,22 +11,26 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling
             this.mappers = mappers ?? Array.Empty<IUiFaultMapper>();
         }
 
-        public bool TryMap(string faultCode, out string uiKey)
+        public UiKeyMapping Map(string faultCode)
         {
-            uiKey = null;
-
             for (int index = 0; index < mappers.Length; index++)
             {
                 IUiFaultMapper mapper = mappers[index];
 
-                if (mapper != null && mapper.TryMap(faultCode, out uiKey))
+                if (mapper == null)
                 {
-                    return true;
+                    continue;
+                }
+
+                UiKeyMapping mapping = mapper.Map(faultCode);
+
+                if (mapping.IsMapped)
+                {
+                    return mapping;
                 }
             }
 
-            uiKey = null;
-            return false;
+            return UiKeyMapping.Unmapped();
         }
     }
 }

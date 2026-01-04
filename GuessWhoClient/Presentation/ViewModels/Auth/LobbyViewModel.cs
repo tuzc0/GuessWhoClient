@@ -8,6 +8,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using GuessWhoClient.Domain.Models;
+using GuessWhoCore.Contracts.Faults;
 
 namespace GuessWhoClient.ViewModels
 {
@@ -139,12 +140,6 @@ namespace GuessWhoClient.ViewModels
             catch (FaultException<ServiceFault> ex)
             {
                 Logger.Error("LeaveAsync: service fault.", ex);
-
-                string message = ex.Detail != null && !string.IsNullOrWhiteSpace(ex.Detail.Message)
-                    ? ex.Detail.Message
-                    : "Ocurrió un error en el servidor al salir del lobby.";
-
-                return OperationResult.Fail(message);
             }
             catch (FaultException ex)
             {

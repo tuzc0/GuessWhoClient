@@ -2,15 +2,14 @@
 using GuessWhoClient.Globalization;
 using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoClient.Interfaces;
+using GuessWhoClient.Presentation.Navegation;
 using GuessWhoClient.Presentation.ViewsModels.Base;
 using GuessWhoClient.Services.Alerts;
 using GuessWhoClient.Session;
-using GuessWhoClient.Windows.ScreensType;
 using GuessWhoCore.Contracts.Requests;
 using log4net;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace GuessWhoClient.Presentation.ViewModels.Auth
 {
@@ -18,12 +17,19 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(LoginViewModel));
 
-        private const string LOG_CTX_LOGIN = "LoginViewModel.Login";
+        private const string LOG_CTX_LOGIN_RANGE = "LoginViewModel.Login.RangeError";
+        private const string LOG_CTX_LOGIN_INVALID_OPERATION = "LoginViewModel.Login.InvalidOperation";
+        private const string LOG_CTX_LOGIN_UNEXPECTED = "LoginViewModel.Login.Unexpected";
 
         private const string KEY_UI_ERROR_TITLE = "LoginErrorTitle";
         private const string KEY_UI_WELCOME_TITLE = "LoginWelcomeTitle";
         private const string KEY_UI_INVALID_CREDENTIALS = "LoginInvalidCredentials";
+
+        private const string KEY_UI_RANGE_ERROR = "UiValueOutOfRange";
+        private const string KEY_UI_INVALID_OPERATION = "UiInvalidOperation";
         private const string KEY_UI_UNEXPECTED_ERROR = "UiGenericError";
+
+        private const string EMPTY = "";
 
         private readonly ILoginAppService loginAppService;
         private readonly IAlertService alertService;
@@ -57,9 +63,9 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             this.gameScreenManager = gameScreenManager ?? 
                 throw new ArgumentNullException(nameof(gameScreenManager));
 
-            LoginCommand = new AsyncRelayCommand(LoginAsync, () => !IsBusy);
-            CreateAccountCommand = new AsyncRelayCommand(OpenCreateAccountAsync, () => !IsBusy);
-            ForgotPasswordCommand = new AsyncRelayCommand(OpenRecoverPasswordAsync, () => !IsBusy);
+            LoginCommand = new AsyncRelayCommand(LoginAsync, CanExecuteCommands);
+            CreateAccountCommand = new AsyncRelayCommand(OpenCreateAccountAsync, CanExecuteCommands);
+            ForgotPasswordCommand = new AsyncRelayCommand(OpenRecoverPasswordAsync, CanExecuteCommands);
         }
 
         public string Email
@@ -81,12 +87,19 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
         }
 
         public AsyncRelayCommand LoginCommand { get; }
-        public ICommand CreateAccountCommand { get; }
-        public ICommand ForgotPasswordCommand { get; }
+        public AsyncRelayCommand CreateAccountCommand { get; }
+        public AsyncRelayCommand ForgotPasswordCommand { get; }
 
         protected override void OnIsBusyChanged(string propertyName)
         {
             LoginCommand.RaiseCanExecuteChanged();
+            CreateAccountCommand.RaiseCanExecuteChanged();
+            ForgotPasswordCommand.RaiseCanExecuteChanged();
+        }
+
+        private bool CanExecuteCommands()
+        {
+            return !IsBusy;
         }
 
         private async Task LoginAsync()
@@ -95,6 +108,12 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
             try
             {
+                if (HasEmptyCredentials())
+                {
+                    ShowInvalidCredentials();
+                    return;
+                }
+
                 var request = new LoginRequest
                 {
                     Email = Email,
@@ -105,15 +124,13 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
                 if (!result.IsSuccess)
                 {
-                    ShowLoginError(result.FaultCode, result.FaultCode);
+                    ShowLoginError(result.FaultCode, result.ServerMessage);
                     return;
                 }
 
                 if (result.Value == null || !result.Value.ValidUser)
                 {
-                    alertService.Error(
-                        localizationService.Get(KEY_UI_INVALID_CREDENTIALS),
-                        localizationService.Get(KEY_UI_ERROR_TITLE));
+                    ShowInvalidCredentials();
                     return;
                 }
 
@@ -131,18 +148,18 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                Logger.Warn(LOG_CTX_LOGIN, ex);
-                ShowUnexpectedError();
+                Logger.Warn(LOG_CTX_LOGIN_RANGE, ex);
+                ShowUiError(KEY_UI_RANGE_ERROR);
             }
             catch (InvalidOperationException ex)
             {
-                Logger.Warn(LOG_CTX_LOGIN, ex);
-                ShowUnexpectedError();
+                Logger.Warn(LOG_CTX_LOGIN_INVALID_OPERATION, ex);
+                ShowUiError(KEY_UI_INVALID_OPERATION);
             }
             catch (Exception ex)
             {
-                Logger.Error(LOG_CTX_LOGIN, ex);
-                ShowUnexpectedError();
+                Logger.Error(LOG_CTX_LOGIN_UNEXPECTED, ex);
+                ShowUiError(KEY_UI_UNEXPECTED_ERROR);
             }
             finally
             {
@@ -150,10 +167,30 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             }
         }
 
-        private void ShowUnexpectedError()
+        private bool HasEmptyCredentials()
+        {
+            string safeEmail = (Email ?? EMPTY).Trim();
+            string safePassword = (Password ?? EMPTY).Trim();
+
+            return string.IsNullOrWhiteSpace(safeEmail) || string.IsNullOrWhiteSpace(safePassword);
+        }
+
+        private void ShowInvalidCredentials()
         {
             alertService.Error(
-                localizationService.Get(KEY_UI_UNEXPECTED_ERROR),
+                localizationService.Get(KEY_UI_INVALID_CREDENTIALS),
+                localizationService.Get(KEY_UI_ERROR_TITLE));
+        }
+
+        private void ShowUiError(string messageKey)
+        {
+            string message = localizationService.LocalOrFallback(
+                messageKey,
+                null,
+                KEY_UI_UNEXPECTED_ERROR);
+
+            alertService.Error(
+                message,
                 localizationService.Get(KEY_UI_ERROR_TITLE));
         }
 
@@ -178,14 +215,18 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
                 serverMessage,
                 KEY_UI_UNEXPECTED_ERROR);
 
-            alertService.Error(message, localizationService.Get(KEY_UI_ERROR_TITLE));
+            alertService.Error(
+                message,
+                localizationService.Get(KEY_UI_ERROR_TITLE));
         }
 
         private string ResolveUiKeyOrFallback(string faultCode)
         {
-            if (loginFaultMapper.TryMap(faultCode, out string uiKey))
+            UiKeyMapping mapping = loginFaultMapper.Map(faultCode);
+
+            if (mapping.IsMapped)
             {
-                return uiKey;
+                return mapping.UiKey;
             }
 
             return KEY_UI_UNEXPECTED_ERROR;
