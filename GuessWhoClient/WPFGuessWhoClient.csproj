@@ -85,6 +85,8 @@
     <Compile Include="Application\Results\RegisterUserResult.cs" />
     <Compile Include="Application\Services\Auth\ILoginAppService.cs" />
     <Compile Include="Application\Services\Auth\LoginAppService.cs" />
+    <Compile Include="Application\Services\Friends\FriendAppService.cs" />
+    <Compile Include="Application\Services\Friends\IFriendAppService.cs" />
     <Compile Include="Application\Services\IUserAppService.cs" />
     <Compile Include="Application\Services\UserAppService.cs" />
     <Compile Include="Domain\Models\LobbyPlayer.cs" />
@@ -94,10 +96,13 @@
     <Compile Include="Infraestructure\ErrorHandling\CompositeUiFaultMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\IUiFaultMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\WcfUiFaultMapper.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\FriendServiceClientAdapter.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\IFriendServiceClient.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\ILoginServiceClient.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\LoginServiceClientAdapter.cs" />
     <Compile Include="Infraestructure\Wcf\WcfCallResult.cs" />
     <Compile Include="Infraestructure\Wcf\WcfEndpointNames.cs" />
+    <Compile Include="Interfaces\IFriendManager.cs" />
     <Compile Include="IsExternalInit.cs" />
     <Compile Include="Presentation\Behaviors\PasswordBoxAssistant.cs" />
     <Compile Include="Presentation\Behaviors\PasswordVisibilityBehavior.cs" />
@@ -115,6 +120,7 @@
     <Compile Include="Presentation\ViewModels\Base\AsyncRelayCommand.cs" />
     <Compile Include="Presentation\ViewModels\Base\DataErrors.cs" />
     <Compile Include="Presentation\ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="Presentation\ViewModels\Friends\FriendViewModel.cs" />
     <Compile Include="Presentation\Views\UserControls\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>

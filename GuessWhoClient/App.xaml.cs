@@ -1,6 +1,9 @@
 ﻿using GuessWhoClient.Application.Services;
+using GuessWhoClient.Application.Services.Friends;
 using GuessWhoClient.Domain.Validation;
 using GuessWhoClient.Globalization;
+using GuessWhoClient.Infraestructure.Wcf.Clients;
+using GuessWhoClient.Presentation.ViewModels.Friends;
 using GuessWhoClient.Presentation.Views.UserControls;
 using GuessWhoClient.Presentation.Views.Windows;
 using GuessWhoClient.ViewModels;
@@ -24,6 +27,11 @@ namespace GuessWhoClient
             services.AddSingleton<IValidationMessageMapper, ValidationMessageMapper>();
             services.AddSingleton<IUserAppService, UserAppService>();
 
+            services.AddTransient<IFriendServiceClient, FriendServiceClientAdapter>();
+            services.AddTransient<IFriendAppService, FriendAppService>();
+            services.AddTransient<FriendViewModel>();
+            services.AddTransient<FriendView>();
+
             services.AddTransient<LoginView>();
             services.AddTransient<CreateAccountViewModel>();
             services.AddTransient<CreateAccountView>();
@@ -38,6 +46,7 @@ namespace GuessWhoClient
             services.AddSingleton<Func<JoinOrCreateGameView>>(provider => () => provider.GetRequiredService<JoinOrCreateGameView>());
             services.AddSingleton<Func<UpdateProfileView>>(provider => () => provider.GetRequiredService<UpdateProfileView>());
             services.AddSingleton<Func<ChangePasswordView>>(provider => () => provider.GetRequiredService<ChangePasswordView>());
+            services.AddSingleton<Func<FriendView>>(provider => () => provider.GetRequiredService<FriendView>());
 
             services.AddSingleton<GameWindow>();
 
