@@ -238,4 +238,39 @@
   <data name="USER_REQUEST_NULL" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="LoginErrorTitle" xml:space="preserve">
+    <value>Erreur de connexion</value>
+  </data>
+  <data name="LoginWelcomeTitle" xml:space="preserve">
+    <value>Bienvenue</value>
+  </data>
+  <data name="LoginInvalidCredentials" xml:space="preserve">
+    <value>E-mail ou mot de passe incorrect.</value>
+  </data>
+  <data name="LoginAccountLocked" xml:space="preserve">
+    <value>Votre compte est verrouillé. Veuillez contacter le support.</value>
+  </data>
+  <data name="LoginProfileActivationFailed" xml:space="preserve">
+    <value>Impossible de démarrer votre session. Veuillez réessayer.</value>
+  </data>
+
+  <data name="UiGenericError" xml:space="preserve">
+    <value>Une erreur s'est produite. Veuillez réessayer.</value>
+  </data>
+  <data name="UiValueOutOfRange" xml:space="preserve">
+    <value>Une valeur est hors limites. Veuillez vérifier votre saisie.</value>
+  </data>
+  <data name="UiInvalidOperation" xml:space="preserve">
+    <value>Impossible d'effectuer cette action maintenant. Veuillez réessayer.</value>
+  </data>
+
+  <data name="UiServiceUnavailable" xml:space="preserve">
+    <value>Le service est indisponible. Veuillez réessayer plus tard.</value>
+  </data>
+  <data name="UiSecurityError" xml:space="preserve">
+    <value>Une erreur de sécurité est survenue lors de la connexion. Veuillez réessayer.</value>
+  </data>
+  <data name="UiTimeout" xml:space="preserve">
+    <value>La demande a expiré. Veuillez réessayer.</value>
+  </data>
 </root>

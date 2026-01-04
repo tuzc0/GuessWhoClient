@@ -238,4 +238,39 @@
   <data name="USER_REQUEST_NULL" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="LoginErrorTitle" xml:space="preserve">
+    <value>Errore di accesso</value>
+  </data>
+  <data name="LoginWelcomeTitle" xml:space="preserve">
+    <value>Benvenuto</value>
+  </data>
+  <data name="LoginInvalidCredentials" xml:space="preserve">
+    <value>Email o password non validi.</value>
+  </data>
+  <data name="LoginAccountLocked" xml:space="preserve">
+    <value>Il tuo account è bloccato. Contatta l'assistenza.</value>
+  </data>
+  <data name="LoginProfileActivationFailed" xml:space="preserve">
+    <value>Impossibile avviare la sessione. Riprova.</value>
+  </data>
+
+  <data name="UiGenericError" xml:space="preserve">
+    <value>Si è verificato un errore. Riprova.</value>
+  </data>
+  <data name="UiValueOutOfRange" xml:space="preserve">
+    <value>Un valore è fuori intervallo. Controlla i dati inseriti.</value>
+  </data>
+  <data name="UiInvalidOperation" xml:space="preserve">
+    <value>Impossibile completare l'operazione ora. Riprova.</value>
+  </data>
+
+  <data name="UiServiceUnavailable" xml:space="preserve">
+    <value>Il servizio non è disponibile. Riprova più tardi.</value>
+  </data>
+  <data name="UiSecurityError" xml:space="preserve">
+    <value>Si è verificato un errore di sicurezza durante la connessione. Riprova.</value>
+  </data>
+  <data name="UiTimeout" xml:space="preserve">
+    <value>La richiesta è scaduta. Riprova.</value>
+  </data>
 </root>
