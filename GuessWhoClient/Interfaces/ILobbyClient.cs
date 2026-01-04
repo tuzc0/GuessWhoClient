@@ -1,4 +1,4 @@
-﻿using GuessWhoClient.MatchServiceRef;
+﻿using GuessWhoCore.Contracts.Response;
 
 namespace GuessWhoClient.Interfaces
 {

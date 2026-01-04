@@ -6,7 +6,7 @@ namespace GuessWhoClient.Interfaces
     public interface IGameScreenManager
     {
         void ShowScreen(GameScreenType screenType);
-        void ShowOverlay(UserControl overlay);
+        void ShowOverlay(GameScreenType overlayType);
         void CloseOverlay();
         void ExitGame();
     }

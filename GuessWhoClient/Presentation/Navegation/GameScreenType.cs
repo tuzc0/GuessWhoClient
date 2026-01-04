@@ -4,6 +4,8 @@
     {
         MainMenu,
         Lobby,
+        CreateAccount,
+        RecoverPassword,
         UpdateProfile,
         Match,
         ChangePassword

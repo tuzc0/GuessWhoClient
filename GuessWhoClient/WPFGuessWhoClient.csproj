@@ -9,6 +9,7 @@
     <RootNamespace>GuessWhoClient</RootNamespace>
     <AssemblyName>GuessWhoClient</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <LangVersion>10.0</LangVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -78,15 +79,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Application\ErrorHandling\Auth\LoginUiFaultMapper.cs" />
     <Compile Include="Application\Mappers\LobbyPlayerMapper.cs" />
     <Compile Include="Application\Results\OperationResult.cs" />
     <Compile Include="Application\Results\RegisterUserResult.cs" />
+    <Compile Include="Application\Services\Auth\ILoginAppService.cs" />
+    <Compile Include="Application\Services\Auth\LoginAppService.cs" />
     <Compile Include="Application\Services\IUserAppService.cs" />
     <Compile Include="Application\Services\UserAppService.cs" />
     <Compile Include="Domain\Models\LobbyPlayer.cs" />
     <Compile Include="Domain\Models\UserRegistrationInput.cs" />
     <Compile Include="Domain\Validation\IValidationMessageMapper.cs" />
     <Compile Include="Domain\Validation\ValidationMessageMapper.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\CompositeUiFaultMapper.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\IUiFaultMapper.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\WcfUiFaultMapper.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\ILoginServiceClient.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\LoginServiceClientAdapter.cs" />
+    <Compile Include="Infraestructure\Wcf\WcfCallResult.cs" />
+    <Compile Include="Infraestructure\Wcf\WcfEndpointNames.cs" />
+    <Compile Include="IsExternalInit.cs" />
+    <Compile Include="Presentation\Behaviors\PasswordBoxAssistant.cs" />
     <Compile Include="Presentation\Behaviors\PasswordVisibilityBehavior.cs" />
     <Compile Include="Presentation\Navegation\IGameScreenManager.cs" />
     <Compile Include="Presentation\Services\Alerts\GameMessageBox.cs" />
@@ -98,9 +111,10 @@
     <Compile Include="Callbacks\MatchCallback.cs" />
     <Compile Include="Presentation\Services\Errors\IUiErrorMapper.cs" />
     <Compile Include="Presentation\Services\Errors\UiErrorMapper.cs" />
-    <Compile Include="Presentation\ViewsModels\Base\AsyncRelayCommand.cs" />
-    <Compile Include="Presentation\ViewsModels\Base\DataErrors.cs" />
-    <Compile Include="Presentation\ViewsModels\Base\ViewModelBase.cs" />
+    <Compile Include="Presentation\ViewModels\Auth\LoginViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Base\AsyncRelayCommand.cs" />
+    <Compile Include="Presentation\ViewModels\Base\DataErrors.cs" />
+    <Compile Include="Presentation\ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="Presentation\Views\UserControls\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
@@ -182,9 +196,9 @@
     <Compile Include="Presentation\Views\UserControls\VerifyEmailView.xaml.cs">
       <DependentUpon>VerifyEmailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\ViewsModels\Auth\ChooseCharactersViewModel.cs" />
-    <Compile Include="Presentation\ViewsModels\Auth\CreateAccountViewModel.cs" />
-    <Compile Include="Presentation\ViewsModels\Auth\LobbyViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Auth\ChooseCharactersViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Auth\CreateAccountViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Auth\LobbyViewModel.cs" />
     <Compile Include="Presentation\Views\Windows\GameMessageWindow.xaml.cs">
       <DependentUpon>GameMessageWindow.xaml</DependentUpon>
     </Compile>
@@ -245,7 +259,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Views\UserControls\LoginView.xaml">
+    <Page Include="Presentation\Views\Auth\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,7 +297,7 @@
     <Compile Include="Presentation\Views\Windows\GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\UserControls\LoginView.xaml.cs">
+    <Compile Include="Presentation\Views\Auth\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Views\UserControls\MainMenuView.xaml.cs">
