@@ -135,24 +135,6 @@
   <data name="chkShowPasswords" xml:space="preserve">
     <value>Show Passwords</value>
   </data>
-  <data name="FaultDatabaseConnection" xml:space="preserve">
-    <value>Unable to connect to the database</value>
-  </data>
-  <data name="FaultDatabaseTimeout" xml:space="preserve">
-    <value>The database server took too long to respond</value>
-  </data>
-  <data name="FaultDuplicateEmail" xml:space="preserve">
-    <value>The email address is already registered</value>
-  </data>
-  <data name="FaultForeignKey" xml:space="preserve">
-    <value>The operation violates an existing relationship</value>
-  </data>
-  <data name="FaultInvalidRequest" xml:space="preserve">
-    <value>The request is invalid</value>
-  </data>
-  <data name="FaultUnexpected" xml:space="preserve">
-    <value>An unexpected error occurred</value>
-  </data>
   <data name="LblConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
@@ -173,6 +155,24 @@
   </data>
   <data name="LinkForgot" xml:space="preserve">
     <value>I forgot my password</value>
+  </data>
+  <data name="FaultDatabaseConnection" xml:space="preserve">
+    <value>Unable to connect to the database</value>
+  </data>
+  <data name="FaultDatabaseTimeout" xml:space="preserve">
+    <value>The database server took too long to respond</value>
+  </data>
+  <data name="FaultDuplicateEmail" xml:space="preserve">
+    <value>The email address is already registered</value>
+  </data>
+  <data name="FaultForeignKey" xml:space="preserve">
+    <value>The operation violates an existing relationship</value>
+  </data>
+  <data name="FaultInvalidRequest" xml:space="preserve">
+    <value>The request is invalid</value>
+  </data>
+  <data name="FaultUnexpected" xml:space="preserve">
+    <value>An unexpected error occurred</value>
   </data>
   <data name="UiAccountCreatedForFmt" xml:space="preserve">
     <value>Account created</value>
@@ -199,7 +199,7 @@
     <value>Display name is required</value>
   </data>
   <data name="UiValidationDisplayNameTooLong" xml:space="preserve">
-    <value>Display name is too long (max. 50 characteres)</value>
+    <value>Display name is too long (max. 50 characters)</value>
   </data>
   <data name="UiValidationEmailFormat" xml:space="preserve">
     <value>Invalid email format</value>
@@ -211,7 +211,7 @@
     <value>Passwords do not match</value>
   </data>
   <data name="UiValidationPasswordRequired" xml:space="preserve">
-    <value>Password is required</value>
+    <value>Password is required.</value>
   </data>
   <data name="UiValidationPasswordTooShort" xml:space="preserve">
     <value>Password must be at least 8 characters long</value>
@@ -236,5 +236,65 @@
   </data>
   <data name="USER_REQUEST_NULL" xml:space="preserve">
     <value>Registration data is missing. Please fill in the form and try again.</value>
+  </data>
+  <data name="FriendErrorTitle" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="UiGenericError" xml:space="preserve">
+    <value>An unexpected error occurred. Please try again later.</value>
+  </data>
+  <data name="BtnSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="BtnRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="BtnSendRequest" xml:space="preserve">
+    <value>Send Request</value>
+  </data>
+  <data name="BtnAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="HeaderSearchResults" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+  <data name="HeaderMyFriends" xml:space="preserve">
+    <value>My Friends</value>
+  </data>
+  <data name="HeaderReceivedRequests" xml:space="preserve">
+    <value>Received Requests</value>
+  </data>
+  <data name="ColUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="ColFromUser" xml:space="preserve">
+    <value>From User</value>
+  </data>
+  <data name="FriendRequestSent" xml:space="preserve">
+    <value>Friend request sent successfully!</value>
+  </data>
+  <data name="FRIEND_REQUEST_NULL" xml:space="preserve">
+    <value>Request cannot be null.</value>
+  </data>
+  <data name="FRIEND_INVALID_ACCOUNT_ID" xml:space="preserve">
+    <value>Invalid Account ID.</value>
+  </data>
+  <data name="FRIEND_ACCOUNT_NOT_FOUND" xml:space="preserve">
+    <value>Account not found or inactive.</value>
+  </data>
+  <data name="FRIEND_CANNOT_SELF" xml:space="preserve">
+    <value>You cannot friend yourself.</value>
+  </data>
+  <data name="FRIEND_ALREADY_FRIENDS" xml:space="preserve">
+    <value>This user is already your friend.</value>
+  </data>
+  <data name="FRIEND_REQUEST_ALREADY_PENDING" xml:space="preserve">
+    <value>A pending request already exists.</value>
+  </data>
+  <data name="FRIEND_UNEXPECTED_ERROR" xml:space="preserve">
+    <value>Unexpected error in friend system.</value>
   </data>
 </root>

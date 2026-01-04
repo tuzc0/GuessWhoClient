@@ -54,7 +54,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Localization\Common.es-MX.resx" />
+    <EmbeddedResource Include="Properties\Localization\Common.es-MX.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Localization\Common.fr-FR.resx" />
     <EmbeddedResource Include="Properties\Localization\Common.it.resx" />
     <EmbeddedResource Include="Properties\Localization\Common.resx">

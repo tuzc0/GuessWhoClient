@@ -70,6 +70,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Accept.
+        /// </summary>
+        public static string BtnAccept {
+            get {
+                return ResourceManager.GetString("BtnAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create account.
         /// </summary>
         public static string BtnCreateAccount {
@@ -88,11 +97,38 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Refresh.
+        /// </summary>
+        public static string BtnRefresh {
+            get {
+                return ResourceManager.GetString("BtnRefresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Resend code.
         /// </summary>
         public static string BtnResendCode {
             get {
                 return ResourceManager.GetString("BtnResendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search.
+        /// </summary>
+        public static string BtnSearch {
+            get {
+                return ResourceManager.GetString("BtnSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Send Request.
+        /// </summary>
+        public static string BtnSendRequest {
+            get {
+                return ResourceManager.GetString("BtnSendRequest", resourceCulture);
             }
         }
         
@@ -111,6 +147,24 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string chkShowPasswords {
             get {
                 return ResourceManager.GetString("chkShowPasswords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a From User.
+        /// </summary>
+        public static string ColFromUser {
+            get {
+                return ResourceManager.GetString("ColFromUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Username.
+        /// </summary>
+        public static string ColUsername {
+            get {
+                return ResourceManager.GetString("ColUsername", resourceCulture);
             }
         }
         
@@ -165,6 +219,114 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string FaultUnexpected {
             get {
                 return ResourceManager.GetString("FaultUnexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account not found or inactive..
+        /// </summary>
+        public static string FRIEND_ACCOUNT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("FRIEND_ACCOUNT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This user is already your friend..
+        /// </summary>
+        public static string FRIEND_ALREADY_FRIENDS {
+            get {
+                return ResourceManager.GetString("FRIEND_ALREADY_FRIENDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You cannot friend yourself..
+        /// </summary>
+        public static string FRIEND_CANNOT_SELF {
+            get {
+                return ResourceManager.GetString("FRIEND_CANNOT_SELF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid Account ID..
+        /// </summary>
+        public static string FRIEND_INVALID_ACCOUNT_ID {
+            get {
+                return ResourceManager.GetString("FRIEND_INVALID_ACCOUNT_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a A pending request already exists..
+        /// </summary>
+        public static string FRIEND_REQUEST_ALREADY_PENDING {
+            get {
+                return ResourceManager.GetString("FRIEND_REQUEST_ALREADY_PENDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Request cannot be null..
+        /// </summary>
+        public static string FRIEND_REQUEST_NULL {
+            get {
+                return ResourceManager.GetString("FRIEND_REQUEST_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unexpected error in friend system..
+        /// </summary>
+        public static string FRIEND_UNEXPECTED_ERROR {
+            get {
+                return ResourceManager.GetString("FRIEND_UNEXPECTED_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friends.
+        /// </summary>
+        public static string FriendErrorTitle {
+            get {
+                return ResourceManager.GetString("FriendErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend request sent successfully!.
+        /// </summary>
+        public static string FriendRequestSent {
+            get {
+                return ResourceManager.GetString("FriendRequestSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a My Friends.
+        /// </summary>
+        public static string HeaderMyFriends {
+            get {
+                return ResourceManager.GetString("HeaderMyFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Received Requests.
+        /// </summary>
+        public static string HeaderReceivedRequests {
+            get {
+                return ResourceManager.GetString("HeaderReceivedRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search Results.
+        /// </summary>
+        public static string HeaderSearchResults {
+            get {
+                return ResourceManager.GetString("HeaderSearchResults", resourceCulture);
             }
         }
         
@@ -232,6 +394,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Success.
+        /// </summary>
+        public static string SuccessTitle {
+            get {
+                return ResourceManager.GetString("SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Account created.
         /// </summary>
         public static string UiAccountCreatedForFmt {
@@ -246,6 +417,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiCommsGeneric {
             get {
                 return ResourceManager.GetString("UiCommsGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred. Please try again later..
+        /// </summary>
+        public static string UiGenericError {
+            get {
+                return ResourceManager.GetString("UiGenericError", resourceCulture);
             }
         }
         
@@ -304,7 +484,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Display name is too long (max. 50 characteres).
+        ///   Busca una cadena traducida similar a Display name is too long (max. 50 characters).
         /// </summary>
         public static string UiValidationDisplayNameTooLong {
             get {
@@ -340,7 +520,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Password is required.
+        ///   Busca una cadena traducida similar a Password is required..
         /// </summary>
         public static string UiValidationPasswordRequired {
             get {

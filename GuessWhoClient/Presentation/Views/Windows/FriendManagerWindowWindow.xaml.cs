@@ -1,6 +1,8 @@
 ﻿using GuessWhoClient.Presentation.ViewModels.Friends;
 using System;
 using System.Windows;
+using ClassLibraryGuessWho.Properties.Localization;
+
 
 namespace WPFGuessWhoClient
 {
