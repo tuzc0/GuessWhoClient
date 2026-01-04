@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using GuessWhoClient.Domain.Models;
 using GuessWhoCore.Contracts.Faults;
 
+
 namespace GuessWhoClient.ViewModels
 {
     public sealed class LobbyViewModel : INotifyPropertyChanged
