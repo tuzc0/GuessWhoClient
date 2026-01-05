@@ -1,8 +1,8 @@
 ﻿using GuessWhoClient.Infraestructure.Wcf;
 using GuessWhoClient.Infraestructure.Wcf.Clients;
 using GuessWhoClient.Interfaces;
-using GuessWhoClient.UpdateServiceRef;
 using GuessWhoCore.Contracts.Requests;
+using GuessWhoCore.Contracts.Response;
 using System;
 using System.Threading.Tasks;
 
@@ -16,6 +16,11 @@ namespace GuessWhoClient.Application.Services.Profile
         {
             this.profileServiceClient = profileServiceClient ??
                 throw new ArgumentNullException(nameof(profileServiceClient));
+        }
+
+        public Task<WcfCallResult<GetProfileResponse>> GetProfileAsync(GetProfileRequest request)
+        {
+            return profileServiceClient.GetProfileAsync(request);
         }
 
         public Task<WcfCallResult<bool>> UpdateProfileAsync(UpdateProfileRequest request)

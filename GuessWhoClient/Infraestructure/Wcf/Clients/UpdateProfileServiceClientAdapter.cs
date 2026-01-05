@@ -3,6 +3,7 @@ using GuessWhoClient.Presentation.Infrastructure;
 using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoCore.Contracts.Faults;
 using GuessWhoCore.Contracts.Requests;
+using GuessWhoCore.Contracts.Response;
 using log4net;
 using System;
 using System.ServiceModel;
@@ -20,6 +21,19 @@ namespace GuessWhoClient.Infraestructure.Wcf.Clients
             _faultMapper = faultMapper ?? throw new ArgumentNullException(nameof(faultMapper));
         }
 
+        public async Task<WcfCallResult<GetProfileResponse>> GetProfileAsync(GetProfileRequest request)
+        {
+            UpdateProfileServiceClient client = null;
+            try
+            {
+                client = new UpdateProfileServiceClient(WcfEndpointNames.UPDATE_SERVICE);
+                var response = await client.GetProfileAsync(request);
+                return WcfCallResult<GetProfileResponse>.Ok(response);
+            }
+            catch (Exception ex) { return HandleException<GetProfileResponse>(ex, nameof(GetProfileAsync)); }
+            finally { await ServiceClientGuard.CloseSafelyAsync(client); }
+        }
+
         public async Task<WcfCallResult<bool>> UpdateUserProfileAsync(UpdateProfileRequest request)
         {
             UpdateProfileServiceClient client = null;
@@ -27,7 +41,7 @@ namespace GuessWhoClient.Infraestructure.Wcf.Clients
             {
                 client = new UpdateProfileServiceClient(WcfEndpointNames.UPDATE_SERVICE);
                 var response = await client.UpdateUserProfileAsync(request);
-                return WcfCallResult<bool>.Ok(response != null);
+                return WcfCallResult<bool>.Ok(response != null && response.Updated);
             }
             catch (Exception ex) { return HandleException<bool>(ex, nameof(UpdateUserProfileAsync)); }
             finally { await ServiceClientGuard.CloseSafelyAsync(client); }
@@ -40,13 +54,13 @@ namespace GuessWhoClient.Infraestructure.Wcf.Clients
             {
                 client = new UpdateProfileServiceClient(WcfEndpointNames.UPDATE_SERVICE);
                 var response = await client.DeleteUserProfileAsync(request);
-                return WcfCallResult<bool>.Ok(response != null);
+                return WcfCallResult<bool>.Ok(response != null && response.Success);
             }
             catch (Exception ex) { return HandleException<bool>(ex, nameof(DeleteUserProfileAsync)); }
             finally { await ServiceClientGuard.CloseSafelyAsync(client); }
         }
 
-        private WcfCallResult<T> HandleException<T>(Exception ex, string context) where T : struct
+        private WcfCallResult<T> HandleException<T>(Exception ex, string context)
         {
             if (ex is FaultException<ServiceFault> faultEx)
             {

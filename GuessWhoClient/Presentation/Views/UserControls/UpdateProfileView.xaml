@@ -5,23 +5,12 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
-
-            <Style x:Key="Txt.ReadOnly"
-                   TargetType="TextBlock"
-                   BasedOn="{StaticResource Txt.Pixel}">
+            <Style x:Key="Txt.ReadOnly" TargetType="TextBlock" BasedOn="{StaticResource Txt.Pixel}">
                 <Setter Property="FontSize" Value="18" />
             </Style>
-
             <SolidColorBrush x:Key="Brush.CardFrameOuter" Color="#A86105"/>
             <SolidColorBrush x:Key="Brush.CardFrameInner" Color="#F39C12"/>
-            <SolidColorBrush x:Key="Brush.CardInside"     Color="#F3C46A"/>
-
-            <Style x:Key="Txt.CardName" TargetType="TextBlock" BasedOn="{StaticResource Txt.Pixel}">
-                <Setter Property="FontSize" Value="20"/>
-                <Setter Property="TextAlignment" Value="Center"/>
-                <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
-                <Setter Property="TextOptions.TextRenderingMode" Value="Aliased"/>
-            </Style>
+            <SolidColorBrush x:Key="Brush.CardInside" Color="#F3C46A"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -34,135 +23,34 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="2"
-                CornerRadius="20"
-                Background="{StaticResource Brush.CardFrameOuter}"
-                BorderBrush="#3B1C09"
-                BorderThickness="4"
-                Padding="6"
-                SnapsToDevicePixels="True">
+        <Border Grid.Column="2" CornerRadius="20" Background="{StaticResource Brush.CardFrameOuter}" BorderBrush="#3B1C09" BorderThickness="4" Padding="6">
             <Border.Effect>
-                <DropShadowEffect BlurRadius="10"
-                                  ShadowDepth="4"
-                                  Direction="315"
-                                  Opacity="0.8"
-                                  Color="#99000000"/>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="4" Direction="315" Opacity="0.8" Color="#99000000"/>
             </Border.Effect>
-
-            <Border CornerRadius="16"
-                    Background="{StaticResource Brush.CardFrameInner}"
-                    Padding="8">
+            <Border CornerRadius="16" Background="{StaticResource Brush.CardFrameInner}" Padding="8">
                 <Grid>
-
-                    <Border Height="6"
-                            Margin="4,4,4,0"
-                            VerticalAlignment="Top"
-                            CornerRadius="6,6,0,0"
-                            Background="#40FFFFFF"/>
-
-                    <Border Height="6"
-                            Margin="4,0,4,4"
-                            VerticalAlignment="Bottom"
-                            CornerRadius="0,0,6,6"
-                            Background="#40000000"/>
-
-                    <Border Width="6"
-                            Margin="4,6,0,6"
-                            HorizontalAlignment="Left"
-                            CornerRadius="6,0,0,6"
-                            Background="#30000000"/>
-
-                    <Border Width="6"
-                            Margin="0,6,4,6"
-                            HorizontalAlignment="Right"
-                            CornerRadius="0,6,6,0"
-                            Background="#20000000"/>
-
                     <Grid Margin="8">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
                             <RowDefinition Height="90" />
                         </Grid.RowDefinitions>
-
-                        <Border Grid.Row="0"
-                                CornerRadius="10"
-                                Background="{StaticResource Brush.CardInside}"
-                                Margin="2,2,2,8"
-                                BorderBrush="#C9A26C"
-                                BorderThickness="2">
-
-                            <Border CornerRadius="8"
-                                    Margin="3"
-                                    Background="#22000000">
-
-                                <Grid Margin="8">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Grid Grid.Row="0">
-                                        <Ellipse Width="180"
-                                                 Height="180"
-                                                 Stroke="Transparent"
-                                                 StrokeThickness="4"
-                                                 Fill="Transparent"
-                                                 HorizontalAlignment="Center"
-                                                 VerticalAlignment="Center">
-
-                                            <Ellipse.Effect>
-                                                <DropShadowEffect BlurRadius="8"
-                                                                  ShadowDepth="2"
-                                                                  Direction="320"
-                                                                  Opacity="0.8"
-                                                                  Color="#AA000000"/>
-                                            </Ellipse.Effect>
-                                        </Ellipse>
-
-                                        <Image x:Name="imgAvatar"
-                                               Stretch="Uniform"
-                                               ClipToBounds="True"
-                                               Width="172"
-                                               Height="172"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"
-                                               Source="{Binding AvatarImageSource}"
-                                               RenderOptions.BitmapScalingMode="NearestNeighbor">
-
-                                            <Image.Clip>
-                                                <EllipseGeometry Center="86,86"
-                                                                 RadiusX="86"
-                                                                 RadiusY="86"/>
-                                            </Image.Clip>
-                                        </Image>
-                                    </Grid>
-
-                                    <Button x:Name="btnChangeAvatar"
-                                            Grid.Row="1"
-                                            Width="140"
-                                            Height="36"
-                                            Margin="0,12,0,4"
-                                            HorizontalAlignment="Center"
-                                            Content="Change"
-                                            Style="{StaticResource Btn.Primary}" />
-                                </Grid>
-                            </Border>
+                        <Border Grid.Row="0" CornerRadius="10" Background="{StaticResource Brush.CardInside}" BorderBrush="#C9A26C" BorderThickness="2" Margin="2,2,2,8">
+                            <Grid Margin="8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding AvatarImageSource}" Width="172" Height="172" RenderOptions.BitmapScalingMode="NearestNeighbor">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="86,86" RadiusX="86" RadiusY="86"/>
+                                    </Image.Clip>
+                                </Image>
+                                <Button Grid.Row="1" Content="Change" Style="{StaticResource Btn.Primary}" Width="140" Height="36" 
+                                        Command="{Binding ChangeAvatarCommand}" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"/>
+                            </Grid>
                         </Border>
-
-                        <Border Grid.Row="1"
-                                Margin="2,4,2,6"
-                                CornerRadius="8"
-                                Background="{StaticResource Brush.CardInside}"
-                                BorderBrush="#8C5521"
-                                BorderThickness="2">
-                            
-                            <TextBlock Text="{Binding DisplayName}"
-                                       Style="{StaticResource Txt.CardName}"
-                                       Foreground="#2A1305"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Center"
-                                       TextTrimming="CharacterEllipsis"/>
+                        <Border Grid.Row="1" CornerRadius="8" Background="{StaticResource Brush.CardInside}" BorderBrush="#8C5521" BorderThickness="2">
+                            <TextBlock Text="{Binding DisplayName}" Style="{StaticResource Txt.Pixel}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </Grid>
                 </Grid>
@@ -178,11 +66,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0"
-                       Text="Profile"
-                       Style="{StaticResource Txt.Pixel}"
-                       FontSize="24"
-                       VerticalAlignment="Center" />
+            <TextBlock Text="Profile" Style="{StaticResource Txt.Pixel}" FontSize="24" />
 
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
@@ -192,130 +76,55 @@
                     <RowDefinition Height="12" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="160" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0"
-                           Grid.Column="0"
-                           Text="Display name"
-                           Style="{StaticResource Txt.ReadOnly}"
-                           VerticalAlignment="Center" />
+                <TextBlock Grid.Row="0" Text="Display name" Style="{StaticResource Txt.ReadOnly}" VerticalAlignment="Center" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}" Height="30"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding DisplayName}" Style="{StaticResource Txt.ReadOnly}" VerticalAlignment="Center"
+                           Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}, ConverterParameter=Inverse}"/>
 
-                <TextBlock Grid.Row="0"
-                           Grid.Column="1"
-                           Margin="0,4,0,4"
-                           Text="{Binding DisplayName}">
-                    
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock"
-                               BasedOn="{StaticResource Txt.ReadOnly}">
-                            <Setter Property="Visibility" Value="Visible" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsEditing}" Value="True">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+                <TextBlock Grid.Row="2" Text="Email" Style="{StaticResource Txt.ReadOnly}" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Email}" Style="{StaticResource Txt.ReadOnly}" VerticalAlignment="Center"/>
 
-                <TextBox Grid.Row="0"
-                         Grid.Column="1"
-                         Margin="0,4,0,4"
-                         Height="30"
-                         Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
-                         MaxLength="50">
-                    
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Setter Property="Visibility" Value="Collapsed" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsEditing}" Value="True">
-                                    <Setter Property="Visibility" Value="Visible" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-
-                <TextBlock Grid.Row="2"
-                           Grid.Column="0"
-                           Text="Email"
-                           Style="{StaticResource Txt.ReadOnly}"
-                           VerticalAlignment="Center" />
-
-                <TextBlock Grid.Row="2"
-                           Grid.Column="1"
-                           Margin="0,4,0,4"
-                           Text="{Binding Email}"
-                           Style="{StaticResource Txt.ReadOnly}" />
-
-                <TextBlock Grid.Row="4"
-                           Grid.Column="0"
-                           Text="Password"
-                           Style="{StaticResource Txt.ReadOnly}"
-                           VerticalAlignment="Center" />
-
-                <StackPanel Grid.Row="4"
-                            Grid.Column="1"
-                            Orientation="Horizontal"
-                            Margin="0,4,0,4">
-                    
-                    <TextBlock Text="Not displayed"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource Txt.Pixel}"
-                               FontSize="16" />
-                    
-                    <Button x:Name="btnChangePassword"
-                            Content="Change password"
-                            Height="32"
-                            MinWidth="160"
-                            Margin="12,0,0,0"
-                            Style="{StaticResource Btn.Secondary}" />
+                <TextBlock Grid.Row="4" Text="Password" Style="{StaticResource Txt.ReadOnly}" VerticalAlignment="Center" />
+                <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="********" Style="{StaticResource Txt.Pixel}" FontSize="16" VerticalAlignment="Center"/>
+                    <Button Content="Change Password" Command="{Binding OpenPasswordModalCommand}" Margin="15,0,0,0"
+                            Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}" Style="{StaticResource Btn.Secondary}" Height="30"/>
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="4" Margin="0,8,0,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Button x:Name="btnDeleteAccount"
-                        Width="120"
-                        Height="36"
-                        Content="Delete Account"
-                        HorizontalAlignment="Left"
-                        Style="{StaticResource Btn.Secondary}"
-                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}" />
-
-                <StackPanel Grid.Column="1"
-                            Orientation="Horizontal"
-                            HorizontalAlignment="Right">
-                    <Button x:Name="btnEditSave"
-                            Width="120"
-                            Height="36"
-                            Margin="0,0,8,0"
-                            Content="{Binding EditButtonText}"
-                            Style="{StaticResource Btn.Primary}" />
-                    <Button x:Name="btnCancel"
-                            Width="100"
-                            Height="36"
-                            Content="Cancel"
-                            Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}"
-                            Style="{StaticResource Btn.Secondary}" />
+            <Grid Grid.Row="4" Margin="0,20,0,0">
+                <Button Content="Delete Account" Command="{Binding DeleteAccountCommand}" HorizontalAlignment="Left" Style="{StaticResource Btn.Secondary}" 
+                        Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}" Width="140" Height="36"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="{Binding EditButtonText}" Command="{Binding EditSaveCommand}" Style="{StaticResource Btn.Primary}" Width="120" Height="36" Margin="0,0,10,0"/>
+                    <Button Content="Cancel" Command="{Binding CancelCommand}" Style="{StaticResource Btn.Secondary}" 
+                            Visibility="{Binding IsEditing, Converter={StaticResource BoolToVis}}" Width="100" Height="36"/>
                 </StackPanel>
             </Grid>
         </Grid>
 
-        <Button x:Name="btnBack"
-                Grid.Column="0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Margin="0,0,0,0"
-                Style="{StaticResource Btn.Play.Left}"/>
+        <Button Grid.Column="0" VerticalAlignment="Bottom" Command="{Binding BackCommand}" Style="{StaticResource Btn.Play.Left}"/>
+
+        <Grid Grid.ColumnSpan="5" Background="#AA000000" Visibility="{Binding IsPasswordModalVisible, Converter={StaticResource BoolToVis}}" Panel.ZIndex="100">
+            <Border Width="350" VerticalAlignment="Center" Background="{StaticResource Brush.CardInside}" CornerRadius="10" Padding="20" BorderBrush="#3B1C09" BorderThickness="3">
+                <StackPanel>
+                    <TextBlock Text="CHANGE PASSWORD" Style="{StaticResource Txt.Pixel}" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+                    <TextBlock Text="Current Password:" FontSize="12"/>
+                    <TextBox Text="{Binding CurrentPassword, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,10" Height="25"/>
+                    <TextBlock Text="New Password:" FontSize="12"/>
+                    <TextBox Text="{Binding NewPassword, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,20" Height="25"/>
+                    <Button Content="Accept" Command="{Binding ClosePasswordModalCommand}" Style="{StaticResource Btn.Primary}" Height="30"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.ColumnSpan="5" Background="#44000000" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}" Panel.ZIndex="200">
+            <TextBlock Text="SYNCING..." Foreground="White" Style="{StaticResource Txt.Pixel}" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 </UserControl>

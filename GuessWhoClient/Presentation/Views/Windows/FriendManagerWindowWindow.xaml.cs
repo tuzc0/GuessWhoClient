@@ -9,15 +9,15 @@ namespace WPFGuessWhoClient.Presentation.ViewModels
         public FriendManagerWindow(FriendViewModel viewModel)
         {
             InitializeComponent();
-
             this.DataContext = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
 
-            this.Loaded += (s, e) =>
+            this.Loaded += async (s, e) =>
             {
-                if (viewModel.LoadFriendsCommand != null && viewModel.LoadFriendsCommand.CanExecute(null))
-                {
-                    viewModel.LoadFriendsCommand.Execute(null);
-                }
+                if (viewModel.LoadFriendsCommand.CanExecute(null))
+                    await viewModel.LoadFriendsAsync();
+
+                if (viewModel.LoadPendingRequestsCommand.CanExecute(null))
+                    await viewModel.LoadPendingRequestsAsync();
             };
         }
     }

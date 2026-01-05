@@ -1,5 +1,6 @@
-﻿using GuessWhoClient.Infraestructure.Wcf; 
+﻿using GuessWhoClient.Infraestructure.Wcf;
 using GuessWhoCore.Contracts.Requests;
+using GuessWhoCore.Contracts.Response;
 using System.Threading.Tasks;
 
 namespace GuessWhoClient.Interfaces
@@ -8,5 +9,6 @@ namespace GuessWhoClient.Interfaces
     {
         Task<WcfCallResult<bool>> UpdateProfileAsync(UpdateProfileRequest request);
         Task<WcfCallResult<bool>> DeleteProfileAsync(DeleteProfileRequest request);
+        Task<WcfCallResult<GetProfileResponse>> GetProfileAsync(GetProfileRequest request);
     }
 }

@@ -43,7 +43,7 @@ namespace GuessWhoClient
 
             services.AddSingleton<LoginUiFaultMapper>();
             services.AddSingleton<FriendUiFaultMapper>();
-            services.AddSingleton<UpdateProfileUiFaultMapper>();
+            services.AddSingleton<ProfileUiFaultMapper>();
 
             services.AddTransient<ILoginServiceClient, LoginServiceClientAdapter>();
             services.AddTransient<ILoginAppService, LoginAppService>();
@@ -54,17 +54,26 @@ namespace GuessWhoClient
             services.AddTransient<IFriendServiceClient>(s =>
                 new FriendServiceClientAdapter(s.GetRequiredService<FriendUiFaultMapper>()));
             services.AddTransient<IFriendAppService, FriendAppService>();
-            services.AddTransient<FriendViewModel>();
+
+            services.AddTransient<FriendViewModel>(s => new FriendViewModel(
+                s.GetRequiredService<IFriendAppService>(),
+                s.GetRequiredService<IAlertService>(),
+                s.GetRequiredService<FriendUiFaultMapper>(),
+                s.GetRequiredService<ILocalizationService>(),
+                s.GetRequiredService<SessionContext>(),
+                s.GetRequiredService<IGameScreenManager>()
+            ));
+
             services.AddTransient<FriendManagerWindow>();
             services.AddSingleton<Func<FriendManagerWindow>>(provider => () => provider.GetRequiredService<FriendManagerWindow>());
 
             services.AddTransient<IUpdateProfileServiceClient>(s =>
-                new UpdateProfileServiceClientAdapter(s.GetRequiredService<UpdateProfileUiFaultMapper>()));
+                new UpdateProfileServiceClientAdapter(s.GetRequiredService<ProfileUiFaultMapper>()));
             services.AddTransient<IUpdateProfileAppService, UpdateProfileAppService>();
             services.AddTransient<UpdateProfileViewModel>(s => new UpdateProfileViewModel(
                 s.GetRequiredService<IUpdateProfileAppService>(),
                 s.GetRequiredService<IAlertService>(),
-                s.GetRequiredService<UpdateProfileUiFaultMapper>(),
+                s.GetRequiredService<ProfileUiFaultMapper>(),
                 s.GetRequiredService<ILocalizationService>(),
                 s.GetRequiredService<SessionContext>(),
                 s.GetRequiredService<IGameScreenManager>()

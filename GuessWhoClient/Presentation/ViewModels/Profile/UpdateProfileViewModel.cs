@@ -36,6 +36,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
         private string currentPassword;
         private string newPassword;
         private bool isEditing;
+        private bool isPasswordModalVisible;
 
         public UpdateProfileViewModel(
             IUpdateProfileAppService profileAppService,
@@ -55,42 +56,52 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
             EditSaveCommand = new AsyncRelayCommand(HandleEditSaveAsync, CanExecuteCommands);
             CancelCommand = new RelayCommand(CancelEditing, CanExecuteCommands);
             DeleteAccountCommand = new AsyncRelayCommand(DeleteAccountAsync, CanExecuteCommands);
-            BackCommand = new RelayCommand(() => gameScreenManager.ShowScreen(GameScreenType.MainMenu), CanExecuteCommands);
-            ChangeAvatarCommand = new RelayCommand(() => { }, CanExecuteCommands);
+            BackCommand = new RelayCommand(NavigateBack, CanExecuteCommands);
+            ChangeAvatarCommand = new RelayCommand(ChangeAvatar, CanExecuteCommands);
+            OpenPasswordModalCommand = new RelayCommand(() => IsPasswordModalVisible = true, CanExecuteCommands);
+            ClosePasswordModalCommand = new RelayCommand(() => IsPasswordModalVisible = false, CanExecuteCommands);
         }
 
         public string DisplayName { get => displayName; set => SetProperty(ref displayName, value); }
         public string Email { get => email; set => SetProperty(ref email, value); }
-        public string AvatarId { get => avatarId; set => SetProperty(ref avatarId, value); }
         public string CurrentPassword { get => currentPassword; set => SetProperty(ref currentPassword, value); }
         public string NewPassword { get => newPassword; set => SetProperty(ref newPassword, value); }
+        public bool IsPasswordModalVisible { get => isPasswordModalVisible; set => SetProperty(ref isPasswordModalVisible, value); }
+        public string AvatarId
+        {
+            get => avatarId;
+            set { if (SetProperty(ref avatarId, value)) OnPropertyChanged(nameof(AvatarImageSource)); }
+        }
+
+        public string AvatarImageSource => $"/GuessWhoClient;component/Presentation/Resources/Avatars/{AvatarId}.png";
+        public string EditButtonText => IsEditing ? localizationService.Get("Save") : localizationService.Get("Edit");
+
         public bool IsEditing
         {
             get => isEditing;
-            set
-            {
-                if (SetProperty(ref isEditing, value))
-                    OnPropertyChanged(nameof(EditButtonText));
-            }
+            set { if (SetProperty(ref isEditing, value)) OnPropertyChanged(nameof(EditButtonText)); }
         }
-
-        public string EditButtonText => IsEditing ? localizationService.Get("Save") : localizationService.Get("Edit");
 
         public AsyncRelayCommand EditSaveCommand { get; }
         public RelayCommand CancelCommand { get; }
         public AsyncRelayCommand DeleteAccountCommand { get; }
         public RelayCommand BackCommand { get; }
         public RelayCommand ChangeAvatarCommand { get; }
+        public RelayCommand OpenPasswordModalCommand { get; }
+        public RelayCommand ClosePasswordModalCommand { get; }
 
         public async Task LoadProfileAsync()
         {
             IsBusy = true;
             try
             {
-                await Task.Delay(50);
-                DisplayName = sessionContext.DisplayName;
-                Email = sessionContext.Email;
-                AvatarId = "Avatar01";
+                var result = await profileAppService.GetProfileAsync(new GetProfileRequest { UserId = sessionContext.UserId });
+                if (result != null && result.IsSuccess && result.Value != null)
+                {
+                    DisplayName = result.Value.Username;
+                    Email = result.Value.Email;
+                    AvatarId = string.IsNullOrEmpty(result.Value.AvatarId) ? "Avatar01" : result.Value.AvatarId;
+                }
             }
             catch (Exception ex)
             {
@@ -135,34 +146,17 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
                 };
 
                 var result = await profileAppService.UpdateProfileAsync(request);
-
-                if (result.IsSuccess)
+                if (result != null && result.IsSuccess)
                 {
                     alertService.Info(localizationService.Get("ProfileUpdateSuccess"), localizationService.Get(KEY_UI_SUCCESS_TITLE));
                     sessionContext.UpdateDisplayName(DisplayName);
                     IsEditing = false;
-                    CurrentPassword = string.Empty;
-                    NewPassword = string.Empty;
+                    ClearPasswords();
                 }
-                else
-                {
-                    ShowProfileError(result.FaultCode);
-                }
+                else ShowProfileError(result?.FaultCode);
             }
-            catch (Exception ex)
-            {
-                Logger.Error(ex);
-                ShowUiError(KEY_GENERIC_ERROR);
-            }
+            catch (Exception ex) { Logger.Error(ex); ShowUiError(KEY_GENERIC_ERROR); }
             finally { IsBusy = false; }
-        }
-
-        private void CancelEditing()
-        {
-            IsEditing = false;
-            DisplayName = sessionContext.DisplayName;
-            CurrentPassword = string.Empty;
-            NewPassword = string.Empty;
         }
 
         private async Task DeleteAccountAsync()
@@ -171,35 +165,48 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
             try
             {
                 var result = await profileAppService.DeleteProfileAsync(new DeleteProfileRequest { UserId = sessionContext.UserId });
-                if (result.IsSuccess)
+                if (result != null && result.IsSuccess)
                 {
                     alertService.Info(localizationService.Get("AccountDeletedSuccess"), localizationService.Get(KEY_UI_SUCCESS_TITLE));
                     gameScreenManager.ShowScreen(GameScreenType.Login);
                 }
-                else
-                {
-                    ShowProfileError(result.FaultCode);
-                }
+                else ShowProfileError(result?.FaultCode);
             }
-            catch (Exception ex)
-            {
-                Logger.Error(ex);
-                ShowUiError(KEY_GENERIC_ERROR);
-            }
+            catch (Exception ex) { Logger.Error(ex); ShowUiError(KEY_GENERIC_ERROR); }
             finally { IsBusy = false; }
         }
+
+        private void ChangeAvatar()
+        {
+            if (string.IsNullOrEmpty(AvatarId)) AvatarId = "Avatar01";
+            int current = int.Parse(AvatarId.Replace("Avatar", ""));
+            int next = (current % 3) + 1;
+            AvatarId = $"Avatar{next:D2}";
+        }
+
+        private void CancelEditing()
+        {
+            IsEditing = false;
+            IsPasswordModalVisible = false;
+            ClearPasswords();
+            _ = LoadProfileAsync();
+        }
+
+        private void ClearPasswords()
+        {
+            CurrentPassword = string.Empty;
+            NewPassword = string.Empty;
+        }
+
+        private void NavigateBack() => gameScreenManager.ShowScreen(GameScreenType.MainMenu);
 
         private void ShowProfileError(string faultCode)
         {
             var mapping = profileFaultMapper.Map(faultCode);
-            string key = mapping.IsMapped ? mapping.UiKey : KEY_GENERIC_ERROR;
-            alertService.Error(localizationService.Get(key), localizationService.Get(KEY_UI_ERROR_TITLE));
+            alertService.Error(localizationService.Get(mapping.IsMapped ? mapping.UiKey : KEY_GENERIC_ERROR), localizationService.Get(KEY_UI_ERROR_TITLE));
         }
 
-        private void ShowUiError(string messageKey)
-        {
-            alertService.Error(localizationService.Get(messageKey), localizationService.Get(KEY_UI_ERROR_TITLE));
-        }
+        private void ShowUiError(string messageKey) => alertService.Error(localizationService.Get(messageKey), localizationService.Get(KEY_UI_ERROR_TITLE));
 
         private bool CanExecuteCommands() => !IsBusy;
 
@@ -209,6 +216,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
             CancelCommand.RaiseCanExecuteChanged();
             DeleteAccountCommand.RaiseCanExecuteChanged();
             BackCommand.RaiseCanExecuteChanged();
+            ChangeAvatarCommand.RaiseCanExecuteChanged();
         }
     }
 }
