@@ -272,4 +272,96 @@
   <data name="UiTimeout" xml:space="preserve">
     <value>The request timed out. Please try again.</value>
   </data>
+<data name="UiValidationSixDigits" xml:space="preserve">
+  <value>Verification code must be 6 digits.</value>
+</data>
+<data name="PasswordRecoveryAccountNotFound" xml:space="preserve">
+  <value>We couldn't find an account with that email.</value>
+</data>
+<data name="PasswordRecoveryCodeExpired" xml:space="preserve">
+  <value>The recovery code has expired.</value>
+</data>
+<data name="PasswordRecoveryCodeInvalid" xml:space="preserve">
+  <value>The recovery code is not valid.</value>
+</data>
+<data name="PasswordRecoveryUpdateFailed" xml:space="preserve">
+  <value>We couldn't update your password. Please try again.</value>
+</data>
+
+<data name="EmailVerificationAccountNotFound" xml:space="preserve">
+  <value>Account not found.</value>
+</data>
+<data name="EmailVerificationCodeMissing" xml:space="preserve">
+  <value>Please enter the verification code.</value>
+</data>
+<data name="EmailVerificationCodeExpired" xml:space="preserve">
+  <value>The verification code has expired.</value>
+</data>
+<data name="EmailVerificationCodeAlreadyUsed" xml:space="preserve">
+  <value>This verification code was already used.</value>
+</data>
+<data name="EmailVerificationFailed" xml:space="preserve">
+  <value>We couldn't verify your email. Please try again.</value>
+</data>
+<data name="EmailVerificationResendLimit" xml:space="preserve">
+  <value>You have reached the resend limit. Please try again later.</value>
+</data>
+
+<data name="UiValidationDisplayNameInvalid" xml:space="preserve">
+  <value>Display name format is not valid.</value>
+</data>
+<data name="UiValidationPasswordInvalid" xml:space="preserve">
+  <value>Password format is not valid.</value>
+</data>
+
+<data name="UiValidationEmailTooLong" xml:space="preserve">
+  <value>Email is too long (max. 254 characters).</value>
+</data>
+<data name="UiValidationDisplayNameTooShort" xml:space="preserve">
+  <value>Display name is too short.</value>
+</data>
+<data name="UiValidationDisplayNameInvalidFormat" xml:space="preserve">
+  <value>Display name format is not valid.</value>
+</data>
+<data name="UiValidationPasswordTooLong" xml:space="preserve">
+  <value>Password is too long (max. 64 characters).</value>
+</data>
+<data name="UiValidationConfirmPasswordRequired" xml:space="preserve">
+  <value>Confirm password is required.</value>
+</data>
+
+<data name="UiValidationSixDigits" xml:space="preserve">
+  <value>Verification code must be 6 digits.</value>
+</data>
+<data name="FaultInvalidOrExpiredCode" xml:space="preserve">
+  <value>The code is invalid or has expired.</value>
+</data>
+<data name="UiMainWindowNotFound" xml:space="preserve">
+  <value>Main window was not found.</value>
+</data>
+
+<data name="Infrastructure.Email.RecipientInvalid" xml:space="preserve">
+  <value>The destination email address is invalid. Please verify it and try again.</value>
+</data>
+<data name="Infrastructure.Email.ConfigurationMissing" xml:space="preserve">
+  <value>The email service is not configured. Please try again later.</value>
+</data>
+<data name="Infrastructure.Email.ConfigurationError" xml:space="preserve">
+  <value>The email service configuration is invalid. Please try again later.</value>
+</data>
+<data name="Infrastructure.Email.AuthenticationFailed" xml:space="preserve">
+  <value>The email service could not authenticate with the mail server. Please try again later.</value>
+</data>
+<data name="Infrastructure.Email.Timeout" xml:space="preserve">
+  <value>The email server took too long to respond. Please try again.</value>
+</data>
+<data name="Infrastructure.Email.Unavailable" xml:space="preserve">
+  <value>The email service is temporarily unavailable. Please try again later.</value>
+</data>
+<data name="Infrastructure.Email.SendFailed" xml:space="preserve">
+  <value>We could not send the email. Please try again later.</value>
+</data>
+<data name="Infrastructure.Email.UnexpectedError" xml:space="preserve">
+  <value>An unexpected error occurred while sending the email. Please try again later.</value>
+</data>
 </root>

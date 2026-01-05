@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace GuessWhoClient.Presentation.ViewsModels.Base
 {
@@ -18,15 +19,32 @@ namespace GuessWhoClient.Presentation.ViewsModels.Base
         {
             if (string.IsNullOrWhiteSpace(propertyName))
             {
-                return Array.Empty<string>();
+                if (errors.Count == 0)
+                {
+                    return Array.Empty<string>();
+                }
+
+                return errors.Values.SelectMany(x => x).ToList();
             }
 
-            if (errors.TryGetValue(propertyName, out List<string> propertyErrors))
+            return errors.TryGetValue(propertyName, out List<string> propertyErrors)
+                ? (IEnumerable)propertyErrors
+                : Array.Empty<string>();
+        }
+
+        public string FirstErrorOrEmpty(string propertyName)
+        {
+            IEnumerable list = GetErrors(propertyName);
+
+            foreach (object item in list)
             {
-                return propertyErrors;
+                if (item is string message && !string.IsNullOrWhiteSpace(message))
+                {
+                    return message;
+                }
             }
 
-            return Array.Empty<string>();
+            return string.Empty;
         }
 
         public void ReplaceAllErrors(IReadOnlyDictionary<string, IReadOnlyList<string>> errors)
@@ -38,7 +56,7 @@ namespace GuessWhoClient.Presentation.ViewsModels.Base
                 return;
             }
 
-            foreach (var pair in errors)
+            foreach (KeyValuePair<string, IReadOnlyList<string>> pair in errors)
             {
                 string propertyName = pair.Key ?? string.Empty;
                 IReadOnlyList<string> messages = pair.Value ?? Array.Empty<string>();
@@ -47,11 +65,19 @@ namespace GuessWhoClient.Presentation.ViewsModels.Base
                 {
                     string message = messages[index];
 
-                    AddErrorInternal(propertyName, message);
+                    if (!string.IsNullOrWhiteSpace(message))
+                    {
+                        AddErrorInternal(propertyName, message);
+                    }
                 }
 
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+                RaiseErrorsChanged(propertyName);
             }
+        }
+
+        public void ClearAllErrors()
+        {
+            ClearAllErrorsInternal();
         }
 
         private void AddErrorInternal(string propertyName, string errorMessage)
@@ -68,11 +94,6 @@ namespace GuessWhoClient.Presentation.ViewsModels.Base
             }
         }
 
-        public void ClearAllErrors()
-        {
-            ClearAllErrorsInternal();
-        }
-
         private void ClearAllErrorsInternal()
         {
             if (errors.Count == 0)
@@ -81,14 +102,17 @@ namespace GuessWhoClient.Presentation.ViewsModels.Base
             }
 
             string[] keys = new string[errors.Keys.Count];
-            errors.Keys.CopyTo(keys, 0);
-
             errors.Clear();
 
             for (int index = 0; index < keys.Length; index++)
             {
                 ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(keys[index]));
             }
+        }
+
+        private void RaiseErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
     }
 }

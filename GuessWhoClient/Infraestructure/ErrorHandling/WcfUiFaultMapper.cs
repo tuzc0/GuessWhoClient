@@ -1,14 +1,10 @@
-﻿using System;
+﻿using GuessWhoClient.Infraestructure.Wcf;
+using System;
 
 namespace GuessWhoClient.Infraestructure.ErrorHandling
 {
     public sealed class WcfUiFaultMapper : IUiFaultMapper
     {
-        private const string CODE_ENDPOINT_NOT_FOUND = "WCF_ENDPOINT_NOT_FOUND";
-        private const string CODE_SECURITY_ERROR = "WCF_SECURITY_ERROR";
-        private const string CODE_TIMEOUT = "WCF_TIMEOUT";
-        private const string CODE_COMMUNICATION = "WCF_COMMUNICATION_ERROR";
-
         private const string KEY_SERVICE_UNAVAILABLE = "UiServiceUnavailable";
         private const string KEY_SECURITY_ERROR = "UiSecurityError";
         private const string KEY_TIMEOUT = "UiTimeout";
@@ -20,22 +16,22 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling
                 return UiKeyMapping.Unmapped();
             }
 
-            if (string.Equals(faultCode, CODE_ENDPOINT_NOT_FOUND, StringComparison.Ordinal))
+            if (string.Equals(faultCode, WcfTechnicalFaultCodes.ENDPOINT_NOT_FOUND, StringComparison.Ordinal))
             {
                 return UiKeyMapping.Mapped(KEY_SERVICE_UNAVAILABLE);
             }
 
-            if (string.Equals(faultCode, CODE_SECURITY_ERROR, StringComparison.Ordinal))
+            if (string.Equals(faultCode, WcfTechnicalFaultCodes.SECURITY_ERROR, StringComparison.Ordinal))
             {
                 return UiKeyMapping.Mapped(KEY_SECURITY_ERROR);
             }
 
-            if (string.Equals(faultCode, CODE_TIMEOUT, StringComparison.Ordinal))
+            if (string.Equals(faultCode, WcfTechnicalFaultCodes.TIMEOUT, StringComparison.Ordinal))
             {
                 return UiKeyMapping.Mapped(KEY_TIMEOUT);
             }
 
-            if (string.Equals(faultCode, CODE_COMMUNICATION, StringComparison.Ordinal))
+            if (string.Equals(faultCode, WcfTechnicalFaultCodes.COMMUNICATION_ERROR, StringComparison.Ordinal))
             {
                 return UiKeyMapping.Mapped(KEY_SERVICE_UNAVAILABLE);
             }

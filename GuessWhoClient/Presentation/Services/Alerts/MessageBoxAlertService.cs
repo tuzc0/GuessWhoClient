@@ -1,10 +1,13 @@
-﻿using GuessWhoClient.Globalization;
-using System.Windows;
+﻿using System.Windows;
 
 namespace GuessWhoClient.Services.Alerts
 {
     public sealed class MessageBoxAlertService : IAlertService
     {
+        public void Ok(string message, string title) 
+        { 
+            MessageBox.Show(message ?? string.Empty, title ?? string.Empty, MessageBoxButton.OK, MessageBoxImage.None);
+        }
 
         public void Warn(string message, string title) =>
             MessageBox.Show(message ?? string.Empty, title ?? string.Empty, MessageBoxButton.OK, MessageBoxImage.Warning);

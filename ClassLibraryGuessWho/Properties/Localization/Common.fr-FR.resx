@@ -273,4 +273,124 @@
   <data name="UiTimeout" xml:space="preserve">
     <value>La demande a expiré. Veuillez réessayer.</value>
   </data>
+<data name="BtnResendCode" xml:space="preserve">
+  <value>Renvoyer le code</value>
+</data>
+<data name="BtnVerifyCode" xml:space="preserve">
+  <value>Vérifier</value>
+</data>
+<data name="LblVerificationCode" xml:space="preserve">
+  <value>Code de vérification</value>
+</data>
+<data name="UiResendInFmt" xml:space="preserve">
+  <value>Vous pourrez renvoyer le code dans {0} secondes</value>
+</data>
+<data name="UIVerificationCodeExpired" xml:space="preserve">
+  <value>Le code de vérification a expiré</value>
+</data>
+<data name="UIVerificationCodeInvalid" xml:space="preserve">
+  <value>Le code de vérification n'est pas valide</value>
+</data>
+<data name="UIVerificationCodeRequired" xml:space="preserve">
+  <value>Veuillez saisir le code de vérification</value>
+</data>
+<data name="UIVerificationResent" xml:space="preserve">
+  <value>Nous avons envoyé un nouveau code de vérification à votre adresse e-mail</value>
+</data>
+<data name="UIVerificationSuccess" xml:space="preserve">
+  <value>Votre adresse e-mail a été vérifiée avec succès</value>
+</data>
+<data name="USER_REQUEST_NULL" xml:space="preserve">
+  <value>Les données d’inscription sont manquantes. Veuillez remplir le formulaire et réessayer.</value>
+</data>
+
+<data name="PasswordRecoveryAccountNotFound" xml:space="preserve">
+  <value>Aucun compte ne correspond à cette adresse e-mail.</value>
+</data>
+<data name="PasswordRecoveryCodeExpired" xml:space="preserve">
+  <value>Le code de récupération a expiré.</value>
+</data>
+<data name="PasswordRecoveryCodeInvalid" xml:space="preserve">
+  <value>Le code de récupération n'est pas valide.</value>
+</data>
+<data name="PasswordRecoveryUpdateFailed" xml:space="preserve">
+  <value>Impossible de mettre à jour le mot de passe. Veuillez réessayer.</value>
+</data>
+
+<data name="EmailVerificationAccountNotFound" xml:space="preserve">
+  <value>Compte introuvable.</value>
+</data>
+<data name="EmailVerificationCodeMissing" xml:space="preserve">
+  <value>Veuillez saisir le code de vérification.</value>
+</data>
+<data name="EmailVerificationCodeExpired" xml:space="preserve">
+  <value>Le code de vérification a expiré.</value>
+</data>
+<data name="EmailVerificationCodeAlreadyUsed" xml:space="preserve">
+  <value>Ce code de vérification a déjà été utilisé.</value>
+</data>
+<data name="EmailVerificationFailed" xml:space="preserve">
+  <value>Impossible de vérifier votre adresse e-mail. Veuillez réessayer.</value>
+</data>
+<data name="EmailVerificationResendLimit" xml:space="preserve">
+  <value>Vous avez atteint la limite de renvoi. Veuillez réessayer plus tard.</value>
+</data>
+
+<data name="UiValidationDisplayNameInvalid" xml:space="preserve">
+  <value>Le nom d’affichage n’a pas un format valide.</value>
+</data>
+<data name="UiValidationPasswordInvalid" xml:space="preserve">
+  <value>Le mot de passe n’a pas un format valide.</value>
+</data>
+
+<data name="UiValidationEmailTooLong" xml:space="preserve">
+  <value>L’adresse e-mail est trop longue (max. 254 caractères).</value>
+</data>
+<data name="UiValidationDisplayNameTooShort" xml:space="preserve">
+  <value>Le nom d’affichage est trop court.</value>
+</data>
+<data name="UiValidationDisplayNameInvalidFormat" xml:space="preserve">
+  <value>Le nom d’affichage a un format invalide.</value>
+</data>
+<data name="UiValidationPasswordTooLong" xml:space="preserve">
+  <value>Le mot de passe est trop long (max. 64 caractères).</value>
+</data>
+<data name="UiValidationConfirmPasswordRequired" xml:space="preserve">
+  <value>La confirmation du mot de passe est requise.</value>
+</data>
+
+<data name="UiValidationSixDigits" xml:space="preserve">
+  <value>Le code doit contenir 6 chiffres.</value>
+</data>
+<data name="FaultInvalidOrExpiredCode" xml:space="preserve">
+  <value>Le code est invalide ou a expiré.</value>
+</data>
+<data name="UiMainWindowNotFound" xml:space="preserve">
+  <value>Fenêtre principale introuvable.</value>
+</data>
+
+<data name="Infrastructure.Email.RecipientInvalid" xml:space="preserve">
+  <value>L'adresse e-mail de destination est invalide. Veuillez vérifier et réessayer.</value>
+</data>
+<data name="Infrastructure.Email.ConfigurationMissing" xml:space="preserve">
+  <value>Le service d’e-mail n’est pas configuré. Veuillez réessayer plus tard.</value>
+</data>
+<data name="Infrastructure.Email.ConfigurationError" xml:space="preserve">
+  <value>La configuration du service d’e-mail est invalide. Veuillez réessayer plus tard.</value>
+</data>
+<data name="Infrastructure.Email.AuthenticationFailed" xml:space="preserve">
+  <value>Le service d’e-mail n’a pas pu s’authentifier auprès du serveur. Veuillez réessayer plus tard.</value>
+</data>
+<data name="Infrastructure.Email.Timeout" xml:space="preserve">
+  <value>Le serveur d’e-mail a mis trop de temps à répondre. Veuillez réessayer.</value>
+</data>
+<data name="Infrastructure.Email.Unavailable" xml:space="preserve">
+  <value>Le service d’e-mail est temporairement indisponible. Veuillez réessayer plus tard.</value>
+</data>
+<data name="Infrastructure.Email.SendFailed" xml:space="preserve">
+  <value>Impossible d’envoyer l’e-mail. Veuillez réessayer plus tard.</value>
+</data>
+<data name="Infrastructure.Email.UnexpectedError" xml:space="preserve">
+  <value>Une erreur inattendue s’est produite lors de l’envoi de l’e-mail. Veuillez réessayer plus tard.</value>
+</data>
 </root>
