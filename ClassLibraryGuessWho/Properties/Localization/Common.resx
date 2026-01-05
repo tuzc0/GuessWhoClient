@@ -252,7 +252,6 @@
   <data name="LoginProfileActivationFailed" xml:space="preserve">
     <value>We couldn't start your session. Please try again.</value>
   </data>
-
   <data name="UiGenericError" xml:space="preserve">
     <value>Something went wrong. Please try again.</value>
   </data>
@@ -262,7 +261,6 @@
   <data name="UiInvalidOperation" xml:space="preserve">
     <value>This action can't be completed right now. Please try again.</value>
   </data>
-
   <data name="UiServiceUnavailable" xml:space="preserve">
     <value>The service is unavailable. Please try again later.</value>
   </data>
@@ -271,5 +269,101 @@
   </data>
   <data name="UiTimeout" xml:space="preserve">
     <value>The request timed out. Please try again.</value>
+  </data>
+  <data name="FRIEND_ACCOUNT_NOT_FOUND" xml:space="preserve">
+    <value>Account not found or inactive</value>
+  </data>
+  <data name="FriendErrorTitle" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="FriendRequestSent" xml:space="preserve">
+    <value>Friend request sent successfully!</value>
+  </data>
+  <data name="FRIEND_ALREADY_FRIENDS" xml:space="preserve">
+    <value>This user is already your friend.</value>
+  </data>
+  <data name="FRIEND_CANNOT_SELF" xml:space="preserve">
+    <value>You cannot add yourself as a friend</value>
+  </data>
+  <data name="FRIEND_INVALID_ACCOUNT_ID" xml:space="preserve">
+    <value>Invalid account ID</value>
+  </data>
+  <data name="FRIEND_REQUEST_ALREADY_PENDING" xml:space="preserve">
+    <value>A pending request already exists.</value>
+  </data>
+  <data name="FRIEND_REQUEST_NULL" xml:space="preserve">
+    <value>Friend request cannot be null.</value>
+  </data>
+  <data name="FRIEND_UNEXPECTED_ERROR" xml:space="preserve">
+    <value>Unexpected error in friend system.</value>
+  </data>
+  <data name="CODE_REQUEST_NULL" xml:space="preserve">
+    <value>The friend request is empty or invalid.</value>
+  </data>
+  <data name="CODE_INVALID_ACCOUNT_ID" xml:space="preserve">
+    <value>The provided account identifier is invalid.</value>
+  </data>
+  <data name="CODE_ACCOUNT_NOT_FOUND" xml:space="preserve">
+    <value>The user you are trying to find or add does not exist.</value>
+  </data>
+  <data name="CODE_INVALID_DISPLAY_NAME" xml:space="preserve">
+    <value>The display name has an incorrect format.</value>
+  </data>
+  <data name="CODE_INVALID_IDS" xml:space="preserve">
+    <value>The user identifiers do not match.</value>
+  </data>
+  <data name="CODE_CANNOT_FRIEND_SELF" xml:space="preserve">
+    <value>You cannot send a friend request to yourself.</value>
+  </data>
+  <data name="CODE_DESTINATION_INACTIVE" xml:space="preserve">
+    <value>The user you are trying to contact is currently inactive.</value>
+  </data>
+  <data name="CODE_NOT_AUTHORIZED" xml:space="preserve">
+    <value>You do not have permission to perform this action.</value>
+  </data>
+  <data name="CODE_NOT_FOUND" xml:space="preserve">
+    <value>The requested friendship record was not found.</value>
+  </data>
+  <data name="CODE_NOT_PENDING" xml:space="preserve">
+    <value>This request is no longer pending approval.</value>
+  </data>
+  <data name="CODE_ALREADY_FRIENDS" xml:space="preserve">
+    <value>You are already friends with this user.</value>
+  </data>
+  <data name="CODE_REQUEST_ID_NOT_GENERATED" xml:space="preserve">
+    <value>An error occurred while generating the request. Please try again.</value>
+  </data>
+  <data name="CODE_REQUEST_ALREADY_PENDING" xml:space="preserve">
+    <value>A friend request is already pending with this user.</value>
+  </data>
+  <data name="CODE_USER_ID_INVALID" xml:space="preserve">
+    <value>Your user session is invalid or has expired.</value>
+  </data>
+  <data name="CODE_PROFILE_NOT_FOUND" xml:space="preserve">
+    <value>Your user profile information could not be found.</value>
+  </data>
+  <data name="CODE_NO_CHANGES_PROVIDED" xml:space="preserve">
+    <value>No changes were detected to be saved.</value>
+  </data>
+  <data name="CODE_CURRENT_PASSWORD_REQUIRED" xml:space="preserve">
+    <value>You must enter your current password to confirm changes.</value>
+  </data>
+  <data name="CODE_CURRENT_PASSWORD_INCORRECT" xml:space="preserve">
+    <value>The current password entered is incorrect.</value>
+  </data>
+  <data name="CODE_UPDATE_FAILED" xml:space="preserve">
+    <value>Internal error occurred while saving profile changes.</value>
+  </data>
+  <data name="CODE_PROFILE_DELETE_FAILED" xml:space="preserve">
+    <value>Could not delete the account. Please try again later.</value>
+  </data>
+  <data name="CODE_DISPLAYNAME_INVALID" xml:space="preserve">
+    <value>The display name does not meet the system requirements.</value>
+  </data>
+  <data name="CODE_AVATAR_INVALID" xml:space="preserve">
+    <value>The selected avatar is currently unavailable.</value>
+  </data>
+  <data name="ODE_PASSWORD_INVALID" xml:space="preserve">
+    <value>The new password does not meet security requirements.</value>
   </data>
 </root>

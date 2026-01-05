@@ -80,6 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="Application\ErrorHandling\Auth\LoginUiFaultMapper.cs" />
+    <Compile Include="Application\ErrorHandling\Friends\FriendUiFaultMapper.cs" />
+    <Compile Include="Application\ErrorHandling\Profile\ProfileUiFaultMapper.cs" />
     <Compile Include="Application\Mappers\LobbyPlayerMapper.cs" />
     <Compile Include="Application\Results\OperationResult.cs" />
     <Compile Include="Application\Results\RegisterUserResult.cs" />
@@ -88,6 +90,8 @@
     <Compile Include="Application\Services\Friends\FriendAppService.cs" />
     <Compile Include="Application\Services\Friends\IFriendAppService.cs" />
     <Compile Include="Application\Services\IUserAppService.cs" />
+    <Compile Include="Application\Services\Update\IUpdateProfileAppService.cs" />
+    <Compile Include="Application\Services\Update\UpdateProfileAppService.cs" />
     <Compile Include="Application\Services\UserAppService.cs" />
     <Compile Include="Domain\Models\LobbyPlayer.cs" />
     <Compile Include="Domain\Models\UserRegistrationInput.cs" />
@@ -100,7 +104,9 @@
     <Compile Include="Infraestructure\Wcf\Clients\FriendServiceClientAdapter.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\IFriendServiceClient.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\ILoginServiceClient.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\IUpdateProfileServiceClient.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\LoginServiceClientAdapter.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\UpdateProfileServiceClientAdapter.cs" />
     <Compile Include="Infraestructure\Wcf\WcfCallResult.cs" />
     <Compile Include="Infraestructure\Wcf\WcfEndpointNames.cs" />
     <Compile Include="Interfaces\IFriendManager.cs" />
@@ -124,8 +130,10 @@
     <Compile Include="Presentation\ViewModels\Auth\LoginViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Base\AsyncRelayCommand.cs" />
     <Compile Include="Presentation\ViewModels\Base\DataErrors.cs" />
+    <Compile Include="Presentation\ViewModels\Base\RelayCommand.cs" />
     <Compile Include="Presentation\ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="Presentation\ViewModels\Friends\FriendViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Profile\UpdateProfileViewModel.cs" />
     <Compile Include="Presentation\Views\UserControls\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
@@ -183,7 +191,7 @@
     <Compile Include="FriendListWindow.xaml.cs">
       <DependentUpon>FriendListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FriendManagerWindowWindow.xaml.cs">
+    <Compile Include="Presentation\Views\Windows\FriendManagerWindowWindow.xaml.cs">
       <DependentUpon>FriendManagerWindowWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Views\UserControls\GameLobbyView.xaml.cs">
@@ -241,7 +249,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FriendManagerWindowWindow.xaml">
+    <Page Include="Presentation\Views\Windows\FriendManagerWindowWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

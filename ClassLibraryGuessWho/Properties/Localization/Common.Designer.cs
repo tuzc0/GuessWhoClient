@@ -115,6 +115,204 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The user you are trying to find or add does not exist..
+        /// </summary>
+        public static string CODE_ACCOUNT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CODE_ACCOUNT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You are already friends with this user..
+        /// </summary>
+        public static string CODE_ALREADY_FRIENDS {
+            get {
+                return ResourceManager.GetString("CODE_ALREADY_FRIENDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The selected avatar is currently unavailable..
+        /// </summary>
+        public static string CODE_AVATAR_INVALID {
+            get {
+                return ResourceManager.GetString("CODE_AVATAR_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You cannot send a friend request to yourself..
+        /// </summary>
+        public static string CODE_CANNOT_FRIEND_SELF {
+            get {
+                return ResourceManager.GetString("CODE_CANNOT_FRIEND_SELF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The current password entered is incorrect..
+        /// </summary>
+        public static string CODE_CURRENT_PASSWORD_INCORRECT {
+            get {
+                return ResourceManager.GetString("CODE_CURRENT_PASSWORD_INCORRECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You must enter your current password to confirm changes..
+        /// </summary>
+        public static string CODE_CURRENT_PASSWORD_REQUIRED {
+            get {
+                return ResourceManager.GetString("CODE_CURRENT_PASSWORD_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user you are trying to contact is currently inactive..
+        /// </summary>
+        public static string CODE_DESTINATION_INACTIVE {
+            get {
+                return ResourceManager.GetString("CODE_DESTINATION_INACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The display name does not meet the system requirements..
+        /// </summary>
+        public static string CODE_DISPLAYNAME_INVALID {
+            get {
+                return ResourceManager.GetString("CODE_DISPLAYNAME_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The provided account identifier is invalid..
+        /// </summary>
+        public static string CODE_INVALID_ACCOUNT_ID {
+            get {
+                return ResourceManager.GetString("CODE_INVALID_ACCOUNT_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The display name has an incorrect format..
+        /// </summary>
+        public static string CODE_INVALID_DISPLAY_NAME {
+            get {
+                return ResourceManager.GetString("CODE_INVALID_DISPLAY_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user identifiers do not match..
+        /// </summary>
+        public static string CODE_INVALID_IDS {
+            get {
+                return ResourceManager.GetString("CODE_INVALID_IDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No changes were detected to be saved..
+        /// </summary>
+        public static string CODE_NO_CHANGES_PROVIDED {
+            get {
+                return ResourceManager.GetString("CODE_NO_CHANGES_PROVIDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You do not have permission to perform this action..
+        /// </summary>
+        public static string CODE_NOT_AUTHORIZED {
+            get {
+                return ResourceManager.GetString("CODE_NOT_AUTHORIZED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The requested friendship record was not found..
+        /// </summary>
+        public static string CODE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CODE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This request is no longer pending approval..
+        /// </summary>
+        public static string CODE_NOT_PENDING {
+            get {
+                return ResourceManager.GetString("CODE_NOT_PENDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Could not delete the account. Please try again later..
+        /// </summary>
+        public static string CODE_PROFILE_DELETE_FAILED {
+            get {
+                return ResourceManager.GetString("CODE_PROFILE_DELETE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your user profile information could not be found..
+        /// </summary>
+        public static string CODE_PROFILE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CODE_PROFILE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a A friend request is already pending with this user..
+        /// </summary>
+        public static string CODE_REQUEST_ALREADY_PENDING {
+            get {
+                return ResourceManager.GetString("CODE_REQUEST_ALREADY_PENDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An error occurred while generating the request. Please try again..
+        /// </summary>
+        public static string CODE_REQUEST_ID_NOT_GENERATED {
+            get {
+                return ResourceManager.GetString("CODE_REQUEST_ID_NOT_GENERATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The friend request is empty or invalid..
+        /// </summary>
+        public static string CODE_REQUEST_NULL {
+            get {
+                return ResourceManager.GetString("CODE_REQUEST_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Internal error occurred while saving profile changes..
+        /// </summary>
+        public static string CODE_UPDATE_FAILED {
+            get {
+                return ResourceManager.GetString("CODE_UPDATE_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your user session is invalid or has expired..
+        /// </summary>
+        public static string CODE_USER_ID_INVALID {
+            get {
+                return ResourceManager.GetString("CODE_USER_ID_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Unable to connect to the database.
         /// </summary>
         public static string FaultDatabaseConnection {
@@ -165,6 +363,87 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string FaultUnexpected {
             get {
                 return ResourceManager.GetString("FaultUnexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account not found or inactive.
+        /// </summary>
+        public static string FRIEND_ACCOUNT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("FRIEND_ACCOUNT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This user is already your friend..
+        /// </summary>
+        public static string FRIEND_ALREADY_FRIENDS {
+            get {
+                return ResourceManager.GetString("FRIEND_ALREADY_FRIENDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You cannot add yourself as a friend.
+        /// </summary>
+        public static string FRIEND_CANNOT_SELF {
+            get {
+                return ResourceManager.GetString("FRIEND_CANNOT_SELF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid account ID.
+        /// </summary>
+        public static string FRIEND_INVALID_ACCOUNT_ID {
+            get {
+                return ResourceManager.GetString("FRIEND_INVALID_ACCOUNT_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a A pending request already exists..
+        /// </summary>
+        public static string FRIEND_REQUEST_ALREADY_PENDING {
+            get {
+                return ResourceManager.GetString("FRIEND_REQUEST_ALREADY_PENDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend request cannot be null..
+        /// </summary>
+        public static string FRIEND_REQUEST_NULL {
+            get {
+                return ResourceManager.GetString("FRIEND_REQUEST_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unexpected error in friend system..
+        /// </summary>
+        public static string FRIEND_UNEXPECTED_ERROR {
+            get {
+                return ResourceManager.GetString("FRIEND_UNEXPECTED_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friends.
+        /// </summary>
+        public static string FriendErrorTitle {
+            get {
+                return ResourceManager.GetString("FriendErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend request sent successfully!.
+        /// </summary>
+        public static string FriendRequestSent {
+            get {
+                return ResourceManager.GetString("FriendRequestSent", resourceCulture);
             }
         }
         
@@ -232,6 +511,60 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Your account is locked. Please contact support..
+        /// </summary>
+        public static string LoginAccountLocked {
+            get {
+                return ResourceManager.GetString("LoginAccountLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Login error.
+        /// </summary>
+        public static string LoginErrorTitle {
+            get {
+                return ResourceManager.GetString("LoginErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid email or password..
+        /// </summary>
+        public static string LoginInvalidCredentials {
+            get {
+                return ResourceManager.GetString("LoginInvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t start your session. Please try again..
+        /// </summary>
+        public static string LoginProfileActivationFailed {
+            get {
+                return ResourceManager.GetString("LoginProfileActivationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Welcome.
+        /// </summary>
+        public static string LoginWelcomeTitle {
+            get {
+                return ResourceManager.GetString("LoginWelcomeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The new password does not meet security requirements..
+        /// </summary>
+        public static string ODE_PASSWORD_INVALID {
+            get {
+                return ResourceManager.GetString("ODE_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Account created.
         /// </summary>
         public static string UiAccountCreatedForFmt {
@@ -250,6 +583,24 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Something went wrong. Please try again..
+        /// </summary>
+        public static string UiGenericError {
+            get {
+                return ResourceManager.GetString("UiGenericError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This action can&apos;t be completed right now. Please try again..
+        /// </summary>
+        public static string UiInvalidOperation {
+            get {
+                return ResourceManager.GetString("UiInvalidOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a You can resend the code in {0} seconds.
         /// </summary>
         public static string UiResendInFmt {
@@ -259,11 +610,38 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a A security error occurred while connecting. Please try again..
+        /// </summary>
+        public static string UiSecurityError {
+            get {
+                return ResourceManager.GetString("UiSecurityError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Transport authentication (Windows) failed. Verify that the service is running.
         /// </summary>
         public static string UiSecurityNegotiationFailed {
             get {
                 return ResourceManager.GetString("UiSecurityNegotiationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The service is unavailable. Please try again later..
+        /// </summary>
+        public static string UiServiceUnavailable {
+            get {
+                return ResourceManager.GetString("UiServiceUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The request timed out. Please try again..
+        /// </summary>
+        public static string UiTimeout {
+            get {
+                return ResourceManager.GetString("UiTimeout", resourceCulture);
             }
         }
         
@@ -354,6 +732,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiValidationPasswordTooShort {
             get {
                 return ResourceManager.GetString("UiValidationPasswordTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a A value is out of range. Please check your input..
+        /// </summary>
+        public static string UiValueOutOfRange {
+            get {
+                return ResourceManager.GetString("UiValueOutOfRange", resourceCulture);
             }
         }
         

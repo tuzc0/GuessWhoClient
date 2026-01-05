@@ -253,7 +253,6 @@
   <data name="LoginProfileActivationFailed" xml:space="preserve">
     <value>No se pudo iniciar tu sesión. Intenta de nuevo.</value>
   </data>
-
   <data name="UiGenericError" xml:space="preserve">
     <value>Ocurrió un error. Intenta de nuevo.</value>
   </data>
@@ -263,7 +262,6 @@
   <data name="UiInvalidOperation" xml:space="preserve">
     <value>No se puede completar esta acción en este momento. Intenta de nuevo.</value>
   </data>
-
   <data name="UiServiceUnavailable" xml:space="preserve">
     <value>El servicio no está disponible. Intenta más tarde.</value>
   </data>
@@ -272,5 +270,101 @@
   </data>
   <data name="UiTimeout" xml:space="preserve">
     <value>La solicitud tardó demasiado. Intenta de nuevo.</value>
+  </data>
+  <data name="FRIEND_ACCOUNT_NOT_FOUND" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="FriendErrorTitle" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="FriendRequestSent" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="FRIEND_ALREADY_FRIENDS" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="FRIEND_CANNOT_SELF" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="FRIEND_INVALID_ACCOUNT_ID" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="FRIEND_REQUEST_ALREADY_PENDING" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="FRIEND_REQUEST_NULL" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="FRIEND_UNEXPECTED_ERROR" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_REQUEST_NULL" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_INVALID_ACCOUNT_ID" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_ACCOUNT_NOT_FOUND" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_INVALID_DISPLAY_NAME" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_INVALID_IDS" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_CANNOT_FRIEND_SELF" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_DESTINATION_INACTIVE" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_NOT_AUTHORIZED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_NOT_FOUND" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_NOT_PENDING" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_ALREADY_FRIENDS" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_REQUEST_ID_NOT_GENERATED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_REQUEST_ALREADY_PENDING" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_USER_ID_INVALID" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_PROFILE_NOT_FOUND" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_NO_CHANGES_PROVIDED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_CURRENT_PASSWORD_REQUIRED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_CURRENT_PASSWORD_INCORRECT" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_UPDATE_FAILED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_PROFILE_DELETE_FAILED" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_DISPLAYNAME_INVALID" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="CODE_AVATAR_INVALID" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="ODE_PASSWORD_INVALID" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

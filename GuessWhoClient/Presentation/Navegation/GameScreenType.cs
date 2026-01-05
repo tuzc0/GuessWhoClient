@@ -2,6 +2,7 @@
 {
     public enum GameScreenType
     {
+        Login,
         MainMenu,
         Lobby,
         CreateAccount,

@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 
-namespace WPFGuessWhoClient
+namespace WPFGuessWhoClient.Presentation.ViewModels
 {
     public partial class FriendManagerWindow : Window
     {

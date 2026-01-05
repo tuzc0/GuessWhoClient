@@ -1,5 +1,6 @@
 ﻿using GuessWhoClient.FriendServiceRef;
 using GuessWhoClient.Presentation.Infrastructure;
+using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoCore.Contracts.Faults;
 using GuessWhoCore.Contracts.Request;
 using GuessWhoCore.Contracts.Requests;
@@ -21,6 +22,13 @@ namespace GuessWhoClient.Infraestructure.Wcf.Clients
         private const string CODE_TIMEOUT = "WCF_TIMEOUT";
         private const string CODE_COMMUNICATION = "WCF_COMMUNICATION_ERROR";
         private const string CODE_UNEXPECTED = "WCF_UNEXPECTED_ERROR";
+
+        private readonly IUiFaultMapper _faultMapper;
+
+        public FriendServiceClientAdapter(IUiFaultMapper faultMapper)
+        {
+            _faultMapper = faultMapper ?? throw new ArgumentNullException(nameof(faultMapper));
+        }
 
         public async Task<WcfCallResult<SearchProfilesResponse>> SearchProfilesAsync(SearchProfileRequest request)
         {
@@ -118,7 +126,8 @@ namespace GuessWhoClient.Infraestructure.Wcf.Clients
             if (ex is FaultException<ServiceFault> faultEx)
             {
                 Logger.Warn(context, faultEx);
-                return WcfCallResult<T>.Fail(faultEx.Detail?.Code, faultEx.ToString());
+                var mapping = _faultMapper.Map(faultEx.Detail?.Code);
+                return WcfCallResult<T>.Fail(mapping.UiKey, faultEx.ToString());
             }
 
             Logger.Error(context, ex);
@@ -130,5 +139,7 @@ namespace GuessWhoClient.Infraestructure.Wcf.Clients
 
             return WcfCallResult<T>.Fail(CODE_UNEXPECTED, ex.Message);
         }
+
+        public void Dispose() { }
     }
 }
