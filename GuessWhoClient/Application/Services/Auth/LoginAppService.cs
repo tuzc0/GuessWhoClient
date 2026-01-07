@@ -1,5 +1,5 @@
 ﻿using GuessWhoClient.Infraestructure.Wcf;
-using GuessWhoClient.Infraestructure.Wcf.Clients;
+using GuessWhoClient.Infraestructure.Wcf.Clients.Login;
 using GuessWhoCore.Contracts.Requests;
 using GuessWhoCore.Contracts.Response;
 using System;

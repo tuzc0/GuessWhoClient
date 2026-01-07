@@ -44,192 +44,220 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="SetMatchPrivate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q7:SetMatchPrivateRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetMatchPrivateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="SetMatchPrivateResult" nillable="true" type="q8:BasicResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchPublicMatch">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q9:SearchPublicMatchRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchPublicMatchResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="SearchPublicMatchResult" nillable="true" type="q10:SearchPublicMatchResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SetPlayerReadyStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q7:SetPlayerReadyStatusRequest" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q11:SetPlayerReadyStatusRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SetPlayerReadyStatusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="SetPlayerReadyStatusResult" nillable="true" type="q8:BasicResponse" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="SetPlayerReadyStatusResult" nillable="true" type="q12:BasicResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SubscribeLobby">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q9:SubscribeLobbyRequest" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q13:SubscribeLobbyRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SubscribeLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="SubscribeLobbyResult" nillable="true" type="q10:BasicResponse" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="SubscribeLobbyResult" nillable="true" type="q14:BasicResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UnsubscribeLobby">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q11:UnsubscribeLobbyRequest" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q15:UnsubscribeLobbyRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UnsubscribeLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="UnsubscribeLobbyResult" nillable="true" type="q12:BasicResponse" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="UnsubscribeLobbyResult" nillable="true" type="q16:BasicResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="StartMatch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q13:StartMatchRequest" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q17:StartMatchRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="StartMatchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="StartMatchResult" nillable="true" type="q14:BasicResponse" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="StartMatchResult" nillable="true" type="q18:BasicResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EndMatch">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q15:EndMatchRequest" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q19:EndMatchRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EndMatchResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="EndMatchResult" nillable="true" type="q16:BasicResponse" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="EndMatchResult" nillable="true" type="q20:BasicResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ChooseSecretCharacter">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q17:ChooseSecretCharacterRequest" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q21:ChooseSecretCharacterRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ChooseSecretCharacterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="ChooseSecretCharacterResult" nillable="true" type="q18:BasicResponse" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="ChooseSecretCharacterResult" nillable="true" type="q22:BasicResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetMatchDeck">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q19:GetOrCreateMatchDeckRequest" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q23:GetOrCreateMatchDeckRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetMatchDeckResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="GetMatchDeckResult" nillable="true" type="q20:MatchDeckResponse" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="GetMatchDeckResult" nillable="true" type="q24:MatchDeckResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AskQuestion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q21:AskQuestionRequest" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q25:AskQuestionRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AskQuestionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="AskQuestionResult" nillable="true" type="q22:BasicResponse" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="AskQuestionResult" nillable="true" type="q26:BasicResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AnswerQuestion">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q23:AnswerQuestionRequest" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q27:AnswerQuestionRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AnswerQuestionResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="AnswerQuestionResult" nillable="true" type="q24:BasicResponse" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="AnswerQuestionResult" nillable="true" type="q28:BasicResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PassTurn">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q25:PassTurnRequest" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q29:PassTurnRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="PassTurnResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="PassTurnResult" nillable="true" type="q26:PassTurnResponse" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="PassTurnResult" nillable="true" type="q30:PassTurnResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ClaimTimeout">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q27:ClaimTimeoutRequest" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q31:ClaimTimeoutRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ClaimTimeoutResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="ClaimTimeoutResult" nillable="true" type="q28:ClaimTimeoutResponse" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="ClaimTimeoutResult" nillable="true" type="q32:ClaimTimeoutResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FinalGuess">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q29:FinalGuessRequest" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q33:FinalGuessRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FinalGuessResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="FinalGuessResult" nillable="true" type="q30:FinalGuessResponse" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="FinalGuessResult" nillable="true" type="q34:FinalGuessResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnPlayerJoined">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="player" nillable="true" type="q31:LobbyPlayerDto" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="player" nillable="true" type="q35:LobbyPlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnPlayerLeft">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="player" nillable="true" type="q32:LobbyPlayerDto" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="player" nillable="true" type="q36:LobbyPlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnReadyChanged">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="player" nillable="true" type="q33:LobbyPlayerDto" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="player" nillable="true" type="q37:LobbyPlayerDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

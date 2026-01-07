@@ -2,14 +2,15 @@
 {
     public enum GameScreenType
     {
-        MainMenu,
         Login,
+        MainMenu,
         Lobby,
         CreateAccount,
         VerifyEmail,
         RecoverPassword,
         UpdateProfile,
-        Match,
-        ChangePassword
+        JoinOrCreateGame,
+        ChangePassword,
+        Settings
     }
 }

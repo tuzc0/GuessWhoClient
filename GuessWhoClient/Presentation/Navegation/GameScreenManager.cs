@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Navigation;
-
 namespace GuessWhoClient.Presentation.Navegation
 {
     public sealed class GameScreenManager : IGameScreenManager

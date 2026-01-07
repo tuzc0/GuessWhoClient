@@ -48,7 +48,12 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
                     continue;
                 }
 
-                string message = localizationService.Get(mapping.MessageKey);
+                string message = localizationService.Get(mapping.MessageKey) ?? string.Empty;
+
+                if (string.IsNullOrWhiteSpace(message))
+                {
+                    continue;
+                }
 
                 if (!mapped.TryGetValue(mapping.PropertyName, out IReadOnlyList<string> existing))
                 {

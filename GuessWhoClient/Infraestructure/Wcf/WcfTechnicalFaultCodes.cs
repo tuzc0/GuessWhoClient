@@ -8,5 +8,7 @@
         public const string COMMUNICATION_ERROR = "WCF_COMMUNICATION_ERROR";
         public const string UNEXPECTED = "WCF_UNEXPECTED";
         public const string NULL_RESPONSE = "WCF_NULL_RESPONSE";
+
+        public const string CLIENT_NOT_CONNECTED = "WCF_CLIENT_NOT_CONNECTED";
     }
 }

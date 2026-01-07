@@ -79,6 +79,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Application\ErrorHandling\Friends\FriendUiFaultMapper.cs" />
+    <Compile Include="Application\ErrorHandling\Profile\ProfileUiFaultMapper.cs" />
     <Compile Include="Application\Mappers\LobbyPlayerMapper.cs" />
     <Compile Include="Application\Results\OperationResult.cs" />
     <Compile Include="Application\Services\Auth\ILoginAppService.cs" />
@@ -87,22 +89,35 @@
     <Compile Include="Application\Services\Friends\IFriendAppService.cs" />
     <Compile Include="Application\Services\Account\IUserAppService.cs" />
     <Compile Include="Application\Services\Account\UserAppService.cs" />
+    <Compile Include="Application\Services\Update\IUpdateProfileAppService.cs" />
+    <Compile Include="Application\Services\Update\UpdateProfileAppService.cs" />
+    <Compile Include="Assets\AvatarPathResolver.cs" />
+    <Compile Include="Assets\IAvatarPathResolver.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Domain\Models\LobbyPlayer.cs" />
-    <Compile Include="Domain\Models\UserRegistrationInput.cs" />
     <Compile Include="Domain\Validation\IValidationMessageMapper.cs" />
     <Compile Include="Domain\Validation\ValidationMessageMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\CompositeUiFaultMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\CreateAccountValidationIssueMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\ICreateAccountValidationIssueMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\IUiFaultMapper.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\DefaultFaultUiCatalog.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\IFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\UiKeyMapping.cs" />
     <Compile Include="Infraestructure\ErrorHandling\UserAccountUiFaultMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\WcfUiFaultMapper.cs" />
+    <Compile Include="Infraestructure\Match\IMatchClient.cs" />
+    <Compile Include="Infraestructure\Match\MatchCallback.cs" />
+    <Compile Include="Infraestructure\Match\MatchHub.cs" />
+    <Compile Include="Infraestructure\Wcf\DuplexWcfCallExecutor.cs" />
+    <Compile Include="Infraestructure\Wcf\WcfCallErrorHelper.cs" />
     <Compile Include="Infraestructure\Wcf\WcfCallExecutor.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\FriendServiceClientAdapter.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\IFriendServiceClient.cs" />
-    <Compile Include="Infraestructure\Wcf\Clients\ILoginServiceClient.cs" />
-    <Compile Include="Infraestructure\Wcf\Clients\LoginServiceClientAdapter.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\Login\ILoginServiceClient.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\IUpdateProfileServiceClient.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\Login\LoginServiceClientAdapter.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\UpdateProfileServiceClientAdapter.cs" />
     <Compile Include="Infraestructure\Wcf\WcfCallResult.cs" />
     <Compile Include="Infraestructure\Wcf\WcfEndpointNames.cs" />
     <Compile Include="Infraestructure\Wcf\WcfTechnicalFaultCodes.cs" />
@@ -110,12 +125,15 @@
     <Compile Include="IsExternalInit.cs" />
     <Compile Include="Presentation\Behaviors\PasswordBoxAssistant.cs" />
     <Compile Include="Presentation\Behaviors\PasswordVisibilityBehavior.cs" />
+    <Compile Include="Presentation\Dialogs\GameMessageDialogService.cs" />
+    <Compile Include="Presentation\Dialogs\IGameMessageDialogService.cs" />
     <Compile Include="Presentation\Navegation\AccountFlowContext.cs" />
     <Compile Include="Presentation\Navegation\GameScreenManager.cs" />
     <Compile Include="Presentation\Navegation\IGameScreenHost.cs" />
     <Compile Include="Presentation\Navegation\IGameScreenManager.cs" />
     <Compile Include="Presentation\Navegation\NavigationCodes.cs" />
     <Compile Include="Presentation\Navegation\NavigationResult.cs" />
+    <Compile Include="Presentation\Services\Alerts\GameAlertService.cs" />
     <Compile Include="Presentation\Services\Alerts\IAcceptDialogService.cs" />
     <Compile Include="Presentation\Services\Alerts\IAlertService.cs" />
     <Compile Include="Presentation\Services\Alerts\MessageBoxAcceptDialogService.cs" />
@@ -123,7 +141,6 @@
     <Compile Include="Assets\AvatarAssets.cs" />
     <Compile Include="Assets\CharacterAsserts.cs" />
     <Compile Include="Callbacks\ChatCallback.cs" />
-    <Compile Include="Callbacks\MatchCallback.cs" />
     <Compile Include="Presentation\ViewModels\Auth\AuthViewModelBase.cs" />
     <Compile Include="Presentation\ViewModels\Auth\EmailVerificationUiFaultMapper.cs" />
     <Compile Include="Presentation\ViewModels\Auth\LoginUiFaultMapper.cs" />
@@ -133,11 +150,23 @@
     <Compile Include="Presentation\ViewModels\Auth\VerifyEmailViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Base\AsyncRelayCommand.cs" />
     <Compile Include="Presentation\ViewModels\Base\DataErrors.cs" />
+    <Compile Include="Presentation\ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="Presentation\ViewModels\Base\RelayCommandWithParam.cs" />
     <Compile Include="Presentation\ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="Presentation\ViewModels\Error\GameMessageViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Friends\FriendViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Match\CreateOrJoinMatchViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Match\GameLobbyViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Match\GameModelItemViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Match\LobbyPlayerItemViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Profile\CreateAccountFaultMapper.cs" />
     <Compile Include="Presentation\ViewModels\Profile\CreateAccountValidationErrorsMapper.cs" />
     <Compile Include="Presentation\ViewModels\Profile\ValidationIssueMapping.cs" />
+    <Compile Include="Presentation\ViewModels\Profile\UpdateProfileViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Settings\SettingsViewModel.cs" />
+    <Compile Include="Presentation\Views\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\Views\UserControls\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
@@ -147,7 +176,7 @@
     <Compile Include="Presentation\Views\UserControls\ChooseAvatarView.xaml.cs">
       <DependentUpon>ChooseAvatarView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\UserControls\ChooseCharacterView.xaml.cs">
+    <Compile Include="Presentation\Views\Match\ChooseCharacterView.xaml.cs">
       <DependentUpon>ChooseCharacterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\ChatServiceRef\Reference.cs">
@@ -185,20 +214,18 @@
     <Compile Include="Presentation\Views\Profile\CreateAccountView.xaml.cs">
       <DependentUpon>CreateAccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Forms\AccountProfileInput.cs" />
     <Compile Include="Domain\Models\AvatarCard.cs" />
     <Compile Include="Application\Contracts\AvatarChangeRequest.cs" />
-    <Compile Include="Presentation\Forms\LoginInput.cs" />
     <Compile Include="Domain\Models\CharacterCard.cs" />
     <Compile Include="Domain\Models\GamePlayParameters.cs" />
     <Compile Include="Application\Contracts\PasswordChangeRequest.cs" />
     <Compile Include="FriendListWindow.xaml.cs">
       <DependentUpon>FriendListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FriendManagerWindowWindow.xaml.cs">
+    <Compile Include="Presentation\Views\Windows\FriendManagerWindowWindow.xaml.cs">
       <DependentUpon>FriendManagerWindowWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\UserControls\GameLobbyView.xaml.cs">
+    <Compile Include="Presentation\Views\Match\GameLobbyView.xaml.cs">
       <DependentUpon>GameLobbyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Globalization\ILocalizationService.cs" />
@@ -207,20 +234,18 @@
     <Compile Include="Domain\Validation\AccountValidator.cs" />
     <Compile Include="Interfaces\ILobbyClient.cs" />
     <Compile Include="Interfaces\IMatchSessionController.cs" />
-    <Compile Include="Presentation\Views\UserControls\JoinOrCreateGameView.xaml.cs">
+    <Compile Include="Presentation\Views\Match\JoinOrCreateGameView.xaml.cs">
       <DependentUpon>JoinOrCreateGameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Views\Auth\RecoverPasswordView.xaml.cs">
       <DependentUpon>RecoverPasswordView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Session\Controllers\MatchSessionController.cs" />
     <Compile Include="Infraestructure\Session\SessionContext.cs" />
     <Compile Include="Presentation\Views\Auth\VerifyEmailView.xaml.cs">
       <DependentUpon>VerifyEmailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\ViewModels\Auth\ChooseCharactersViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Profile\CreateAccountViewModel.cs" />
-    <Compile Include="Presentation\ViewModels\Auth\LobbyViewModel.cs" />
     <Compile Include="Presentation\Views\Windows\GameMessageWindow.xaml.cs">
       <DependentUpon>GameMessageWindow.xaml</DependentUpon>
     </Compile>
@@ -229,6 +254,10 @@
     </Compile>
     <Compile Include="Presentation\Navegation\GameScreenType.cs" />
     <Compile Include="Infraestructure\Wcf\ServiceClientGuard.cs" />
+    <Page Include="Presentation\Views\Settings\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\Views\UserControls\ChangePasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,7 +270,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Views\UserControls\ChooseCharacterView.xaml">
+    <Page Include="Presentation\Views\Match\ChooseCharacterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,15 +282,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="FriendManagerWindowWindow.xaml">
+    <Page Include="Presentation\Views\Windows\FriendManagerWindowWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Views\UserControls\GameLobbyView.xaml">
+    <Page Include="Presentation\Views\Match\GameLobbyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Views\UserControls\JoinOrCreateGameView.xaml">
+    <Page Include="Presentation\Views\Match\JoinOrCreateGameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -473,6 +502,7 @@
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.PasswordRecoveryResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.RegisterResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.SearchProfilesResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.SearchPublicMatchResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.SendFriendRequestResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.UpdateProfileResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.VerifyEmailResponse.datasource" />

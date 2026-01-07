@@ -6,5 +6,6 @@
         void Warn(string message, string title);
         void Info(string message, string title);
         void Error(string message, string title);
+        void Error(string v);
     }
 }

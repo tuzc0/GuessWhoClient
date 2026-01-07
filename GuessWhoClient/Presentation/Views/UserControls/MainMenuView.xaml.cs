@@ -1,6 +1,5 @@
 ﻿using GuessWhoClient.Presentation.Views.Windows;
 using GuessWhoClient.Session;
-using GuessWhoClient.Windows;
 using System.Windows;
 using System.Windows.Controls;
 

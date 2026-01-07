@@ -1,17 +1,13 @@
 ﻿using GuessWhoClient.Presentation.Infrastructure;
-using GuessWhoCore.Contracts.Faults;
 using log4net;
 using System;
 using System.ServiceModel;
-using System.ServiceModel.Security;
 using System.Threading.Tasks;
 
 namespace GuessWhoClient.Infraestructure.Wcf
 {
     public sealed class WcfCallExecutor
     {
-        private const string EMPTY = "";
-
         public async Task<WcfCallResult<T>> CallAsync<TClient, T>(
             Func<TClient> clientFactory,
             Func<TClient, Task<T>> operationAsync,
@@ -34,59 +30,26 @@ namespace GuessWhoClient.Infraestructure.Wcf
                 throw new ArgumentNullException(nameof(logger));
             }
 
-            if (string.IsNullOrWhiteSpace(logContext))
-            {
-                throw new ArgumentException("logContext is required.", nameof(logContext));
-            }
-
             TClient client = default;
 
             try
             {
-                client = clientFactory.Invoke();
+                WcfCallResult<TClient> createResult = await WcfCallErrorHelper.ExecuteAsync(
+                    () => Task.FromResult(clientFactory.Invoke()),
+                    logger,
+                    logContext);
 
-                T response = await operationAsync(client);
-
-                if (response == null)
+                if (!createResult.IsSuccess || !createResult.HasValue)
                 {
-                    logger.WarnFormat("{0}: null response.", logContext);
-                    return WcfCallResult<T>.Fail(WcfTechnicalFaultCodes.NULL_RESPONSE, EMPTY);
+                    return WcfCallResult<T>.Fail(createResult.FaultCode, createResult.ServerMessage);
                 }
 
-                return WcfCallResult<T>.Ok(response);
-            }
-            catch (FaultException<ServiceFault> ex)
-            {
-                string code = ex.Detail != null ? ex.Detail.Code ?? EMPTY : EMPTY;
-                string message = ex.Detail != null ? ex.Detail.MessageKey ?? EMPTY : EMPTY;
+                client = createResult.Value;
 
-                logger.Warn(logContext, ex);
-                return WcfCallResult<T>.Fail(code, message);
-            }
-            catch (EndpointNotFoundException ex)
-            {
-                logger.Error(logContext, ex);
-                return WcfCallResult<T>.Fail(WcfTechnicalFaultCodes.ENDPOINT_NOT_FOUND, EMPTY);
-            }
-            catch (SecurityNegotiationException ex)
-            {
-                logger.Error(logContext, ex);
-                return WcfCallResult<T>.Fail(WcfTechnicalFaultCodes.SECURITY_ERROR, EMPTY);
-            }
-            catch (TimeoutException ex)
-            {
-                logger.Error(logContext, ex);
-                return WcfCallResult<T>.Fail(WcfTechnicalFaultCodes.TIMEOUT, EMPTY);
-            }
-            catch (CommunicationException ex)
-            {
-                logger.Error(logContext, ex);
-                return WcfCallResult<T>.Fail(WcfTechnicalFaultCodes.COMMUNICATION_ERROR, EMPTY);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(logContext, ex);
-                return WcfCallResult<T>.Fail(WcfTechnicalFaultCodes.UNEXPECTED, EMPTY);
+                return await WcfCallErrorHelper.ExecuteAsync(
+                    () => operationAsync(client),
+                    logger,
+                    logContext);
             }
             finally
             {
@@ -104,6 +67,11 @@ namespace GuessWhoClient.Infraestructure.Wcf
             string logContext)
             where TClient : ICommunicationObject
         {
+            if (operationAsync == null)
+            {
+                throw new ArgumentNullException(nameof (operationAsync));
+            }
+
             return await CallAsync<TClient, bool>(
                 clientFactory,
                 async c =>

@@ -3,11 +3,11 @@ using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Threading.Tasks;
 using System.Windows;
-using GuessWhoClient.Alerts;
 using GuessWhoClient.Globalization;
 using GuessWhoClient.FriendServiceRef;
-
-using ServiceFault = GuessWhoClient.FriendServiceRef.ServiceFault;
+using GuessWhoClient.Services.Alerts;
+using GuessWhoCore.Contracts.Requests;
+using GuessWhoCore.Contracts.Faults;
 
 namespace WPFGuessWhoClient
 {
@@ -82,7 +82,7 @@ namespace WPFGuessWhoClient
                 string faultKey = $"Fault{ex.Detail.Code}";
                 string localizedText = localizationService.LocalOrFallback(
                     faultKey,
-                    ex.Detail.Message,
+                    ex.Detail.MessageKey,
                     "FaultUnexpected");
 
                 alertService.Error(localizedText);

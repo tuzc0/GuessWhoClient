@@ -1,7 +1,7 @@
 ﻿using GuessWhoClient.Presentation.ViewModels.Auth;
 using System;
 
-namespace GuessWhoClient.Presentation.Views.UserControls
+namespace GuessWhoClient.Presentation.Views.Auth
 {
     public partial class RecoverPasswordView
     {

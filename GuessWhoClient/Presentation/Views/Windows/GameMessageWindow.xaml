@@ -1,7 +1,6 @@
 ﻿<Window x:Class="GuessWhoClient.Presentation.Views.Windows.GameMessageWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:GuessWhoClient.Windows"
         Title="Message"
         Height="220"
         Width="480"
@@ -43,7 +42,7 @@
                 <Path Data="{StaticResource Geo.Mascot.Bulbito.Hello}"
                       Stretch="Uniform"
                       Fill="{StaticResource Brush.Accent}" 
-                      Grid.ColumnSpan="2" Margin="0,-32,316,-38" />
+                      Grid.ColumnSpan="2" Margin="0,-32,346,-27" />
 
                 <TextBlock Grid.Column="1"
                        Text="{Binding MessageText}"
@@ -63,7 +62,7 @@
                     Width="120"
                     Height="40"
                     Style="{StaticResource Btn.Primary}"
-                    Click="BtnOk_Click" />
+                    Click="BtnOkClick" />
             </StackPanel>
         </Grid>
     </Border>

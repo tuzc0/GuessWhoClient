@@ -4,6 +4,11 @@ namespace GuessWhoClient.Services.Alerts
 {
     public sealed class MessageBoxAlertService : IAlertService
     {
+        public void Error(string message)
+        {
+            MessageBox.Show(message ?? string.Empty, string.Empty, MessageBoxButton.OK, MessageBoxImage.None);
+        }
+
         public void Ok(string message, string title) 
         { 
             MessageBox.Show(message ?? string.Empty, title ?? string.Empty, MessageBoxButton.OK, MessageBoxImage.None);

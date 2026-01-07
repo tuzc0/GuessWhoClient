@@ -1,13 +1,14 @@
 ﻿using GuessWhoClient.Assets;
 using GuessWhoClient.Dtos;
 using GuessWhoClient.Interfaces;
-using GuessWhoClient.MatchServiceRef;
+using GuessWhoCore.Contracts.Faults;
 using log4net;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using WPFGuessWhoClient.Application.Results;
 
 namespace GuessWhoClient.ViewModels
 {
@@ -93,8 +94,8 @@ namespace GuessWhoClient.ViewModels
             {
                 Logger.Error("ConfirmSelectionAsync: service fault.", ex);
 
-                string message = ex.Detail != null && !string.IsNullOrWhiteSpace(ex.Detail.Message)
-                    ? ex.Detail.Message
+                string message = ex.Detail != null && !string.IsNullOrWhiteSpace(ex.Detail.MessageKey)
+                    ? ex.Detail.MessageKey
                     : "Ocurrió un error en el servidor al elegir tu personaje secreto.";
 
                 return OperationResult.Fail(message);

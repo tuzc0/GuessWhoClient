@@ -120,6 +120,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -188,8 +189,7 @@
                 <Button Style="{StaticResource Btn.Icon}"
                         Margin="6,0"
                         ToolTip="Amigos"
-                        Width="80"
-                        Click="BtnFriends_Click">
+                        Width="80">
                     <Path Style="{StaticResource Icon.Group}" />
                 </Button>
             </StackPanel>
@@ -279,10 +279,9 @@
                             <ToggleButton Style="{StaticResource ChipToggle}"
                                           Content="{Binding Name}"
                                           IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                          IsEnabled="{Binding DataContext.IsCurrentUserHost,
-                                                              RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                          IsEnabled="{Binding IsEnabled}"
                                           Command="{Binding DataContext.SelectModeCommand,
-                                                            RelativeSource={RelativeSource AncestorType=Window}}"
+                                                            RelativeSource={RelativeSource AncestorType=UserControl}}"
                                           CommandParameter="{Binding}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -290,8 +289,7 @@
 
                 <StackPanel Grid.Row="2"
                             Margin="0,10,0,10">
-                    <CheckBox x:Name="chkPrivate"
-                              Margin="0,0,0,8"
+                    <CheckBox Margin="0,0,0,8"
                               Content="Privada"
                               Foreground="{StaticResource Brush.TextLight}"
                               FontFamily="{StaticResource Font.Pixel}"
@@ -313,6 +311,11 @@
                                   BorderThickness="2"
                                   IsEnabled="{Binding IsCurrentUserHost}" />
                     </StackPanel>
+
+                    <TextBlock Margin="0,10,0,0"
+                               Style="{StaticResource Txt.Pixel}"
+                               Foreground="{StaticResource Brush.Accent}"
+                               Text="{Binding UiMessage}" />
                 </StackPanel>
 
                 <StackPanel Grid.Row="3"
@@ -320,13 +323,11 @@
                             Orientation="Horizontal"
                             HorizontalAlignment="Right">
 
-                    <ToggleButton x:Name="btnReadyBottom"
-                                  Content="LISTO"
+                    <ToggleButton Content="LISTO"
                                   MinWidth="140"
                                   MinHeight="44"
-                                  Click="ReadyToggle_Checked"
+                                  Command="{Binding ToggleReadyCommand}"
                                   IsChecked="{Binding IsCurrentPlayerReady, Mode=OneWay}">
-                        
                         <ToggleButton.Style>
                             <Style TargetType="ToggleButton"
                                    BasedOn="{StaticResource ReadyToggle}">
@@ -345,10 +346,9 @@
                             MinWidth="140"
                             MinHeight="44"
                             Margin="8,0,0,0"
+                            Command="{Binding StartCommand}"
                             IsEnabled="{Binding CanStart}"
-                            Visibility="{Binding IsCurrentUserHost,
-                                                 Converter={StaticResource BoolToVis}}"
-                            Click="BtnStart_Click" />
+                            Visibility="{Binding IsCurrentUserHost, Converter={StaticResource BoolToVis}}" />
                 </StackPanel>
             </Grid>
         </Border>
@@ -362,13 +362,11 @@
             <Run Text="{Binding MatchCode, Mode=OneWay}" />
         </TextBlock>
 
-        <Button x:Name="btnBack"
-                Grid.Row="2"
+        <Button Grid.Row="2"
                 Grid.Column="0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
-                Margin="0,0,0,0"
                 Style="{StaticResource Btn.Play.Left}"
-                Click="BtnBack_Click" />
+                Command="{Binding LeaveLobbyCommand}" />
     </Grid>
 </UserControl>

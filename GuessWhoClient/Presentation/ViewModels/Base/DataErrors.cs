@@ -101,12 +101,15 @@ namespace GuessWhoClient.Presentation.ViewsModels.Base
                 return;
             }
 
-            string[] keys = new string[errors.Keys.Count];
+            string[] keys = errors.Keys
+                .Select(k => k ?? string.Empty)
+                .ToArray();
+
             errors.Clear();
 
             for (int index = 0; index < keys.Length; index++)
             {
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(keys[index]));
+                RaiseErrorsChanged(keys[index]);
             }
         }
 

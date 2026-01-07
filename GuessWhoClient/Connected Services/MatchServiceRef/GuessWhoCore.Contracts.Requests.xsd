@@ -34,6 +34,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LeaveMatchRequest" nillable="true" type="tns:LeaveMatchRequest" />
+  <xs:complexType name="SetMatchPrivateRequest">
+    <xs:sequence>
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SetMatchPrivateRequest" nillable="true" type="tns:SetMatchPrivateRequest" />
+  <xs:complexType name="SearchPublicMatchRequest">
+    <xs:sequence>
+      <xs:element name="MatchCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchPublicMatchRequest" nillable="true" type="tns:SearchPublicMatchRequest" />
   <xs:complexType name="SetPlayerReadyStatusRequest">
     <xs:sequence>
       <xs:element minOccurs="0" name="IsReady" type="xs:boolean" />
@@ -81,8 +94,8 @@
   <xs:element name="ChooseSecretCharacterRequest" nillable="true" type="tns:ChooseSecretCharacterRequest" />
   <xs:complexType name="GetOrCreateMatchDeckRequest">
     <xs:sequence>
-      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
-      <xs:element minOccurs="0" name="ModeId" type="xs:unsignedByte" />
+      <xs:element name="MatchId" type="xs:long" />
+      <xs:element name="ModeId" type="xs:unsignedByte" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="GetOrCreateMatchDeckRequest" nillable="true" type="tns:GetOrCreateMatchDeckRequest" />

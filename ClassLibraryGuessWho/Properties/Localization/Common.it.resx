@@ -117,280 +117,164 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppTitle" xml:space="preserve">
-    <value>INDOVINA CHI?</value>
-  </data>
-  <data name="BtnCreateAccount" xml:space="preserve">
-    <value>Creare un account</value>
-  </data>
-  <data name="BtnLogin" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BtnResendCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="BtnVerifyCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="chkShowPasswords" xml:space="preserve">
-    <value>Mostra la password</value>
-  </data>
-  <data name="FaultDatabaseConnection" xml:space="preserve">
-    <value>Impossibile connettersi al database</value>
-  </data>
-  <data name="FaultDatabaseTimeout" xml:space="preserve">
-    <value>Il server del database ha impiegato troppo tempo per rispondere</value>
-  </data>
-  <data name="FaultDuplicateEmail" xml:space="preserve">
-    <value>L'indirizzo email è già registrato</value>
-  </data>
-  <data name="FaultForeignKey" xml:space="preserve">
-    <value>L'operazione viola una relazione esistente</value>
-  </data>
-  <data name="FaultInvalidRequest" xml:space="preserve">
-    <value>La richiesta non è valida</value>
-  </data>
-  <data name="FaultUnexpected" xml:space="preserve">
-    <value>Si è verificato un errore imprevisto</value>
-  </data>
-  <data name="LblConfirmPassword" xml:space="preserve">
-    <value>Conferma password</value>
-  </data>
-  <data name="LblEmail" xml:space="preserve">
-    <value>E-mail</value>
-  </data>
-  <data name="LblPassword" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="LblUser" xml:space="preserve">
-    <value>Utente</value>
-  </data>
-  <data name="LblVerificationCode" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="LinkCreate" xml:space="preserve">
-    <value>Creare un account</value>
-  </data>
-  <data name="LinkForgot" xml:space="preserve">
-    <value>Ho dimenticato la password</value>
-  </data>
-  <data name="UiAccountCreatedForFmt" xml:space="preserve">
-    <value>Conto creato</value>
-  </data>
-  <data name="UiCommsGeneric" xml:space="preserve">
-    <value>Impossibile comunicare con il servizio</value>
-  </data>
-  <data name="UiResendInFmt" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="UiSecurityNegotiationFailed" xml:space="preserve">
-    <value>Autenticazione del trasporto (Windows) non riuscita. Verificare che il servizio sia in esecuzione</value>
-  </data>
-  <data name="UiTitleError" xml:space="preserve">
-    <value>Errore</value>
-  </data>
-  <data name="UiTitleInfo" xml:space="preserve">
-    <value>Informazioni</value>
-  </data>
-  <data name="UiTitleWarning" xml:space="preserve">
-    <value>Avvertimento</value>
-  </data>
-  <data name="UiValidationDisplayNameRequired" xml:space="preserve">
-    <value>Il nome visualizzato è obbligatorio</value>
-  </data>
-  <data name="UiValidationDisplayNameTooLong" xml:space="preserve">
-    <value>Il nome visualizzato è troppo lungo (max. 50 caratteri)</value>
-  </data>
-  <data name="UiValidationEmailFormat" xml:space="preserve">
-    <value>Formato email non valido</value>
-  </data>
-  <data name="UiValidationEmailRequired" xml:space="preserve">
-    <value>L'e-mail è obbligatoria</value>
-  </data>
-  <data name="UiValidationPasswordDontMatch" xml:space="preserve">
-    <value>Le password non corrispondono</value>
-  </data>
-  <data name="UiValidationPasswordRequired" xml:space="preserve">
-    <value>È richiesta la password</value>
-  </data>
-  <data name="UiValidationPasswordTooShort" xml:space="preserve">
-    <value>La password deve contenere almeno 8 caratteri</value>
-  </data>
-  <data name="UIVerificationCodeExpired" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="UIVerificationCodeInvalid" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="UIVerificationCodeRequired" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="UIVerificationResent" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="UiVerificationSentFmt" xml:space="preserve">
-    <value>Abbiamo inviato un codice di verifica al suo indirizzo e-mail: {0}</value>
-  </data>
-  <data name="UIVerificationSuccess" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="USER_REQUEST_NULL" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="LoginErrorTitle" xml:space="preserve">
-    <value>Errore di accesso</value>
-  </data>
-  <data name="LoginWelcomeTitle" xml:space="preserve">
-    <value>Benvenuto</value>
-  </data>
-  <data name="LoginInvalidCredentials" xml:space="preserve">
-    <value>Email o password non validi.</value>
-  </data>
-  <data name="LoginAccountLocked" xml:space="preserve">
-    <value>Il tuo account è bloccato. Contatta l'assistenza.</value>
-  </data>
-  <data name="LoginProfileActivationFailed" xml:space="preserve">
-    <value>Impossibile avviare la sessione. Riprova.</value>
-  </data>
+<data name="AppTitle" xml:space="preserve"><value>INDOVINA CHI?</value></data>
+  <data name="BtnCreateAccount" xml:space="preserve"><value>Creare un account</value></data>
+  <data name="BtnLogin" xml:space="preserve"><value>Login</value></data>
+  <data name="BtnResendCode" xml:space="preserve"><value>Reinvia codice</value></data>
+  <data name="BtnVerifyCode" xml:space="preserve"><value>Verifica</value></data>
+  <data name="chkShowPasswords" xml:space="preserve"><value>Mostra la password</value></data>
 
-  <data name="UiGenericError" xml:space="preserve">
-    <value>Si è verificato un errore. Riprova.</value>
-  </data>
-  <data name="UiValueOutOfRange" xml:space="preserve">
-    <value>Un valore è fuori intervallo. Controlla i dati inseriti.</value>
-  </data>
-  <data name="UiInvalidOperation" xml:space="preserve">
-    <value>Impossibile completare l'operazione ora. Riprova.</value>
-  </data>
+  <data name="FaultDatabaseConnection" xml:space="preserve"><value>Impossibile connettersi al database</value></data>
+  <data name="FaultDatabaseTimeout" xml:space="preserve"><value>Il server del database ha impiegato troppo tempo per rispondere</value></data>
+  <data name="FaultDuplicateEmail" xml:space="preserve"><value>L'indirizzo email è già registrato</value></data>
+  <data name="FaultForeignKey" xml:space="preserve"><value>L'operazione viola una relazione esistente</value></data>
+  <data name="FaultInvalidRequest" xml:space="preserve"><value>La richiesta non è valida</value></data>
+  <data name="FaultUnexpected" xml:space="preserve"><value>Si è verificato un errore imprevisto</value></data>
 
-  <data name="UiServiceUnavailable" xml:space="preserve">
-    <value>Il servizio non è disponibile. Riprova più tardi.</value>
-  </data>
-  <data name="UiSecurityError" xml:space="preserve">
-    <value>Si è verificato un errore di sicurezza durante la connessione. Riprova.</value>
-  </data>
-  <data name="UiTimeout" xml:space="preserve">
-    <value>La richiesta è scaduta. Riprova.</value>
-  </data>
-<data name="BtnResendCode" xml:space="preserve">
-  <value>Reinvia codice</value>
-</data>
-<data name="BtnVerifyCode" xml:space="preserve">
-  <value>Verifica</value>
-</data>
-<data name="LblVerificationCode" xml:space="preserve">
-  <value>Codice di verifica</value>
-</data>
-<data name="UiResendInFmt" xml:space="preserve">
-  <value>Puoi reinviare il codice tra {0} secondi</value>
-</data>
-<data name="UIVerificationCodeExpired" xml:space="preserve">
-  <value>Il codice di verifica è scaduto</value>
-</data>
-<data name="UIVerificationCodeInvalid" xml:space="preserve">
-  <value>Il codice di verifica non è valido</value>
-</data>
-<data name="UIVerificationCodeRequired" xml:space="preserve">
-  <value>Inserisci il codice di verifica</value>
-</data>
-<data name="UIVerificationResent" xml:space="preserve">
-  <value>Abbiamo inviato un nuovo codice di verifica alla tua email</value>
-</data>
-<data name="UIVerificationSuccess" xml:space="preserve">
-  <value>La tua email è stata verificata con successo</value>
-</data>
-<data name="USER_REQUEST_NULL" xml:space="preserve">
-  <value>I dati di registrazione mancano. Compila il modulo e riprova.</value>
-</data>
+  <data name="LblConfirmPassword" xml:space="preserve"><value>Conferma password</value></data>
+  <data name="LblEmail" xml:space="preserve"><value>E-mail</value></data>
+  <data name="LblPassword" xml:space="preserve"><value>Password</value></data>
+  <data name="LblUser" xml:space="preserve"><value>Utente</value></data>
+  <data name="LblVerificationCode" xml:space="preserve"><value>Codice di verifica</value></data>
 
-<data name="PasswordRecoveryAccountNotFound" xml:space="preserve">
-  <value>Non abbiamo trovato un account con questa email.</value>
-</data>
-<data name="PasswordRecoveryCodeExpired" xml:space="preserve">
-  <value>Il codice di recupero è scaduto.</value>
-</data>
-<data name="PasswordRecoveryCodeInvalid" xml:space="preserve">
-  <value>Il codice di recupero non è valido.</value>
-</data>
-<data name="PasswordRecoveryUpdateFailed" xml:space="preserve">
-  <value>Impossibile aggiornare la password. Riprova.</value>
-</data>
+  <data name="LinkCreate" xml:space="preserve"><value>Creare un account</value></data>
+  <data name="LinkForgot" xml:space="preserve"><value>Ho dimenticato la password</value></data>
 
-<data name="EmailVerificationAccountNotFound" xml:space="preserve">
-  <value>Account non trovato.</value>
-</data>
-<data name="EmailVerificationCodeMissing" xml:space="preserve">
-  <value>Inserisci il codice di verifica.</value>
-</data>
-<data name="EmailVerificationCodeExpired" xml:space="preserve">
-  <value>Il codice di verifica è scaduto.</value>
-</data>
-<data name="EmailVerificationCodeAlreadyUsed" xml:space="preserve">
-  <value>Questo codice di verifica è già stato usato.</value>
-</data>
-<data name="EmailVerificationFailed" xml:space="preserve">
-  <value>Impossibile verificare la tua email. Riprova.</value>
-</data>
-<data name="EmailVerificationResendLimit" xml:space="preserve">
-  <value>Hai raggiunto il limite di reinvio. Riprova più tardi.</value>
-</data>
+  <data name="UiAccountCreatedForFmt" xml:space="preserve"><value>Conto creato</value></data>
+  <data name="UiCommsGeneric" xml:space="preserve"><value>Impossibile comunicare con il servizio</value></data>
+  <data name="UiResendInFmt" xml:space="preserve"><value>Puoi reinviare il codice tra {0} secondi</value></data>
+  <data name="UiSecurityNegotiationFailed" xml:space="preserve"><value>Autenticazione del trasporto (Windows) non riuscita. Verificare che il servizio sia in esecuzione</value></data>
 
-<data name="UiValidationDisplayNameInvalid" xml:space="preserve">
-  <value>Il nome visualizzato non ha un formato valido.</value>
-</data>
-<data name="UiValidationPasswordInvalid" xml:space="preserve">
-  <value>La password non ha un formato valido.</value>
-</data>
+  <data name="UiTitleError" xml:space="preserve"><value>Errore</value></data>
+  <data name="UiTitleInfo" xml:space="preserve"><value>Informazioni</value></data>
+  <data name="UiTitleWarning" xml:space="preserve"><value>Avvertimento</value></data>
 
-<data name="UiValidationEmailTooLong" xml:space="preserve">
-  <value>L'email è troppo lunga (max. 254 caratteri).</value>
-</data>
-<data name="UiValidationDisplayNameTooShort" xml:space="preserve">
-  <value>Il nome visualizzato è troppo corto.</value>
-</data>
-<data name="UiValidationDisplayNameInvalidFormat" xml:space="preserve">
-  <value>Il nome visualizzato ha un formato non valido.</value>
-</data>
-<data name="UiValidationPasswordTooLong" xml:space="preserve">
-  <value>La password è troppo lunga (max. 64 caratteri).</value>
-</data>
-<data name="UiValidationConfirmPasswordRequired" xml:space="preserve">
-  <value>La conferma della password è obbligatoria.</value>
-</data>
+  <data name="UiEndpointNotFound" xml:space="preserve"><value>L'endpoint del servizio non è stato trovato. Verifica che il server sia in esecuzione.</value></data>
+  <data name="UiCommunicationError" xml:space="preserve"><value>Impossibile comunicare con il servizio.</value></data>
+  <data name="UiSecurityError" xml:space="preserve"><value>Si è verificato un errore di sicurezza durante la connessione. Riprova.</value></data>
+  <data name="UiTimeout" xml:space="preserve"><value>La richiesta è scaduta. Riprova.</value></data>
+  <data name="UiServiceUnavailable" xml:space="preserve"><value>Il servizio non è disponibile. Riprova più tardi.</value></data>
+  <data name="UiGenericError" xml:space="preserve"><value>Si è verificato un errore. Riprova.</value></data>
+  <data name="UiInvalidRequest" xml:space="preserve"><value>La richiesta non è valida.</value></data>
 
-<data name="UiValidationSixDigits" xml:space="preserve">
-  <value>Il codice deve avere 6 cifre.</value>
-</data>
-<data name="FaultInvalidOrExpiredCode" xml:space="preserve">
-  <value>Il codice non è valido o è scaduto.</value>
-</data>
-<data name="UiMainWindowNotFound" xml:space="preserve">
-  <value>Finestra principale non trovata.</value>
-</data>
+  <data name="UiValueOutOfRange" xml:space="preserve"><value>Un valore è fuori intervallo. Controlla i dati inseriti.</value></data>
+  <data name="UiInvalidOperation" xml:space="preserve"><value>Impossibile completare l'operazione ora. Riprova.</value></data>
 
-<data name="Infrastructure.Email.RecipientInvalid" xml:space="preserve">
-  <value>L'indirizzo email di destinazione non è valido. Verificalo e riprova.</value>
-</data>
-<data name="Infrastructure.Email.ConfigurationMissing" xml:space="preserve">
-  <value>Il servizio email non è configurato. Riprova più tardi.</value>
-</data>
-<data name="Infrastructure.Email.ConfigurationError" xml:space="preserve">
-  <value>La configurazione del servizio email non è valida. Riprova più tardi.</value>
-</data>
-<data name="Infrastructure.Email.AuthenticationFailed" xml:space="preserve">
-  <value>Il servizio email non è riuscito ad autenticarsi con il server. Riprova più tardi.</value>
-</data>
-<data name="Infrastructure.Email.Timeout" xml:space="preserve">
-  <value>Il server email ha impiegato troppo tempo per rispondere. Riprova.</value>
-</data>
-<data name="Infrastructure.Email.Unavailable" xml:space="preserve">
-  <value>Il servizio email è temporaneamente non disponibile. Riprova più tardi.</value>
-</data>
-<data name="Infrastructure.Email.SendFailed" xml:space="preserve">
-  <value>Non è stato possibile inviare l'email. Riprova più tardi.</value>
-</data>
-<data name="Infrastructure.Email.UnexpectedError" xml:space="preserve">
-  <value>Si è verificato un errore imprevisto durante l'invio dell'email. Riprova più tardi.</value>
-</data>
-</root>
+  <data name="UiValidationEmailRequired" xml:space="preserve"><value>L'e-mail è obbligatoria</value></data>
+  <data name="UiValidationEmailTooLong" xml:space="preserve"><value>L'email è troppo lunga (max. 254 caratteri).</value></data>
+  <data name="UiValidationEmailFormat" xml:space="preserve"><value>Formato email non valido</value></data>
+
+  <data name="UiValidationPasswordRequired" xml:space="preserve"><value>È richiesta la password</value></data>
+  <data name="UiValidationPasswordTooShort" xml:space="preserve"><value>La password deve contenere almeno 8 caratteri</value></data>
+  <data name="UiValidationPasswordTooLong" xml:space="preserve"><value>La password è troppo lunga (max. 64 caratteri).</value></data>
+  <data name="UiValidationPasswordInvalid" xml:space="preserve"><value>La password non ha un formato valido.</value></data>
+
+  <data name="UiValidationDisplayNameRequired" xml:space="preserve"><value>Il nome visualizzato è obbligatorio</value></data>
+  <data name="UiValidationDisplayNameTooShort" xml:space="preserve"><value>Il nome visualizzato è troppo corto.</value></data>
+  <data name="UiValidationDisplayNameTooLong" xml:space="preserve"><value>Il nome visualizzato è troppo lungo (max. 50 caratteri)</value></data>
+  <data name="UiValidationDisplayNameInvalid" xml:space="preserve"><value>Il nome visualizzato non ha un formato valido.</value></data>
+  <data name="UiValidationDisplayNameInvalidFormat" xml:space="preserve"><value>Il nome visualizzato ha un formato non valido.</value></data>
+
+  <data name="UiValidationConfirmPasswordRequired" xml:space="preserve"><value>La conferma della password è obbligatoria.</value></data>
+  <data name="UiValidationPasswordDontMatch" xml:space="preserve"><value>Le password non corrispondono</value></data>
+
+  <data name="UiValidationAvatarIdTooLong" xml:space="preserve"><value>L'id dell'avatar è troppo lungo.</value></data>
+  <data name="UiValidationCurrentPasswordRequired" xml:space="preserve"><value>Devi inserire la password attuale.</value></data>
+
+  <data name="UiValidationSixDigits" xml:space="preserve"><value>Il codice deve avere 6 cifre.</value></data>
+
+  <data name="LoginErrorTitle" xml:space="preserve"><value>Errore di accesso</value></data>
+  <data name="LoginWelcomeTitle" xml:space="preserve"><value>Benvenuto</value></data>
+  <data name="LoginInvalidCredentials" xml:space="preserve"><value>Email o password non validi.</value></data>
+  <data name="LoginAccountLocked" xml:space="preserve"><value>Il tuo account è bloccato. Contatta l'assistenza.</value></data>
+  <data name="LoginProfileActivationFailed" xml:space="preserve"><value>Impossibile avviare la sessione. Riprova.</value></data>
+  <data name="LoginProfileAlreadyActive" xml:space="preserve"><value>Il tuo profilo è già attivo.</value></data>
+
+  <data name="PasswordRecoveryAccountNotFound" xml:space="preserve"><value>Non abbiamo trovato un account con questa email.</value></data>
+  <data name="PasswordRecoveryCodeExpired" xml:space="preserve"><value>Il codice di recupero è scaduto.</value></data>
+  <data name="PasswordRecoveryCodeInvalid" xml:space="preserve"><value>Il codice di recupero non è valido.</value></data>
+  <data name="PasswordRecoveryUpdateFailed" xml:space="preserve"><value>Impossibile aggiornare la password. Riprova.</value></data>
+
+  <data name="EmailVerificationAccountNotFound" xml:space="preserve"><value>Account non trovato.</value></data>
+  <data name="EmailVerificationCodeMissing" xml:space="preserve"><value>Inserisci il codice di verifica.</value></data>
+  <data name="EmailVerificationCodeExpired" xml:space="preserve"><value>Il codice di verifica è scaduto.</value></data>
+  <data name="EmailVerificationCodeAlreadyUsed" xml:space="preserve"><value>Questo codice di verifica è già stato usato.</value></data>
+  <data name="EmailVerificationFailed" xml:space="preserve"><value>Impossibile verificare la tua email. Riprova.</value></data>
+  <data name="EmailVerificationResendLimit" xml:space="preserve"><value>Hai raggiunto il limite di reinvio. Riprova più tardi.</value></data>
+
+  <data name="UIVerificationCodeExpired" xml:space="preserve"><value>Il codice di verifica è scaduto</value></data>
+  <data name="UIVerificationCodeInvalid" xml:space="preserve"><value>Il codice di verifica non è valido</value></data>
+  <data name="UIVerificationCodeRequired" xml:space="preserve"><value>Inserisci il codice di verifica</value></data>
+  <data name="UIVerificationResent" xml:space="preserve"><value>Abbiamo inviato un nuovo codice di verifica alla tua email</value></data>
+  <data name="UiVerificationSentFmt" xml:space="preserve"><value>Abbiamo inviato un codice di verifica al suo indirizzo e-mail: {0}</value></data>
+  <data name="UIVerificationSuccess" xml:space="preserve"><value>La tua email è stata verificata con successo</value></data>
+
+  <data name="FaultInvalidOrExpiredCode" xml:space="preserve"><value>Il codice non è valido o è scaduto.</value></data>
+  <data name="UiMainWindowNotFound" xml:space="preserve"><value>Finestra principale non trovata.</value></data>
+
+  <data name="Infrastructure.Email.RecipientInvalid" xml:space="preserve"><value>L'indirizzo email di destinazione non è valido. Verificalo e riprova.</value></data>
+  <data name="Infrastructure.Email.ConfigurationMissing" xml:space="preserve"><value>Il servizio email non è configurato. Riprova più tardi.</value></data>
+  <data name="Infrastructure.Email.ConfigurationError" xml:space="preserve"><value>La configurazione del servizio email non è valida. Riprova più tardi.</value></data>
+  <data name="Infrastructure.Email.AuthenticationFailed" xml:space="preserve"><value>Il servizio email non è riuscito ad autenticarsi con il server. Riprova più tardi.</value></data>
+  <data name="Infrastructure.Email.Timeout" xml:space="preserve"><value>Il server email ha impiegato troppo tempo per rispondere. Riprova.</value></data>
+  <data name="Infrastructure.Email.Unavailable" xml:space="preserve"><value>Il servizio email è temporaneamente non disponibile. Riprova più tardi.</value></data>
+  <data name="Infrastructure.Email.SendFailed" xml:space="preserve"><value>Non è stato possibile inviare l'email. Riprova più tardi.</value></data>
+  <data name="Infrastructure.Email.UnexpectedError" xml:space="preserve"><value>Si è verificato un errore imprevisto durante l'invio dell'email. Riprova più tardi.</value></data>
+
+  <data name="InfrastructureEmailRecipientInvalid" xml:space="preserve"><value>L'indirizzo email di destinazione non è valido. Verificalo e riprova.</value></data>
+  <data name="InfrastructureEmailConfigurationMissing" xml:space="preserve"><value>Il servizio email non è configurato. Riprova più tardi.</value></data>
+  <data name="InfrastructureEmailConfigurationError" xml:space="preserve"><value>La configurazione del servizio email non è valida. Riprova più tardi.</value></data>
+  <data name="InfrastructureEmailAuthenticationFailed" xml:space="preserve"><value>Il servizio email non è riuscito ad autenticarsi con il server. Riprova più tardi.</value></data>
+  <data name="InfrastructureEmailTimeout" xml:space="preserve"><value>Il server email ha impiegato troppo tempo per rispondere. Riprova.</value></data>
+  <data name="InfrastructureEmailUnavailable" xml:space="preserve"><value>Il servizio email è temporaneamente non disponibile. Riprova più tardi.</value></data>
+  <data name="InfrastructureEmailSendFailed" xml:space="preserve"><value>Non è stato possibile inviare l'email. Riprova più tardi.</value></data>
+  <data name="InfrastructureEmailUnexpectedError" xml:space="preserve"><value>Si è verificato un errore imprevisto durante l'invio dell'email. Riprova più tardi.</value></data>
+
+  <data name="FriendErrorTitle" xml:space="preserve"><value>Amici</value></data>
+  <data name="FriendRequestSent" xml:space="preserve"><value>Richiesta di amicizia inviata con successo!</value></data>
+
+  <data name="UserRequestNull" xml:space="preserve"><value>I dati di registrazione mancano. Compila il modulo e riprova.</value></data>
+
+  <data name="FriendAccountNotFound" xml:space="preserve"><value>Account non trovato o inattivo</value></data>
+  <data name="FriendAlreadyFriends" xml:space="preserve"><value>Questo utente è già tuo amico.</value></data>
+  <data name="FriendCannotSelf" xml:space="preserve"><value>Non puoi aggiungere te stesso come amico</value></data>
+  <data name="FriendInvalidAccountId" xml:space="preserve"><value>ID account non valido</value></data>
+  <data name="FriendRequestAlreadyPending" xml:space="preserve"><value>Esiste già una richiesta in sospeso.</value></data>
+  <data name="FriendRequestNull" xml:space="preserve"><value>La richiesta di amicizia non può essere nulla.</value></data>
+  <data name="FriendUnexpectedError" xml:space="preserve"><value>Errore imprevisto nel sistema amici.</value></data>
+
+  <data name="CodeRequestNull" xml:space="preserve"><value>La richiesta di amicizia è vuota o non valida.</value></data>
+  <data name="CodeInvalidAccountId" xml:space="preserve"><value>L'identificatore dell'account fornito non è valido.</value></data>
+  <data name="CodeAccountNotFound" xml:space="preserve"><value>L'utente che stai cercando o aggiungendo non esiste.</value></data>
+  <data name="CodeInvalidDisplayName" xml:space="preserve"><value>Il nome visualizzato ha un formato errato.</value></data>
+  <data name="CodeInvalidIds" xml:space="preserve"><value>Gli identificatori utente non corrispondono.</value></data>
+  <data name="CodeCannotFriendSelf" xml:space="preserve"><value>Non puoi inviare una richiesta di amicizia a te stesso.</value></data>
+  <data name="CodeDestinationInactive" xml:space="preserve"><value>L'utente che stai cercando di contattare è attualmente inattivo.</value></data>
+  <data name="CodeNotAuthorized" xml:space="preserve"><value>Non hai il permesso di eseguire questa azione.</value></data>
+  <data name="CodeNotFound" xml:space="preserve"><value>Il record di amicizia richiesto non è stato trovato.</value></data>
+  <data name="CodeNotPending" xml:space="preserve"><value>Questa richiesta non è più in attesa di approvazione.</value></data>
+  <data name="CodeAlreadyFriends" xml:space="preserve"><value>Siete già amici.</value></data>
+  <data name="CodeRequestIdNotGenerated" xml:space="preserve"><value>Si è verificato un errore durante la generazione della richiesta. Riprova.</value></data>
+  <data name="CodeRequestAlreadyPending" xml:space="preserve"><value>Esiste già una richiesta di amicizia in sospeso con questo utente.</value></data>
+
+  <data name="CodeUserIdInvalid" xml:space="preserve"><value>La sessione utente non è valida o è scaduta.</value></data>
+  <data name="CodeProfileNotFound" xml:space="preserve"><value>Le informazioni del tuo profilo utente non sono state trovate.</value></data>
+  <data name="CodeNoChangesProvided" xml:space="preserve"><value>Nessuna modifica da salvare è stata rilevata.</value></data>
+  <data name="CodeCurrentPasswordRequired" xml:space="preserve"><value>Devi inserire la password attuale per confermare le modifiche.</value></data>
+  <data name="CodeCurrentPasswordIncorrect" xml:space="preserve"><value>La password attuale inserita non è corretta.</value></data>
+  <data name="CodeUpdateFailed" xml:space="preserve"><value>Si è verificato un errore interno durante il salvataggio delle modifiche del profilo.</value></data>
+  <data name="CodeProfileDeleteFailed" xml:space="preserve"><value>Impossibile eliminare l'account. Riprova più tardi.</value></data>
+  <data name="CodeDisplayNameInvalid" xml:space="preserve"><value>Il nome visualizzato non soddisfa i requisiti di sistema.</value></data>
+  <data name="CodeAvatarInvalid" xml:space="preserve"><value>L'avatar selezionato non è disponibile al momento.</value></data>
+  <data name="CodePasswordInvalid" xml:space="preserve"><value>La nuova password non soddisfa i requisiti di sicurezza.</value></data>
+<data name="SettingsTitle" xml:space="preserve"><value>Impostazioni</value></data>
+<data name="SettingsLanguageLabel" xml:space="preserve"><value>Lingua</value></data>
+<data name="SettingsLanguageEnglish" xml:space="preserve"><value>Inglese</value></data>
+<data name="SettingsLanguageSpanishMx" xml:space="preserve"><value>Spagnolo</value></data>
+<data name="SettingsLanguageFrench" xml:space="preserve"><value>Francese</value></data>
+<data name="SettingsLanguageItalian" xml:space="preserve"><value>Italiano</value></data>
+<data name="SettingsBtnApply" xml:space="preserve"><value>Salva</value></data>
+<data name="SettingsBtnCancel" xml:space="preserve"><value>Annulla</value></data>
+<data name="BtnCancel" xml:space="preserve"><value>Annulla</value></data>
+<data name="BtnApply" xml:space="preserve"><value>Salva</value></data>
+  </root>

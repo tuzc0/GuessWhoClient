@@ -13,17 +13,19 @@ namespace GuessWhoClient.Assets
 
         public static string GetAvatarPathById(string avatarId)
         {
-            if (string.IsNullOrEmpty(avatarId))
+            const string defaultPath = "/Images/Avatars/Avatar1.png";
+
+            if (string.IsNullOrWhiteSpace(avatarId))
             {
-                return "/Images/Avatars/Avatar1.png";
+                return defaultPath;
             }
 
-            if (avatarById.TryGetValue(avatarId, out var path))
+            if (avatarById.TryGetValue(avatarId, out string path) && !string.IsNullOrWhiteSpace(path))
             {
                 return path;
             }
 
-            return null;
+            return defaultPath;
         }
 
         public static IReadOnlyDictionary<string, string> GetAllAvatars()

@@ -47,6 +47,24 @@
   <wsdl:message name="IMatchService_LeaveMatch_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q3:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="IMatchService_SetMatchPrivate_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetMatchPrivate" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_SetMatchPrivate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetMatchPrivateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_SetMatchPrivate_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q4:ServiceFault" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_SearchPublicMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchPublicMatch" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_SearchPublicMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchPublicMatchResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMatchService_SearchPublicMatch_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q5:ServiceFault" />
+  </wsdl:message>
   <wsdl:message name="IMatchService_SetPlayerReadyStatus_InputMessage">
     <wsdl:part name="parameters" element="tns:SetPlayerReadyStatus" />
   </wsdl:message>
@@ -54,7 +72,7 @@
     <wsdl:part name="parameters" element="tns:SetPlayerReadyStatusResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_SetPlayerReadyStatus_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q4:ServiceFault" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q6:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_SubscribeLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:SubscribeLobby" />
@@ -63,7 +81,7 @@
     <wsdl:part name="parameters" element="tns:SubscribeLobbyResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_SubscribeLobby_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q5:ServiceFault" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q7:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_UnsubscribeLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:UnsubscribeLobby" />
@@ -72,7 +90,7 @@
     <wsdl:part name="parameters" element="tns:UnsubscribeLobbyResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_UnsubscribeLobby_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q6:ServiceFault" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q8:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_StartMatch_InputMessage">
     <wsdl:part name="parameters" element="tns:StartMatch" />
@@ -81,7 +99,7 @@
     <wsdl:part name="parameters" element="tns:StartMatchResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_StartMatch_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q7:ServiceFault" />
+    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q9:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_EndMatch_InputMessage">
     <wsdl:part name="parameters" element="tns:EndMatch" />
@@ -90,7 +108,7 @@
     <wsdl:part name="parameters" element="tns:EndMatchResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_EndMatch_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q8:ServiceFault" />
+    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q10:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_ChooseSecretCharacter_InputMessage">
     <wsdl:part name="parameters" element="tns:ChooseSecretCharacter" />
@@ -99,7 +117,7 @@
     <wsdl:part name="parameters" element="tns:ChooseSecretCharacterResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_ChooseSecretCharacter_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q9="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q9:ServiceFault" />
+    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q11:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_GetMatchDeck_InputMessage">
     <wsdl:part name="parameters" element="tns:GetMatchDeck" />
@@ -108,7 +126,7 @@
     <wsdl:part name="parameters" element="tns:GetMatchDeckResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_GetMatchDeck_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q10="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q10:ServiceFault" />
+    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q12:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_AskQuestion_InputMessage">
     <wsdl:part name="parameters" element="tns:AskQuestion" />
@@ -117,7 +135,7 @@
     <wsdl:part name="parameters" element="tns:AskQuestionResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_AskQuestion_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q11="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q11:ServiceFault" />
+    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q13:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_AnswerQuestion_InputMessage">
     <wsdl:part name="parameters" element="tns:AnswerQuestion" />
@@ -126,7 +144,7 @@
     <wsdl:part name="parameters" element="tns:AnswerQuestionResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_AnswerQuestion_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q12="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q12:ServiceFault" />
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q14:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_PassTurn_InputMessage">
     <wsdl:part name="parameters" element="tns:PassTurn" />
@@ -135,7 +153,7 @@
     <wsdl:part name="parameters" element="tns:PassTurnResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_PassTurn_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q13="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q13:ServiceFault" />
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q15:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_ClaimTimeout_InputMessage">
     <wsdl:part name="parameters" element="tns:ClaimTimeout" />
@@ -144,7 +162,7 @@
     <wsdl:part name="parameters" element="tns:ClaimTimeoutResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_ClaimTimeout_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q14:ServiceFault" />
+    <wsdl:part xmlns:q16="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q16:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_FinalGuess_InputMessage">
     <wsdl:part name="parameters" element="tns:FinalGuess" />
@@ -153,7 +171,7 @@
     <wsdl:part name="parameters" element="tns:FinalGuessResponse" />
   </wsdl:message>
   <wsdl:message name="IMatchService_FinalGuess_ServiceFaultFault_FaultMessage">
-    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q15:ServiceFault" />
+    <wsdl:part xmlns:q17="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q17:ServiceFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_OnPlayerJoined_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnPlayerJoined" />
@@ -197,6 +215,16 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchLobbyOperations/LeaveMatch" message="tns:IMatchService_LeaveMatch_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMatchLobbyOperations/LeaveMatchResponse" message="tns:IMatchService_LeaveMatch_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IMatchLobbyOperations/LeaveMatchServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_LeaveMatch_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SetMatchPrivate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivate" message="tns:IMatchService_SetMatchPrivate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivateResponse" message="tns:IMatchService_SetMatchPrivate_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivateServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_SetMatchPrivate_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SearchPublicMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchLobbyOperations/SearchPublicMatch" message="tns:IMatchService_SearchPublicMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchLobbyOperations/SearchPublicMatchResponse" message="tns:IMatchService_SearchPublicMatch_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchLobbyOperations/SearchPublicMatchServiceFaultFault" name="ServiceFaultFault" message="tns:IMatchService_SearchPublicMatch_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SetPlayerReadyStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchLobbyOperations/SetPlayerReadyStatus" message="tns:IMatchService_SetPlayerReadyStatus_InputMessage" />
@@ -316,6 +344,30 @@
     </wsdl:operation>
     <wsdl:operation name="LeaveMatch">
       <soap12:operation soapAction="http://tempuri.org/IMatchLobbyOperations/LeaveMatch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetMatchPrivate">
+      <soap12:operation soapAction="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SearchPublicMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchLobbyOperations/SearchPublicMatch" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

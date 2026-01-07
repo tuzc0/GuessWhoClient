@@ -1,5 +1,5 @@
 ﻿using GuessWhoClient.Domain.Models;
-using GuessWhoClient.MatchServiceRef;
+using GuessWhoCore.Contracts.Response;
 using System;
 using System.Collections.Generic;
 
