@@ -5,7 +5,6 @@ using GuessWhoClient.Application.Services.Auth;
 using GuessWhoClient.Application.Services.Friends;
 using GuessWhoClient.Application.Services.Profile;
 using GuessWhoClient.Assets;
-using GuessWhoClient.Domain.Validation;
 using GuessWhoClient.Globalization;
 using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoClient.Infraestructure.ErrorHandling.Mapper;
@@ -70,10 +69,7 @@ namespace GuessWhoClient
             services.AddSingleton<IGameMessageDialogService, GameMessageDialogService>();
             services.AddSingleton<IAlertService, GameAlertService>();
 
-            services.AddSingleton<IValidationMessageMapper, ValidationMessageMapper>();
-
-            services.AddSingleton<IValidationIssueMapper,
-     GuessWhoClient.Presentation.ViewModels.Profile.CreateAccountValidationIssueMapper>();
+            services.AddSingleton<Domain.Validation.IValidationIssueMapper, Domain.Validation.UserValidationIssueMapper>();
 
             services.AddSingleton<ICreateAccountValidationErrorsMapper, CreateAccountValidationErrorsMapper>();
 
@@ -89,10 +85,12 @@ namespace GuessWhoClient
 
             services.AddSingleton<IAvatarPathResolver, AvatarPathResolver>();
 
+            services.AddSingleton<UserRegistrationFaultUiCatalog>();
+            services.AddSingleton<InfrastructureEmailFaultUiCatalog>();
+            services.AddSingleton<InfrastructureFaultUiCatalog>();
             services.AddSingleton<IFaultUiCatalog, DefaultFaultUiCatalog>();
 
             services.AddSingleton<WcfUiFaultMapper>();
-            services.AddSingleton<UserAccountUiFaultMapper>();
             services.AddSingleton<LoginUiFaultMapper>();
             services.AddSingleton<PasswordRecoveryUiFaultMapper>();
             services.AddSingleton<FriendUiFaultMapper>();
@@ -101,7 +99,6 @@ namespace GuessWhoClient
             services.AddSingleton<IUiFaultMapper>(sp =>
                 new CompositeUiFaultMapper(
                     sp.GetRequiredService<WcfUiFaultMapper>(),
-                    sp.GetRequiredService<UserAccountUiFaultMapper>(),
                     sp.GetRequiredService<LoginUiFaultMapper>(),
                     sp.GetRequiredService<PasswordRecoveryUiFaultMapper>(),
                     sp.GetRequiredService<FriendUiFaultMapper>(),

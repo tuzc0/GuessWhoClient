@@ -33,7 +33,7 @@
                    Margin="0,0,0,8" />
 
             <Grid Grid.Row="1"
-              Margin="0,10,0,10">
+                  Margin="0,10,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -41,19 +41,25 @@
 
                 <Path Data="{StaticResource Geo.Mascot.Bulbito.Hello}"
                       Stretch="Uniform"
-                      Fill="{StaticResource Brush.Accent}" 
+                      Fill="{StaticResource Brush.Accent}"
                       Grid.ColumnSpan="2" Margin="0,-32,346,-27" />
 
-                <TextBlock Grid.Column="1"
-                       Text="{Binding MessageText}"
-                       TextWrapping="Wrap"
-                       Style="{StaticResource Txt.Pixel}"
-                       FontSize="16"
-                       Foreground="{StaticResource Brush.TextLight}"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       TextAlignment="Center" />
+                <ScrollViewer Grid.Column="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              MaxHeight="100"
+                              Margin="0,0,0,0">
+                    <TextBlock Text="{Binding MessageText}"
+                               TextWrapping="Wrap"
+                               Style="{StaticResource Txt.Pixel}"
+                               FontSize="16"
+                               Foreground="{StaticResource Brush.TextLight}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center" />
+                </ScrollViewer>
             </Grid>
+
 
             <StackPanel Grid.Row="2"
                     Orientation="Horizontal"

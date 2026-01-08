@@ -4,6 +4,32 @@
              xmlns:localization="clr-namespace:GuessWhoClient.Globalization"
              xmlns:behaviors="clr-namespace:GuessWhoClient.Presentation.Behaviors">
 
+    <UserControl.Resources>
+
+        <Style x:Key="PasswordBoxHiddenStyle"
+               TargetType="PasswordBox"
+               BasedOn="{StaticResource Input.Pixel.Password}">
+            <Setter Property="Visibility" Value="Visible" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsPasswordVisible}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PasswordTextVisibleStyle"
+               TargetType="TextBox"
+               BasedOn="{StaticResource Input.Pixel}">
+            <Setter Property="Visibility" Value="Collapsed" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsPasswordVisible}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
     <Grid Background="{StaticResource Brush.Bg}" Margin="0,0,0,-6">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -41,7 +67,7 @@
                                Margin="0,0,0,4" />
 
                     <TextBox x:Name="txtEmail"
-                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                             Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                              MaxLength="254"
                              Height="32"
                              Style="{StaticResource Input.Pixel}" />
@@ -54,7 +80,7 @@
                                Margin="0,0,0,4" />
 
                     <TextBox x:Name="txtDisplayName"
-                             Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                             Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
                              MaxLength="50"
                              Height="32"
                              Style="{StaticResource Input.Pixel}" />
@@ -66,12 +92,20 @@
                                Text="{Binding [LblPassword], Source={x:Static localization:LocalizationProvider.Instance}}"
                                Margin="0,0,0,4" />
 
-                    <PasswordBox x:Name="pwdPassword"
+                    <Grid>
+                        <PasswordBox x:Name="pwdPassword"
+                                     Height="32"
+                                     MaxLength="64"
+                                     Style="{StaticResource PasswordBoxHiddenStyle}"
+                                     behaviors:PasswordBoxAssistant.BindPassword="True"
+                                     behaviors:PasswordBoxAssistant.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBox x:Name="txtPasswordVisible"
                                  Height="32"
                                  MaxLength="64"
-                                 Style="{StaticResource Input.Pixel.Password}"
-                                 behaviors:PasswordBoxAssistant.BindPassword="True"
-                                 behaviors:PasswordBoxAssistant.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                 Style="{StaticResource PasswordTextVisibleStyle}"
+                                 Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,8">
@@ -80,12 +114,20 @@
                                Text="{Binding [LblConfirmPassword], Source={x:Static localization:LocalizationProvider.Instance}}"
                                Margin="0,0,0,4" />
 
-                    <PasswordBox x:Name="pwdConfirmPassword"
+                    <Grid>
+                        <PasswordBox x:Name="pwdConfirmPassword"
+                                     Height="32"
+                                     MaxLength="64"
+                                     Style="{StaticResource PasswordBoxHiddenStyle}"
+                                     behaviors:PasswordBoxAssistant.BindPassword="True"
+                                     behaviors:PasswordBoxAssistant.BoundPassword="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBox x:Name="txtConfirmPasswordVisible"
                                  Height="32"
                                  MaxLength="64"
-                                 Style="{StaticResource Input.Pixel.Password}"
-                                 behaviors:PasswordBoxAssistant.BindPassword="True"
-                                 behaviors:PasswordBoxAssistant.BoundPassword="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                 Style="{StaticResource PasswordTextVisibleStyle}"
+                                 Text="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
                 </StackPanel>
 
                 <CheckBox x:Name="chkShowPasswords"

@@ -277,4 +277,10 @@
 <data name="SettingsBtnCancel" xml:space="preserve"><value>Annulla</value></data>
 <data name="BtnCancel" xml:space="preserve"><value>Annulla</value></data>
 <data name="BtnApply" xml:space="preserve"><value>Salva</value></data>
+<data name="UiCreateAccount.InvalidDataTitle" xml:space="preserve">
+  <value>Dati di registrazione non validi</value>
+</data>
+<data name="UiCreateAccount.InvalidDataIntro" xml:space="preserve">
+  <value>Correggi quanto segue:</value>
+</data>
   </root>

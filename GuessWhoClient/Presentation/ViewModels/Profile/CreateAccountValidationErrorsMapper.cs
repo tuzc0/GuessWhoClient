@@ -1,4 +1,5 @@
-﻿using GuessWhoClient.Globalization;
+﻿using GuessWhoClient.Domain.Validation;
+using GuessWhoClient.Globalization;
 using GuessWhoCore.Validation;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,10 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
 
     public sealed class CreateAccountValidationErrorsMapper : ICreateAccountValidationErrorsMapper
     {
+        private const string EMPTY = "";
+        private const string LOCALIZATION_MISSING_PREFIX = "!";
+        private const string LOCALIZATION_MISSING_SUFFIX = "!";
+
         private readonly ILocalizationService localizationService;
         private readonly IValidationIssueMapper issueMapper;
 
@@ -48,16 +53,23 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
                     continue;
                 }
 
-                string message = localizationService.Get(mapping.MessageKey) ?? string.Empty;
+                string propertyName = mapping.PropertyName ?? EMPTY;
+
+                if (string.IsNullOrWhiteSpace(propertyName))
+                {
+                    continue;
+                }
+
+                string message = GetLocalizedOrFallback(mapping.MessageKey);
 
                 if (string.IsNullOrWhiteSpace(message))
                 {
                     continue;
                 }
 
-                if (!mapped.TryGetValue(mapping.PropertyName, out IReadOnlyList<string> existing))
+                if (!mapped.TryGetValue(propertyName, out IReadOnlyList<string> existing))
                 {
-                    mapped[mapping.PropertyName] = new List<string> { message };
+                    mapped[propertyName] = new List<string> { message };
                     continue;
                 }
 
@@ -68,10 +80,25 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
                     list.Add(message);
                 }
 
-                mapped[mapping.PropertyName] = list;
+                mapped[propertyName] = list;
             }
 
             return mapped;
+        }
+
+        private string GetLocalizedOrFallback(string messageKey)
+        {
+            if (string.IsNullOrWhiteSpace(messageKey))
+            {
+                return EMPTY;
+            }
+
+            string localized = localizationService.Get(messageKey) ?? EMPTY;
+            string missingMarker = string.Concat(LOCALIZATION_MISSING_PREFIX, messageKey, LOCALIZATION_MISSING_SUFFIX);
+
+            return string.Equals(localized, missingMarker, StringComparison.Ordinal)
+                ? messageKey
+                : localized;
         }
     }
 }

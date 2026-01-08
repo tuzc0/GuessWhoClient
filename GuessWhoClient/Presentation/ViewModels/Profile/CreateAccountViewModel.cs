@@ -2,6 +2,7 @@
 using GuessWhoClient.Globalization;
 using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoClient.Infraestructure.Wcf;
+using GuessWhoClient.Presentation.Dialogs;
 using GuessWhoClient.Presentation.Navegation;
 using GuessWhoClient.Presentation.ViewModels.Auth;
 using GuessWhoClient.Presentation.ViewModels.Profile;
@@ -13,34 +14,40 @@ using GuessWhoCore.Validation;
 using GuessWhoCore.Validation.ValidationDTOs;
 using log4net;
 using System;
-using System.Collections;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GuessWhoClient.ViewModels.Profile
 {
-    public sealed class CreateAccountViewModel : AuthViewModelBase, INotifyDataErrorInfo
+    public sealed class CreateAccountViewModel : AuthViewModelBase
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(CreateAccountViewModel));
 
-        private const string LOG_CTX_CREATE = "CreateAccountViewModel.CreateAccount";
+        private const string EMPTY = "";
+        private const string LOG_CTX_CREATE_ACCOUNT = "CreateAccountViewModel.CreateAccount";
 
         private const string KEY_UI_ACCOUNT_CREATED_FMT = "UiAccountCreatedForFmt";
 
-        private readonly IUserAppService userAppService;
+        private const string KEY_UI_TITLE_ERROR = "UiTitleError";
+        private const string KEY_UI_TITLE_WARNING = "UiTitleWarning";
+
+        private const string KEY_UI_CREATE_INVALID_DATA_TITLE = "UiCreateAccount.InvalidDataTitle";
+        private const string KEY_UI_CREATE_INVALID_DATA_INTRO = "UiCreateAccount.InvalidDataIntro";
+
+        private const string BULLET_PREFIX = "• ";
+
+        private readonly IUserAppService userAccountAppService;
         private readonly IGameScreenManager gameScreenManager;
         private readonly AccountFlowContext accountFlowContext;
-        private readonly ICreateAccountValidationErrorsMapper errorsMapper;
-
-        private readonly DataErrors dataErrors;
+        private readonly ICreateAccountValidationErrorsMapper createAccountValidationErrorsMapper;
+        private readonly IGameMessageDialogService gameMessageDialogService;
 
         private string email;
         private string displayName;
         private string password;
         private string confirmPassword;
         private bool isPasswordVisible;
-
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
         protected override ILog LoggerInstance => Logger;
 
@@ -50,37 +57,33 @@ namespace GuessWhoClient.ViewModels.Profile
             ILocalizationService localizationService,
             IUiFaultMapper faultMapper,
             ICreateAccountValidationErrorsMapper errorsMapper,
+            IGameMessageDialogService gameMessageDialogService,
             IGameScreenManager gameScreenManager,
             AccountFlowContext accountFlowContext)
             : base(alertService, localizationService, faultMapper)
         {
-            this.userAppService = userAppService ?? 
+            userAccountAppService = userAppService ?? 
                 throw new ArgumentNullException(nameof(userAppService));
-            this.errorsMapper = errorsMapper ?? 
+            createAccountValidationErrorsMapper = errorsMapper ?? 
                 throw new ArgumentNullException(nameof(errorsMapper));
+            this.gameMessageDialogService = gameMessageDialogService ?? 
+                throw new ArgumentNullException(nameof(gameMessageDialogService));
             this.gameScreenManager = gameScreenManager ?? 
                 throw new ArgumentNullException(nameof(gameScreenManager));
             this.accountFlowContext = accountFlowContext ?? 
                 throw new ArgumentNullException(nameof(accountFlowContext));
-
-            dataErrors = new DataErrors();
-            dataErrors.ErrorsChanged += OnInternalErrorsChanged;
 
             email = EMPTY;
             displayName = EMPTY;
             password = EMPTY;
             confirmPassword = EMPTY;
 
-            CreateAccountCommand = new AsyncRelayCommand(CreateAccountAsync, CanExecuteCreate);
+            CreateAccountCommand = new AsyncRelayCommand(CreateAccountAsync, CanExecuteCreateAccount);
             BackCommand = new AsyncRelayCommand(BackAsync, CanExecuteBack);
-
-            Validate();
         }
 
         public AsyncRelayCommand CreateAccountCommand { get; }
         public AsyncRelayCommand BackCommand { get; }
-
-        public bool HasErrors => dataErrors.HasErrors;
 
         public bool IsPasswordVisible
         {
@@ -91,77 +94,25 @@ namespace GuessWhoClient.ViewModels.Profile
         public string Email
         {
             get => email;
-            set
-            {
-                if (!SetProperty(ref email, value ?? EMPTY))
-                {
-                    return;
-                }
-
-                Validate();
-            }
+            set => SetProperty(ref email, value ?? EMPTY);
         }
 
         public string DisplayName
         {
             get => displayName;
-            set
-            {
-                if (!SetProperty(ref displayName, value ?? EMPTY))
-                {
-                    return;
-                }
-
-                Validate();
-            }
+            set => SetProperty(ref displayName, value ?? EMPTY);
         }
 
         public string Password
         {
             get => password;
-            set
-            {
-                if (!SetProperty(ref password, value ?? EMPTY))
-                {
-                    return;
-                }
-
-                Validate();
-            }
+            set => SetProperty(ref password, value ?? EMPTY);
         }
 
         public string ConfirmPassword
         {
             get => confirmPassword;
-            set
-            {
-                if (!SetProperty(ref confirmPassword, value ?? EMPTY))
-                {
-                    return;
-                }
-
-                Validate();
-            }
-        }
-
-        public IEnumerable GetErrors(string propertyName)
-        {
-            return dataErrors.GetErrors(propertyName);
-        }
-
-        public void Validate()
-        {
-            var passwordsDraft = 
-                new PasswordConfirmationDraft(Password ?? EMPTY, ConfirmPassword ?? EMPTY);
-            var draft = new UserRulesDraft(Email ?? EMPTY, DisplayName ?? EMPTY, passwordsDraft);
-
-            var errors = UserRules.Validate(draft);
-            var mapped = errorsMapper.Map(errors);
-
-            dataErrors.ReplaceAllErrors(mapped);
-
-            OnPropertyChanged(nameof(HasErrors));
-            RaiseCommandsCanExecuteChanged();
+            set => SetProperty(ref confirmPassword, value ?? EMPTY);
         }
 
         protected override void OnIsBusyChanged(string propertyName)
@@ -169,16 +120,9 @@ namespace GuessWhoClient.ViewModels.Profile
             RaiseCommandsCanExecuteChanged();
         }
 
-        private void OnInternalErrorsChanged(object sender, DataErrorsChangedEventArgs e)
+        private bool CanExecuteCreateAccount()
         {
-            ErrorsChanged?.Invoke(this, e);
-            OnPropertyChanged(nameof(HasErrors));
-            RaiseCommandsCanExecuteChanged();
-        }
-
-        private bool CanExecuteCreate()
-        {
-            return !IsBusy && !HasErrors;
+            return !IsBusy;
         }
 
         private bool CanExecuteBack()
@@ -195,35 +139,35 @@ namespace GuessWhoClient.ViewModels.Profile
 
             try
             {
-                if (!TryValidateBeforeSubmit())
+                if (!TryValidateInputOrShowDialog())
                 {
                     return;
                 }
 
-                var request = new RegisterRequest
+                var registerRequest = new RegisterRequest
                 {
                     Email = (Email ?? EMPTY).Trim(),
-                    DisplayName = DisplayName ?? EMPTY,
+                    DisplayName = (DisplayName ?? EMPTY).Trim(),
                     Password = Password ?? EMPTY
                 };
 
-                WcfCallResult<RegisterResponse> result = await userAppService.RegisterUserAsync(request);
+                WcfCallResult<RegisterResponse> registerResult =
+                    await userAccountAppService.RegisterUserAsync(registerRequest);
 
-                if (result == null || !result.IsSuccess || !result.HasValue || result.Value == null)
+                if (registerResult == null || !registerResult.IsSuccess || !registerResult.HasValue || registerResult.Value == null)
                 {
-                    ShowCallError(result, KEY_UI_GENERIC_ERROR, LOG_CTX_CREATE);
+                    ShowCallError(registerResult, KEY_UI_GENERIC_ERROR, LOG_CTX_CREATE_ACCOUNT);
                     return;
                 }
 
-                RegisterResponse response = result.Value;
+                RegisterResponse registerResponse = registerResult.Value;
 
-                string message = FormatFromResource(KEY_UI_ACCOUNT_CREATED_FMT, request.Email);
+                string createdMessage = FormatFromResource(KEY_UI_ACCOUNT_CREATED_FMT, registerRequest.Email);
+                alertService.Info(createdMessage, localizationService.Get(KEY_UI_TITLE_INFO));
 
-                alertService.Info(message, localizationService.Get(KEY_UI_TITLE_INFO));
-
-                if (response.EmailVerificationRequired)
+                if (registerResponse.EmailVerificationRequired)
                 {
-                    accountFlowContext.SetPendingEmailVerification(response.AccountId, response.Email);
+                    accountFlowContext.SetPendingEmailVerification(registerResponse.AccountId, registerResponse.Email);
                     gameScreenManager.ShowOverlay(GameScreenType.VerifyEmail);
                     return;
                 }
@@ -236,38 +180,93 @@ namespace GuessWhoClient.ViewModels.Profile
             }
         }
 
-        private bool TryValidateBeforeSubmit()
+        private bool TryValidateInputOrShowDialog()
         {
-            Validate();
+            string validationMessage = BuildValidationSummaryMessageOrEmpty();
 
-            if (!HasErrors)
+            if (string.IsNullOrWhiteSpace(validationMessage))
             {
                 return true;
             }
 
-            string first = dataErrors.FirstErrorOrEmpty(nameof(Email));
+            string dialogTitle =
+                localizationService.Get(KEY_UI_CREATE_INVALID_DATA_TITLE) ??
+                localizationService.Get(KEY_UI_TITLE_WARNING) ??
+                localizationService.Get(KEY_UI_TITLE_ERROR) ??
+                EMPTY;
 
-            if (string.IsNullOrWhiteSpace(first))
-            {
-                first = dataErrors.FirstErrorOrEmpty(nameof(DisplayName));
-            }
-
-            if (string.IsNullOrWhiteSpace(first))
-            {
-                first = dataErrors.FirstErrorOrEmpty(nameof(Password));
-            }
-
-            if (string.IsNullOrWhiteSpace(first))
-            {
-                first = dataErrors.FirstErrorOrEmpty(nameof(ConfirmPassword));
-            }
-
-            if (!string.IsNullOrWhiteSpace(first))
-            {
-                alertService.Warn(first, localizationService.Get(KEY_UI_TITLE_WARNING));
-            }
-
+            gameMessageDialogService.Show(dialogTitle, validationMessage);
             return false;
+        }
+
+        private string BuildValidationSummaryMessageOrEmpty()
+        {
+            var draft = new UserRulesDraft(
+                (Email ?? EMPTY).Trim(),
+                (DisplayName ?? EMPTY).Trim(),
+                new PasswordConfirmationDraft(Password ?? EMPTY, ConfirmPassword ?? EMPTY));
+
+            IReadOnlyList<ValidationError> validationErrors = UserRules.Validate(draft);
+            IReadOnlyDictionary<string, IReadOnlyList<string>> mappedErrors =
+                createAccountValidationErrorsMapper.Map(validationErrors);
+
+            if (mappedErrors == null || mappedErrors.Count == 0)
+            {
+                return EMPTY;
+            }
+
+            var uniqueMessages = new HashSet<string>(StringComparer.Ordinal);
+            var messageBuilder = new StringBuilder();
+
+            string intro =
+                localizationService.Get(KEY_UI_CREATE_INVALID_DATA_INTRO) ?? EMPTY;
+
+            if (!string.IsNullOrWhiteSpace(intro))
+            {
+                messageBuilder.AppendLine(intro.Trim());
+                messageBuilder.AppendLine();
+            }
+
+            bool anyMessageAdded = false;
+
+            foreach (KeyValuePair<string, IReadOnlyList<string>> entry in mappedErrors)
+            {
+                IReadOnlyList<string> messages = entry.Value;
+
+                if (messages == null || messages.Count == 0)
+                {
+                    continue;
+                }
+
+                for (int index = 0; index < messages.Count; index++)
+                {
+                    string message = messages[index] ?? EMPTY;
+
+                    if (string.IsNullOrWhiteSpace(message))
+                    {
+                        continue;
+                    }
+
+                    message = message.Trim();
+
+                    if (!uniqueMessages.Add(message))
+                    {
+                        continue;
+                    }
+
+                    messageBuilder.Append(BULLET_PREFIX);
+                    messageBuilder.AppendLine(message);
+
+                    anyMessageAdded = true;
+                }
+            }
+
+            if (!anyMessageAdded)
+            {
+                return EMPTY;
+            }
+
+            return messageBuilder.ToString().Trim();
         }
 
         private Task BackAsync()

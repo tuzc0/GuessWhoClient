@@ -89,7 +89,7 @@ namespace GuessWhoClient.Infraestructure.Wcf
             string logContext)
         {
             string code = ex.Detail != null ? ex.Detail.Code ?? EMPTY : EMPTY;
-            string fallback = ex.Detail != null ? ex.Detail.FallbackMessage ?? EMPTY : EMPTY;
+            string fallback = ex.Detail != null ? ex.Detail.MessageKey ?? EMPTY : EMPTY;
 
             logger.WarnFormat("{0}: Fault. Code='{1}', CorrelationId='{2}', MessageKey='{3}'.",
                 logContext,
