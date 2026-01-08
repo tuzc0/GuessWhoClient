@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" />
+  <xs:element name="GetGlobalLeaderboard">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q1:GetLeaderboardRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGlobalLeaderboardResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="GetGlobalLeaderboardResult" nillable="true" type="q2:GetLeaderboardResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
