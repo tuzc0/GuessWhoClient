@@ -177,6 +177,9 @@
     <Compile Include="Presentation\ViewModels\Profile\CreateAccountValidationErrorsMapper.cs" />
     <Compile Include="Presentation\ViewModels\Profile\UpdateProfileViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Settings\SettingsViewModel.cs" />
+    <Compile Include="Presentation\Views\Leaderboard\LeaderboardView.xaml.cs">
+      <DependentUpon>LeaderboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\Views\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -266,6 +269,10 @@
     </Compile>
     <Compile Include="Presentation\Navegation\GameScreenType.cs" />
     <Compile Include="Infraestructure\Wcf\ServiceClientGuard.cs" />
+    <Page Include="Presentation\Views\Leaderboard\LeaderboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\Views\Settings\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
