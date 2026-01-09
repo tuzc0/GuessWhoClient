@@ -70,6 +70,24 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Save.
+        /// </summary>
+        public static string BtnApply {
+            get {
+                return ResourceManager.GetString("BtnApply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cancel.
+        /// </summary>
+        public static string BtnCancel {
+            get {
+                return ResourceManager.GetString("BtnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create account.
         /// </summary>
         public static string BtnCreateAccount {
@@ -97,6 +115,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Send code.
+        /// </summary>
+        public static string BtnSendCode {
+            get {
+                return ResourceManager.GetString("BtnSendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Verify.
         /// </summary>
         public static string BtnVerifyCode {
@@ -115,268 +142,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a The user you are trying to find or add does not exist..
-        /// </summary>
-        public static string CodeAccountNotFound {
-            get {
-                return ResourceManager.GetString("CodeAccountNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a You are already friends with this user..
-        /// </summary>
-        public static string CodeAlreadyFriends {
-            get {
-                return ResourceManager.GetString("CodeAlreadyFriends", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The selected avatar is currently unavailable..
-        /// </summary>
-        public static string CodeAvatarInvalid {
-            get {
-                return ResourceManager.GetString("CodeAvatarInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a You cannot send a friend request to yourself..
-        /// </summary>
-        public static string CodeCannotFriendSelf {
-            get {
-                return ResourceManager.GetString("CodeCannotFriendSelf", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The current password entered is incorrect..
-        /// </summary>
-        public static string CodeCurrentPasswordIncorrect {
-            get {
-                return ResourceManager.GetString("CodeCurrentPasswordIncorrect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a You must enter your current password to confirm changes..
-        /// </summary>
-        public static string CodeCurrentPasswordRequired {
-            get {
-                return ResourceManager.GetString("CodeCurrentPasswordRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The user you are trying to contact is currently inactive..
-        /// </summary>
-        public static string CodeDestinationInactive {
-            get {
-                return ResourceManager.GetString("CodeDestinationInactive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The display name does not meet the system requirements..
-        /// </summary>
-        public static string CodeDisplayNameInvalid {
-            get {
-                return ResourceManager.GetString("CodeDisplayNameInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The provided account identifier is invalid..
-        /// </summary>
-        public static string CodeInvalidAccountId {
-            get {
-                return ResourceManager.GetString("CodeInvalidAccountId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The display name has an incorrect format..
-        /// </summary>
-        public static string CodeInvalidDisplayName {
-            get {
-                return ResourceManager.GetString("CodeInvalidDisplayName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The user identifiers do not match..
-        /// </summary>
-        public static string CodeInvalidIds {
-            get {
-                return ResourceManager.GetString("CodeInvalidIds", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a No changes were detected to be saved..
-        /// </summary>
-        public static string CodeNoChangesProvided {
-            get {
-                return ResourceManager.GetString("CodeNoChangesProvided", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a You do not have permission to perform this action..
-        /// </summary>
-        public static string CodeNotAuthorized {
-            get {
-                return ResourceManager.GetString("CodeNotAuthorized", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The requested friendship record was not found..
-        /// </summary>
-        public static string CodeNotFound {
-            get {
-                return ResourceManager.GetString("CodeNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a This request is no longer pending approval..
-        /// </summary>
-        public static string CodeNotPending {
-            get {
-                return ResourceManager.GetString("CodeNotPending", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The new password does not meet security requirements..
-        /// </summary>
-        public static string CodePasswordInvalid {
-            get {
-                return ResourceManager.GetString("CodePasswordInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Could not delete the account. Please try again later..
-        /// </summary>
-        public static string CodeProfileDeleteFailed {
-            get {
-                return ResourceManager.GetString("CodeProfileDeleteFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Your user profile information could not be found..
-        /// </summary>
-        public static string CodeProfileNotFound {
-            get {
-                return ResourceManager.GetString("CodeProfileNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a A friend request is already pending with this user..
-        /// </summary>
-        public static string CodeRequestAlreadyPending {
-            get {
-                return ResourceManager.GetString("CodeRequestAlreadyPending", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a An error occurred while generating the request. Please try again..
-        /// </summary>
-        public static string CodeRequestIdNotGenerated {
-            get {
-                return ResourceManager.GetString("CodeRequestIdNotGenerated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The friend request is empty or invalid..
-        /// </summary>
-        public static string CodeRequestNull {
-            get {
-                return ResourceManager.GetString("CodeRequestNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Internal error occurred while saving profile changes..
-        /// </summary>
-        public static string CodeUpdateFailed {
-            get {
-                return ResourceManager.GetString("CodeUpdateFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Your user session is invalid or has expired..
-        /// </summary>
-        public static string CodeUserIdInvalid {
-            get {
-                return ResourceManager.GetString("CodeUserIdInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Account not found..
-        /// </summary>
-        public static string EmailVerificationAccountNotFound {
-            get {
-                return ResourceManager.GetString("EmailVerificationAccountNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a This verification code was already used..
-        /// </summary>
-        public static string EmailVerificationCodeAlreadyUsed {
-            get {
-                return ResourceManager.GetString("EmailVerificationCodeAlreadyUsed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The verification code has expired..
-        /// </summary>
-        public static string EmailVerificationCodeExpired {
-            get {
-                return ResourceManager.GetString("EmailVerificationCodeExpired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Please enter the verification code..
-        /// </summary>
-        public static string EmailVerificationCodeMissing {
-            get {
-                return ResourceManager.GetString("EmailVerificationCodeMissing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a We couldn&apos;t verify your email. Please try again..
-        /// </summary>
-        public static string EmailVerificationFailed {
-            get {
-                return ResourceManager.GetString("EmailVerificationFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a You have reached the resend limit. Please try again later..
-        /// </summary>
-        public static string EmailVerificationResendLimit {
-            get {
-                return ResourceManager.GetString("EmailVerificationResendLimit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Unable to connect to the database.
+        ///   Busca una cadena traducida similar a Unable to connect to the database. Verify that SQL Server is running and the connection string is correct..
         /// </summary>
         public static string FaultDatabaseConnection {
             get {
@@ -385,7 +151,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a The database server took too long to respond.
+        ///   Busca una cadena traducida similar a The database operation timed out. The database server may be busy. Please try again..
         /// </summary>
         public static string FaultDatabaseTimeout {
             get {
@@ -394,16 +160,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a The email address is already registered.
-        /// </summary>
-        public static string FaultDuplicateEmail {
-            get {
-                return ResourceManager.GetString("FaultDuplicateEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The operation violates an existing relationship.
+        ///   Busca una cadena traducida similar a The operation violates an existing relationship. Please verify the data and try again..
         /// </summary>
         public static string FaultForeignKey {
             get {
@@ -412,16 +169,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a The code is invalid or has expired..
-        /// </summary>
-        public static string FaultInvalidOrExpiredCode {
-            get {
-                return ResourceManager.GetString("FaultInvalidOrExpiredCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a The request is invalid.
+        ///   Busca una cadena traducida similar a The request is invalid..
         /// </summary>
         public static string FaultInvalidRequest {
             get {
@@ -430,92 +178,11 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a An unexpected error occurred.
+        ///   Busca una cadena traducida similar a An unexpected error occurred. Please try again..
         /// </summary>
         public static string FaultUnexpected {
             get {
                 return ResourceManager.GetString("FaultUnexpected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Account not found or inactive.
-        /// </summary>
-        public static string FriendAccountNotFound {
-            get {
-                return ResourceManager.GetString("FriendAccountNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a This user is already your friend..
-        /// </summary>
-        public static string FriendAlreadyFriends {
-            get {
-                return ResourceManager.GetString("FriendAlreadyFriends", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a You cannot add yourself as a friend.
-        /// </summary>
-        public static string FriendCannotSelf {
-            get {
-                return ResourceManager.GetString("FriendCannotSelf", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Friends.
-        /// </summary>
-        public static string FriendErrorTitle {
-            get {
-                return ResourceManager.GetString("FriendErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Invalid account ID.
-        /// </summary>
-        public static string FriendInvalidAccountId {
-            get {
-                return ResourceManager.GetString("FriendInvalidAccountId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a A pending request already exists..
-        /// </summary>
-        public static string FriendRequestAlreadyPending {
-            get {
-                return ResourceManager.GetString("FriendRequestAlreadyPending", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Friend request cannot be null..
-        /// </summary>
-        public static string FriendRequestNull {
-            get {
-                return ResourceManager.GetString("FriendRequestNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Friend request sent successfully!.
-        /// </summary>
-        public static string FriendRequestSent {
-            get {
-                return ResourceManager.GetString("FriendRequestSent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Unexpected error in friend system..
-        /// </summary>
-        public static string FriendUnexpectedError {
-            get {
-                return ResourceManager.GetString("FriendUnexpectedError", resourceCulture);
             }
         }
         
@@ -727,97 +394,79 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Your account is locked. Please contact support..
+        ///   Busca una cadena traducida similar a Save.
         /// </summary>
-        public static string LoginAccountLocked {
+        public static string SettingsBtnApply {
             get {
-                return ResourceManager.GetString("LoginAccountLocked", resourceCulture);
+                return ResourceManager.GetString("SettingsBtnApply", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Login error.
+        ///   Busca una cadena traducida similar a Cancel.
         /// </summary>
-        public static string LoginErrorTitle {
+        public static string SettingsBtnCancel {
             get {
-                return ResourceManager.GetString("LoginErrorTitle", resourceCulture);
+                return ResourceManager.GetString("SettingsBtnCancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Invalid email or password..
+        ///   Busca una cadena traducida similar a English.
         /// </summary>
-        public static string LoginInvalidCredentials {
+        public static string SettingsLanguageEnglish {
             get {
-                return ResourceManager.GetString("LoginInvalidCredentials", resourceCulture);
+                return ResourceManager.GetString("SettingsLanguageEnglish", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a We couldn&apos;t start your session. Please try again..
+        ///   Busca una cadena traducida similar a French.
         /// </summary>
-        public static string LoginProfileActivationFailed {
+        public static string SettingsLanguageFrench {
             get {
-                return ResourceManager.GetString("LoginProfileActivationFailed", resourceCulture);
+                return ResourceManager.GetString("SettingsLanguageFrench", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Your profile is already active..
+        ///   Busca una cadena traducida similar a Italian.
         /// </summary>
-        public static string LoginProfileAlreadyActive {
+        public static string SettingsLanguageItalian {
             get {
-                return ResourceManager.GetString("LoginProfileAlreadyActive", resourceCulture);
+                return ResourceManager.GetString("SettingsLanguageItalian", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Welcome.
+        ///   Busca una cadena traducida similar a Language.
         /// </summary>
-        public static string LoginWelcomeTitle {
+        public static string SettingsLanguageLabel {
             get {
-                return ResourceManager.GetString("LoginWelcomeTitle", resourceCulture);
+                return ResourceManager.GetString("SettingsLanguageLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a We couldn&apos;t find an account with that email..
+        ///   Busca una cadena traducida similar a Spanish.
         /// </summary>
-        public static string PasswordRecoveryAccountNotFound {
+        public static string SettingsLanguageSpanishMx {
             get {
-                return ResourceManager.GetString("PasswordRecoveryAccountNotFound", resourceCulture);
+                return ResourceManager.GetString("SettingsLanguageSpanishMx", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a The recovery code has expired..
+        ///   Busca una cadena traducida similar a Settings.
         /// </summary>
-        public static string PasswordRecoveryCodeExpired {
+        public static string SettingsTitle {
             get {
-                return ResourceManager.GetString("PasswordRecoveryCodeExpired", resourceCulture);
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a The recovery code is not valid..
-        /// </summary>
-        public static string PasswordRecoveryCodeInvalid {
-            get {
-                return ResourceManager.GetString("PasswordRecoveryCodeInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a We couldn&apos;t update your password. Please try again..
-        /// </summary>
-        public static string PasswordRecoveryUpdateFailed {
-            get {
-                return ResourceManager.GetString("PasswordRecoveryUpdateFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Account created.
+        ///   Busca una cadena traducida similar a Account created for {0}..
         /// </summary>
         public static string UiAccountCreatedForFmt {
             get {
@@ -826,7 +475,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Could not communicate with the service.
+        ///   Busca una cadena traducida similar a Could not communicate with the service. Please try again..
         /// </summary>
         public static string UiCommsGeneric {
             get {
@@ -835,7 +484,16 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Could not communicate with the service..
+        ///   Busca una cadena traducida similar a Service endpoint was not found. Verify that the server is running and the endpoint address is correct..
+        /// </summary>
+        public static string UiCommunicationEndpointNotFound {
+            get {
+                return ResourceManager.GetString("UiCommunicationEndpointNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Could not communicate with the service. Please try again..
         /// </summary>
         public static string UiCommunicationError {
             get {
@@ -844,11 +502,461 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Service endpoint was not found. Verify that the server is running..
+        ///   Busca una cadena traducida similar a Could not communicate with the service. Please try again..
+        /// </summary>
+        public static string UiCommunicationGeneric {
+            get {
+                return ResourceManager.GetString("UiCommunicationGeneric", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a A security error occurred while connecting. Please try again..
+        /// </summary>
+        public static string UiCommunicationSecurityError {
+            get {
+                return ResourceManager.GetString("UiCommunicationSecurityError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Transport authentication (Windows) failed. Verify that the service is running..
+        /// </summary>
+        public static string UiCommunicationSecurityNegotiationFailed {
+            get {
+                return ResourceManager.GetString("UiCommunicationSecurityNegotiationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The service is unavailable. Please try again later..
+        /// </summary>
+        public static string UiCommunicationServiceUnavailable {
+            get {
+                return ResourceManager.GetString("UiCommunicationServiceUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The request timed out. Please try again..
+        /// </summary>
+        public static string UiCommunicationTimeout {
+            get {
+                return ResourceManager.GetString("UiCommunicationTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please review the following:.
+        /// </summary>
+        public static string UiCreateAccountInvalidDataIntro {
+            get {
+                return ResourceManager.GetString("UiCreateAccountInvalidDataIntro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid registration data.
+        /// </summary>
+        public static string UiCreateAccountInvalidDataTitle {
+            get {
+                return ResourceManager.GetString("UiCreateAccountInvalidDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email service could not authenticate with the mail server. Please try again later..
+        /// </summary>
+        public static string UiEmailAuthenticationFailed {
+            get {
+                return ResourceManager.GetString("UiEmailAuthenticationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email service configuration is invalid. Please try again later..
+        /// </summary>
+        public static string UiEmailConfigurationError {
+            get {
+                return ResourceManager.GetString("UiEmailConfigurationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email service is not configured. Please try again later..
+        /// </summary>
+        public static string UiEmailConfigurationMissing {
+            get {
+                return ResourceManager.GetString("UiEmailConfigurationMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The destination email address is invalid. Please verify it and try again..
+        /// </summary>
+        public static string UiEmailRecipientInvalid {
+            get {
+                return ResourceManager.GetString("UiEmailRecipientInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We could not send the email. Please try again later..
+        /// </summary>
+        public static string UiEmailSendFailed {
+            get {
+                return ResourceManager.GetString("UiEmailSendFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email server took too long to respond. Please try again..
+        /// </summary>
+        public static string UiEmailTimeout {
+            get {
+                return ResourceManager.GetString("UiEmailTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email service is temporarily unavailable. Please try again later..
+        /// </summary>
+        public static string UiEmailUnavailable {
+            get {
+                return ResourceManager.GetString("UiEmailUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred while sending the email. Please try again later..
+        /// </summary>
+        public static string UiEmailUnexpectedError {
+            get {
+                return ResourceManager.GetString("UiEmailUnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account not found..
+        /// </summary>
+        public static string UiEmailVerificationAccountNotFound {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationAccountNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This verification code was already used..
+        /// </summary>
+        public static string UiEmailVerificationCodeAlreadyUsed {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationCodeAlreadyUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code has expired..
+        /// </summary>
+        public static string UiEmailVerificationCodeExpired {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationCodeExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t generate the verification code. Please try again later..
+        /// </summary>
+        public static string UiEmailVerificationCodeGenerationFailed {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationCodeGenerationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code is incorrect..
+        /// </summary>
+        public static string UiEmailVerificationCodeIncorrect {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationCodeIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification code must be exactly 6 digits..
+        /// </summary>
+        public static string UiEmailVerificationCodeInvalidFormat {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationCodeInvalidFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please enter the verification code..
+        /// </summary>
+        public static string UiEmailVerificationCodeMissing {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationCodeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The system random generator is unavailable. Please try again later..
+        /// </summary>
+        public static string UiEmailVerificationCryptoRandomUnavailable {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationCryptoRandomUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The verification request is missing or invalid..
+        /// </summary>
+        public static string UiEmailVerificationRequestNull {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationRequestNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If after 1 minute you have not received the code, press “Resend code”..
+        /// </summary>
+        public static string UiEmailVerificationResendHint {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationResendHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have reached the resend limit. Please try again later..
+        /// </summary>
+        public static string UiEmailVerificationResendHourlyLimitExceeded {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationResendHourlyLimitExceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You can resend the code in {0} seconds.
+        /// </summary>
+        public static string UiEmailVerificationResendInFmt {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationResendInFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please wait 1 minute before requesting another verification code..
+        /// </summary>
+        public static string UiEmailVerificationResendTooFrequent {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationResendTooFrequent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We have sent a new verification code to your email..
+        /// </summary>
+        public static string UiEmailVerificationResent {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationResent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We have sent a verification code to your email: {0}.
+        /// </summary>
+        public static string UiEmailVerificationSentFmt {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationSentFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your email has been successfully verified..
+        /// </summary>
+        public static string UiEmailVerificationSuccess {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t generate a verification code. Please try again later..
+        /// </summary>
+        public static string UiEmailVerificationTokenCreationFailed {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationTokenCreationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred during email verification. Please try again..
+        /// </summary>
+        public static string UiEmailVerificationUnexpectedError {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationUnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t verify your email. Please try again..
+        /// </summary>
+        public static string UiEmailVerificationVerificationFailed {
+            get {
+                return ResourceManager.GetString("UiEmailVerificationVerificationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Service endpoint was not found. Verify that the server is running and the endpoint address is correct..
         /// </summary>
         public static string UiEndpointNotFound {
             get {
                 return ResourceManager.GetString("UiEndpointNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user you are trying to find or add does not exist..
+        /// </summary>
+        public static string UiFriendsAccountNotFound {
+            get {
+                return ResourceManager.GetString("UiFriendsAccountNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You are already friends with this user..
+        /// </summary>
+        public static string UiFriendsAlreadyFriends {
+            get {
+                return ResourceManager.GetString("UiFriendsAlreadyFriends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You cannot send a friend request to yourself..
+        /// </summary>
+        public static string UiFriendsCannotFriendSelf {
+            get {
+                return ResourceManager.GetString("UiFriendsCannotFriendSelf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user you are trying to contact is currently inactive..
+        /// </summary>
+        public static string UiFriendsDestinationInactive {
+            get {
+                return ResourceManager.GetString("UiFriendsDestinationInactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The provided account identifier is invalid..
+        /// </summary>
+        public static string UiFriendsInvalidAccountId {
+            get {
+                return ResourceManager.GetString("UiFriendsInvalidAccountId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The display name has an incorrect format..
+        /// </summary>
+        public static string UiFriendsInvalidDisplayName {
+            get {
+                return ResourceManager.GetString("UiFriendsInvalidDisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The user identifiers do not match..
+        /// </summary>
+        public static string UiFriendsInvalidIds {
+            get {
+                return ResourceManager.GetString("UiFriendsInvalidIds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You do not have permission to perform this action..
+        /// </summary>
+        public static string UiFriendsNotAuthorized {
+            get {
+                return ResourceManager.GetString("UiFriendsNotAuthorized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a A friend request is already pending with this user..
+        /// </summary>
+        public static string UiFriendsRequestAlreadyPending {
+            get {
+                return ResourceManager.GetString("UiFriendsRequestAlreadyPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The friend request was created but could not be finalized. Please try again..
+        /// </summary>
+        public static string UiFriendsRequestIdNotGenerated {
+            get {
+                return ResourceManager.GetString("UiFriendsRequestIdNotGenerated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The requested friendship record was not found..
+        /// </summary>
+        public static string UiFriendsRequestNotFound {
+            get {
+                return ResourceManager.GetString("UiFriendsRequestNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This request is no longer pending approval..
+        /// </summary>
+        public static string UiFriendsRequestNotPending {
+            get {
+                return ResourceManager.GetString("UiFriendsRequestNotPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The friend request is empty or invalid..
+        /// </summary>
+        public static string UiFriendsRequestNull {
+            get {
+                return ResourceManager.GetString("UiFriendsRequestNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friend request sent successfully!.
+        /// </summary>
+        public static string UiFriendsRequestSent {
+            get {
+                return ResourceManager.GetString("UiFriendsRequestSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Friends.
+        /// </summary>
+        public static string UiFriendsTitle {
+            get {
+                return ResourceManager.GetString("UiFriendsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred in the friends system. Please try again..
+        /// </summary>
+        public static string UiFriendsUnexpectedError {
+            get {
+                return ResourceManager.GetString("UiFriendsUnexpectedError", resourceCulture);
             }
         }
         
@@ -858,6 +966,177 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiGenericError {
             get {
                 return ResourceManager.GetString("UiGenericError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database operation timed out. The database server may be busy. Please try again..
+        /// </summary>
+        public static string UiInfrastructureDatabaseCommandTimeout {
+            get {
+                return ResourceManager.GetString("UiInfrastructureDatabaseCommandTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unable to connect to the database. Verify that SQL Server is running and the connection string is correct..
+        /// </summary>
+        public static string UiInfrastructureDatabaseConnectionFailure {
+            get {
+                return ResourceManager.GetString("UiInfrastructureDatabaseConnectionFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The network path to the database could not be found. Verify the network and server address..
+        /// </summary>
+        public static string UiInfrastructureDatabaseNetworkPathNotFound {
+            get {
+                return ResourceManager.GetString("UiInfrastructureDatabaseNetworkPathNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database was not found. Verify that the database exists and the connection string points to it..
+        /// </summary>
+        public static string UiInfrastructureDatabaseNotFound {
+            get {
+                return ResourceManager.GetString("UiInfrastructureDatabaseNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database server was not found. Verify the server/instance name in the connection string..
+        /// </summary>
+        public static string UiInfrastructureDatabaseServerNotFound {
+            get {
+                return ResourceManager.GetString("UiInfrastructureDatabaseServerNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a A network transport error occurred while communicating with the database. Please verify connectivity and try again..
+        /// </summary>
+        public static string UiInfrastructureDatabaseTransportLevelError {
+            get {
+                return ResourceManager.GetString("UiInfrastructureDatabaseTransportLevelError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The database server is unreachable. Verify network connectivity and firewall settings..
+        /// </summary>
+        public static string UiInfrastructureDatabaseUnreachable {
+            get {
+                return ResourceManager.GetString("UiInfrastructureDatabaseUnreachable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No default avatar is configured. Please contact support..
+        /// </summary>
+        public static string UiInfrastructureDefaultAvatarNotConfigured {
+            get {
+                return ResourceManager.GetString("UiInfrastructureDefaultAvatarNotConfigured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The external email provider rejected authentication. Please try again later..
+        /// </summary>
+        public static string UiInfrastructureEmailAuthenticationFailed {
+            get {
+                return ResourceManager.GetString("UiInfrastructureEmailAuthenticationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The external email provider configuration is invalid. Please try again later..
+        /// </summary>
+        public static string UiInfrastructureEmailConfigurationError {
+            get {
+                return ResourceManager.GetString("UiInfrastructureEmailConfigurationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The external email provider is not configured. Please try again later..
+        /// </summary>
+        public static string UiInfrastructureEmailConfigurationMissing {
+            get {
+                return ResourceManager.GetString("UiInfrastructureEmailConfigurationMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The destination email address is invalid. Please verify it and try again..
+        /// </summary>
+        public static string UiInfrastructureEmailRecipientInvalid {
+            get {
+                return ResourceManager.GetString("UiInfrastructureEmailRecipientInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We could not send the email using the external provider. Please try again later..
+        /// </summary>
+        public static string UiInfrastructureEmailSendFailed {
+            get {
+                return ResourceManager.GetString("UiInfrastructureEmailSendFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The external email provider took too long to respond. Please try again..
+        /// </summary>
+        public static string UiInfrastructureEmailTimeout {
+            get {
+                return ResourceManager.GetString("UiInfrastructureEmailTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The external email provider is temporarily unavailable. Please try again later..
+        /// </summary>
+        public static string UiInfrastructureEmailUnavailable {
+            get {
+                return ResourceManager.GetString("UiInfrastructureEmailUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred in the external email provider. Please try again later..
+        /// </summary>
+        public static string UiInfrastructureEmailUnexpectedError {
+            get {
+                return ResourceManager.GetString("UiInfrastructureEmailUnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The operation violates an existing relationship. Please verify the data and try again..
+        /// </summary>
+        public static string UiInfrastructureForeignKeyViolation {
+            get {
+                return ResourceManager.GetString("UiInfrastructureForeignKeyViolation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The request is missing or invalid..
+        /// </summary>
+        public static string UiInfrastructureRequestNull {
+            get {
+                return ResourceManager.GetString("UiInfrastructureRequestNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected infrastructure error occurred. Please try again..
+        /// </summary>
+        public static string UiInfrastructureUnexpectedError {
+            get {
+                return ResourceManager.GetString("UiInfrastructureUnexpectedError", resourceCulture);
             }
         }
         
@@ -880,11 +1159,389 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Your account is locked. Please contact support..
+        /// </summary>
+        public static string UiLoginAccountLocked {
+            get {
+                return ResourceManager.GetString("UiLoginAccountLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid email or password..
+        /// </summary>
+        public static string UiLoginInvalidCredentials {
+            get {
+                return ResourceManager.GetString("UiLoginInvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t start your session. Please try again..
+        /// </summary>
+        public static string UiLoginProfileActivationFailed {
+            get {
+                return ResourceManager.GetString("UiLoginProfileActivationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your profile is already active..
+        /// </summary>
+        public static string UiLoginProfileAlreadyActive {
+            get {
+                return ResourceManager.GetString("UiLoginProfileAlreadyActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Login error.
+        /// </summary>
+        public static string UiLoginTitleError {
+            get {
+                return ResourceManager.GetString("UiLoginTitleError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Welcome.
+        /// </summary>
+        public static string UiLoginTitleWelcome {
+            get {
+                return ResourceManager.GetString("UiLoginTitleWelcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t log you out. Please try again..
+        /// </summary>
+        public static string UiLogoutFailed {
+            get {
+                return ResourceManager.GetString("UiLogoutFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Main window was not found..
         /// </summary>
         public static string UiMainWindowNotFound {
             get {
                 return ResourceManager.GetString("UiMainWindowNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t find an account with that email..
+        /// </summary>
+        public static string UiPasswordRecoveryAccountNotFound {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryAccountNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If an account exists, you will receive an email with next steps..
+        /// </summary>
+        public static string UiPasswordRecoveryAmbiguousSuccess {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryAmbiguousSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The recovery code has expired..
+        /// </summary>
+        public static string UiPasswordRecoveryCodeExpired {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryCodeExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The recovery code is not valid..
+        /// </summary>
+        public static string UiPasswordRecoveryCodeInvalid {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryCodeInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t prepare the recovery email. Please try again later..
+        /// </summary>
+        public static string UiPasswordRecoveryEmailMessageBuildFailed {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryEmailMessageBuildFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email service is temporarily unavailable. Please try again later..
+        /// </summary>
+        public static string UiPasswordRecoveryEmailSenderUnavailable {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryEmailSenderUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a If an account exists, a recovery code was sent to that email..
+        /// </summary>
+        public static string UiPasswordRecoveryRecoverySent {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryRecoverySent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The recovery request is missing or invalid..
+        /// </summary>
+        public static string UiPasswordRecoveryRequestNull {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryRequestNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You have reached the resend limit. Please try again later..
+        /// </summary>
+        public static string UiPasswordRecoveryResendHourlyLimitExceeded {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryResendHourlyLimitExceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please wait 1 minute before requesting another recovery code..
+        /// </summary>
+        public static string UiPasswordRecoveryResendTooFrequent {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryResendTooFrequent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t generate a recovery code. Please try again later..
+        /// </summary>
+        public static string UiPasswordRecoveryTokenCreationFailed {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryTokenCreationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a An unexpected error occurred during password recovery. Please try again..
+        /// </summary>
+        public static string UiPasswordRecoveryUnexpectedError {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryUnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t update your password. Please try again..
+        /// </summary>
+        public static string UiPasswordRecoveryUpdateFailed {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t update your password. Please try again..
+        /// </summary>
+        public static string UiPasswordRecoveryUpdatePasswordFailed {
+            get {
+                return ResourceManager.GetString("UiPasswordRecoveryUpdatePasswordFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The selected avatar is not valid..
+        /// </summary>
+        public static string UiProfileAvatarInvalid {
+            get {
+                return ResourceManager.GetString("UiProfileAvatarInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The current password you entered is incorrect..
+        /// </summary>
+        public static string UiProfileCurrentPasswordIncorrect {
+            get {
+                return ResourceManager.GetString("UiProfileCurrentPasswordIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please enter your current password to confirm changes..
+        /// </summary>
+        public static string UiProfileCurrentPasswordRequired {
+            get {
+                return ResourceManager.GetString("UiProfileCurrentPasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t delete your account. Please try again later..
+        /// </summary>
+        public static string UiProfileDeleteFailed {
+            get {
+                return ResourceManager.GetString("UiProfileDeleteFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The display name is not valid..
+        /// </summary>
+        public static string UiProfileDisplayNameInvalid {
+            get {
+                return ResourceManager.GetString("UiProfileDisplayNameInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No changes were detected to save..
+        /// </summary>
+        public static string UiProfileNoChangesProvided {
+            get {
+                return ResourceManager.GetString("UiProfileNoChangesProvided", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t find your profile..
+        /// </summary>
+        public static string UiProfileNotFound {
+            get {
+                return ResourceManager.GetString("UiProfileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The new password does not meet the security requirements..
+        /// </summary>
+        public static string UiProfilePasswordInvalid {
+            get {
+                return ResourceManager.GetString("UiProfilePasswordInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The profile request is missing or invalid..
+        /// </summary>
+        public static string UiProfileRequestNull {
+            get {
+                return ResourceManager.GetString("UiProfileRequestNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t save your profile changes. Please try again later..
+        /// </summary>
+        public static string UiProfileUpdateFailed {
+            get {
+                return ResourceManager.GetString("UiProfileUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Recover password.
+        /// </summary>
+        public static string UiRecoverPasswordTitle {
+            get {
+                return ResourceManager.GetString("UiRecoverPasswordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Display name format is not valid..
+        /// </summary>
+        public static string UiRegisterDisplayNameInvalid {
+            get {
+                return ResourceManager.GetString("UiRegisterDisplayNameInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Display name is required..
+        /// </summary>
+        public static string UiRegisterDisplayNameRequired {
+            get {
+                return ResourceManager.GetString("UiRegisterDisplayNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email address is already registered..
+        /// </summary>
+        public static string UiRegisterEmailAlreadyExists {
+            get {
+                return ResourceManager.GetString("UiRegisterEmailAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The email address is already registered..
+        /// </summary>
+        public static string UiRegisterEmailAlreadyExists1 {
+            get {
+                return ResourceManager.GetString("UiRegisterEmailAlreadyExists1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invalid email format..
+        /// </summary>
+        public static string UiRegisterEmailInvalid {
+            get {
+                return ResourceManager.GetString("UiRegisterEmailInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Email is required..
+        /// </summary>
+        public static string UiRegisterEmailRequired {
+            get {
+                return ResourceManager.GetString("UiRegisterEmailRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The registration request is invalid..
+        /// </summary>
+        public static string UiRegisterInvalidRequest {
+            get {
+                return ResourceManager.GetString("UiRegisterInvalidRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password format is not valid..
+        /// </summary>
+        public static string UiRegisterPasswordInvalid {
+            get {
+                return ResourceManager.GetString("UiRegisterPasswordInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Password is required..
+        /// </summary>
+        public static string UiRegisterPasswordRequired {
+            get {
+                return ResourceManager.GetString("UiRegisterPasswordRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t complete the registration. Please try again..
+        /// </summary>
+        public static string UiRegisterTechnicalError {
+            get {
+                return ResourceManager.GetString("UiRegisterTechnicalError", resourceCulture);
             }
         }
         
@@ -907,7 +1564,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Transport authentication (Windows) failed. Verify that the service is running.
+        ///   Busca una cadena traducida similar a Transport authentication (Windows) failed. Verify that the service is running..
         /// </summary>
         public static string UiSecurityNegotiationFailed {
             get {
@@ -921,6 +1578,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiServiceUnavailable {
             get {
                 return ResourceManager.GetString("UiServiceUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your session is invalid or has expired. Please sign in again..
+        /// </summary>
+        public static string UiSessionInvalidOrExpired {
+            get {
+                return ResourceManager.GetString("UiSessionInvalidOrExpired", resourceCulture);
             }
         }
         
@@ -997,7 +1663,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Display name format is not valid..
+        ///   Busca una cadena traducida similar a Display name can only contain letters, numbers, spaces, hyphens (-), and underscores (_)..
         /// </summary>
         public static string UiValidationDisplayNameInvalidFormat {
             get {
@@ -1006,7 +1672,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Display name is required.
+        ///   Busca una cadena traducida similar a Display name is required..
         /// </summary>
         public static string UiValidationDisplayNameRequired {
             get {
@@ -1015,7 +1681,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Display name is too long (max. 50 characters).
+        ///   Busca una cadena traducida similar a Display name is too long (max. 50 characters)..
         /// </summary>
         public static string UiValidationDisplayNameTooLong {
             get {
@@ -1033,7 +1699,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Invalid email format.
+        ///   Busca una cadena traducida similar a Please enter a valid email address (e.g., user@domain.com). No spaces..
         /// </summary>
         public static string UiValidationEmailFormat {
             get {
@@ -1042,7 +1708,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Email is required.
+        ///   Busca una cadena traducida similar a Email is required..
         /// </summary>
         public static string UiValidationEmailRequired {
             get {
@@ -1060,7 +1726,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Passwords do not match.
+        ///   Busca una cadena traducida similar a Passwords do not match..
         /// </summary>
         public static string UiValidationPasswordDontMatch {
             get {
@@ -1069,7 +1735,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Password format is not valid..
+        ///   Busca una cadena traducida similar a The password must include at least: 1 lowercase letter, 1 uppercase letter, 1 number, and 1 special character. Spaces are not allowed..
         /// </summary>
         public static string UiValidationPasswordInvalid {
             get {
@@ -1078,7 +1744,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Password is required.
+        ///   Busca una cadena traducida similar a Password is required..
         /// </summary>
         public static string UiValidationPasswordRequired {
             get {
@@ -1096,7 +1762,7 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Password must be at least 8 characters long.
+        ///   Busca una cadena traducida similar a Password must be at least 8 characters long..
         /// </summary>
         public static string UiValidationPasswordTooShort {
             get {
@@ -1173,15 +1839,6 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UIVerificationSuccess {
             get {
                 return ResourceManager.GetString("UIVerificationSuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Registration data is missing. Please fill in the form and try again..
-        /// </summary>
-        public static string UserRequestNull {
-            get {
-                return ResourceManager.GetString("UserRequestNull", resourceCulture);
             }
         }
     }

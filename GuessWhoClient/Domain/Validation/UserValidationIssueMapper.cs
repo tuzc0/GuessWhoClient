@@ -26,6 +26,7 @@ namespace GuessWhoClient.Domain.Validation
                 { UserValidationCodes.PASSWORD_REQUIRED, ValidationIssueMapping.Mapped(PROP_PASSWORD, "UiValidationPasswordRequired") },
                 { UserValidationCodes.PASSWORD_TOO_SHORT, ValidationIssueMapping.Mapped(PROP_PASSWORD, "UiValidationPasswordTooShort") },
                 { UserValidationCodes.PASSWORD_TOO_LONG, ValidationIssueMapping.Mapped(PROP_PASSWORD, "UiValidationPasswordTooLong") },
+                { UserValidationCodes.PASSWORD_INVALID_FORMAT, ValidationIssueMapping.Mapped(PROP_PASSWORD, "UiValidationPasswordInvalid") },
 
                 { UserValidationCodes.CONFIRM_PASSWORD_REQUIRED, ValidationIssueMapping.Mapped(PROP_CONFIRM_PASSWORD, "UiValidationConfirmPasswordRequired") },
                 { UserValidationCodes.CONFIRM_PASSWORD_MISMATCH, ValidationIssueMapping.Mapped(PROP_CONFIRM_PASSWORD, "UiValidationPasswordDontMatch") },

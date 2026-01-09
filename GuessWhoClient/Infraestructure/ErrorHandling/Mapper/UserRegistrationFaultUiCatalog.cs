@@ -8,26 +8,36 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling.Mapper
     {
         private const string EMPTY = "";
 
+        private const string KEY_INVALID_REQUEST = "UiRegisterInvalidRequest";
+        private const string KEY_EMAIL_REQUIRED = "UiRegisterEmailRequired";
+        private const string KEY_EMAIL_INVALID = "UiRegisterEmailInvalid";
+        private const string KEY_EMAIL_ALREADY_EXISTS = "UiRegisterEmailAlreadyExists";
+        private const string KEY_DISPLAY_NAME_REQUIRED = "UiRegisterDisplayNameRequired";
+        private const string KEY_DISPLAY_NAME_INVALID = "UiRegisterDisplayNameInvalid";
+        private const string KEY_PASSWORD_REQUIRED = "UiRegisterPasswordRequired";
+        private const string KEY_PASSWORD_INVALID = "UiRegisterPasswordInvalid";
+        private const string KEY_TECHNICAL_ERROR = "UiRegisterTechnicalError";
+
         private static readonly IReadOnlyDictionary<string, string> MapTable =
             new Dictionary<string, string>(StringComparer.Ordinal)
             {
-                { UserRegistrationFaultKeys.CODE_REQUEST_NULL, "UiRegister.InvalidRequest" },
-                { UserRegistrationFaultKeys.CODE_ARGS_REQUIRED, "UiRegister.InvalidRequest" },
-                { UserRegistrationFaultKeys.CODE_VALIDATION_FAILED, "UiRegister.InvalidRequest" },
+                { UserRegistrationFaultKeys.CODE_REQUEST_NULL, KEY_INVALID_REQUEST },
+                { UserRegistrationFaultKeys.CODE_ARGS_REQUIRED, KEY_INVALID_REQUEST },
+                { UserRegistrationFaultKeys.CODE_VALIDATION_FAILED, KEY_INVALID_REQUEST },
 
-                { UserRegistrationFaultKeys.CODE_EMAIL_REQUIRED, "UiRegister.Email.Required" },
-                { UserRegistrationFaultKeys.CODE_EMAIL_INVALID, "UiRegister.Email.Invalid" },
-                { UserRegistrationFaultKeys.CODE_EMAIL_ALREADY_EXISTS, "UiRegister.Email.AlreadyExists" },
+                { UserRegistrationFaultKeys.CODE_EMAIL_REQUIRED, KEY_EMAIL_REQUIRED },
+                { UserRegistrationFaultKeys.CODE_EMAIL_INVALID, KEY_EMAIL_INVALID },
+                { UserRegistrationFaultKeys.CODE_EMAIL_ALREADY_EXISTS, KEY_EMAIL_ALREADY_EXISTS },
 
-                { UserRegistrationFaultKeys.CODE_DISPLAYNAME_REQUIRED, "UiRegister.DisplayName.Required" },
-                { UserRegistrationFaultKeys.CODE_DISPLAYNAME_INVALID, "UiRegister.DisplayName.Invalid" },
+                { UserRegistrationFaultKeys.CODE_DISPLAYNAME_REQUIRED, KEY_DISPLAY_NAME_REQUIRED },
+                { UserRegistrationFaultKeys.CODE_DISPLAYNAME_INVALID, KEY_DISPLAY_NAME_INVALID },
 
-                { UserRegistrationFaultKeys.CODE_PASSWORD_REQUIRED, "UiRegister.Password.Required" },
-                { UserRegistrationFaultKeys.CODE_PASSWORD_INVALID, "UiRegister.Password.Invalid" },
+                { UserRegistrationFaultKeys.CODE_PASSWORD_REQUIRED, KEY_PASSWORD_REQUIRED },
+                { UserRegistrationFaultKeys.CODE_PASSWORD_INVALID, KEY_PASSWORD_INVALID },
 
-                { UserRegistrationFaultKeys.CODE_TOKEN_CREATION_FAILED, "UiRegister.TechnicalError" },
-                { UserRegistrationFaultKeys.CODE_NOWUTC_REQUIRED, "UiRegister.TechnicalError" },
-                { UserRegistrationFaultKeys.CODE_UNEXPECTED_ERROR, "UiRegister.TechnicalError" },
+                { UserRegistrationFaultKeys.CODE_TOKEN_CREATION_FAILED, KEY_TECHNICAL_ERROR },
+                { UserRegistrationFaultKeys.CODE_NOWUTC_REQUIRED, KEY_TECHNICAL_ERROR },
+                { UserRegistrationFaultKeys.CODE_UNEXPECTED_ERROR, KEY_TECHNICAL_ERROR },
             };
 
         public string ResolveUiKey(string faultCode)
@@ -37,9 +47,13 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling.Mapper
                 return EMPTY;
             }
 
-            return MapTable.TryGetValue(faultCode, out string key)
-                ? key ?? EMPTY
-                : EMPTY;
+            if (!MapTable.ContainsKey(faultCode))
+            {
+                return EMPTY;
+            }
+
+            string key = MapTable[faultCode];
+            return key ?? EMPTY;
         }
 
         public UiKeyMapping Map(string faultCode)

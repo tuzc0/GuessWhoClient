@@ -27,11 +27,14 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
         private const string KEY_UI_RESEND_IN_FMT = "UiResendInFmt";
         private const string KEY_UI_VERIFICATION_RESENT = "UIVerificationResent";
         private const string KEY_UI_VALIDATION_SIX_DIGITS = "UiValidationSixDigits";
-
+        private const string KEY_UI_RESEND_HINT_FMT = "UiPasswordRecoveryResendTooFrequent";
         private const string KEY_UI_CODE_INVALID = "UIVerificationCodeInvalid";
 
-        private const int COOLDOWN_SECONDS = 60;
         private const int CODE_LENGTH = 6;
+        private const int SECONDS_PER_MINUTE = 60;
+        private const int COOLDOWN_SECONDS = 1 * SECONDS_PER_MINUTE;
+        private const int COOLDOWN_MINUTES = COOLDOWN_SECONDS / SECONDS_PER_MINUTE;
+
 
         private readonly IUserAppService userAppService;
         private readonly IGameScreenManager gameScreenManager;
@@ -56,27 +59,32 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             AccountFlowContext accountFlowContext)
             : base(alertService, localizationService, faultMapper)
         {
-            this.userAppService = userAppService ?? 
+            this.userAppService = userAppService ??
                 throw new ArgumentNullException(nameof(userAppService));
-            this.gameScreenManager = gameScreenManager ?? 
+            this.gameScreenManager = gameScreenManager ??
                 throw new ArgumentNullException(nameof(gameScreenManager));
             this.accountFlowContext = accountFlowContext ??
                 throw new ArgumentNullException(nameof(accountFlowContext));
 
             code = EMPTY;
 
-            cooldownTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(1)
-            };
-
-            cooldownTimer.Tick += CooldownTick;
-
             VerifyCommand = new AsyncRelayCommand(VerifyAsync, CanExecuteCommands);
             ResendCommand = new AsyncRelayCommand(ResendAsync, CanExecuteResend);
             BackCommand = new AsyncRelayCommand(BackAsync, CanExecuteBack);
 
+            cooldownTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            cooldownTimer.Tick += CooldownTick;
+
+            cooldownUntilUtc = DateTime.UtcNow.AddSeconds(COOLDOWN_SECONDS);
+            cooldownTimer.Start();
+
+            UpdateStatus();
             RefreshInfoText();
+
+            ResendCommand.RaiseCanExecuteChanged();
         }
 
         public AsyncRelayCommand VerifyCommand { get; }
@@ -121,7 +129,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
         private bool CanExecuteResend()
         {
-            return !IsBusy && !cooldownTimer.IsEnabled;
+            return !IsBusy && DateTime.UtcNow >= cooldownUntilUtc;
         }
 
         private bool CanExecuteBack()
@@ -248,6 +256,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
                 cooldownUntilUtc = DateTime.UtcNow.AddSeconds(COOLDOWN_SECONDS);
                 cooldownTimer.Start();
                 UpdateStatus();
+                ResendCommand.RaiseCanExecuteChanged();
             }
             finally
             {
@@ -289,7 +298,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             if (DateTime.UtcNow >= cooldownUntilUtc)
             {
                 cooldownTimer.Stop();
-                StatusText = EMPTY;
+                UpdateStatus(); 
                 ResendCommand.RaiseCanExecuteChanged();
                 return;
             }
@@ -297,26 +306,42 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             UpdateStatus();
         }
 
+
         private void UpdateStatus()
         {
+            string hintTemplate = localizationService.Get(KEY_UI_RESEND_HINT_FMT) ?? EMPTY;
+
+            string hint;
+            try
+            {
+                hint = string.Format(hintTemplate, COOLDOWN_MINUTES);
+            }
+            catch (FormatException)
+            {
+                hint = hintTemplate;
+            }
+
             TimeSpan remaining = cooldownUntilUtc - DateTime.UtcNow;
 
             if (remaining.TotalSeconds <= 0)
             {
-                StatusText = EMPTY;
+                StatusText = hint;
                 return;
             }
 
-            string template = localizationService.Get(KEY_UI_RESEND_IN_FMT);
+            string countdownTemplate = localizationService.Get(KEY_UI_RESEND_IN_FMT) ?? EMPTY;
 
+            string countdown;
             try
             {
-                StatusText = string.Format(template, Math.Ceiling(remaining.TotalSeconds));
+                countdown = string.Format(countdownTemplate, (int)Math.Ceiling(remaining.TotalSeconds));
             }
             catch (FormatException)
             {
-                StatusText = template ?? EMPTY;
+                countdown = countdownTemplate;
             }
+
+            StatusText = countdown + Environment.NewLine + hint;
         }
 
         public void Dispose()

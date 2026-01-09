@@ -39,11 +39,6 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Path Data="{StaticResource Geo.Mascot.Bulbito.Hello}"
-                      Stretch="Uniform"
-                      Fill="{StaticResource Brush.Accent}"
-                      Grid.ColumnSpan="2" Margin="0,-32,346,-27" />
-
                 <ScrollViewer Grid.Column="1"
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Disabled"

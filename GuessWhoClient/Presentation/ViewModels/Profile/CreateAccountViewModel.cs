@@ -32,8 +32,8 @@ namespace GuessWhoClient.ViewModels.Profile
         private const string KEY_UI_TITLE_ERROR = "UiTitleError";
         private const string KEY_UI_TITLE_WARNING = "UiTitleWarning";
 
-        private const string KEY_UI_CREATE_INVALID_DATA_TITLE = "UiCreateAccount.InvalidDataTitle";
-        private const string KEY_UI_CREATE_INVALID_DATA_INTRO = "UiCreateAccount.InvalidDataIntro";
+        private const string KEY_UI_CREATE_INVALID_DATA_TITLE = "UiCreateAccountInvalidDataTitle";
+        private const string KEY_UI_CREATE_INVALID_DATA_INTRO = "UiCreateAccountInvalidDataIntro";
 
         private const string BULLET_PREFIX = "• ";
 
@@ -196,6 +196,7 @@ namespace GuessWhoClient.ViewModels.Profile
                 EMPTY;
 
             gameMessageDialogService.Show(dialogTitle, validationMessage);
+
             return false;
         }
 

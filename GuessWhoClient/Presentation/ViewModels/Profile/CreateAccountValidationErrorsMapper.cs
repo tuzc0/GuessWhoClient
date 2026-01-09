@@ -24,8 +24,10 @@ namespace GuessWhoClient.Presentation.ViewModels.Profile
             ILocalizationService localizationService,
             IValidationIssueMapper issueMapper)
         {
-            this.localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
-            this.issueMapper = issueMapper ?? throw new ArgumentNullException(nameof(issueMapper));
+            this.localizationService = localizationService ?? 
+                throw new ArgumentNullException(nameof(localizationService));
+            this.issueMapper = issueMapper ?? 
+                throw new ArgumentNullException(nameof(issueMapper));
         }
 
         public IReadOnlyDictionary<string, IReadOnlyList<string>> Map(IReadOnlyList<ValidationError> errors)

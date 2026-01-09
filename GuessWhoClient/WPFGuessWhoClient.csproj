@@ -104,9 +104,13 @@
     <Compile Include="Infraestructure\ErrorHandling\CompositeUiFaultMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\IUiFaultMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\DefaultFaultUiCatalog.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\EmailVerificationFaultUiCatalog.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\FriendFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\IFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\InfrastructureEmailFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\InfrastructureFaultUiCatalog.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\PasswordRecoveryFaultUiCatalog.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\UpdateProfileFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\UserRegistrationFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\UiKeyMapping.cs" />
     <Compile Include="Infraestructure\ErrorHandling\WcfUiFaultMapper.cs" />

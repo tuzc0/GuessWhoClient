@@ -10,21 +10,46 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling.Mapper
     {
         private const string EMPTY = "";
 
+        private const string KEY_GENERIC_ERROR = "UiGenericError";
+        private const string KEY_INVALID_REQUEST = "UiInvalidRequest";
+
+        private const string KEY_LOGIN_INVALID_CREDENTIALS = "UiLoginInvalidCredentials";
+        private const string KEY_LOGIN_ACCOUNT_LOCKED = "UiLoginAccountLocked";
+        private const string KEY_LOGIN_PROFILE_ALREADY_ACTIVE = "UiLoginProfileAlreadyActive";
+        private const string KEY_LOGIN_PROFILE_ACTIVATION_FAILED = "UiLoginProfileActivationFailed";
+        private const string KEY_LOGOUT_FAILED = "UiLogoutFailed";
+        private const string KEY_SESSION_INVALID_OR_EXPIRED = "UiSessionInvalidOrExpired";
+        private const string KEY_SESSION_USER_ID_INVALID = "UiSessionInvalidOrExpired";
+
+        private const string KEY_WCF_ENDPOINT_NOT_FOUND = "UiCommunicationEndpointNotFound";
+        private const string KEY_WCF_TIMEOUT = "UiCommunicationTimeout";
+        private const string KEY_WCF_COMMUNICATION = "UiCommunicationError";
+        private const string KEY_WCF_SECURITY = "UiCommunicationSecurityError";
+
         private static readonly IReadOnlyDictionary<string, string> MapTable =
             new Dictionary<string, string>(StringComparer.Ordinal)
             {
-                { LoginFaultKeys.CODE_INVALID_CREDENTIALS, "LoginInvalidCredentials" },
-                { LoginFaultKeys.CODE_ACCOUNT_LOCKED, "LoginAccountLocked" },
-                { LoginFaultKeys.CODE_PROFILE_ALREADY_ACTIVE, "LoginProfileAlreadyActive" },
-                { LoginFaultKeys.CODE_UNEXPECTED_ERROR, "UiGenericError" },
-                { LoginCoordinatorFaultKeys.CODE_PROFILE_MARK_ACTIVE_FAILED, "LoginProfileActivationFailed" },
-                { WcfTechnicalFaultCodes.ENDPOINT_NOT_FOUND, "UiEndpointNotFound" },
-                { WcfTechnicalFaultCodes.TIMEOUT, "UiTimeout" },
-                { WcfTechnicalFaultCodes.COMMUNICATION_ERROR, "UiCommunicationError" },
-                { WcfTechnicalFaultCodes.SECURITY_ERROR, "UiSecurityError" },
-                { WcfTechnicalFaultCodes.NULL_RESPONSE, "UiGenericError" },
-                { WcfTechnicalFaultCodes.UNEXPECTED, "UiGenericError" },
-                { UserValidationCodes.INVALID_REQUEST, "UiInvalidRequest" },
+                { LoginFaultKeys.CODE_REQUEST_NULL, KEY_INVALID_REQUEST },
+                { LoginFaultKeys.CODE_INVALID_CREDENTIALS, KEY_LOGIN_INVALID_CREDENTIALS },
+                { LoginFaultKeys.CODE_ACCOUNT_LOCKED, KEY_LOGIN_ACCOUNT_LOCKED },
+                { LoginFaultKeys.CODE_PROFILE_ALREADY_ACTIVE, KEY_LOGIN_PROFILE_ALREADY_ACTIVE },
+                { LoginFaultKeys.CODE_LOGOUT_FAILED, KEY_LOGOUT_FAILED },
+                { LoginFaultKeys.CODE_UNEXPECTED_ERROR, KEY_GENERIC_ERROR },
+                { GameSessionFaultKeys.CODE_USER_ID_INVALID, KEY_SESSION_USER_ID_INVALID},
+
+                { LoginCoordinatorFaultKeys.CODE_USER_ID_INVALID, KEY_SESSION_INVALID_OR_EXPIRED },
+                { LoginCoordinatorFaultKeys.CODE_PROFILE_MARK_ACTIVE_FAILED, KEY_LOGIN_PROFILE_ACTIVATION_FAILED },
+                { LoginCoordinatorFaultKeys.CODE_LOGOUT_TERMINATE_SESSIONS_FAILED, KEY_LOGOUT_FAILED },
+                { LoginCoordinatorFaultKeys.CODE_LOGOUT_MARK_INACTIVE_FAILED, KEY_LOGOUT_FAILED },
+
+                { WcfTechnicalFaultCodes.ENDPOINT_NOT_FOUND, KEY_WCF_ENDPOINT_NOT_FOUND },
+                { WcfTechnicalFaultCodes.TIMEOUT, KEY_WCF_TIMEOUT },
+                { WcfTechnicalFaultCodes.COMMUNICATION_ERROR, KEY_WCF_COMMUNICATION },
+                { WcfTechnicalFaultCodes.SECURITY_ERROR, KEY_WCF_SECURITY },
+                { WcfTechnicalFaultCodes.NULL_RESPONSE, KEY_GENERIC_ERROR },
+                { WcfTechnicalFaultCodes.UNEXPECTED, KEY_GENERIC_ERROR },
+
+                { UserValidationCodes.INVALID_REQUEST, KEY_INVALID_REQUEST },
                 { UserValidationCodes.EMAIL_REQUIRED, "UiValidationEmailRequired" },
                 { UserValidationCodes.EMAIL_TOO_LONG, "UiValidationEmailTooLong" },
                 { UserValidationCodes.EMAIL_INVALID_FORMAT, "UiValidationEmailFormat" },
@@ -39,8 +64,7 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling.Mapper
                 { UserValidationCodes.CONFIRM_PASSWORD_MISMATCH, "UiValidationPasswordDontMatch" },
                 { UserValidationCodes.AVATAR_ID_TOO_LONG, "UiValidationAvatarIdTooLong" },
                 { UserValidationCodes.CURRENT_PASSWORD_REQUIRED, "UiValidationCurrentPasswordRequired" },
-    };
-
+            };
 
         public string ResolveUiKey(string faultCode)
         {
@@ -49,12 +73,13 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling.Mapper
                 return EMPTY;
             }
 
-            if (MapTable.TryGetValue(faultCode, out var key))
+            if (!MapTable.ContainsKey(faultCode))
             {
-                return key ?? EMPTY;
+                return EMPTY;
             }
 
-            return EMPTY;
+            string key = MapTable[faultCode];
+            return key ?? EMPTY;
         }
     }
 }

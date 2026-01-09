@@ -86,23 +86,26 @@ namespace GuessWhoClient
             services.AddSingleton<IAvatarPathResolver, AvatarPathResolver>();
 
             services.AddSingleton<UserRegistrationFaultUiCatalog>();
+            services.AddSingleton<EmailVerificationFaultUiCatalog>();
             services.AddSingleton<InfrastructureEmailFaultUiCatalog>();
             services.AddSingleton<InfrastructureFaultUiCatalog>();
             services.AddSingleton<IFaultUiCatalog, DefaultFaultUiCatalog>();
 
             services.AddSingleton<WcfUiFaultMapper>();
             services.AddSingleton<LoginUiFaultMapper>();
-            services.AddSingleton<PasswordRecoveryUiFaultMapper>();
             services.AddSingleton<FriendUiFaultMapper>();
             services.AddSingleton<ProfileUiFaultMapper>();
 
             services.AddSingleton<IUiFaultMapper>(sp =>
-                new CompositeUiFaultMapper(
-                    sp.GetRequiredService<WcfUiFaultMapper>(),
-                    sp.GetRequiredService<LoginUiFaultMapper>(),
-                    sp.GetRequiredService<PasswordRecoveryUiFaultMapper>(),
-                    sp.GetRequiredService<FriendUiFaultMapper>(),
-                    sp.GetRequiredService<ProfileUiFaultMapper>()));
+            new CompositeUiFaultMapper(
+                sp.GetRequiredService<LoginUiFaultMapper>(),
+                sp.GetRequiredService<UserRegistrationFaultUiCatalog>(),
+                sp.GetRequiredService<EmailVerificationFaultUiCatalog>(),
+                sp.GetRequiredService<InfrastructureEmailFaultUiCatalog>(),
+                sp.GetRequiredService<InfrastructureFaultUiCatalog>(),
+                sp.GetRequiredService<FriendUiFaultMapper>(),
+                sp.GetRequiredService<ProfileUiFaultMapper>(),
+                sp.GetRequiredService<WcfUiFaultMapper>()));
         }
 
         private static void RegisterWcfClients(IServiceCollection services)
@@ -176,9 +179,9 @@ namespace GuessWhoClient
             services.AddTransient<JoinOrCreateGameView>(sp =>
             {
                 var view = new JoinOrCreateGameView();
-                var vm = sp.GetRequiredService<CreateOrJoinViewModel>();
+                var viewModel = sp.GetRequiredService<CreateOrJoinViewModel>();
 
-                view.DataContext = vm;
+                view.DataContext = viewModel;
 
                 IGameScreenManager screenManager = sp.GetRequiredService<IGameScreenManager>();
 
@@ -208,13 +211,13 @@ namespace GuessWhoClient
                     gamePlayWindow.Show();
                 }
 
-                vm.BackRequested += HandleBack;
-                vm.LobbyRequested += HandleLobby;
+                viewModel.BackRequested += HandleBack;
+                viewModel.LobbyRequested += HandleLobby;
 
                 view.Unloaded += (_, __) =>
                 {
-                    vm.BackRequested -= HandleBack;
-                    vm.LobbyRequested -= HandleLobby;
+                    viewModel.BackRequested -= HandleBack;
+                    viewModel.LobbyRequested -= HandleLobby;
                 };
 
                 return view;
@@ -249,12 +252,12 @@ namespace GuessWhoClient
             services.AddTransient<SettingsView>(sp =>
             {
                 var view = new SettingsView();
-                var vm = sp.GetRequiredService<SettingsViewModel>();
+                var viewModel = sp.GetRequiredService<SettingsViewModel>();
 
                 var host = sp.GetRequiredService<IGameScreenHost>();
-                vm.RequestClose = () => host.SetOverlayContent(null);
+                viewModel.RequestClose = () => host.SetOverlayContent(null);
 
-                view.DataContext = vm;
+                view.DataContext = viewModel;
                 return view;
             });
 

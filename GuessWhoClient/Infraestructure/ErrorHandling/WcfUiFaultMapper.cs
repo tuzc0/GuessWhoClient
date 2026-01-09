@@ -1,13 +1,27 @@
 ﻿using GuessWhoClient.Infraestructure.Wcf;
 using System;
+using System.Collections.Generic;
 
 namespace GuessWhoClient.Infraestructure.ErrorHandling
 {
     public sealed class WcfUiFaultMapper : IUiFaultMapper
     {
-        private const string KEY_SERVICE_UNAVAILABLE = "UiServiceUnavailable";
-        private const string KEY_SECURITY_ERROR = "UiSecurityError";
-        private const string KEY_TIMEOUT = "UiTimeout";
+        private const string EMPTY = "";
+
+        private const string KEY_ENDPOINT_NOT_FOUND = "UiCommunicationEndpointNotFound";
+        private const string KEY_COMMUNICATION_ERROR = "UiCommunicationError";
+        private const string KEY_SERVICE_UNAVAILABLE = "UiCommunicationServiceUnavailable";
+        private const string KEY_SECURITY_ERROR = "UiCommunicationSecurityError";
+        private const string KEY_TIMEOUT = "UiCommunicationTimeout";
+
+        private static readonly IReadOnlyDictionary<string, string> MapTable =
+            new Dictionary<string, string>(StringComparer.Ordinal)
+            {
+                { WcfTechnicalFaultCodes.ENDPOINT_NOT_FOUND, KEY_ENDPOINT_NOT_FOUND },
+                { WcfTechnicalFaultCodes.COMMUNICATION_ERROR, KEY_COMMUNICATION_ERROR },
+                { WcfTechnicalFaultCodes.SECURITY_ERROR, KEY_SECURITY_ERROR },
+                { WcfTechnicalFaultCodes.TIMEOUT, KEY_TIMEOUT },
+            };
 
         public UiKeyMapping Map(string faultCode)
         {
@@ -16,27 +30,16 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling
                 return UiKeyMapping.Unmapped();
             }
 
-            if (string.Equals(faultCode, WcfTechnicalFaultCodes.ENDPOINT_NOT_FOUND, StringComparison.Ordinal))
+            if (MapTable.ContainsKey(faultCode))
             {
-                return UiKeyMapping.Mapped(KEY_SERVICE_UNAVAILABLE);
+                string uiKey = MapTable[faultCode] ?? EMPTY;
+
+                return string.IsNullOrWhiteSpace(uiKey)
+                    ? UiKeyMapping.Unmapped()
+                    : UiKeyMapping.Mapped(uiKey);
             }
 
-            if (string.Equals(faultCode, WcfTechnicalFaultCodes.SECURITY_ERROR, StringComparison.Ordinal))
-            {
-                return UiKeyMapping.Mapped(KEY_SECURITY_ERROR);
-            }
-
-            if (string.Equals(faultCode, WcfTechnicalFaultCodes.TIMEOUT, StringComparison.Ordinal))
-            {
-                return UiKeyMapping.Mapped(KEY_TIMEOUT);
-            }
-
-            if (string.Equals(faultCode, WcfTechnicalFaultCodes.COMMUNICATION_ERROR, StringComparison.Ordinal))
-            {
-                return UiKeyMapping.Mapped(KEY_SERVICE_UNAVAILABLE);
-            }
-
-            return UiKeyMapping.Unmapped();
+            return UiKeyMapping.Mapped(KEY_SERVICE_UNAVAILABLE);
         }
     }
 }

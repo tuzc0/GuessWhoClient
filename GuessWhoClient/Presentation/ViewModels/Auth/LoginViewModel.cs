@@ -1,6 +1,7 @@
 ﻿using GuessWhoClient.Application.Services.Auth;
 using GuessWhoClient.Globalization;
 using GuessWhoClient.Infraestructure.ErrorHandling.Mapper;
+using GuessWhoClient.Presentation.Dialogs;
 using GuessWhoClient.Presentation.Navegation;
 using GuessWhoClient.Presentation.ViewsModels.Base;
 using GuessWhoClient.Services.Alerts;
@@ -11,6 +12,7 @@ using GuessWhoCore.Validation.ValidationDTOs;
 using log4net;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GuessWhoClient.Presentation.ViewModels.Auth
@@ -23,14 +25,17 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
         private const string LOG_CTX_LOGIN_INVALID_OPERATION = "LoginViewModel.Login.InvalidOperation";
         private const string LOG_CTX_LOGIN_UNEXPECTED = "LoginViewModel.Login.Unexpected";
 
-        private const string KEY_UI_ERROR_TITLE = "LoginErrorTitle";
-        private const string KEY_UI_WELCOME_TITLE = "LoginWelcomeTitle";
-        private const string KEY_UI_INVALID_CREDENTIALS = "LoginInvalidCredentials";
+        private const string KEY_UI_TITLE_ERROR = "UiLoginTitleError";
+        private const string KEY_UI_TITLE_WELCOME = "UiLoginTitleWelcome";
+        private const string KEY_UI_TITLE_WARNING = "UiTitleWarning";
+
+        private const string KEY_UI_INVALID_CREDENTIALS = "UiLoginInvalidCredentials";
 
         private const string KEY_UI_RANGE_ERROR = "UiValueOutOfRange";
         private const string KEY_UI_INVALID_OPERATION = "UiInvalidOperation";
         private const string KEY_UI_UNEXPECTED_ERROR = "UiGenericError";
 
+        private const string BULLET_PREFIX = "• ";
         private const string EMPTY = "";
 
         private readonly ILoginAppService loginAppService;
@@ -39,6 +44,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
         private readonly ILocalizationService localizationService;
         private readonly SessionContext sessionContext;
         private readonly IGameScreenManager gameScreenManager;
+        private readonly IGameMessageDialogService gameMessageDialogService;
 
         private string email;
         private string password;
@@ -50,7 +56,8 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             IFaultUiCatalog faultUiCatalog,
             ILocalizationService localizationService,
             SessionContext sessionContext,
-            IGameScreenManager gameScreenManager)
+            IGameScreenManager gameScreenManager,
+            IGameMessageDialogService gameMessageDialogService)
         {
             this.loginAppService = loginAppService ??
                 throw new ArgumentNullException(nameof(loginAppService));
@@ -64,6 +71,11 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
                 throw new ArgumentNullException(nameof(sessionContext));
             this.gameScreenManager = gameScreenManager ??
                 throw new ArgumentNullException(nameof(gameScreenManager));
+            this.gameMessageDialogService = gameMessageDialogService ??
+                throw new ArgumentNullException(nameof(gameMessageDialogService));
+
+            email = EMPTY;
+            password = EMPTY;
 
             LoginCommand = new AsyncRelayCommand(LoginAsync, CanExecuteCommands);
             CreateAccountCommand = new AsyncRelayCommand(OpenCreateAccountAsync, CanExecuteCommands);
@@ -99,6 +111,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             LoginCommand.RaiseCanExecuteChanged();
             CreateAccountCommand.RaiseCanExecuteChanged();
             ForgotPasswordCommand.RaiseCanExecuteChanged();
+            OpenSettingsCommand.RaiseCanExecuteChanged();
         }
 
         private bool CanExecuteCommands()
@@ -112,16 +125,17 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
             try
             {
-                string validationCode = GetFirstLoginValidationCodeOrEmpty();
-                if (!string.IsNullOrWhiteSpace(validationCode))
+                string validationMessage = BuildLoginValidationSummaryMessageOrEmpty();
+
+                if (!string.IsNullOrWhiteSpace(validationMessage))
                 {
-                    ShowValidationError(validationCode);
+                    ShowValidationDialog(validationMessage);
                     return;
                 }
 
                 var request = new LoginRequest
                 {
-                    Email = Email ?? EMPTY,
+                    Email = (Email ?? EMPTY).Trim(),
                     Password = Password ?? EMPTY
                 };
 
@@ -147,7 +161,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
                 alertService.Info(
                     result.Value.DisplayName,
-                    localizationService.Get(KEY_UI_WELCOME_TITLE));
+                    localizationService.Get(KEY_UI_TITLE_WELCOME_TITLE()));
 
                 gameScreenManager.ShowScreen(GameScreenType.MainMenu);
             }
@@ -172,39 +186,89 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             }
         }
 
-        private string GetFirstLoginValidationCodeOrEmpty()
+        private string KEY_UI_TITLE_WELCOME_TITLE()
         {
-            var draft = new LoginDraft(Email, Password);
+            return KEY_UI_TITLE_WELCOME;
+        }
 
-            IReadOnlyList<ValidationError> errors = UserRules.ValidateLogin(draft);
+        private string BuildLoginValidationSummaryMessageOrEmpty()
+        {
+            string safeEmail = (Email ?? EMPTY).Trim();
+            string safePassword = Password ?? EMPTY;
 
-            if (errors == null || errors.Count == 0)
+            var draft = new LoginDraft(safeEmail, safePassword);
+
+            IReadOnlyList<ValidationError> errors =
+                UserRules.ValidateLogin(draft) ?? Array.Empty<ValidationError>();
+
+            if (errors.Count == 0)
             {
                 return EMPTY;
             }
 
-            return errors[0]?.Key ?? EMPTY;
+            var uniqueMessages = new HashSet<string>(StringComparer.Ordinal);
+            var messageBuilder = new StringBuilder();
+
+            bool anyMessageAdded = false;
+
+            for (int index = 0; index < errors.Count; index++)
+            {
+                string code = errors[index]?.Key ?? EMPTY;
+
+                if (string.IsNullOrWhiteSpace(code))
+                {
+                    continue;
+                }
+
+                string uiKey = ResolveUiKeyOrFallback(code);
+
+                if (string.IsNullOrWhiteSpace(uiKey) ||
+                    string.Equals(uiKey, KEY_UI_UNEXPECTED_ERROR, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                string message = localizationService.LocalOrFallback(
+                    uiKey, null, KEY_UI_UNEXPECTED_ERROR) ?? EMPTY;
+
+                if (string.IsNullOrWhiteSpace(message))
+                {
+                    continue;
+                }
+
+                message = message.Trim();
+
+                if (!uniqueMessages.Add(message))
+                {
+                    continue;
+                }
+
+                messageBuilder.Append(BULLET_PREFIX);
+                messageBuilder.AppendLine(message);
+
+                anyMessageAdded = true;
+            }
+
+            return anyMessageAdded
+                ? messageBuilder.ToString().Trim()
+                : EMPTY;
         }
 
-        private void ShowValidationError(string validationCode)
+        private void ShowValidationDialog(string message)
         {
-            string uiKey = ResolveUiKeyOrFallback(validationCode);
+            string title =
+                localizationService.Get(KEY_UI_TITLE_WARNING) ??
+                localizationService.Get(KEY_UI_TITLE_ERROR) ??
+                EMPTY;
 
-            string message = localizationService.LocalOrFallback(
-                uiKey,
-                null,
-                KEY_UI_UNEXPECTED_ERROR);
-
-            alertService.Error(
-                message,
-                localizationService.Get(KEY_UI_ERROR_TITLE));
+            gameMessageDialogService.Show(title, message ?? EMPTY);
         }
 
         private void ShowInvalidCredentials()
         {
             alertService.Error(
                 localizationService.Get(KEY_UI_INVALID_CREDENTIALS),
-                localizationService.Get(KEY_UI_ERROR_TITLE));
+                localizationService.Get(KEY_UI_TITLE_ERROR));
         }
 
         private void ShowUiError(string messageKey)
@@ -216,7 +280,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
             alertService.Error(
                 message,
-                localizationService.Get(KEY_UI_ERROR_TITLE));
+                localizationService.Get(KEY_UI_TITLE_ERROR));
         }
 
         private Task OpenCreateAccountAsync()
@@ -248,19 +312,21 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
             alertService.Error(
                 message,
-                localizationService.Get(KEY_UI_ERROR_TITLE));
+                localizationService.Get(KEY_UI_TITLE_ERROR));
         }
 
         private string ResolveUiKeyOrFallback(string faultCode)
         {
-            string uiKey = faultUiCatalog.ResolveUiKey(faultCode);
-
-            if (!string.IsNullOrWhiteSpace(uiKey))
+            if (string.IsNullOrWhiteSpace(faultCode))
             {
-                return uiKey;
+                return KEY_UI_UNEXPECTED_ERROR;
             }
 
-            return KEY_UI_UNEXPECTED_ERROR;
+            string uiKey = faultUiCatalog.ResolveUiKey(faultCode);
+
+            return !string.IsNullOrWhiteSpace(uiKey)
+                ? uiKey
+                : KEY_UI_UNEXPECTED_ERROR;
         }
     }
 }
