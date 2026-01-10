@@ -850,4 +850,37 @@
   <data name="BtnNo" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="LblLeaderboard" xml:space="preserve">
+    <value>Leaderboard</value>
+  </data>
+  <data name="lblTopPlayers" xml:space="preserve">
+    <value>Top Players</value>
+  </data>
+  <data name="lblYourPosition" xml:space="preserve">
+    <value>Your position:</value>
+  </data>
+  <data name="BtnBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="LeaderboardErrorTitle" xml:space="preserve">
+    <value>Leaderboard error</value>
+  </data>
+  <data name="UiLeaderboardRequestNull" xml:space="preserve">
+    <value>Leaderboard request error.</value>
+  </data>
+  <data name="UiLeaderboardInvalidTopN" xml:space="preserve">
+    <value>The requested number of positions is invalid.</value>
+  </data>
+  <data name="UiLeaderboardUserNotFound" xml:space="preserve">
+    <value>No statistics found for your user.</value>
+  </data>
+  <data name="UiLeaderboardTechnicalError" xml:space="preserve">
+    <value>Unexpected error loading the leaderboard.</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Success!</value>
+  </data>
+  <data name="FriendErrorTitle" xml:space="preserve">
+    <value>Friends Error</value>
+  </data>
 </root>

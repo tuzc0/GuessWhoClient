@@ -79,6 +79,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Back.
+        /// </summary>
+        public static string BtnBack {
+            get {
+                return ResourceManager.GetString("BtnBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cancel.
         /// </summary>
         public static string BtnCancel {
@@ -313,6 +322,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Friends Error.
+        /// </summary>
+        public static string FriendErrorTitle {
+            get {
+                return ResourceManager.GetString("FriendErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The email service could not authenticate with the mail server. Please try again later..
         /// </summary>
         public static string Infrastructure_Email_AuthenticationFailed {
@@ -502,6 +520,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Leaderboard.
+        /// </summary>
+        public static string LblLeaderboard {
+            get {
+                return ResourceManager.GetString("LblLeaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a New password.
         /// </summary>
         public static string LblNewPassword {
@@ -529,6 +556,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Top Players.
+        /// </summary>
+        public static string lblTopPlayers {
+            get {
+                return ResourceManager.GetString("lblTopPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a User.
         /// </summary>
         public static string LblUser {
@@ -543,6 +579,24 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string LblVerificationCode {
             get {
                 return ResourceManager.GetString("LblVerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Your position:.
+        /// </summary>
+        public static string lblYourPosition {
+            get {
+                return ResourceManager.GetString("lblYourPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Leaderboard error.
+        /// </summary>
+        public static string LeaderboardErrorTitle {
+            get {
+                return ResourceManager.GetString("LeaderboardErrorTitle", resourceCulture);
             }
         }
         
@@ -633,6 +687,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string SettingsTitle {
             get {
                 return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Success!.
+        /// </summary>
+        public static string SuccessTitle {
+            get {
+                return ResourceManager.GetString("SuccessTitle", resourceCulture);
             }
         }
         
@@ -1371,6 +1434,42 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiInvalidRequest {
             get {
                 return ResourceManager.GetString("UiInvalidRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The requested number of positions is invalid..
+        /// </summary>
+        public static string UiLeaderboardInvalidTopN {
+            get {
+                return ResourceManager.GetString("UiLeaderboardInvalidTopN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Leaderboard request error..
+        /// </summary>
+        public static string UiLeaderboardRequestNull {
+            get {
+                return ResourceManager.GetString("UiLeaderboardRequestNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unexpected error loading the leaderboard..
+        /// </summary>
+        public static string UiLeaderboardTechnicalError {
+            get {
+                return ResourceManager.GetString("UiLeaderboardTechnicalError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No statistics found for your user..
+        /// </summary>
+        public static string UiLeaderboardUserNotFound {
+            get {
+                return ResourceManager.GetString("UiLeaderboardUserNotFound", resourceCulture);
             }
         }
         

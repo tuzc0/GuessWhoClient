@@ -11,6 +11,8 @@
         UpdateProfile,
         JoinOrCreateGame,
         ChangePassword,
-        Settings
+        Settings,
+        Leaderboard,
+        Friends
     }
 }

@@ -1,7 +1,9 @@
-﻿using GuessWhoClient.Application.Services.Leaderboard; // Ajusta según tu namespace real
+﻿using GuessWhoClient.Application.Services.Leaderboard;
+using GuessWhoClient.Assets;
 using GuessWhoClient.Globalization;
 using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoClient.Interfaces;
+using GuessWhoClient.Presentation.Navegation;
 using GuessWhoClient.Presentation.ViewModels.Base;
 using GuessWhoClient.Presentation.ViewsModels.Base;
 using GuessWhoClient.Services.Alerts;
@@ -11,6 +13,7 @@ using GuessWhoCore.Contracts.Requests;
 using GuessWhoCore.Contracts.Response;
 using log4net;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -21,7 +24,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Leaderboard
         private static readonly ILog Logger = LogManager.GetLogger(typeof(LeaderboardViewModel));
 
         private const string LOG_CTX_LOAD = "LeaderboardViewModel.LoadLeaderboard.Unexpected";
-
         private const string KEY_UI_ERROR_TITLE = "LeaderboardErrorTitle";
         private const string KEY_GENERIC_ERROR = "UiGenericError";
 
@@ -30,9 +32,11 @@ namespace GuessWhoClient.Presentation.ViewModels.Leaderboard
         private readonly IUiFaultMapper leaderboardFaultMapper;
         private readonly ILocalizationService localizationService;
         private readonly SessionContext sessionContext;
+        private readonly IGameScreenManager gameScreenManager;
+        private readonly IAvatarPathResolver avatarPathResolver;
 
-        private ObservableCollection<LeaderboardPlayerDto> players;
-        private LeaderboardPlayerDto currentUserStats;
+        private ObservableCollection<LeaderboardPlayerDto> topPlayers;
+        private LeaderboardPlayerDto myStats;
         private int topN = 10;
 
         public LeaderboardViewModel(
@@ -40,28 +44,33 @@ namespace GuessWhoClient.Presentation.ViewModels.Leaderboard
             IAlertService alertService,
             IUiFaultMapper leaderboardFaultMapper,
             ILocalizationService localizationService,
-            SessionContext sessionContext)
+            SessionContext sessionContext,
+            IGameScreenManager gameScreenManager,
+            IAvatarPathResolver avatarPathResolver)
         {
             this.leaderboardAppService = leaderboardAppService ?? throw new ArgumentNullException(nameof(leaderboardAppService));
             this.alertService = alertService ?? throw new ArgumentNullException(nameof(alertService));
             this.leaderboardFaultMapper = leaderboardFaultMapper ?? throw new ArgumentNullException(nameof(leaderboardFaultMapper));
             this.localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             this.sessionContext = sessionContext ?? throw new ArgumentNullException(nameof(sessionContext));
+            this.gameScreenManager = gameScreenManager ?? throw new ArgumentNullException(nameof(gameScreenManager));
+            this.avatarPathResolver = avatarPathResolver ?? throw new ArgumentNullException(nameof(avatarPathResolver));
 
-            Players = new ObservableCollection<LeaderboardPlayerDto>();
+            TopPlayers = new ObservableCollection<LeaderboardPlayerDto>();
             LoadLeaderboardCommand = new AsyncRelayCommand(LoadLeaderboardAsync, CanExecuteCommands);
+            BackCommand = new RelayCommand(OnBackRequested);
         }
 
-        public ObservableCollection<LeaderboardPlayerDto> Players
+        public ObservableCollection<LeaderboardPlayerDto> TopPlayers
         {
-            get => players;
-            set => SetProperty(ref players, value);
+            get => topPlayers;
+            set => SetProperty(ref topPlayers, value);
         }
 
-        public LeaderboardPlayerDto CurrentUserStats
+        public LeaderboardPlayerDto MyStats
         {
-            get => currentUserStats;
-            set => SetProperty(ref currentUserStats, value);
+            get => myStats;
+            set => SetProperty(ref myStats, value);
         }
 
         public int TopN
@@ -71,6 +80,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Leaderboard
         }
 
         public AsyncRelayCommand LoadLeaderboardCommand { get; }
+        public RelayCommand BackCommand { get; }
 
         protected override void OnIsBusyChanged(string propertyName)
         {
@@ -78,6 +88,11 @@ namespace GuessWhoClient.Presentation.ViewModels.Leaderboard
         }
 
         private bool CanExecuteCommands() => !IsBusy;
+
+        private void OnBackRequested()
+        {
+            gameScreenManager.ShowScreen(GameScreenType.MainMenu);
+        }
 
         private async Task LoadLeaderboardAsync()
         {
@@ -100,12 +115,24 @@ namespace GuessWhoClient.Presentation.ViewModels.Leaderboard
 
                 if (result.Value != null)
                 {
-                    var playerList = result.Value.Players != null
-                                     ? new System.Collections.Generic.List<LeaderboardPlayerDto>(result.Value.Players)
-                                     : new System.Collections.Generic.List<LeaderboardPlayerDto>();
+                    if (result.Value.Players != null)
+                    {
+                        foreach (var player in result.Value.Players)
+                        {
+                            player.AvatarId = avatarPathResolver.Resolve(player.AvatarId);
+                        }
+                    }
 
-                    Players = new ObservableCollection<LeaderboardPlayerDto>(playerList);
-                    CurrentUserStats = result.Value.CurrentUserStats;
+                    if (result.Value.CurrentUserStats != null)
+                    {
+                        result.Value.CurrentUserStats.AvatarId = avatarPathResolver.Resolve(result.Value.CurrentUserStats.AvatarId);
+                    }
+
+                    TopPlayers = new ObservableCollection<LeaderboardPlayerDto>(
+                        result.Value.Players ?? new List<LeaderboardPlayerDto>()
+                    );
+
+                    MyStats = result.Value.CurrentUserStats;
                 }
             }
             catch (Exception ex)

@@ -1,8 +1,10 @@
 ﻿using GuessWhoClient.Application.Services.Friends;
+using GuessWhoClient.Assets;
 using GuessWhoClient.Globalization;
 using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoClient.Interfaces;
 using GuessWhoClient.Presentation.Navegation;
+using GuessWhoClient.Presentation.ViewModels.Base;
 using GuessWhoClient.Presentation.ViewsModels.Base;
 using GuessWhoClient.Services.Alerts;
 using GuessWhoClient.Session;
@@ -34,10 +36,13 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
         private readonly ILocalizationService localizationService;
         private readonly SessionContext sessionContext;
         private readonly IGameScreenManager gameScreenManager;
+        private readonly IAvatarPathResolver avatarPathResolver;
 
         private ObservableCollection<UserProfileSearchResult> friends;
         private ObservableCollection<UserProfileSearchResult> searchResults;
+        private ObservableCollection<UserProfileSearchResult> receivedRequests;
         private UserProfileSearchResult selectedProfile;
+        private UserProfileSearchResult selectedReceivedRequest;
         private string searchText;
 
         public FriendViewModel(
@@ -46,7 +51,8 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
             IUiFaultMapper friendFaultMapper,
             ILocalizationService localizationService,
             SessionContext sessionContext,
-            IGameScreenManager gameScreenManager)
+            IGameScreenManager gameScreenManager,
+            IAvatarPathResolver avatarPathResolver)
         {
             this.friendAppService = friendAppService ?? throw new ArgumentNullException(nameof(friendAppService));
             this.alertService = alertService ?? throw new ArgumentNullException(nameof(alertService));
@@ -54,13 +60,18 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
             this.localizationService = localizationService ?? throw new ArgumentNullException(nameof(localizationService));
             this.sessionContext = sessionContext ?? throw new ArgumentNullException(nameof(sessionContext));
             this.gameScreenManager = gameScreenManager ?? throw new ArgumentNullException(nameof(gameScreenManager));
+            this.avatarPathResolver = avatarPathResolver ?? throw new ArgumentNullException(nameof(avatarPathResolver));
 
             Friends = new ObservableCollection<UserProfileSearchResult>();
             SearchResults = new ObservableCollection<UserProfileSearchResult>();
+            ReceivedRequests = new ObservableCollection<UserProfileSearchResult>();
 
             LoadFriendsCommand = new AsyncRelayCommand(LoadFriendsAsync, CanExecuteCommands);
             SearchProfilesCommand = new AsyncRelayCommand(SearchProfilesAsync, CanExecuteCommands);
             SendFriendRequestCommand = new AsyncRelayCommand(SendFriendRequestAsync, CanExecuteSendRequest);
+            AcceptFriendRequestCommand = new AsyncRelayCommand(AcceptFriendRequestAsync, CanExecuteAcceptRequest);
+            RejectFriendRequestCommand = new AsyncRelayCommand(RejectFriendRequestAsync, CanExecuteAcceptRequest);
+            BackCommand = new RelayCommand(OnBackRequested);
         }
 
         public string SearchText { get => searchText; set => SetProperty(ref searchText, value); }
@@ -68,48 +79,73 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
         public UserProfileSearchResult SelectedProfile
         {
             get => selectedProfile;
+            set { if (SetProperty(ref selectedProfile, value)) SendFriendRequestCommand.RaiseCanExecuteChanged(); }
+        }
+
+        public UserProfileSearchResult SelectedReceivedRequest
+        {
+            get => selectedReceivedRequest;
             set
             {
-                if (SetProperty(ref selectedProfile, value))
+                if (SetProperty(ref selectedReceivedRequest, value))
                 {
-                    SendFriendRequestCommand.RaiseCanExecuteChanged();
+                    AcceptFriendRequestCommand.RaiseCanExecuteChanged();
+                    RejectFriendRequestCommand.RaiseCanExecuteChanged();
                 }
             }
         }
 
         public ObservableCollection<UserProfileSearchResult> Friends { get => friends; set => SetProperty(ref friends, value); }
         public ObservableCollection<UserProfileSearchResult> SearchResults { get => searchResults; set => SetProperty(ref searchResults, value); }
+        public ObservableCollection<UserProfileSearchResult> ReceivedRequests { get => receivedRequests; set => SetProperty(ref receivedRequests, value); }
 
         public AsyncRelayCommand LoadFriendsCommand { get; }
         public AsyncRelayCommand SearchProfilesCommand { get; }
         public AsyncRelayCommand SendFriendRequestCommand { get; }
+        public AsyncRelayCommand AcceptFriendRequestCommand { get; }
+        public AsyncRelayCommand RejectFriendRequestCommand { get; }
+        public RelayCommand BackCommand { get; }
 
         protected override void OnIsBusyChanged(string propertyName)
         {
             LoadFriendsCommand.RaiseCanExecuteChanged();
             SearchProfilesCommand.RaiseCanExecuteChanged();
             SendFriendRequestCommand.RaiseCanExecuteChanged();
+            AcceptFriendRequestCommand.RaiseCanExecuteChanged();
+            RejectFriendRequestCommand.RaiseCanExecuteChanged();
         }
 
         private bool CanExecuteCommands() => !IsBusy;
         private bool CanExecuteSendRequest() => !IsBusy && SelectedProfile != null;
+        private bool CanExecuteAcceptRequest() => !IsBusy && SelectedReceivedRequest != null;
+
+        private void OnBackRequested() => gameScreenManager.ShowScreen(GameScreenType.MainMenu);
 
         private async Task LoadFriendsAsync()
         {
             IsBusy = true;
             try
             {
-                var result = await friendAppService.GetFriendsAsync(new GetFriendsRequest { AccountId = sessionContext.UserId.ToString() });
-
-                if (!result.IsSuccess)
+                var friendsResult = await friendAppService.GetFriendsAsync(new GetFriendsRequest { AccountId = sessionContext.UserId.ToString() });
+                if (friendsResult.IsSuccess && friendsResult.Value?.Friends != null)
                 {
-                    ShowFriendError(result.FaultCode);
-                    return;
+                    foreach (var f in friendsResult.Value.Friends) f.AvatarId = avatarPathResolver.Resolve(f.AvatarId);
+                    Friends = new ObservableCollection<UserProfileSearchResult>(friendsResult.Value.Friends);
                 }
 
-                if (result.Value?.Friends != null)
+                var pendingResult = await friendAppService.GetPendingRequestsAsync(new GetPendingFriendRequestsRequest { AccountId = sessionContext.UserId.ToString() });
+                if (pendingResult.IsSuccess && pendingResult.Value?.Requests != null)
                 {
-                    Friends = new ObservableCollection<UserProfileSearchResult>(result.Value.Friends);
+                    var requestsList = new ObservableCollection<UserProfileSearchResult>();
+                    foreach (var r in pendingResult.Value.Requests)
+                    {
+                        requestsList.Add(new UserProfileSearchResult
+                        {
+                            UserId = r.FriendRequestId,
+                            DisplayName = r.RequesterDisplayName
+                        });
+                    }
+                    ReceivedRequests = requestsList;
                 }
             }
             catch (Exception ex)
@@ -127,15 +163,10 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
             try
             {
                 var result = await friendAppService.SearchProfilesAsync(new SearchProfileRequest { DisplayName = SearchText });
-
-                if (!result.IsSuccess)
-                {
-                    ShowFriendError(result.FaultCode);
-                    return;
-                }
-
+                if (!result.IsSuccess) { ShowFriendError(result.FaultCode); return; }
                 if (result.Value?.Profiles != null)
                 {
+                    foreach (var p in result.Value.Profiles) p.AvatarId = avatarPathResolver.Resolve(p.AvatarId);
                     SearchResults = new ObservableCollection<UserProfileSearchResult>(result.Value.Profiles);
                 }
             }
@@ -157,14 +188,8 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
                     FromAccountId = sessionContext.UserId,
                     ToUserId = SelectedProfile.UserId
                 });
-
-                if (!result.IsSuccess)
-                {
-                    ShowFriendError(result.FaultCode);
-                    return;
-                }
-
-                alertService.Info(localizationService.Get("FriendRequestSent"), localizationService.Get(KEY_UI_SUCCESS_TITLE));
+                if (!result.IsSuccess) { ShowFriendError(result.FaultCode); return; }
+                alertService.Info(localizationService.Get("UiFriendsRequestSent"), localizationService.Get(KEY_UI_SUCCESS_TITLE));
             }
             catch (Exception ex)
             {
@@ -174,10 +199,50 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
             finally { IsBusy = false; }
         }
 
-        private void ShowUiError(string messageKey)
+        private async Task AcceptFriendRequestAsync()
         {
-            alertService.Error(localizationService.Get(messageKey), localizationService.Get(KEY_UI_ERROR_TITLE));
+            IsBusy = true;
+            try
+            {
+                var result = await friendAppService.AcceptFriendRequestAsync(new FriendRequestOperationRequest
+                {
+                    AccountId = sessionContext.UserId.ToString(),
+                    FriendRequestId = SelectedReceivedRequest.UserId.ToString()
+                });
+                if (!result.IsSuccess) { ShowFriendError(result.FaultCode); return; }
+                alertService.Info(localizationService.Get("UiFriendsRequestAccepted"), localizationService.Get(KEY_UI_SUCCESS_TITLE));
+                await LoadFriendsAsync();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(LOG_CTX_OPERATION, ex);
+                ShowUiError(KEY_GENERIC_ERROR);
+            }
+            finally { IsBusy = false; }
         }
+
+        private async Task RejectFriendRequestAsync()
+        {
+            IsBusy = true;
+            try
+            {
+                var result = await friendAppService.RejectFriendRequestAsync(new FriendRequestOperationRequest
+                {
+                    AccountId = sessionContext.UserId.ToString(),
+                    FriendRequestId = SelectedReceivedRequest.UserId.ToString()
+                });
+                if (!result.IsSuccess) { ShowFriendError(result.FaultCode); return; }
+                await LoadFriendsAsync();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(LOG_CTX_OPERATION, ex);
+                ShowUiError(KEY_GENERIC_ERROR);
+            }
+            finally { IsBusy = false; }
+        }
+
+        private void ShowUiError(string messageKey) => alertService.Error(localizationService.Get(messageKey), localizationService.Get(KEY_UI_ERROR_TITLE));
 
         private void ShowFriendError(string faultCode)
         {

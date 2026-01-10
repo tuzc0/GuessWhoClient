@@ -13,6 +13,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
 
         private const string LOG_CTX_PLAY = "MainMenuViewModel.Play";
         private const string LOG_CTX_PROFILE = "MainMenuViewModel.Profile";
+        private const string LOG_CTX_LEADERBOARDS = "MainMenuViewModel.Leaderboards";
         private const string LOG_CTX_SETTINGS = "MainMenuViewModel.Settings";
         private const string LOG_CTX_EXIT = "MainMenuViewModel.Exit";
 
@@ -43,23 +44,24 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
 
             PlayCommand = new RelayCommand(Play, CanExecuteCommands);
             ProfileCommand = new RelayCommand(Profile, CanExecuteCommands);
+            LeaderboardsCommand = new RelayCommand(Leaderboards, CanExecuteCommands);
             SettingsCommand = new RelayCommand(Settings, CanExecuteCommands);
             ExitCommand = new RelayCommand(Exit, CanExecuteCommands);
-
-            LeaderboardsCommand = new RelayCommand(Leaderboards, () => false);
         }
 
         public RelayCommand PlayCommand { get; }
         public RelayCommand ProfileCommand { get; }
+        public RelayCommand LeaderboardsCommand { get; }
         public RelayCommand SettingsCommand { get; }
         public RelayCommand ExitCommand { get; }
-        public RelayCommand LeaderboardsCommand { get; }
 
         private bool CanExecuteCommands() => !IsBusy;
 
         private void Play() => NavigateToScreen(GameScreenType.JoinOrCreateGame, LOG_CTX_PLAY);
 
         private void Profile() => NavigateToScreen(GameScreenType.UpdateProfile, LOG_CTX_PROFILE);
+
+        private void Leaderboards() => NavigateToScreen(GameScreenType.Leaderboard, LOG_CTX_LEADERBOARDS);
 
         private void Settings() => NavigateToOverlay(GameScreenType.Settings, LOG_CTX_SETTINGS);
 
@@ -75,11 +77,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
             }
         }
 
-        private void Leaderboards()
-        {
-            // feature pendiente
-        }
-
         private void NavigateToScreen(GameScreenType screenType, string context)
         {
             try
@@ -91,12 +88,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
                     HandleNavigationFailure(result, context);
                 }
             }
-            catch (InvalidOperationException ex)
-            {
-                Logger.Error(string.Format(LOG_NAV_EXCEPTION_TEMPLATE, context, screenType), ex);
-                ShowNavigationWarning(KEY_UI_NAV_FAILED);
-            }
-            catch (ArgumentException ex)
+            catch (Exception ex) when (ex is InvalidOperationException || ex is ArgumentException)
             {
                 Logger.Error(string.Format(LOG_NAV_EXCEPTION_TEMPLATE, context, screenType), ex);
                 ShowNavigationWarning(KEY_UI_NAV_FAILED);
@@ -114,12 +106,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
                     HandleNavigationFailure(result, context);
                 }
             }
-            catch (InvalidOperationException ex)
-            {
-                Logger.Error(string.Format(LOG_NAV_EXCEPTION_TEMPLATE, context, screenType), ex);
-                ShowNavigationWarning(KEY_UI_NAV_FAILED);
-            }
-            catch (ArgumentException ex)
+            catch (Exception ex) when (ex is InvalidOperationException || ex is ArgumentException)
             {
                 Logger.Error(string.Format(LOG_NAV_EXCEPTION_TEMPLATE, context, screenType), ex);
                 ShowNavigationWarning(KEY_UI_NAV_FAILED);
@@ -160,6 +147,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
         {
             PlayCommand.RaiseCanExecuteChanged();
             ProfileCommand.RaiseCanExecuteChanged();
+            LeaderboardsCommand.RaiseCanExecuteChanged();
             SettingsCommand.RaiseCanExecuteChanged();
             ExitCommand.RaiseCanExecuteChanged();
         }

@@ -850,4 +850,37 @@
   <data name="BtnNo" xml:space="preserve">
     <value>Non</value>
   </data>
+  <data name="LblLeaderboard" xml:space="preserve">
+    <value>Classement</value>
+  </data>
+  <data name="lblTopPlayers" xml:space="preserve">
+    <value>Meilleurs joueurs</value>
+  </data>
+  <data name="lblYourPosition" xml:space="preserve">
+    <value>Votre position :</value>
+  </data>
+  <data name="BtnBack" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="LeaderboardErrorTitle" xml:space="preserve">
+    <value>Erreur de classement</value>
+  </data>
+  <data name="UiLeaderboardRequestNull" xml:space="preserve">
+    <value>Erreur de demande de classement.</value>
+  </data>
+  <data name="UiLeaderboardInvalidTopN" xml:space="preserve">
+    <value>Le nombre de positions demandé est invalide.</value>
+  </data>
+  <data name="UiLeaderboardUserNotFound" xml:space="preserve">
+    <value>Aucune statistique trouvée pour votre utilisateur.</value>
+  </data>
+  <data name="UiLeaderboardTechnicalError" xml:space="preserve">
+    <value>Erreur inattendue lors du chargement du classement.</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Succès !</value>
+  </data>
+  <data name="FriendErrorTitle" xml:space="preserve">
+    <value>Erreur d'Amis</value>
+  </data>
 </root>

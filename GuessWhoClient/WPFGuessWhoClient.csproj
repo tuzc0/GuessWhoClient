@@ -111,6 +111,7 @@
     <Compile Include="Infraestructure\ErrorHandling\Mapper\IFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\InfrastructureEmailFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\InfrastructureFaultUiCatalog.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\LeaderboardFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\MatchBusinessErrorMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\PasswordRecoveryFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\UpdateProfileFaultUiCatalog.cs" />
@@ -178,6 +179,12 @@
     <Compile Include="Presentation\ViewModels\Profile\CreateAccountValidationErrorsMapper.cs" />
     <Compile Include="Presentation\ViewModels\Profile\UpdateProfileViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Settings\SettingsViewModel.cs" />
+    <Compile Include="Presentation\Views\Friends\FriendView.xaml.cs">
+      <DependentUpon>FriendView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Leaderboard\LeaderboardView.xaml.cs">
+      <DependentUpon>LeaderboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\Views\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -232,9 +239,6 @@
     <Compile Include="FriendListWindow.xaml.cs">
       <DependentUpon>FriendListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\Windows\FriendManagerWindowWindow.xaml.cs">
-      <DependentUpon>FriendManagerWindowWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Presentation\Views\Match\GameLobbyView.xaml.cs">
       <DependentUpon>GameLobbyView.xaml</DependentUpon>
     </Compile>
@@ -263,6 +267,14 @@
     </Compile>
     <Compile Include="Presentation\Navegation\GameScreenType.cs" />
     <Compile Include="Infraestructure\Wcf\ServiceClientGuard.cs" />
+    <Page Include="Presentation\Views\Friends\FriendView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Leaderboard\LeaderboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\Views\Settings\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -288,10 +300,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FriendListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\Views\Windows\FriendManagerWindowWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
