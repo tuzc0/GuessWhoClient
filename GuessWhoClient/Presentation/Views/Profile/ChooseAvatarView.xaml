@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="GuessWhoClient.Presentation.Views.Profile.ChooseAvatarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:localization="clr-namespace:GuessWhoClient.Globalization">
+
+    <Border CornerRadius="20"
+            Background="#34495E"
+            Padding="25"
+            Margin="40"
+            BorderBrush="#3498DB"
+            BorderThickness="2"
+            Panel.ZIndex="2">
+
+        <Grid Background="{StaticResource Brush.Bg}"
+              Opacity="0.88"
+              Margin="-25">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Text="{Binding [UiChooseAvatarTitle], Source={x:Static localization:LocalizationProvider.Instance}}"
+                       Style="{StaticResource Txt.Pixel}"
+                       Foreground="{StaticResource Brush.Accent}"
+                       FontSize="32"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20" />
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ListBox ItemsSource="{Binding AvatarCards}"
+                         SelectedItem="{Binding SelectedAvatar}"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Top"
+                                         Margin="20" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Opacity" Value="0.4"/>
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="10"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Opacity" Value="1"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#3498DB"
+                                    BorderThickness="2"
+                                    CornerRadius="8"
+                                    Background="#34495E"
+                                    Width="160"
+                                    Height="200"
+                                    Cursor="Hand">
+                                <Image Source="{Binding ImagePath}"
+                                       Stretch="Uniform"
+                                       Margin="10" />
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,15,40,20">
+
+                <Button Content="{Binding [BtnCancel], Source={x:Static localization:LocalizationProvider.Instance}}"
+                        Style="{StaticResource Btn.Primary}"
+                        Width="120"
+                        Height="50"
+                        Margin="0,0,10,0"
+                        Command="{Binding CancelCommand}" />
+
+                <Button Content="{Binding [BtnSelect], Source={x:Static localization:LocalizationProvider.Instance}}"
+                        Style="{StaticResource Btn.Primary}"
+                        Width="140"
+                        Height="50"
+                        Command="{Binding ConfirmCommand}" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

@@ -29,13 +29,5 @@ namespace GuessWhoClient.Domain.Models
         public int SlotNumber { get; }
         public bool IsReady { get; }
         public bool IsHost { get; }
-
-        public string AvatarPath
-        {
-            get
-            {
-                return AvatarAssets.GetAvatarPathById(AvatarId);
-            }
-        }
     }
 }

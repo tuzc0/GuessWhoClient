@@ -8,8 +8,11 @@ using GuessWhoClient.Services.Alerts;
 using GuessWhoCore.Contracts.Faults;
 using GuessWhoCore.Contracts.Requests;
 using GuessWhoCore.Contracts.Response;
+using GuessWhoCore.Validation;
+using GuessWhoCore.Validation.ValidationDTOs;
 using log4net;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GuessWhoClient.Presentation.ViewModels.Auth
@@ -19,19 +22,27 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
         private static readonly ILog Logger = LogManager.GetLogger(typeof(RecoverPasswordViewModel));
 
         private const string LOG_CTX_SEND = "RecoverPasswordViewModel.SendCode";
+        private const string LOG_CTX_RESEND = "RecoverPasswordViewModel.ResendCode";
         private const string LOG_CTX_UPDATE = "RecoverPasswordViewModel.UpdatePassword";
 
         private const string KEY_UI_EMAIL_REQUIRED = "UiValidationEmailRequired";
+        private const string KEY_UI_EMAIL_INVALID = "UiValidationEmailInvalid";
+
         private const string KEY_UI_PASSWORD_REQUIRED = "UiValidationPasswordRequired";
+        private const string KEY_UI_PASSWORD_INVALID = "UiValidationPasswordInvalid";
+        private const string KEY_UI_CONFIRM_PASSWORD_REQUIRED = "UiValidationConfirmPasswordRequired";
         private const string KEY_UI_PASSWORD_DONT_MATCH = "UiValidationPasswordDontMatch";
 
         private const string KEY_UI_CODE_INVALID = "UIVerificationCodeInvalid";
 
-        private const string KEY_UI_RECOVERY_SENT = "UiRecoverySent";
-        private const string KEY_UI_RECOVERY_AMBIGUOUS = "UiRecoveryAmbiguous";
+        private const string KEY_UI_RECOVERY_AMBIGUOUS = "UiPasswordRecoveryAmbiguousSuccess";
         private const string KEY_UI_PASSWORD_UPDATED = "UiPasswordUpdated";
 
         private const int CODE_LENGTH = 6;
+
+        private const string DUMMY_VALID_PASSWORD_FOR_EMAIL_VALIDATION = "Aa1!aaaa";
+        private const string DUMMY_VALID_EMAIL_FOR_PASSWORD_RULES = "player@example.com";
+        private const string DUMMY_VALID_DISPLAY_NAME_FOR_PASSWORD_RULES = "Player";
 
         private readonly IUserAppService userAppService;
         private readonly IGameScreenManager gameScreenManager;
@@ -55,9 +66,9 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             IGameScreenManager gameScreenManager)
             : base(alertService, localizationService, faultMapper)
         {
-            this.userAppService = userAppService ?? 
+            this.userAppService = userAppService ??
                 throw new ArgumentNullException(nameof(userAppService));
-            this.gameScreenManager = gameScreenManager ?? 
+            this.gameScreenManager = gameScreenManager ??
                 throw new ArgumentNullException(nameof(gameScreenManager));
 
             email = EMPTY;
@@ -69,11 +80,13 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             isPasswordStepVisible = false;
 
             SendCodeCommand = new AsyncRelayCommand(SendCodeAsync, CanExecuteCommands);
+            ResendCodeCommand = new AsyncRelayCommand(ResendCodeAsync, CanExecuteCommands);
             UpdatePasswordCommand = new AsyncRelayCommand(UpdatePasswordAsync, CanExecuteCommands);
             CancelCommand = new AsyncRelayCommand(CancelAsync, CanExecuteCommands);
         }
 
         public AsyncRelayCommand SendCodeCommand { get; }
+        public AsyncRelayCommand ResendCodeCommand { get; }
         public AsyncRelayCommand UpdatePasswordCommand { get; }
         public AsyncRelayCommand CancelCommand { get; }
 
@@ -122,6 +135,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
         protected override void OnIsBusyChanged(string propertyName)
         {
             SendCodeCommand.RaiseCanExecuteChanged();
+            ResendCodeCommand.RaiseCanExecuteChanged();
             UpdatePasswordCommand.RaiseCanExecuteChanged();
             CancelCommand.RaiseCanExecuteChanged();
         }
@@ -131,7 +145,17 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             return !IsBusy;
         }
 
-        private async Task SendCodeAsync()
+        private Task SendCodeAsync()
+        {
+            return SendOrResendCodeAsync(moveToPasswordStep: true, logContext: LOG_CTX_SEND);
+        }
+
+        private Task ResendCodeAsync()
+        {
+            return SendOrResendCodeAsync(moveToPasswordStep: false, logContext: LOG_CTX_RESEND);
+        }
+
+        private async Task SendOrResendCodeAsync(bool moveToPasswordStep, string logContext)
         {
             if (!TryBeginOperation())
             {
@@ -142,7 +166,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             {
                 string safeEmail = (Email ?? EMPTY).Trim();
 
-                if (!TryValidateEmail(safeEmail))
+                if (!TryValidateEmailRequiredAndFormat(safeEmail))
                 {
                     return;
                 }
@@ -157,17 +181,19 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
                 if (result == null || !result.IsSuccess || !result.HasValue)
                 {
-                    ShowCallError(result, KEY_UI_GENERIC_ERROR, LOG_CTX_SEND);
+                    ShowCallError(result, KEY_UI_GENERIC_ERROR, logContext);
                     return;
                 }
 
-                string noticeKey = ResolveRecoveryNoticeKey(result.Value);
-
-                alertService.Info(localizationService.Get(noticeKey), 
+                alertService.Info(
+                    localizationService.Get(KEY_UI_RECOVERY_AMBIGUOUS),
                     localizationService.Get(KEY_UI_TITLE_INFO));
 
-                IsEmailStepVisible = false;
-                IsPasswordStepVisible = true;
+                if (moveToPasswordStep)
+                {
+                    IsEmailStepVisible = false;
+                    IsPasswordStepVisible = true;
+                }
             }
             finally
             {
@@ -211,17 +237,33 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             }
         }
 
-        private bool TryValidateEmail(string safeEmail)
+        private bool TryValidateEmailRequiredAndFormat(string safeEmail)
         {
             if (string.IsNullOrWhiteSpace(safeEmail))
             {
-                alertService.Warn(localizationService.Get(
-                    KEY_UI_EMAIL_REQUIRED), 
+                alertService.Warn(
+                    localizationService.Get(KEY_UI_EMAIL_REQUIRED),
+                    localizationService.Get(KEY_UI_TITLE_WARNING));
+                return false;
+            }
+
+            if (!IsEmailFormatValidByUserRules(safeEmail))
+            {
+                alertService.Warn(
+                    localizationService.Get(KEY_UI_EMAIL_INVALID),
                     localizationService.Get(KEY_UI_TITLE_WARNING));
                 return false;
             }
 
             return true;
+        }
+
+        private static bool IsEmailFormatValidByUserRules(string safeEmail)
+        {
+            var draft = new LoginDraft(safeEmail, DUMMY_VALID_PASSWORD_FOR_EMAIL_VALIDATION);
+            IReadOnlyList<ValidationError> errors = UserRules.ValidateLogin(draft);
+
+            return errors == null || errors.Count == 0;
         }
 
         private bool TryValidateUpdatePassword()
@@ -247,23 +289,71 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(safeNew))
+            return TryValidateNewPasswordByUserRules(safeNew, safeConfirm);
+        }
+
+        private bool TryValidateNewPasswordByUserRules(string newPasswordValue, string confirmPasswordValue)
+        {
+            var passwords = new PasswordConfirmationDraft(
+                newPasswordValue ?? EMPTY,
+                confirmPasswordValue ?? EMPTY);
+
+            var draft = new UserRulesDraft(
+                DUMMY_VALID_EMAIL_FOR_PASSWORD_RULES,
+                DUMMY_VALID_DISPLAY_NAME_FOR_PASSWORD_RULES,
+                passwords);
+
+            IReadOnlyList<ValidationError> errors = UserRules.Validate(draft);
+
+            if (errors == null || errors.Count == 0)
             {
-                alertService.Warn(
-                    localizationService.Get(KEY_UI_PASSWORD_REQUIRED),
-                    localizationService.Get(KEY_UI_TITLE_WARNING));
-                return false;
+                return true;
             }
 
-            if (!string.Equals(safeNew, safeConfirm, StringComparison.Ordinal))
+            string uiKey = ResolvePasswordValidationUiKey(errors);
+
+            alertService.Warn(
+                localizationService.Get(uiKey),
+                localizationService.Get(KEY_UI_TITLE_WARNING));
+
+            return false;
+        }
+
+        private string ResolvePasswordValidationUiKey(IReadOnlyList<ValidationError> errors)
+        {
+            if (errors == null || errors.Count == 0)
             {
-                alertService.Warn(
-                    localizationService.Get(KEY_UI_PASSWORD_DONT_MATCH),
-                    localizationService.Get(KEY_UI_TITLE_WARNING));
-                return false;
+                return KEY_UI_PASSWORD_INVALID;
             }
 
-            return true;
+            for (int index = 0; index < errors.Count; index++)
+            {
+                string codeValue = errors[index]?.Code ?? EMPTY;
+
+                if (string.Equals(codeValue, UserValidationCodes.PASSWORD_REQUIRED, StringComparison.Ordinal))
+                {
+                    return KEY_UI_PASSWORD_REQUIRED;
+                }
+
+                if (string.Equals(codeValue, UserValidationCodes.CONFIRM_PASSWORD_REQUIRED, StringComparison.Ordinal))
+                {
+                    return KEY_UI_CONFIRM_PASSWORD_REQUIRED;
+                }
+
+                if (string.Equals(codeValue, UserValidationCodes.CONFIRM_PASSWORD_MISMATCH, StringComparison.Ordinal))
+                {
+                    return KEY_UI_PASSWORD_DONT_MATCH;
+                }
+
+                if (string.Equals(codeValue, UserValidationCodes.PASSWORD_TOO_SHORT, StringComparison.Ordinal) ||
+                    string.Equals(codeValue, UserValidationCodes.PASSWORD_TOO_LONG, StringComparison.Ordinal) ||
+                    string.Equals(codeValue, UserValidationCodes.PASSWORD_INVALID_FORMAT, StringComparison.Ordinal))
+                {
+                    return KEY_UI_PASSWORD_INVALID;
+                }
+            }
+
+            return KEY_UI_PASSWORD_INVALID;
         }
 
         private UpdatePasswordRequest CreateUpdatePasswordRequest()
@@ -279,10 +369,8 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
         private void ShowUpdatePasswordError(WcfCallResult<bool> result)
         {
             if (result != null &&
-                (string.Equals(result.FaultCode, PasswordRecoveryFaultKeys.CODE_CODE_EXPIRED, 
-                StringComparison.Ordinal) ||
-                 string.Equals(result.FaultCode, PasswordRecoveryFaultKeys.CODE_CODE_INVALID, 
-                 StringComparison.Ordinal)))
+                (string.Equals(result.FaultCode, PasswordRecoveryFaultKeys.CODE_CODE_EXPIRED, StringComparison.Ordinal) ||
+                 string.Equals(result.FaultCode, PasswordRecoveryFaultKeys.CODE_CODE_INVALID, StringComparison.Ordinal)))
             {
                 ShowCallWarning(result, KEY_UI_GENERIC_ERROR, LOG_CTX_UPDATE);
                 return;
@@ -329,25 +417,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
             }
 
             return true;
-        }
-
-        private string ResolveRecoveryNoticeKey(PasswordRecoveryResponse response)
-        {
-            string codeValue = response != null ? response.MessageCode ?? EMPTY : EMPTY;
-
-            if (string.Equals(codeValue, PasswordRecoveryNoticeCodes.AMBIGUOUS_SUCCESS, 
-                StringComparison.Ordinal))
-            {
-                return KEY_UI_RECOVERY_AMBIGUOUS;
-            }
-
-            if (string.Equals(codeValue, PasswordRecoveryNoticeCodes.RECOVERY_SENT, 
-                StringComparison.Ordinal))
-            {
-                return KEY_UI_RECOVERY_SENT;
-            }
-
-            return KEY_UI_RECOVERY_SENT;
         }
     }
 }

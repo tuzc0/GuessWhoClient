@@ -754,4 +754,100 @@
   <data name="UiAccountCreatedForFmt" xml:space="preserve">
     <value>Compte créé pour {0}.</value>
   </data>
+  <data name="UiPasswordUpdated" xml:space="preserve">
+    <value>Le mot de passe a été mis à jour avec succès.</value>
+  </data>
+  <data name="LblRecoveryCodeSentTo" xml:space="preserve">
+    <value>Code envoyé à :</value>
+  </data>
+  <data name="BtnChangePassword" xml:space="preserve">
+    <value>Changer le mot de passe</value>
+  </data>
+  <data name="BtnPlay" xml:space="preserve">
+    <value>Jouer</value>
+  </data>
+  <data name="BtnLeaderboards" xml:space="preserve">
+    <value>Classement</value>
+  </data>
+  <data name="BtnProfile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="BtnExit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="TooltipSettings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="UiNavigationScreenFactoryMissing" xml:space="preserve">
+    <value>Cet écran n’est pas disponible pour le moment.</value>
+  </data>
+  <data name="UiNavigationScreenFactoryReturnedNull" xml:space="preserve">
+    <value>Impossible d’ouvrir cet écran à cause d’un problème de configuration.</value>
+  </data>
+  <data name="UiNavigationFailed" xml:space="preserve">
+    <value>Impossible d’ouvrir cet écran. Veuillez réessayer.</value>
+  </data>
+  <data name="UiProfileTitle" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="LblDisplayName" xml:space="preserve">
+    <value>Nom d’affichage</value>
+  </data>
+  <data name="UiProfilePasswordNotDisplayed" xml:space="preserve">
+    <value>Non affiché</value>
+  </data>
+  <data name="BtnChangeAvatar" xml:space="preserve">
+    <value>Changer</value>
+  </data>
+  <data name="BtnDeleteAccount" xml:space="preserve">
+    <value>Supprimer le compte</value>
+  </data>
+  <data name="BtnEdit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="BtnSave" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="BtnOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="BtnSelect" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="UiProfileUpdateSuccess" xml:space="preserve">
+    <value>Profil mis à jour avec succès.</value>
+  </data>
+  <data name="UiProfileDeleteSuccess" xml:space="preserve">
+    <value>Compte supprimé avec succès.</value>
+  </data>
+  <data name="UiChooseAvatarTitle" xml:space="preserve">
+    <value>Sélectionnez votre avatar</value>
+  </data>
+  <data name="UiChooseAvatarSelectRequired" xml:space="preserve">
+    <value>Veuillez d’abord sélectionner un avatar.</value>
+  </data>
+  <data name="UiChangePasswordTitle" xml:space="preserve">
+    <value>Changer le mot de passe</value>
+  </data>
+  <data name="LblCurrentPassword" xml:space="preserve">
+    <value>Mot de passe actuel</value>
+  </data>
+  <data name="LblNewPassword" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
+  <data name="LblConfirmNewPassword" xml:space="preserve">
+    <value>Confirmer le nouveau</value>
+  </data>
+  <data name="BtnVerifyEmail" xml:space="preserve">
+    <value>Vérifier l’e-mail</value>
+  </data>
+  <data name="UiDeleteAccountConfirm" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer votre compte ?</value>
+  </data>
+  <data name="BtnYes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="BtnNo" xml:space="preserve">
+    <value>Non</value>
+  </data>
 </root>

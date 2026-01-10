@@ -754,4 +754,100 @@
   <data name="UiAccountCreatedForFmt" xml:space="preserve">
     <value>Account creato per {0}.</value>
   </data>
+  <data name="UiPasswordUpdated" xml:space="preserve">
+    <value>Password aggiornata correttamente.</value>
+  </data>
+  <data name="LblRecoveryCodeSentTo" xml:space="preserve">
+    <value>Codice inviato a:</value>
+  </data>
+  <data name="BtnChangePassword" xml:space="preserve">
+    <value>Cambia password</value>
+  </data>
+  <data name="BtnPlay" xml:space="preserve">
+    <value>Gioca</value>
+  </data>
+  <data name="BtnLeaderboards" xml:space="preserve">
+    <value>Classifica</value>
+  </data>
+  <data name="BtnProfile" xml:space="preserve">
+    <value>Profilo</value>
+  </data>
+  <data name="BtnExit" xml:space="preserve">
+    <value>Esci</value>
+  </data>
+  <data name="TooltipSettings" xml:space="preserve">
+    <value>Impostazioni</value>
+  </data>
+  <data name="UiNavigationScreenFactoryMissing" xml:space="preserve">
+    <value>Questa schermata non è disponibile al momento.</value>
+  </data>
+  <data name="UiNavigationScreenFactoryReturnedNull" xml:space="preserve">
+    <value>Non è stato possibile aprire questa schermata per un problema di configurazione.</value>
+  </data>
+  <data name="UiNavigationFailed" xml:space="preserve">
+    <value>Non è stato possibile aprire quella schermata. Riprova.</value>
+  </data>
+  <data name="UiProfileTitle" xml:space="preserve">
+    <value>Profilo</value>
+  </data>
+  <data name="LblDisplayName" xml:space="preserve">
+    <value>Nome visualizzato</value>
+  </data>
+  <data name="UiProfilePasswordNotDisplayed" xml:space="preserve">
+    <value>Non visualizzata</value>
+  </data>
+  <data name="BtnChangeAvatar" xml:space="preserve">
+    <value>Cambia</value>
+  </data>
+  <data name="BtnDeleteAccount" xml:space="preserve">
+    <value>Elimina account</value>
+  </data>
+  <data name="BtnEdit" xml:space="preserve">
+    <value>Modifica</value>
+  </data>
+  <data name="BtnSave" xml:space="preserve">
+    <value>Salva</value>
+  </data>
+  <data name="BtnOk" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="BtnSelect" xml:space="preserve">
+    <value>Seleziona</value>
+  </data>
+  <data name="UiProfileUpdateSuccess" xml:space="preserve">
+    <value>Profilo aggiornato con successo.</value>
+  </data>
+  <data name="UiProfileDeleteSuccess" xml:space="preserve">
+    <value>Account eliminato con successo.</value>
+  </data>
+  <data name="UiChooseAvatarTitle" xml:space="preserve">
+    <value>Seleziona il tuo avatar</value>
+  </data>
+  <data name="UiChooseAvatarSelectRequired" xml:space="preserve">
+    <value>Seleziona prima un avatar.</value>
+  </data>
+  <data name="UiChangePasswordTitle" xml:space="preserve">
+    <value>Cambia password</value>
+  </data>
+  <data name="LblCurrentPassword" xml:space="preserve">
+    <value>Password attuale</value>
+  </data>
+  <data name="LblNewPassword" xml:space="preserve">
+    <value>Nuova password</value>
+  </data>
+  <data name="LblConfirmNewPassword" xml:space="preserve">
+    <value>Conferma nuova</value>
+  </data>
+  <data name="BtnVerifyEmail" xml:space="preserve">
+    <value>Verifica email</value>
+  </data>
+  <data name="UiDeleteAccountConfirm" xml:space="preserve">
+    <value>Sei sicuro di voler eliminare il tuo account?</value>
+  </data>
+  <data name="BtnYes" xml:space="preserve">
+    <value>Sì</value>
+  </data>
+  <data name="BtnNo" xml:space="preserve">
+    <value>No</value>
+  </data>
 </root>

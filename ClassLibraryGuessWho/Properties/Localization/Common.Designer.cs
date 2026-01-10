@@ -88,11 +88,65 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Change.
+        /// </summary>
+        public static string BtnChangeAvatar {
+            get {
+                return ResourceManager.GetString("BtnChangeAvatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change password.
+        /// </summary>
+        public static string BtnChangePassword {
+            get {
+                return ResourceManager.GetString("BtnChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Create account.
         /// </summary>
         public static string BtnCreateAccount {
             get {
                 return ResourceManager.GetString("BtnCreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Delete account.
+        /// </summary>
+        public static string BtnDeleteAccount {
+            get {
+                return ResourceManager.GetString("BtnDeleteAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Edit.
+        /// </summary>
+        public static string BtnEdit {
+            get {
+                return ResourceManager.GetString("BtnEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Exit.
+        /// </summary>
+        public static string BtnExit {
+            get {
+                return ResourceManager.GetString("BtnExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Leaderboards.
+        /// </summary>
+        public static string BtnLeaderboards {
+            get {
+                return ResourceManager.GetString("BtnLeaderboards", resourceCulture);
             }
         }
         
@@ -106,11 +160,65 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No.
+        /// </summary>
+        public static string BtnNo {
+            get {
+                return ResourceManager.GetString("BtnNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a OK.
+        /// </summary>
+        public static string BtnOk {
+            get {
+                return ResourceManager.GetString("BtnOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Play.
+        /// </summary>
+        public static string BtnPlay {
+            get {
+                return ResourceManager.GetString("BtnPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Profile.
+        /// </summary>
+        public static string BtnProfile {
+            get {
+                return ResourceManager.GetString("BtnProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Resend code.
         /// </summary>
         public static string BtnResendCode {
             get {
                 return ResourceManager.GetString("BtnResendCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Save.
+        /// </summary>
+        public static string BtnSave {
+            get {
+                return ResourceManager.GetString("BtnSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select.
+        /// </summary>
+        public static string BtnSelect {
+            get {
+                return ResourceManager.GetString("BtnSelect", resourceCulture);
             }
         }
         
@@ -129,6 +237,24 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string BtnVerifyCode {
             get {
                 return ResourceManager.GetString("BtnVerifyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verify email.
+        /// </summary>
+        public static string BtnVerifyEmail {
+            get {
+                return ResourceManager.GetString("BtnVerifyEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Yes.
+        /// </summary>
+        public static string BtnYes {
+            get {
+                return ResourceManager.GetString("BtnYes", resourceCulture);
             }
         }
         
@@ -331,11 +457,38 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Confirm new.
+        /// </summary>
+        public static string LblConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("LblConfirmNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Confirm Password.
         /// </summary>
         public static string LblConfirmPassword {
             get {
                 return ResourceManager.GetString("LblConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Current password.
+        /// </summary>
+        public static string LblCurrentPassword {
+            get {
+                return ResourceManager.GetString("LblCurrentPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Display name.
+        /// </summary>
+        public static string LblDisplayName {
+            get {
+                return ResourceManager.GetString("LblDisplayName", resourceCulture);
             }
         }
         
@@ -349,11 +502,29 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a New password.
+        /// </summary>
+        public static string LblNewPassword {
+            get {
+                return ResourceManager.GetString("LblNewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Password.
         /// </summary>
         public static string LblPassword {
             get {
                 return ResourceManager.GetString("LblPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Code sent to:.
+        /// </summary>
+        public static string LblRecoveryCodeSentTo {
+            get {
+                return ResourceManager.GetString("LblRecoveryCodeSentTo", resourceCulture);
             }
         }
         
@@ -466,11 +637,47 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Settings.
+        /// </summary>
+        public static string TooltipSettings {
+            get {
+                return ResourceManager.GetString("TooltipSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Account created for {0}..
         /// </summary>
         public static string UiAccountCreatedForFmt {
             get {
                 return ResourceManager.GetString("UiAccountCreatedForFmt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change password.
+        /// </summary>
+        public static string UiChangePasswordTitle {
+            get {
+                return ResourceManager.GetString("UiChangePasswordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please select an avatar first..
+        /// </summary>
+        public static string UiChooseAvatarSelectRequired {
+            get {
+                return ResourceManager.GetString("UiChooseAvatarSelectRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select your avatar.
+        /// </summary>
+        public static string UiChooseAvatarTitle {
+            get {
+                return ResourceManager.GetString("UiChooseAvatarTitle", resourceCulture);
             }
         }
         
@@ -561,6 +768,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiCreateAccountInvalidDataTitle {
             get {
                 return ResourceManager.GetString("UiCreateAccountInvalidDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Are you sure you want to delete your account?.
+        /// </summary>
+        public static string UiDeleteAccountConfirm {
+            get {
+                return ResourceManager.GetString("UiDeleteAccountConfirm", resourceCulture);
             }
         }
         
@@ -1231,6 +1447,33 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a We couldn’t open that screen. Please try again..
+        /// </summary>
+        public static string UiNavigationFailed {
+            get {
+                return ResourceManager.GetString("UiNavigationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This screen is not available right now..
+        /// </summary>
+        public static string UiNavigationScreenFactoryMissing {
+            get {
+                return ResourceManager.GetString("UiNavigationScreenFactoryMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn’t open this screen due to a configuration issue..
+        /// </summary>
+        public static string UiNavigationScreenFactoryReturnedNull {
+            get {
+                return ResourceManager.GetString("UiNavigationScreenFactoryReturnedNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a We couldn&apos;t find an account with that email..
         /// </summary>
         public static string UiPasswordRecoveryAccountNotFound {
@@ -1357,6 +1600,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Password updated successfully..
+        /// </summary>
+        public static string UiPasswordUpdated {
+            get {
+                return ResourceManager.GetString("UiPasswordUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The selected avatar is not valid..
         /// </summary>
         public static string UiProfileAvatarInvalid {
@@ -1389,6 +1641,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiProfileDeleteFailed {
             get {
                 return ResourceManager.GetString("UiProfileDeleteFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Account deleted successfully..
+        /// </summary>
+        public static string UiProfileDeleteSuccess {
+            get {
+                return ResourceManager.GetString("UiProfileDeleteSuccess", resourceCulture);
             }
         }
         
@@ -1429,6 +1690,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Not displayed.
+        /// </summary>
+        public static string UiProfilePasswordNotDisplayed {
+            get {
+                return ResourceManager.GetString("UiProfilePasswordNotDisplayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a The profile request is missing or invalid..
         /// </summary>
         public static string UiProfileRequestNull {
@@ -1438,11 +1708,29 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Profile.
+        /// </summary>
+        public static string UiProfileTitle {
+            get {
+                return ResourceManager.GetString("UiProfileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a We couldn&apos;t save your profile changes. Please try again later..
         /// </summary>
         public static string UiProfileUpdateFailed {
             get {
                 return ResourceManager.GetString("UiProfileUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Profile updated successfully..
+        /// </summary>
+        public static string UiProfileUpdateSuccess {
+            get {
+                return ResourceManager.GetString("UiProfileUpdateSuccess", resourceCulture);
             }
         }
         

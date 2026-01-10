@@ -12,11 +12,11 @@
         ShowInTaskbar="False">
 
     <Border Background="{StaticResource Brush.Bg}"
-        BorderBrush="{StaticResource Brush.AccentDark}"
-        BorderThickness="3"
-        CornerRadius="18"
-        Padding="12"
-        SnapsToDevicePixels="True">
+            BorderBrush="{StaticResource Brush.AccentDark}"
+            BorderThickness="3"
+            CornerRadius="18"
+            Padding="12"
+            SnapsToDevicePixels="True">
 
         <Grid>
             <Grid.RowDefinitions>
@@ -26,14 +26,13 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
-                   Text="{Binding MessageTitle}"
-                   Style="{StaticResource Txt.Pixel}"
-                   FontSize="24"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,8" />
+                       Text="{Binding MessageTitle}"
+                       Style="{StaticResource Txt.Pixel}"
+                       FontSize="24"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,8" />
 
-            <Grid Grid.Row="1"
-                  Margin="0,10,0,10">
+            <Grid Grid.Row="1" Margin="0,10,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -42,8 +41,7 @@
                 <ScrollViewer Grid.Column="1"
                               VerticalScrollBarVisibility="Auto"
                               HorizontalScrollBarVisibility="Disabled"
-                              MaxHeight="100"
-                              Margin="0,0,0,0">
+                              MaxHeight="100">
                     <TextBlock Text="{Binding MessageText}"
                                TextWrapping="Wrap"
                                Style="{StaticResource Txt.Pixel}"
@@ -55,15 +53,33 @@
                 </ScrollViewer>
             </Grid>
 
-
             <StackPanel Grid.Row="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-                <Button Content="OK"
-                    Width="120"
-                    Height="40"
-                    Style="{StaticResource Btn.Primary}"
-                    Click="BtnOkClick" />
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+
+                <Button Width="120"
+                        Height="40"
+                        Margin="0,0,8,0"
+                        Content="{Binding SecondaryButtonText}"
+                        Click="BtnSecondaryClick">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource Btn.Primary}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasSecondaryButton}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+
+                <Button Width="120"
+                        Height="40"
+                        Style="{StaticResource Btn.Primary}"
+                        Content="{Binding PrimaryButtonText}"
+                        Click="BtnPrimaryClick" />
             </StackPanel>
         </Grid>
     </Border>

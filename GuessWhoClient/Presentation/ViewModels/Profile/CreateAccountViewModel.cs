@@ -24,13 +24,13 @@ namespace GuessWhoClient.ViewModels.Profile
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(CreateAccountViewModel));
 
-        private const string EMPTY = "";
+        private new const string EMPTY = "";
         private const string LOG_CTX_CREATE_ACCOUNT = "CreateAccountViewModel.CreateAccount";
 
         private const string KEY_UI_ACCOUNT_CREATED_FMT = "UiAccountCreatedForFmt";
 
-        private const string KEY_UI_TITLE_ERROR = "UiTitleError";
-        private const string KEY_UI_TITLE_WARNING = "UiTitleWarning";
+        private new const string KEY_UI_TITLE_ERROR = "UiTitleError";
+        private new const string KEY_UI_TITLE_WARNING = "UiTitleWarning";
 
         private const string KEY_UI_CREATE_INVALID_DATA_TITLE = "UiCreateAccountInvalidDataTitle";
         private const string KEY_UI_CREATE_INVALID_DATA_INTRO = "UiCreateAccountInvalidDataIntro";
@@ -144,10 +144,13 @@ namespace GuessWhoClient.ViewModels.Profile
                     return;
                 }
 
+                string safeEmail = (Email ?? EMPTY).Trim();
+                string safeDisplayName = (DisplayName ?? EMPTY).Trim();
+
                 var registerRequest = new RegisterRequest
                 {
-                    Email = (Email ?? EMPTY).Trim(),
-                    DisplayName = (DisplayName ?? EMPTY).Trim(),
+                    Email = safeEmail,
+                    DisplayName = safeDisplayName,
                     Password = Password ?? EMPTY
                 };
 
@@ -162,12 +165,16 @@ namespace GuessWhoClient.ViewModels.Profile
 
                 RegisterResponse registerResponse = registerResult.Value;
 
-                string createdMessage = FormatFromResource(KEY_UI_ACCOUNT_CREATED_FMT, registerRequest.Email);
+                string createdMessage = FormatFromResource(KEY_UI_ACCOUNT_CREATED_FMT, safeEmail);
                 alertService.Info(createdMessage, localizationService.Get(KEY_UI_TITLE_INFO));
 
                 if (registerResponse.EmailVerificationRequired)
                 {
-                    accountFlowContext.SetPendingEmailVerification(registerResponse.AccountId, registerResponse.Email);
+                    accountFlowContext.SetPendingEmailVerification(
+                        accountId: registerResponse.AccountId,
+                        email: safeEmail,
+                        returnScreen: GameScreenType.Login);
+
                     gameScreenManager.ShowOverlay(GameScreenType.VerifyEmail);
                     return;
                 }

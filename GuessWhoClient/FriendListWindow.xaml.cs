@@ -89,7 +89,7 @@ namespace WPFGuessWhoClient
                 DgFriends.ItemsSource = null;
                 client.Abort();
             }
-            catch (TimeoutException ex)
+            catch (TimeoutException)
             {
                 alertService.Error(localizationService.Get("FaultDatabaseTimeout"));
                 client.Abort();

@@ -4,7 +4,7 @@
     {
         public string Resolve(string avatarId)
         {
-            return AvatarAssets.GetAvatarPathById(avatarId);
+            return AvatarAssets.GetAvatarUriById(avatarId);
         }
     }
 }

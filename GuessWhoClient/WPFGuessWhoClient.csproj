@@ -123,9 +123,7 @@
     <Compile Include="Infraestructure\Wcf\Clients\FriendServiceClientAdapter.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\IFriendServiceClient.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\Login\ILoginServiceClient.cs" />
-    <Compile Include="Infraestructure\Wcf\Clients\IUpdateProfileServiceClient.cs" />
     <Compile Include="Infraestructure\Wcf\Clients\Login\LoginServiceClientAdapter.cs" />
-    <Compile Include="Infraestructure\Wcf\Clients\UpdateProfileServiceClientAdapter.cs" />
     <Compile Include="Infraestructure\Wcf\WcfCallResult.cs" />
     <Compile Include="Infraestructure\Wcf\WcfEndpointNames.cs" />
     <Compile Include="Infraestructure\Wcf\WcfTechnicalFaultCodes.cs" />
@@ -133,8 +131,11 @@
     <Compile Include="IsExternalInit.cs" />
     <Compile Include="Presentation\Behaviors\PasswordBoxAssistant.cs" />
     <Compile Include="Presentation\Behaviors\PasswordVisibilityBehavior.cs" />
+    <Compile Include="Presentation\Dialogs\GameConfirmDialogService.cs" />
     <Compile Include="Presentation\Dialogs\GameMessageDialogService.cs" />
+    <Compile Include="Presentation\Dialogs\IGameConfirmDialogService.cs" />
     <Compile Include="Presentation\Dialogs\IGameMessageDialogService.cs" />
+    <Compile Include="Presentation\Dialogs\OverlayDialogService.cs" />
     <Compile Include="Presentation\Navegation\AccountFlowContext.cs" />
     <Compile Include="Presentation\Navegation\GameScreenManager.cs" />
     <Compile Include="Presentation\Navegation\IGameScreenHost.cs" />
@@ -150,10 +151,9 @@
     <Compile Include="Assets\CharacterAsserts.cs" />
     <Compile Include="Callbacks\ChatCallback.cs" />
     <Compile Include="Presentation\ViewModels\Auth\AuthViewModelBase.cs" />
-    <Compile Include="Presentation\ViewModels\Auth\EmailVerificationUiFaultMapper.cs" />
+    <Compile Include="Presentation\ViewModels\Auth\ChangePasswordViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Auth\LoginUiFaultMapper.cs" />
     <Compile Include="Presentation\ViewModels\Auth\LoginViewModel.cs" />
-    <Compile Include="Presentation\ViewModels\Auth\PasswordRecoveryUiFaultMapper.cs" />
     <Compile Include="Presentation\ViewModels\Auth\RecoverPasswordViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Auth\VerifyEmailViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Base\AsyncRelayCommand.cs" />
@@ -167,19 +167,21 @@
     <Compile Include="Presentation\ViewModels\Match\GameLobbyViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Match\GameModelItemViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Match\LobbyPlayerItemViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Menu\MainMenuViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Profile\ChooseAvatarViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Profile\CreateAccountValidationErrorsMapper.cs" />
     <Compile Include="Presentation\ViewModels\Profile\UpdateProfileViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="Presentation\Views\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\UserControls\ChangePasswordView.xaml.cs">
+    <Compile Include="Presentation\Views\Auth\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\UserControls\ChooseAvatarView.xaml.cs">
+    <Compile Include="Presentation\Views\Profile\ChooseAvatarView.xaml.cs">
       <DependentUpon>ChooseAvatarView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\Views\Match\ChooseCharacterView.xaml.cs">
@@ -263,7 +265,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Views\UserControls\ChangePasswordView.xaml">
+    <Page Include="Presentation\Views\Auth\ChangePasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -271,7 +273,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Views\UserControls\ChooseAvatarView.xaml">
+    <Page Include="Presentation\Views\Profile\ChooseAvatarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -319,7 +321,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Views\UserControls\MainMenuView.xaml">
+    <Page Include="Presentation\Views\Menu\MainMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -327,7 +329,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation\Views\UserControls\UpdateProfileView.xaml">
+    <Page Include="Presentation\Views\Profile\UpdateProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -356,7 +358,7 @@
     <Compile Include="Presentation\Views\Auth\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\UserControls\MainMenuView.xaml.cs">
+    <Compile Include="Presentation\Views\Menu\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -364,7 +366,7 @@
     <Compile Include="MatchWindow.xaml.cs">
       <DependentUpon>MatchWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\UserControls\UpdateProfileView.xaml.cs">
+    <Compile Include="Presentation\Views\Profile\UpdateProfileView.xaml.cs">
       <DependentUpon>UpdateProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">

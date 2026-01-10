@@ -1,31 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GuessWhoClient.Assets
 {
     public static class AvatarAssets
     {
+        private const string ASSEMBLY_NAME = "GuessWhoClient";
+        private const string PACK_BASE_URI = "pack://application:,,,/" + ASSEMBLY_NAME + ";component";
+        private const string DEFAULT_AVATAR_ID = "A0001";
 
-        private static readonly Dictionary<string, string> avatarById = new Dictionary<string, string>
-        {
-            ["A0001"] = "/Images/Avatars/Avatar1.png",
-            ["A0002"] = "/Images/Avatars/Avatar2.png",
-        };
-
-        public static string GetAvatarPathById(string avatarId)
-        {
-            const string defaultPath = "/Images/Avatars/Avatar1.png";
-
-            if (string.IsNullOrWhiteSpace(avatarId))
+        private static readonly Dictionary<string, string> avatarById =
+            new Dictionary<string, string>(StringComparer.Ordinal)
             {
-                return defaultPath;
+                ["A0001"] = PACK_BASE_URI + "/Images/Avatars/Avatar1.png",
+                ["A0002"] = PACK_BASE_URI + "/Images/Avatars/Avatar2.png"
+            };
+
+        public static string GetDefaultAvatarId() => DEFAULT_AVATAR_ID;
+
+        public static string GetAvatarUriById(string avatarId)
+        {
+            string safeId = (avatarId ?? string.Empty).Trim();
+
+            if (avatarById.TryGetValue(safeId, out string uri) && !string.IsNullOrWhiteSpace(uri))
+            {
+                return uri;
             }
 
-            if (avatarById.TryGetValue(avatarId, out string path) && !string.IsNullOrWhiteSpace(path))
-            {
-                return path;
-            }
-
-            return defaultPath;
+            return avatarById[DEFAULT_AVATAR_ID];
         }
 
         public static IReadOnlyDictionary<string, string> GetAllAvatars()

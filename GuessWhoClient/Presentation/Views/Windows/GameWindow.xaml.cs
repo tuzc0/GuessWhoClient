@@ -6,6 +6,8 @@ using GuessWhoClient.Presentation.Navegation;
 using GuessWhoClient.Presentation.ViewModels.Match;
 using GuessWhoClient.Presentation.ViewModels.Settings;
 using GuessWhoClient.Presentation.Views.Auth;
+using GuessWhoClient.Presentation.Views.Menu;
+using GuessWhoClient.Presentation.Views.Profile;
 using GuessWhoClient.Presentation.Views.Settings;
 using GuessWhoClient.Presentation.Views.UserControls;
 using GuessWhoClient.Session;

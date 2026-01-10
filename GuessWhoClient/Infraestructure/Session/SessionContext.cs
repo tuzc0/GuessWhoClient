@@ -20,6 +20,7 @@ namespace GuessWhoClient.Session
         public long UserId { get; private set; }
         public string DisplayName { get; private set; }
         public string Email { get; private set; }
+        public string AvatarId { get; private set; }
         public bool AuthToken { get; private set; }
 
         public bool IsAuthenticated =>
@@ -47,6 +48,11 @@ namespace GuessWhoClient.Session
         public void UpdateEmail(string newEmail)
         {
             Email = newEmail ?? EMPTY;
+        }
+
+        public void UpdateAvatarId(string avatarId)
+        {
+            AvatarId = avatarId ?? EMPTY;
         }
 
         public void UpdateAuthToken(bool newToken)

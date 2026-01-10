@@ -18,48 +18,119 @@ using GuessWhoClient.Presentation.Navegation;
 using GuessWhoClient.Presentation.Services.Alerts;
 using GuessWhoClient.Presentation.ViewModels.Auth;
 using GuessWhoClient.Presentation.ViewModels.Match;
+using GuessWhoClient.Presentation.ViewModels.Menu;
 using GuessWhoClient.Presentation.ViewModels.Profile;
 using GuessWhoClient.Presentation.ViewModels.Settings;
 using GuessWhoClient.Presentation.Views.Auth;
+using GuessWhoClient.Presentation.Views.Menu;
+using GuessWhoClient.Presentation.Views.Profile;
 using GuessWhoClient.Presentation.Views.Settings;
 using GuessWhoClient.Presentation.Views.UserControls;
 using GuessWhoClient.Presentation.Views.Windows;
 using GuessWhoClient.Services.Alerts;
 using GuessWhoClient.Session;
 using GuessWhoClient.ViewModels.Profile;
+using log4net;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace GuessWhoClient
 {
     public partial class App : System.Windows.Application
     {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(App));
+
+        private const string LOG_CTX_STARTUP_DI = "App.OnStartup.DI";
+        private const string LOG_CTX_STARTUP = "App.OnStartup";
+        private const string LOG_CTX_EXIT = "App.OnExit";
+
+        private const string FATAL_STARTUP_TITLE = "Error";
+        private const string FATAL_STARTUP_MESSAGE =
+            "The application could not start due to a configuration error.";
+
         private IServiceProvider serviceProvider;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            var services = new ServiceCollection();
+            try
+            {
+                var services = new ServiceCollection();
 
-            RegisterCore(services);
-            RegisterWcfClients(services);
-            RegisterAppServices(services);
-            RegisterNavigation(services);
-            RegisterViewModels(services);
-            RegisterViews(services);
-            RegisterMatchModule(services);
+                RegisterCore(services);
+                RegisterWcfClients(services);
+                RegisterAppServices(services);
+                RegisterNavigation(services);
+                RegisterViewModels(services);
+                RegisterViews(services);
+                RegisterOverlayDialogs(services);
+                RegisterMatchModule(services);
 
-            serviceProvider = services.BuildServiceProvider();
+                serviceProvider = BuildServiceProviderValidated(services);
 
-            var mainWindow = serviceProvider.GetRequiredService<GameWindow>();
-            MainWindow = mainWindow;
-            mainWindow.Show();
+                var mainWindow = serviceProvider.GetRequiredService<GameWindow>();
+                MainWindow = mainWindow;
+                mainWindow.Show();
 
-            var screenManager = serviceProvider.GetRequiredService<IGameScreenManager>();
-            screenManager.ShowScreen(GameScreenType.Login);
+                var screenManager = serviceProvider.GetRequiredService<IGameScreenManager>();
+                screenManager.ShowScreen(GameScreenType.Login);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Logger.Error(LOG_CTX_STARTUP_DI, ex);
+                ShowFatalStartupError();
+                Shutdown();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(LOG_CTX_STARTUP, ex);
+                ShowFatalStartupError();
+                Shutdown();
+            }
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            try
+            {
+                if (serviceProvider is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(LOG_CTX_EXIT, ex);
+            }
+
+            base.OnExit(e);
+        }
+
+        private static IServiceProvider BuildServiceProviderValidated(ServiceCollection services)
+        {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
+            return services.BuildServiceProvider(new ServiceProviderOptions
+            {
+                ValidateOnBuild = true,
+                ValidateScopes = true
+            });
+        }
+
+        private static void ShowFatalStartupError()
+        {
+            MessageBox.Show(
+                FATAL_STARTUP_MESSAGE,
+                FATAL_STARTUP_TITLE,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
         }
 
         private static void RegisterCore(IServiceCollection services)
@@ -67,10 +138,10 @@ namespace GuessWhoClient
             services.AddSingleton<ILocalizationService, LocalizationService>();
 
             services.AddSingleton<IGameMessageDialogService, GameMessageDialogService>();
+            services.AddSingleton<IGameConfirmDialogService, GameConfirmDialogService>();
             services.AddSingleton<IAlertService, GameAlertService>();
 
             services.AddSingleton<Domain.Validation.IValidationIssueMapper, Domain.Validation.UserValidationIssueMapper>();
-
             services.AddSingleton<ICreateAccountValidationErrorsMapper, CreateAccountValidationErrorsMapper>();
 
             services.AddSingleton<SessionContext>(_ => SessionContext.Current);
@@ -78,7 +149,7 @@ namespace GuessWhoClient
 
             services.AddSingleton<WcfCallExecutor>();
 
-            services.AddSingleton(sp => Current.Dispatcher);
+            services.AddSingleton<Dispatcher>(_ => Current?.Dispatcher ?? Dispatcher.CurrentDispatcher);
 
             services.AddSingleton<Func<string, string>>(sp =>
                 sp.GetRequiredService<ILocalizationService>().Get);
@@ -87,6 +158,7 @@ namespace GuessWhoClient
 
             services.AddSingleton<UserRegistrationFaultUiCatalog>();
             services.AddSingleton<EmailVerificationFaultUiCatalog>();
+            services.AddSingleton<PasswordRecoveryFaultUiCatalog>();
             services.AddSingleton<InfrastructureEmailFaultUiCatalog>();
             services.AddSingleton<InfrastructureFaultUiCatalog>();
             services.AddSingleton<IFaultUiCatalog, DefaultFaultUiCatalog>();
@@ -97,22 +169,22 @@ namespace GuessWhoClient
             services.AddSingleton<ProfileUiFaultMapper>();
 
             services.AddSingleton<IUiFaultMapper>(sp =>
-            new CompositeUiFaultMapper(
-                sp.GetRequiredService<LoginUiFaultMapper>(),
-                sp.GetRequiredService<UserRegistrationFaultUiCatalog>(),
-                sp.GetRequiredService<EmailVerificationFaultUiCatalog>(),
-                sp.GetRequiredService<InfrastructureEmailFaultUiCatalog>(),
-                sp.GetRequiredService<InfrastructureFaultUiCatalog>(),
-                sp.GetRequiredService<FriendUiFaultMapper>(),
-                sp.GetRequiredService<ProfileUiFaultMapper>(),
-                sp.GetRequiredService<WcfUiFaultMapper>()));
+                new CompositeUiFaultMapper(
+                    sp.GetRequiredService<LoginUiFaultMapper>(),
+                    sp.GetRequiredService<UserRegistrationFaultUiCatalog>(),
+                    sp.GetRequiredService<EmailVerificationFaultUiCatalog>(),
+                    sp.GetRequiredService<PasswordRecoveryFaultUiCatalog>(),
+                    sp.GetRequiredService<InfrastructureEmailFaultUiCatalog>(),
+                    sp.GetRequiredService<InfrastructureFaultUiCatalog>(),
+                    sp.GetRequiredService<FriendUiFaultMapper>(),
+                    sp.GetRequiredService<ProfileUiFaultMapper>(),
+                    sp.GetRequiredService<WcfUiFaultMapper>()));
         }
 
         private static void RegisterWcfClients(IServiceCollection services)
         {
             services.AddTransient<ILoginServiceClient, LoginServiceClientAdapter>();
             services.AddTransient<IFriendServiceClient, FriendServiceClientAdapter>();
-            services.AddTransient<IUpdateProfileServiceClient, UpdateProfileServiceClientAdapter>();
         }
 
         private static void RegisterAppServices(IServiceCollection services)
@@ -142,7 +214,7 @@ namespace GuessWhoClient
 
                     { GameScreenType.JoinOrCreateGame, () => sp.GetRequiredService<JoinOrCreateGameView>() },
 
-                    { GameScreenType.Settings, () => sp.GetRequiredService<SettingsView>() },
+                    { GameScreenType.Settings, () => sp.GetRequiredService<SettingsView>() }
                 });
 
             services.AddSingleton<IGameScreenManager, GameScreenManager>();
@@ -156,9 +228,18 @@ namespace GuessWhoClient
             services.AddSingleton<Func<SettingsView>>(sp => () => sp.GetRequiredService<SettingsView>());
         }
 
+        private static void RegisterOverlayDialogs(IServiceCollection services)
+        {
+            services.AddSingleton<Func<ChooseAvatarView>>(sp => () => sp.GetRequiredService<ChooseAvatarView>());
+            services.AddSingleton<Func<ChangePasswordView>>(sp => () => sp.GetRequiredService<ChangePasswordView>());
+
+            services.AddSingleton<IOverlayDialogService, OverlayDialogService>();
+        }
+
         private static void RegisterMatchModule(IServiceCollection services)
         {
-            services.AddSingleton<MatchHub>(sp => new MatchHub(sp.GetRequiredService<System.Windows.Threading.Dispatcher>()));
+            services.AddSingleton<MatchHub>(sp =>
+                new MatchHub(sp.GetRequiredService<Dispatcher>()));
 
             services.AddSingleton<IMatchClient>(sp => sp.GetRequiredService<MatchHub>());
 
@@ -231,24 +312,30 @@ namespace GuessWhoClient
             services.AddTransient<VerifyEmailViewModel>();
             services.AddTransient<RecoverPasswordViewModel>();
 
-            services.AddSingleton<Func<SettingsViewModel>>(sp =>
-                () => sp.GetRequiredService<SettingsViewModel>());
+            services.AddTransient<MainMenuViewModel>();
+
+            services.AddTransient<UpdateProfileViewModel>();
+            services.AddTransient<ChooseAvatarViewModel>();
+
+            services.AddTransient<ChangePasswordViewModel>();
+
+            services.AddSingleton<Func<SettingsViewModel>>(sp => () => sp.GetRequiredService<SettingsViewModel>());
             services.AddTransient<SettingsViewModel>();
-
         }
-
 
         private static void RegisterViews(IServiceCollection services)
         {
-            services.AddTransient<LoginView>();
-            services.AddTransient<CreateAccountView>();
-            services.AddTransient<VerifyEmailView>();
-            services.AddTransient<RecoverPasswordView>();
+            services.AddTransient<LoginView>(sp => CreateViewWithDataContext<LoginView, LoginViewModel>(sp));
+            services.AddTransient<CreateAccountView>(sp => CreateViewWithDataContext<CreateAccountView, CreateAccountViewModel>(sp));
+            services.AddTransient<VerifyEmailView>(sp => CreateViewWithDataContext<VerifyEmailView, VerifyEmailViewModel>(sp));
+            services.AddTransient<RecoverPasswordView>(sp => CreateViewWithDataContext<RecoverPasswordView, RecoverPasswordViewModel>(sp));
 
-            services.AddTransient<MainMenuView>();
-            services.AddTransient<JoinOrCreateGameView>();
-            services.AddTransient<UpdateProfileView>();
-            services.AddTransient<ChangePasswordView>();
+            services.AddTransient<MainMenuView>(sp => CreateViewWithDataContext<MainMenuView, MainMenuViewModel>(sp));
+            services.AddTransient<UpdateProfileView>(sp => CreateViewWithDataContext<UpdateProfileView, UpdateProfileViewModel>(sp));
+
+            services.AddTransient<ChooseAvatarView>(sp => CreateViewWithDataContext<ChooseAvatarView, ChooseAvatarViewModel>(sp));
+            services.AddTransient<ChangePasswordView>(sp => CreateViewWithDataContext<ChangePasswordView, ChangePasswordViewModel>(sp));
+
             services.AddTransient<SettingsView>(sp =>
             {
                 var view = new SettingsView();
@@ -260,7 +347,21 @@ namespace GuessWhoClient
                 view.DataContext = viewModel;
                 return view;
             });
+        }
 
+        private static TView CreateViewWithDataContext<TView, TViewModel>(IServiceProvider serviceProvider)
+            where TView : FrameworkElement
+        {
+            if (serviceProvider == null)
+            {
+                throw new ArgumentNullException(nameof(serviceProvider));
+            }
+
+            TView view = ActivatorUtilities.CreateInstance<TView>(serviceProvider);
+
+            view.DataContext ??= serviceProvider.GetRequiredService<TViewModel>();
+
+            return view;
         }
     }
 }

@@ -181,15 +181,18 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
                 if (result.Value.Success)
                 {
-                    alertService.Info(localizationService.Get(
-                        KEY_UI_VERIFICATION_SUCCESS), 
+                    alertService.Info(
+                        localizationService.Get(KEY_UI_VERIFICATION_SUCCESS),
                         localizationService.Get(KEY_UI_TITLE_INFO));
+
+                    GameScreenType returnScreen = accountFlowContext.PendingVerificationReturnScreen;
 
                     accountFlowContext.ClearPendingEmailVerification();
                     gameScreenManager.HideOverlay();
-                    gameScreenManager.ShowScreen(GameScreenType.Login);
+                    gameScreenManager.ShowScreen(returnScreen);
                     return;
                 }
+
 
                 alertService.Warn(localizationService.Get(
                     KEY_UI_CODE_INVALID), 
@@ -267,11 +270,14 @@ namespace GuessWhoClient.Presentation.ViewModels.Auth
 
         private Task BackAsync()
         {
+            GameScreenType returnScreen = accountFlowContext.PendingVerificationReturnScreen;
+
             accountFlowContext.ClearPendingEmailVerification();
             gameScreenManager.HideOverlay();
-            gameScreenManager.ShowScreen(GameScreenType.Login);
+            gameScreenManager.ShowScreen(returnScreen);
             return Task.CompletedTask;
         }
+
 
         private static bool IsValidCode(string value)
         {
