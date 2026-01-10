@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="b9204fd2-1fd1-4612-b783-dddeda01343f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://localhost:8102/LeaderboardService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="0b93ddf6-4c0f-4fa2-aea0-5d17aa631c79" SourceId="1" SourceUrl="net.tcp://localhost:8102/LeaderboardService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="5ef2d6c2-f08d-40c6-b135-602233ebae72" SourceId="1" SourceUrl="net.tcp://localhost:8102/LeaderboardService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="5a097c9a-8cd8-461a-8e20-45d45d21bb8d" SourceId="1" SourceUrl="net.tcp://localhost:8102/LeaderboardService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Requests.xsd" MetadataType="Schema" ID="73cd2f07-e32d-4b63-a1bc-da7ab41cdcca" SourceId="1" SourceUrl="net.tcp://localhost:8102/LeaderboardService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Response.xsd" MetadataType="Schema" ID="47e8ea9a-9107-4d91-96c9-dd59044b3f2a" SourceId="1" SourceUrl="net.tcp://localhost:8102/LeaderboardService/mex" />
+    <MetadataFile FileName="GuessWhoContracts.Dtos.Dto.xsd" MetadataType="Schema" ID="4951e574-020b-45f2-ab06-325a3801c727" SourceId="1" SourceUrl="net.tcp://localhost:8102/LeaderboardService/mex" />
+    <MetadataFile FileName="GuessWhoCore.Contracts.Faults.xsd" MetadataType="Schema" ID="ecd3c436-3c8c-456f-8a6f-4bb7c0f1264a" SourceId="1" SourceUrl="net.tcp://localhost:8102/LeaderboardService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="6416f76a-8a22-4866-afa5-f768c1c61009" SourceId="1" SourceUrl="net.tcp://localhost:8102/LeaderboardService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -2,6 +2,7 @@
 using GuessWhoClient.Application.Services.Account;
 using GuessWhoClient.Application.Services.Auth;
 using GuessWhoClient.Application.Services.Friends;
+using GuessWhoClient.Application.Services.Leaderboard;
 using GuessWhoClient.Application.Services.Profile;
 using GuessWhoClient.Assets;
 using GuessWhoClient.Globalization;
@@ -185,6 +186,7 @@ namespace GuessWhoClient
         {
             services.AddTransient<ILoginServiceClient, LoginServiceClientAdapter>();
             services.AddTransient<IFriendServiceClient, FriendServiceClientAdapter>();
+            services.AddTransient<ILeaderboardServiceClient, LeaderboardServiceClientAdapter>();
         }
 
         private static void RegisterAppServices(IServiceCollection services)
@@ -193,6 +195,7 @@ namespace GuessWhoClient
             services.AddTransient<IUserAppService, UserAppService>();
             services.AddTransient<IFriendAppService, FriendAppService>();
             services.AddTransient<IUpdateProfileAppService, UpdateProfileAppService>();
+            services.AddTransient<ILeaderboardAppService, LeaderboardAppService>();
         }
 
         private static void RegisterNavigation(IServiceCollection services)
@@ -323,6 +326,8 @@ namespace GuessWhoClient
 
             services.AddSingleton<Func<SettingsViewModel>>(sp => () => sp.GetRequiredService<SettingsViewModel>());
             services.AddTransient<SettingsViewModel>();
+
+            services.AddTransient<GuessWhoClient.Presentation.ViewModels.Leaderboard.LeaderboardViewModel>();
         }
 
         private static void RegisterViews(IServiceCollection services)
