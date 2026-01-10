@@ -1,5 +1,4 @@
 ﻿using GuessWhoClient.Application.ErrorHandling.Friends;
-using GuessWhoClient.Application.ErrorHandling.Profile;
 using GuessWhoClient.Application.Services.Account;
 using GuessWhoClient.Application.Services.Auth;
 using GuessWhoClient.Application.Services.Friends;
@@ -55,6 +54,7 @@ namespace GuessWhoClient
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            log4net.Config.XmlConfigurator.Configure();
             base.OnStartup(e);
 
             try
@@ -159,6 +159,7 @@ namespace GuessWhoClient
             services.AddSingleton<UserRegistrationFaultUiCatalog>();
             services.AddSingleton<EmailVerificationFaultUiCatalog>();
             services.AddSingleton<PasswordRecoveryFaultUiCatalog>();
+            services.AddSingleton<UpdateProfileFaultUiCatalog>();
             services.AddSingleton<InfrastructureEmailFaultUiCatalog>();
             services.AddSingleton<InfrastructureFaultUiCatalog>();
             services.AddSingleton<IFaultUiCatalog, DefaultFaultUiCatalog>();
@@ -166,7 +167,6 @@ namespace GuessWhoClient
             services.AddSingleton<WcfUiFaultMapper>();
             services.AddSingleton<LoginUiFaultMapper>();
             services.AddSingleton<FriendUiFaultMapper>();
-            services.AddSingleton<ProfileUiFaultMapper>();
 
             services.AddSingleton<IUiFaultMapper>(sp =>
                 new CompositeUiFaultMapper(
@@ -174,10 +174,10 @@ namespace GuessWhoClient
                     sp.GetRequiredService<UserRegistrationFaultUiCatalog>(),
                     sp.GetRequiredService<EmailVerificationFaultUiCatalog>(),
                     sp.GetRequiredService<PasswordRecoveryFaultUiCatalog>(),
+                    sp.GetRequiredService<UpdateProfileFaultUiCatalog>(),
                     sp.GetRequiredService<InfrastructureEmailFaultUiCatalog>(),
                     sp.GetRequiredService<InfrastructureFaultUiCatalog>(),
                     sp.GetRequiredService<FriendUiFaultMapper>(),
-                    sp.GetRequiredService<ProfileUiFaultMapper>(),
                     sp.GetRequiredService<WcfUiFaultMapper>()));
         }
 
@@ -251,11 +251,13 @@ namespace GuessWhoClient
                 return new CreateOrJoinViewModel(
                     sp.GetRequiredService<MatchHub>(),
                     sp.GetRequiredService<IAvatarPathResolver>(),
+                    sessionContext: session,
                     profileId: userId,
                     userId: userId,
                     sp.GetRequiredService<IUiFaultMapper>(),
                     sp.GetRequiredService<Func<string, string>>());
             });
+
 
             services.AddTransient<JoinOrCreateGameView>(sp =>
             {

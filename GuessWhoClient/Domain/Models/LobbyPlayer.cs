@@ -1,6 +1,4 @@
-﻿using GuessWhoClient.Assets;
-
-namespace GuessWhoClient.Domain.Models
+﻿namespace GuessWhoClient.Domain.Models
 {
     public sealed class LobbyPlayer
     {

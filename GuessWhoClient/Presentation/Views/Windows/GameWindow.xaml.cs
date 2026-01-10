@@ -31,11 +31,6 @@ namespace GuessWhoClient.Presentation.Views.Windows
         private readonly Func<UpdateProfileView> updateProfileViewFactory;
         private readonly Func<ChangePasswordView> changePasswordViewFactory;
 
-        private readonly MatchHub matchHub;
-        private readonly IAvatarPathResolver avatarPathResolver;
-        private readonly IUiFaultMapper uiFaultMapper;
-        private readonly Func<string, string> localize;
-
         public GameWindow(
             Func<LoginView> loginViewFactory,
             Func<SettingsView> settingsViewFactory,
@@ -44,8 +39,7 @@ namespace GuessWhoClient.Presentation.Views.Windows
             Func<MainMenuView> mainMenuViewFactory,
             Func<JoinOrCreateGameView> joinOrCreateGameViewFactory,
             Func<UpdateProfileView> updateProfileViewFactory,
-            Func<ChangePasswordView> changePasswordViewFactory,
-            ILocalizationService localizationService)
+            Func<ChangePasswordView> changePasswordViewFactory)
         {
             this.loginViewFactory = loginViewFactory ??
                 throw new ArgumentNullException(nameof(loginViewFactory));
@@ -63,24 +57,17 @@ namespace GuessWhoClient.Presentation.Views.Windows
                 throw new ArgumentNullException(nameof(updateProfileViewFactory));
             this.changePasswordViewFactory = changePasswordViewFactory ??
                 throw new ArgumentNullException(nameof(changePasswordViewFactory));
-            if (localizationService == null)
-            {
-                throw new ArgumentNullException(nameof(localizationService));
-            }
 
             InitializeComponent();
-
-            matchHub = new MatchHub(Dispatcher);
-            avatarPathResolver = new AvatarPathResolver();
-            uiFaultMapper = new CompositeUiFaultMapper(new WcfUiFaultMapper());
-            localize = localizationService.Get;
-
-            Loaded += (_, __) => LoadJoinOrCreateGameScreen();
         }
 
+        // Si todavía usas estos métodos en algún lado, déjalos.
         public void LoadLoginWindow() => ShowScreen(loginViewFactory());
         public void LoadCreateAccountWindow() => ShowScreen(createAccountViewFactory());
         public void LoadMainMenu() => ShowScreen(mainMenuViewFactory());
+        public void LoadJoinOrCreateGameScreen() => ShowScreen(joinOrCreateGameViewFactory());
+        public void LoadUpdateProfileScreen() => ShowScreen(updateProfileViewFactory());
+        public void LoadChangePasswordScreen() => ShowScreen(changePasswordViewFactory());
 
         public void LoadSettingsWindow()
         {
@@ -88,32 +75,6 @@ namespace GuessWhoClient.Presentation.Views.Windows
             view.DataContext = settingsViewModelFactory();
             ShowOverlay(view);
         }
-
-        public void LoadJoinOrCreateGameScreen()
-        {
-            JoinOrCreateGameView view = joinOrCreateGameViewFactory();
-
-            long profileId = SessionContext.Current.UserId;
-            long userId = SessionContext.Current.UserId;
-
-            var vm = new CreateOrJoinViewModel(
-                matchHub,
-                avatarPathResolver,
-                profileId,
-                userId,
-                uiFaultMapper,
-                localize);
-
-            vm.LobbyRequested += CreateGamePlayWindow;
-            vm.BackRequested += LoadMainMenu;
-
-            view.DataContext = vm;
-
-            ShowScreen(view);
-        }
-
-        public void LoadUpdateProfileScreen() => ShowScreen(updateProfileViewFactory());
-        public void LoadChangePasswordScreen() => ShowScreen(changePasswordViewFactory());
 
         public void ShowScreen(UserControl screen)
         {
@@ -199,29 +160,6 @@ namespace GuessWhoClient.Presentation.Views.Windows
         {
             CloseOverlay();
             System.Windows.Application.Current.Shutdown();
-        }
-
-        public void CreateGamePlayWindow(GameLobbyViewModel lobbyViewModel)
-        {
-            if (lobbyViewModel == null)
-            {
-                throw new ArgumentNullException(nameof(lobbyViewModel));
-            }
-
-            var gamePlayWindow = new GamePlayWindow(lobbyViewModel)
-            {
-                Owner = this,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
-            };
-
-            gamePlayWindow.Closed += (_, __) =>
-            {
-                Show();
-                LoadJoinOrCreateGameScreen();
-            };
-
-            Hide();
-            gamePlayWindow.Show();
         }
     }
 }
