@@ -13,6 +13,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
 
         private const string LOG_CTX_PLAY = "MainMenuViewModel.Play";
         private const string LOG_CTX_PROFILE = "MainMenuViewModel.Profile";
+        private const string LOG_CTX_FRIENDS = "MainMenuViewModel.Friends"; 
         private const string LOG_CTX_LEADERBOARDS = "MainMenuViewModel.Leaderboards";
         private const string LOG_CTX_SETTINGS = "MainMenuViewModel.Settings";
         private const string LOG_CTX_EXIT = "MainMenuViewModel.Exit";
@@ -21,7 +22,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
         private const string LOG_NAV_EXCEPTION_TEMPLATE = "{0}: navigation threw exception for ScreenType='{1}'.";
 
         private const string KEY_UI_TITLE_WARNING = "UiTitleWarning";
-
         private const string KEY_UI_NAV_FACTORY_MISSING = "UiNavigationScreenFactoryMissing";
         private const string KEY_UI_NAV_FACTORY_RETURNED_NULL = "UiNavigationScreenFactoryReturnedNull";
         private const string KEY_UI_NAV_FAILED = "UiNavigationFailed";
@@ -44,6 +44,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
 
             PlayCommand = new RelayCommand(Play, CanExecuteCommands);
             ProfileCommand = new RelayCommand(Profile, CanExecuteCommands);
+            FriendsCommand = new RelayCommand(Friends, CanExecuteCommands); 
             LeaderboardsCommand = new RelayCommand(Leaderboards, CanExecuteCommands);
             SettingsCommand = new RelayCommand(Settings, CanExecuteCommands);
             ExitCommand = new RelayCommand(Exit, CanExecuteCommands);
@@ -51,6 +52,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
 
         public RelayCommand PlayCommand { get; }
         public RelayCommand ProfileCommand { get; }
+        public RelayCommand FriendsCommand { get; }
         public RelayCommand LeaderboardsCommand { get; }
         public RelayCommand SettingsCommand { get; }
         public RelayCommand ExitCommand { get; }
@@ -60,6 +62,8 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
         private void Play() => NavigateToScreen(GameScreenType.JoinOrCreateGame, LOG_CTX_PLAY);
 
         private void Profile() => NavigateToScreen(GameScreenType.UpdateProfile, LOG_CTX_PROFILE);
+
+        private void Friends() => NavigateToScreen(GameScreenType.Friends, LOG_CTX_FRIENDS); 
 
         private void Leaderboards() => NavigateToScreen(GameScreenType.Leaderboard, LOG_CTX_LEADERBOARDS);
 
@@ -82,7 +86,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
             try
             {
                 NavigationResult result = gameScreenManager.ShowScreen(screenType);
-
                 if (!result.IsSuccess)
                 {
                     HandleNavigationFailure(result, context);
@@ -100,7 +103,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
             try
             {
                 NavigationResult result = gameScreenManager.ShowOverlay(screenType);
-
                 if (!result.IsSuccess)
                 {
                     HandleNavigationFailure(result, context);
@@ -116,7 +118,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
         private void HandleNavigationFailure(NavigationResult result, string context)
         {
             Logger.WarnFormat(LOG_NAV_FAILED_TEMPLATE, context, result.Code, result.ScreenType);
-
             string uiKey = MapNavigationCodeToUiKey(result.Code);
             ShowNavigationWarning(uiKey);
         }
@@ -127,12 +128,10 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
             {
                 return KEY_UI_NAV_FACTORY_MISSING;
             }
-
             if (string.Equals(code, NavigationCodes.CODE_SCREEN_FACTORY_RETURNED_NULL, StringComparison.Ordinal))
             {
                 return KEY_UI_NAV_FACTORY_RETURNED_NULL;
             }
-
             return KEY_UI_NAV_FAILED;
         }
 
@@ -147,6 +146,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Menu
         {
             PlayCommand.RaiseCanExecuteChanged();
             ProfileCommand.RaiseCanExecuteChanged();
+            FriendsCommand.RaiseCanExecuteChanged();
             LeaderboardsCommand.RaiseCanExecuteChanged();
             SettingsCommand.RaiseCanExecuteChanged();
             ExitCommand.RaiseCanExecuteChanged();

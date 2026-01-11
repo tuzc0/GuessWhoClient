@@ -93,6 +93,11 @@
     <Compile Include="Application\Services\Update\UpdateProfileAppService.cs" />
     <Compile Include="Assets\AvatarPathResolver.cs" />
     <Compile Include="Assets\IAvatarPathResolver.cs" />
+    <Compile Include="Connected Services\FriendServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LeaderboardServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,11 +212,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\FriendServiceRef\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\LoginServiceRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,9 +238,6 @@
       <DependentUpon>CreateAccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Domain\Models\CharacterCard.cs" />
-    <Compile Include="FriendListWindow.xaml.cs">
-      <DependentUpon>FriendListWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Presentation\Views\Match\GameLobbyView.xaml.cs">
       <DependentUpon>GameLobbyView.xaml</DependentUpon>
     </Compile>
@@ -298,10 +295,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Presentation\Views\UserControls\FinalMatchStatistics.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FriendListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -408,10 +401,22 @@
     <None Include="Connected Services\FriendServiceRef\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoCore.Contracts.Faults.xsd">
-      <SubType>Designer</SubType>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.BasicResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\FriendServiceRef\GuessWhoCore.Contracts.Request.xsd">
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.GetFriendsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.GetPendingRequestsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.SearchProfilesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoClient.FriendServiceRef.SendFriendRequestResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendServiceRef\GuessWhoCore.Contracts.Faults.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\FriendServiceRef\GuessWhoCore.Contracts.Requests.xsd">
@@ -583,22 +588,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatServiceRef\configuration91.svcinfo" />
-    <None Include="Connected Services\FriendServiceRef\configuration91.svcinfo" />
     <None Include="Connected Services\UpdateServiceRef\configuration91.svcinfo" />
     <None Include="Connected Services\UserServiceRef\configuration91.svcinfo" />
     <None Include="Connected Services\LoginServiceRef\configuration91.svcinfo" />
     <None Include="Connected Services\ChatServiceRef\configuration.svcinfo" />
-    <None Include="Connected Services\FriendServiceRef\configuration.svcinfo" />
     <None Include="Connected Services\UpdateServiceRef\configuration.svcinfo" />
     <None Include="Connected Services\UserServiceRef\configuration.svcinfo" />
     <None Include="Connected Services\LoginServiceRef\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\ChatServiceRef\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\FriendServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -703,6 +702,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\LeaderboardServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FriendServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FriendServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\FriendServiceRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/PixelTheme.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Themes/PixelTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="Card.FriendManager" TargetType="GroupBox">
@@ -23,13 +23,14 @@
                         <ControlTemplate TargetType="GroupBox">
                             <Border BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{StaticResource Brush.AccentDark}"
-                                    Background="{TemplateBinding Background}">
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="8">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <ContentPresenter Grid.Row="0" Margin="5,0,0,5" ContentSource="Header" RecognizesAccessKey="True" TextElement.FontWeight="Bold" TextElement.Foreground="{StaticResource Brush.Accent}"/>
+                                    <ContentPresenter Grid.Row="0" Margin="5,5,0,5" ContentSource="Header" RecognizesAccessKey="True" TextElement.FontWeight="Bold" TextElement.Foreground="{StaticResource Brush.Accent}"/>
                                     <ContentPresenter Grid.Row="1" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 </Grid>
                             </Border>
@@ -59,11 +60,13 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,16">
                         <TextBox Width="360" Height="34" Margin="0,0,8,0"
-                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                                 Style="{StaticResource {x:Type TextBox}}"/>
+                                 FontFamily="Consolas"
+                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+
                         <Button Content="Search" Width="120" Height="34" Margin="0,0,8,0"
                                 Style="{StaticResource Btn.Primary}" 
                                 Command="{Binding SearchProfilesCommand}"/>
+
                         <Button Content="Refresh" Width="120" Height="34"
                                 Style="{StaticResource Btn.Primary}" 
                                 Command="{Binding LoadFriendsCommand}"/>
@@ -83,7 +86,8 @@
                                 </Grid.RowDefinitions>
                                 <DataGrid ItemsSource="{Binding SearchResults}" 
                                           SelectedItem="{Binding SelectedProfile}"
-                                          AutoGenerateColumns="False" IsReadOnly="True" Height="200">
+                                          AutoGenerateColumns="False" IsReadOnly="True" Height="200"
+                                          Background="{StaticResource Brush.Card}">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Avatar" Width="64">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -102,7 +106,8 @@
                         </GroupBox>
 
                         <GroupBox Header="My Friends" Grid.Column="1" Margin="8,0,0,0" Style="{StaticResource Card.FriendManager}">
-                            <DataGrid ItemsSource="{Binding Friends}" AutoGenerateColumns="False" IsReadOnly="True">
+                            <DataGrid ItemsSource="{Binding Friends}" AutoGenerateColumns="False" IsReadOnly="True"
+                                      Background="{StaticResource Brush.Card}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Name" Binding="{Binding DisplayName}" Width="*"/>
                                 </DataGrid.Columns>

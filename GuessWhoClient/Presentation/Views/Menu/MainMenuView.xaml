@@ -65,6 +65,15 @@
                         Margin="{StaticResource MainMenu.ButtonMargin}"
                         HorizontalAlignment="Stretch"/>
 
+                <Button x:Name="btnFriends"
+                        Content="{Binding [BtnFriends], Source={x:Static localization:LocalizationProvider.Instance}}"
+                        Command="{Binding FriendsCommand}"
+                        Style="{StaticResource Btn.Primary}"
+                        MinWidth="{StaticResource MainMenu.ButtonMinWidth}"
+                        Height="{StaticResource MainMenu.ButtonHeight}"
+                        Margin="{StaticResource MainMenu.ButtonMargin}"
+                        HorizontalAlignment="Stretch"/>
+
                 <Button x:Name="btnExit"
                         Content="{Binding [BtnExit], Source={x:Static localization:LocalizationProvider.Instance}}"
                         Command="{Binding ExitCommand}"
