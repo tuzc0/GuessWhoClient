@@ -87,10 +87,17 @@
     <Compile Include="Application\Services\Friends\IFriendAppService.cs" />
     <Compile Include="Application\Services\Account\IUserAppService.cs" />
     <Compile Include="Application\Services\Account\UserAppService.cs" />
+    <Compile Include="Application\Services\Leaderboard\ILeaderboardAppService.cs" />
+    <Compile Include="Application\Services\Leaderboard\LeaderboardAppService.cs" />
     <Compile Include="Application\Services\Update\IUpdateProfileAppService.cs" />
     <Compile Include="Application\Services\Update\UpdateProfileAppService.cs" />
     <Compile Include="Assets\AvatarPathResolver.cs" />
     <Compile Include="Assets\IAvatarPathResolver.cs" />
+    <Compile Include="Connected Services\LeaderboardServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Domain\Models\LobbyPlayer.cs" />
     <Compile Include="Domain\Validation\IValidationIssueMapper.cs" />
@@ -104,6 +111,7 @@
     <Compile Include="Infraestructure\ErrorHandling\Mapper\IFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\InfrastructureEmailFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\InfrastructureFaultUiCatalog.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\LeaderboardFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\MatchBusinessErrorMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\PasswordRecoveryFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\UpdateProfileFaultUiCatalog.cs" />
@@ -114,6 +122,8 @@
     <Compile Include="Infraestructure\Match\MatchCallback.cs" />
     <Compile Include="Infraestructure\Match\MatchHub.cs" />
     <Compile Include="Infraestructure\Session\IPresenceHeartbeatService.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\ILeaderboardServiceClient.cs" />
+    <Compile Include="Infraestructure\Wcf\Clients\LeaderboardServiceClientAdapter.cs" />
     <Compile Include="Infraestructure\Wcf\DuplexWcfCallExecutor.cs" />
     <Compile Include="Infraestructure\Wcf\PresenceHeartbeatService.cs" />
     <Compile Include="Infraestructure\Wcf\WcfCallErrorHelper.cs" />
@@ -161,6 +171,7 @@
     <Compile Include="Presentation\ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="Presentation\ViewModels\Error\GameMessageViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Friends\FriendViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Leaderboard\LeaderboardViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Match\CreateOrJoinMatchViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Match\GameLobbyViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Match\GameModelItemViewModel.cs" />
@@ -170,6 +181,12 @@
     <Compile Include="Presentation\ViewModels\Profile\CreateAccountValidationErrorsMapper.cs" />
     <Compile Include="Presentation\ViewModels\Profile\UpdateProfileViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Settings\SettingsViewModel.cs" />
+    <Compile Include="Presentation\Views\Friends\FriendView.xaml.cs">
+      <DependentUpon>FriendView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\Views\Leaderboard\LeaderboardView.xaml.cs">
+      <DependentUpon>LeaderboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\Views\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -224,9 +241,6 @@
     <Compile Include="FriendListWindow.xaml.cs">
       <DependentUpon>FriendListWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\Views\Windows\FriendManagerWindowWindow.xaml.cs">
-      <DependentUpon>FriendManagerWindowWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Presentation\Views\Match\GameLobbyView.xaml.cs">
       <DependentUpon>GameLobbyView.xaml</DependentUpon>
     </Compile>
@@ -255,6 +269,14 @@
     </Compile>
     <Compile Include="Presentation\Navegation\GameScreenType.cs" />
     <Compile Include="Infraestructure\Wcf\ServiceClientGuard.cs" />
+    <Page Include="Presentation\Views\Friends\FriendView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\Views\Leaderboard\LeaderboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\Views\Settings\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -280,10 +302,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FriendListWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Presentation\Views\Windows\FriendManagerWindowWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -409,6 +427,28 @@
     <None Include="Connected Services\FriendServiceRef\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\LeaderboardServiceRef\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\GuessWhoContracts.Dtos.Dto.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\GuessWhoCore.Contracts.Faults.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\GuessWhoCore.Contracts.Requests.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\GuessWhoCore.Contracts.Response.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\service.wsdl" />
+    <None Include="Connected Services\LeaderboardServiceRef\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardServiceRef\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\LoginServiceRef\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -495,6 +535,7 @@
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.CreateMatchResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.FinalGuessResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.GetFriendsResponse.datasource" />
+    <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.GetLeaderboardResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.GetPendingRequestsResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.GetProfileResponse.datasource" />
     <None Include="Properties\DataSources\GuessWhoCore.Contracts.Response.LoginResponse.datasource" />
@@ -534,6 +575,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\ChatServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\FriendServiceRef\" />
+    <WCFMetadataStorage Include="Connected Services\LeaderboardServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\LoginServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\MatchServiceRef\" />
     <WCFMetadataStorage Include="Connected Services\UpdateServiceRef\" />
@@ -653,6 +695,17 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Connected Services\LeaderboardServiceRef\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LeaderboardServiceRef\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LeaderboardServiceRef\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

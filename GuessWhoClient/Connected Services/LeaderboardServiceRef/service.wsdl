@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="LeaderboardService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_ILeaderboardService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/GuessWhoContracts.Dtos.Dto" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ILeaderboardService_GetGlobalLeaderboard_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlobalLeaderboard" />
+  </wsdl:message>
+  <wsdl:message name="ILeaderboardService_GetGlobalLeaderboard_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGlobalLeaderboardResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILeaderboardService_GetGlobalLeaderboard_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q1:ServiceFault" />
+  </wsdl:message>
+  <wsdl:portType name="ILeaderboardService">
+    <wsdl:operation name="GetGlobalLeaderboard">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILeaderboardService/GetGlobalLeaderboard" message="tns:ILeaderboardService_GetGlobalLeaderboard_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILeaderboardService/GetGlobalLeaderboardResponse" message="tns:ILeaderboardService_GetGlobalLeaderboard_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILeaderboardService/GetGlobalLeaderboardServiceFaultFault" name="ServiceFaultFault" message="tns:ILeaderboardService_GetGlobalLeaderboard_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_ILeaderboardService" type="tns:ILeaderboardService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ILeaderboardService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetGlobalLeaderboard">
+      <soap12:operation soapAction="http://tempuri.org/ILeaderboardService/GetGlobalLeaderboard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LeaderboardService">
+    <wsdl:port name="NetTcpBinding_ILeaderboardService" binding="tns:NetTcpBinding_ILeaderboardService">
+      <soap12:address location="net.tcp://localhost:8102/LeaderboardService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8102/LeaderboardService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
