@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 
 namespace GuessWhoClient.Infraestructure.Wcf.Clients.Login
 {
-    public interface ILoginServiceClient
+    internal interface ILoginServiceClient
     {
         Task<WcfCallResult<LoginResponse>> LoginUserAsync(LoginRequest request);
+
+        Task<WcfCallResult<BasicResponse>> TouchPresenceAsync(TouchPresenceRequest request);
+
         Task<WcfCallResult<BasicResponse>> LogoutUserAsync(LogoutRequest request);
     }
 }

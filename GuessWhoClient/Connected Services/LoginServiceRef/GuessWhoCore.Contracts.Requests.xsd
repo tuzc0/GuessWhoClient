@@ -7,4 +7,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LoginRequest" nillable="true" type="tns:LoginRequest" />
+  <xs:complexType name="TouchPresenceRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TouchPresenceRequest" nillable="true" type="tns:TouchPresenceRequest" />
 </xs:schema>

@@ -28,6 +28,13 @@ namespace GuessWhoClient.LoginServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/LogoutUser", ReplyAction="http://tempuri.org/ILoginService/LogoutUserResponse")]
         System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> LogoutUserAsync(GuessWhoCore.Contracts.Request.LogoutRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/TouchPresence", ReplyAction="http://tempuri.org/ILoginService/TouchPresenceResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/ILoginService/TouchPresenceServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse TouchPresence(GuessWhoCore.Contracts.Requests.TouchPresenceRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILoginService/TouchPresence", ReplyAction="http://tempuri.org/ILoginService/TouchPresenceResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> TouchPresenceAsync(GuessWhoCore.Contracts.Requests.TouchPresenceRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -71,6 +78,14 @@ namespace GuessWhoClient.LoginServiceRef {
         
         public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> LogoutUserAsync(GuessWhoCore.Contracts.Request.LogoutRequest request) {
             return base.Channel.LogoutUserAsync(request);
+        }
+        
+        public GuessWhoCore.Contracts.Response.BasicResponse TouchPresence(GuessWhoCore.Contracts.Requests.TouchPresenceRequest request) {
+            return base.Channel.TouchPresence(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> TouchPresenceAsync(GuessWhoCore.Contracts.Requests.TouchPresenceRequest request) {
+            return base.Channel.TouchPresenceAsync(request);
         }
     }
 }

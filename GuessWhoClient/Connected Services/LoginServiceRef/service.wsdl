@@ -39,6 +39,15 @@
   <wsdl:message name="ILoginService_LogoutUser_ServiceFaultFault_FaultMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q2:ServiceFault" />
   </wsdl:message>
+  <wsdl:message name="ILoginService_TouchPresence_InputMessage">
+    <wsdl:part name="parameters" element="tns:TouchPresence" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_TouchPresence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TouchPresenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILoginService_TouchPresence_ServiceFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults" name="detail" element="q3:ServiceFault" />
+  </wsdl:message>
   <wsdl:portType name="ILoginService">
     <wsdl:operation name="LoginUser">
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LoginUser" message="tns:ILoginService_LoginUser_InputMessage" />
@@ -49,6 +58,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/LogoutUser" message="tns:ILoginService_LogoutUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/LogoutUserResponse" message="tns:ILoginService_LogoutUser_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/LogoutUserServiceFaultFault" name="ServiceFaultFault" message="tns:ILoginService_LogoutUser_ServiceFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TouchPresence">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILoginService/TouchPresence" message="tns:ILoginService_TouchPresence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILoginService/TouchPresenceResponse" message="tns:ILoginService_TouchPresence_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILoginService/TouchPresenceServiceFaultFault" name="ServiceFaultFault" message="tns:ILoginService_TouchPresence_ServiceFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILoginService" type="tns:ILoginService">
@@ -69,6 +83,18 @@
     </wsdl:operation>
     <wsdl:operation name="LogoutUser">
       <soap12:operation soapAction="http://tempuri.org/ILoginService/LogoutUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ServiceFaultFault">
+        <soap12:fault use="literal" name="ServiceFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="TouchPresence">
+      <soap12:operation soapAction="http://tempuri.org/ILoginService/TouchPresence" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

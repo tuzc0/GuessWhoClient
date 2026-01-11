@@ -31,4 +31,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="TouchPresence">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Requests" minOccurs="0" name="request" nillable="true" type="q5:TouchPresenceRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TouchPresenceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Response" minOccurs="0" name="TouchPresenceResult" nillable="true" type="q6:BasicResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

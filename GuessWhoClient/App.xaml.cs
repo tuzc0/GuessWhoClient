@@ -8,6 +8,7 @@ using GuessWhoClient.Globalization;
 using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoClient.Infraestructure.ErrorHandling.Mapper;
 using GuessWhoClient.Infraestructure.Match;
+using GuessWhoClient.Infraestructure.Session;
 using GuessWhoClient.Infraestructure.Wcf;
 using GuessWhoClient.Infraestructure.Wcf.Clients;
 using GuessWhoClient.Infraestructure.Wcf.Clients.Login;
@@ -33,6 +34,7 @@ using log4net;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -179,11 +181,17 @@ namespace GuessWhoClient
                     sp.GetRequiredService<InfrastructureFaultUiCatalog>(),
                     sp.GetRequiredService<FriendUiFaultMapper>(),
                     sp.GetRequiredService<WcfUiFaultMapper>()));
-        }
 
+            services.AddSingleton<IPresenceHeartbeatService>(sp =>
+            new PresenceHeartbeatService(
+                sp.GetRequiredService<ILoginServiceClient>(),
+                intervalSeconds: 20));
+
+        }
         private static void RegisterWcfClients(IServiceCollection services)
         {
-            services.AddTransient<ILoginServiceClient, LoginServiceClientAdapter>();
+            services.AddSingleton<ILoginServiceClient, LoginServiceClientSessionAdapter>();
+
             services.AddTransient<IFriendServiceClient, FriendServiceClientAdapter>();
         }
 

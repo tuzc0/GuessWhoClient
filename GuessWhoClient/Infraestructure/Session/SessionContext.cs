@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GuessWhoClient.Infraestructure.Session;
+using GuessWhoClient.Infraestructure.Wcf;
+using System;
 
 namespace GuessWhoClient.Session
 {
@@ -29,11 +31,6 @@ namespace GuessWhoClient.Session
 
         public void SignIn(long userId, string displayName, string email, bool authToken)
         {
-            if (userId <= DEFAULT_USER_ID)
-            {
-                throw new ArgumentOutOfRangeException(nameof(userId));
-            }
-
             UserId = userId;
             DisplayName = displayName ?? EMPTY;
             Email = email ?? EMPTY;
@@ -70,6 +67,7 @@ namespace GuessWhoClient.Session
             UserId = DEFAULT_USER_ID;
             DisplayName = EMPTY;
             Email = EMPTY;
+            AvatarId = EMPTY;
             AuthToken = false;
         }
     }
