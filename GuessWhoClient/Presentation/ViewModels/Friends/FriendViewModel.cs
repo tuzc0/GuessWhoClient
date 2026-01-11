@@ -8,12 +8,13 @@ using GuessWhoClient.Presentation.ViewModels.Base;
 using GuessWhoClient.Presentation.ViewsModels.Base;
 using GuessWhoClient.Services.Alerts;
 using GuessWhoClient.Session;
-using GuessWhoCore.Contracts.Request;
 using GuessWhoCore.Contracts.Requests;
 using GuessWhoCore.Contracts.Response;
 using log4net;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GuessWhoClient.Presentation.ViewModels.Friends
@@ -121,28 +122,35 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
 
         private void OnBackRequested() => gameScreenManager.ShowScreen(GameScreenType.MainMenu);
 
-        private async Task LoadFriendsAsync()
+        public async Task LoadFriendsAsync()
         {
             IsBusy = true;
             try
             {
-                var friendsResult = await friendAppService.GetFriendsAsync(new GetFriendsRequest { AccountId = sessionContext.UserId });
+                long currentAccountId = sessionContext.UserId;
+
+                // Cargar Amigos
+                var friendsResult = await friendAppService.GetFriendsAsync(new GetFriendsRequest { AccountId = currentAccountId });
                 if (friendsResult.IsSuccess && friendsResult.Value?.Friends != null)
                 {
-                    foreach (var f in friendsResult.Value.Friends) f.AvatarId = avatarPathResolver.Resolve(f.AvatarId);
-                    Friends = new ObservableCollection<UserProfileSearchResult>(friendsResult.Value.Friends);
+                    var updatedFriends = friendsResult.Value.Friends.ToList();
+                    foreach (var f in updatedFriends) f.AvatarId = avatarPathResolver.Resolve(f.AvatarId);
+                    Friends = new ObservableCollection<UserProfileSearchResult>(updatedFriends);
                 }
 
-                var pendingResult = await friendAppService.GetPendingRequestsAsync(new GetPendingFriendRequestsRequest { AccountId = sessionContext.UserId });
+                // Cargar Solicitudes Pendientes
+                var pendingResult = await friendAppService.GetPendingRequestsAsync(new GetPendingFriendRequestsRequest { AccountId = currentAccountId });
                 if (pendingResult.IsSuccess && pendingResult.Value?.Requests != null)
                 {
                     var requestsList = new ObservableCollection<UserProfileSearchResult>();
                     foreach (var r in pendingResult.Value.Requests)
                     {
+                        // Mapeamos FriendRequestId al campo UserId para que la UI pueda enviarlo de vuelta al aceptar/rechazar
                         requestsList.Add(new UserProfileSearchResult
                         {
                             UserId = r.FriendRequestId,
-                            DisplayName = r.RequesterDisplayName
+                            DisplayName = r.RequesterDisplayName,
+                            AvatarId = avatarPathResolver.Resolve(string.Empty)
                         });
                     }
                     ReceivedRequests = requestsList;
@@ -166,8 +174,9 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
                 if (!result.IsSuccess) { ShowFriendError(result.FaultCode); return; }
                 if (result.Value?.Profiles != null)
                 {
-                    foreach (var p in result.Value.Profiles) p.AvatarId = avatarPathResolver.Resolve(p.AvatarId);
-                    SearchResults = new ObservableCollection<UserProfileSearchResult>(result.Value.Profiles);
+                    var profiles = result.Value.Profiles.ToList();
+                    foreach (var p in profiles) p.AvatarId = avatarPathResolver.Resolve(p.AvatarId);
+                    SearchResults = new ObservableCollection<UserProfileSearchResult>(profiles);
                 }
             }
             catch (Exception ex)
@@ -175,11 +184,16 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
                 Logger.Error(LOG_CTX_SEARCH, ex);
                 ShowUiError(KEY_GENERIC_ERROR);
             }
-            finally { IsBusy = false; }
+            finally
+            {
+                IsBusy = false;
+                SearchProfilesCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private async Task SendFriendRequestAsync()
         {
+            if (SelectedProfile == null) return;
             IsBusy = true;
             try
             {
@@ -188,8 +202,11 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
                     FromAccountId = sessionContext.UserId,
                     ToUserId = SelectedProfile.UserId
                 });
+
                 if (!result.IsSuccess) { ShowFriendError(result.FaultCode); return; }
+
                 alertService.Info(localizationService.Get("UiFriendsRequestSent"), localizationService.Get(KEY_UI_SUCCESS_TITLE));
+                SelectedProfile = null;
             }
             catch (Exception ex)
             {
@@ -201,15 +218,18 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
 
         private async Task AcceptFriendRequestAsync()
         {
+            if (SelectedReceivedRequest == null) return;
             IsBusy = true;
             try
             {
                 var result = await friendAppService.AcceptFriendRequestAsync(new FriendRequestOperationRequest
                 {
                     AccountId = sessionContext.UserId,
-                    FriendRequestId = SelectedReceivedRequest.UserId
+                    FriendRequestId = SelectedReceivedRequest.UserId // Aquí va el ID de la solicitud
                 });
+
                 if (!result.IsSuccess) { ShowFriendError(result.FaultCode); return; }
+
                 alertService.Info(localizationService.Get("UiFriendsRequestAccepted"), localizationService.Get(KEY_UI_SUCCESS_TITLE));
                 await LoadFriendsAsync();
             }
@@ -223,6 +243,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
 
         private async Task RejectFriendRequestAsync()
         {
+            if (SelectedReceivedRequest == null) return;
             IsBusy = true;
             try
             {
@@ -231,7 +252,9 @@ namespace GuessWhoClient.Presentation.ViewModels.Friends
                     AccountId = sessionContext.UserId,
                     FriendRequestId = SelectedReceivedRequest.UserId
                 });
+
                 if (!result.IsSuccess) { ShowFriendError(result.FaultCode); return; }
+
                 await LoadFriendsAsync();
             }
             catch (Exception ex)

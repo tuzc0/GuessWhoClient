@@ -1,4 +1,5 @@
 ﻿using GuessWhoClient.Presentation.ViewModels.Friends;
+using System;
 using System.Windows.Controls;
 
 namespace GuessWhoClient.Presentation.Views.Friends
@@ -8,13 +9,20 @@ namespace GuessWhoClient.Presentation.Views.Friends
         public FriendView()
         {
             InitializeComponent();
+        }
+
+        public FriendView(FriendViewModel viewModel)
+        {
+            if (viewModel == null) throw new ArgumentNullException(nameof(viewModel));
+
+            InitializeComponent();
+            this.DataContext = viewModel;
 
             this.Loaded += (s, e) =>
             {
-                if (DataContext is FriendViewModel vm)
+                if (viewModel.LoadFriendsCommand.CanExecute(null))
                 {
-                    if (vm.LoadFriendsCommand.CanExecute(null))
-                        vm.LoadFriendsCommand.Execute(null);
+                    viewModel.LoadFriendsCommand.Execute(null);
                 }
             };
         }

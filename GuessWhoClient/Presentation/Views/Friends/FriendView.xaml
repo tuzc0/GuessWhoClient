@@ -12,6 +12,8 @@
                 <ResourceDictionary Source="pack://application:,,,/Themes/PixelTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <BooleanToVisibilityConverter x:Key="BoolToVisData" />
+
             <Style x:Key="Card.FriendManager" TargetType="GroupBox">
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -30,8 +32,11 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <ContentPresenter Grid.Row="0" Margin="5,5,0,5" ContentSource="Header" RecognizesAccessKey="True" TextElement.FontWeight="Bold" TextElement.Foreground="{StaticResource Brush.Accent}"/>
-                                    <ContentPresenter Grid.Row="1" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    <ContentPresenter Grid.Row="0" Margin="5,5,0,5" ContentSource="Header" 
+                                                      RecognizesAccessKey="True" TextElement.FontWeight="Bold" 
+                                                      TextElement.Foreground="{StaticResource Brush.Accent}"/>
+                                    <ContentPresenter Grid.Row="1" Margin="{TemplateBinding Padding}" 
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                                 </Grid>
                             </Border>
                         </ControlTemplate>
@@ -60,7 +65,7 @@
 
                     <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,16">
                         <TextBox Width="360" Height="34" Margin="0,0,8,0"
-                                 FontFamily="Consolas"
+                                 FontFamily="Consolas" VerticalContentAlignment="Center"
                                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
 
                         <Button Content="Search" Width="120" Height="34" Margin="0,0,8,0"
@@ -92,7 +97,7 @@
                                         <DataGridTemplateColumn Header="Avatar" Width="64">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Image Source="{Binding AvatarId}" Width="32" Height="32"/>
+                                                    <Image Source="{Binding AvatarId}" Width="32" Height="32" Stretch="UniformToFill"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -121,14 +126,18 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <DataGrid ItemsSource="{Binding SearchResults}" AutoGenerateColumns="False" IsReadOnly="True" Height="100">
+                            <DataGrid ItemsSource="{Binding ReceivedRequests}" 
+                                      SelectedItem="{Binding SelectedReceivedRequest}"
+                                      AutoGenerateColumns="False" IsReadOnly="True" Height="120">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="From User" Binding="{Binding DisplayName}" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                             <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
-                                <Button Content="Accept" Style="{StaticResource Btn.Primary}" Width="100" Margin="0,0,0,5"/>
-                                <Button Content="Reject" Style="{StaticResource Btn.Primary}" Width="100"/>
+                                <Button Content="Accept" Style="{StaticResource Btn.Primary}" Width="100" Margin="0,0,0,5"
+                                        Command="{Binding AcceptFriendRequestCommand}"/>
+                                <Button Content="Reject" Style="{StaticResource Btn.Primary}" Width="100"
+                                        Command="{Binding RejectFriendRequestCommand}"/>
                             </StackPanel>
                         </Grid>
                     </GroupBox>
@@ -138,5 +147,16 @@
                 </Grid>
             </ScrollViewer>
         </Border>
+
+        <Grid Background="#AA000000" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisData}}">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="WAITING FOR SERVER..." 
+                           FontFamily="Consolas" FontSize="22" 
+                           Foreground="{StaticResource Brush.Accent}" 
+                           HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <ProgressBar IsIndeterminate="True" Width="250" Height="15" 
+                             Foreground="{StaticResource Brush.Accent}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>
