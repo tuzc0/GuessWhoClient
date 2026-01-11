@@ -1,6 +1,4 @@
-﻿using GuessWhoClient.Infraestructure.Session;
-using GuessWhoClient.Infraestructure.Wcf;
-using System;
+﻿using System;
 
 namespace GuessWhoClient.Session
 {

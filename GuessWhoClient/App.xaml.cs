@@ -203,14 +203,38 @@ namespace GuessWhoClient
                 var session = sp.GetRequiredService<SessionContext>();
                 return new CreateOrJoinViewModel(sp.GetRequiredService<MatchHub>(), sp.GetRequiredService<IAvatarPathResolver>(), session, session.UserId, session.UserId, sp.GetRequiredService<IUiFaultMapper>(), sp.GetRequiredService<Func<string, string>>());
             });
-            services.AddTransient<JoinOrCreateGameView>(sp => {
+            services.AddTransient<JoinOrCreateGameView>(sp =>
+            {
                 var view = new JoinOrCreateGameView();
                 var viewModel = sp.GetRequiredService<CreateOrJoinViewModel>();
+
                 view.DataContext = viewModel;
+
                 var screenManager = sp.GetRequiredService<IGameScreenManager>();
                 viewModel.BackRequested += () => screenManager.ShowScreen(GameScreenType.MainMenu);
+
+                viewModel.LobbyRequested += lobbyVm =>
+                {
+                    if (lobbyVm == null)
+                    {
+                        return;
+                    }
+
+                    Dispatcher dispatcher = sp.GetRequiredService<Dispatcher>();
+                    dispatcher.Invoke(() =>
+                    {
+                        var lobbyWindow = new GamePlayWindow(lobbyVm)
+                        {
+                            Owner = sp.GetRequiredService<GameWindow>()
+                        };
+
+                        lobbyWindow.Show();
+                    });
+                };
+
                 return view;
             });
+
         }
 
         private static void RegisterViewModels(IServiceCollection services)

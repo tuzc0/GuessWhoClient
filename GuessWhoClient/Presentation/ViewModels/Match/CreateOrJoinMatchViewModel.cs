@@ -163,7 +163,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
 
                 if (created.Value.MatchId <= INVALID_ID)
                 {
-                    string createUiKey = MatchBusinessErrorMapper.MapCreateBusinessCodeToUiKey(created.Value.Code);
+                    string createUiKey = MatchBusinessErrorMapper.MsapCreateBusinessCodeToUiKey(created.Value.Code);
                     SetUiMessage(createUiKey);
                     return;
                 }

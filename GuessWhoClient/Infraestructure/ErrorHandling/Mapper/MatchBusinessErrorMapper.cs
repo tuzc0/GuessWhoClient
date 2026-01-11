@@ -45,7 +45,7 @@ namespace GuessWhoClient.Infraestructure.ErrorHandling.Mapper
                 : KEY_MATCH_JOIN_FAILED;
         }
 
-        internal static string MapCreateBusinessCodeToUiKey(string code)
+        internal static string MsapCreateBusinessCodeToUiKey(string code)
         {
             string safe = (code ?? EMPTY).Trim();
 
