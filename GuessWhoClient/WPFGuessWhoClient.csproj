@@ -112,7 +112,7 @@
     <Compile Include="Infraestructure\ErrorHandling\Mapper\InfrastructureEmailFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\InfrastructureFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\LeaderboardFaultUiCatalog.cs" />
-    <Compile Include="Infraestructure\ErrorHandling\Mapper\MatchBusinessErrorMapper.cs" />
+    <Compile Include="Infraestructure\ErrorHandling\Mapper\MatchUiFaultMapper.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\PasswordRecoveryFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\UpdateProfileFaultUiCatalog.cs" />
     <Compile Include="Infraestructure\ErrorHandling\Mapper\UserRegistrationFaultUiCatalog.cs" />
@@ -174,8 +174,12 @@
     <Compile Include="Presentation\ViewModels\Leaderboard\LeaderboardViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Match\CreateOrJoinMatchViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Match\GameLobbyViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Match\GameLobbyViewModelFactory.cs" />
     <Compile Include="Presentation\ViewModels\Match\GameModelItemViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Match\IGameLobbyViewModelFactory.cs" />
+    <Compile Include="Presentation\ViewModels\Match\IMatchUiKeyResolver.cs" />
     <Compile Include="Presentation\ViewModels\Match\LobbyPlayerItemViewModel.cs" />
+    <Compile Include="Presentation\ViewModels\Match\MatchUiKeyResolver.cs" />
     <Compile Include="Presentation\ViewModels\Menu\MainMenuViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Profile\ChooseAvatarViewModel.cs" />
     <Compile Include="Presentation\ViewModels\Profile\CreateAccountValidationErrorsMapper.cs" />

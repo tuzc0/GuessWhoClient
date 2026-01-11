@@ -160,11 +160,47 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a READY.
+        /// </summary>
+        public static string BtnLobbyReady {
+            get {
+                return ResourceManager.GetString("BtnLobbyReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a START.
+        /// </summary>
+        public static string BtnLobbyStart {
+            get {
+                return ResourceManager.GetString("BtnLobbyStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Login.
         /// </summary>
         public static string BtnLogin {
             get {
                 return ResourceManager.GetString("BtnLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Join game.
+        /// </summary>
+        public static string BtnMatchJoinGame {
+            get {
+                return ResourceManager.GetString("BtnMatchJoinGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New game.
+        /// </summary>
+        public static string BtnMatchNewGame {
+            get {
+                return ResourceManager.GetString("BtnMatchNewGame", resourceCulture);
             }
         }
         
@@ -264,6 +300,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string BtnYes {
             get {
                 return ResourceManager.GetString("BtnYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Private.
+        /// </summary>
+        public static string ChkLobbyPrivate {
+            get {
+                return ResourceManager.GetString("ChkLobbyPrivate", resourceCulture);
             }
         }
         
@@ -529,6 +574,60 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Game mode:.
+        /// </summary>
+        public static string LblLobbyBoardMode {
+            get {
+                return ResourceManager.GetString("LblLobbyBoardMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match settings.
+        /// </summary>
+        public static string LblLobbyMatchSettings {
+            get {
+                return ResourceManager.GetString("LblLobbyMatchSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Players.
+        /// </summary>
+        public static string LblLobbyPlayers {
+            get {
+                return ResourceManager.GetString("LblLobbyPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Code.
+        /// </summary>
+        public static string LblMatchCode {
+            get {
+                return ResourceManager.GetString("LblMatchCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Code: .
+        /// </summary>
+        public static string LblMatchCodePrefix {
+            get {
+                return ResourceManager.GetString("LblMatchCodePrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match.
+        /// </summary>
+        public static string LblMatchTitle {
+            get {
+                return ResourceManager.GetString("LblMatchTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a New password.
         /// </summary>
         public static string LblNewPassword {
@@ -543,6 +642,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string LblPassword {
             get {
                 return ResourceManager.GetString("LblPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Player.
+        /// </summary>
+        public static string LblPlayerFallback {
+            get {
+                return ResourceManager.GetString("LblPlayerFallback", resourceCulture);
             }
         }
         
@@ -696,6 +804,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string SuccessTitle {
             get {
                 return ResourceManager.GetString("SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Chat.
+        /// </summary>
+        public static string TooltipChat {
+            get {
+                return ResourceManager.GetString("TooltipChat", resourceCulture);
             }
         }
         
@@ -1474,6 +1591,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Lobby.
+        /// </summary>
+        public static string UiLobbyTitle {
+            get {
+                return ResourceManager.GetString("UiLobbyTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Your account is locked. Please contact support..
         /// </summary>
         public static string UiLoginAccountLocked {
@@ -1542,6 +1668,105 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiMainWindowNotFound {
             get {
                 return ResourceManager.GetString("UiMainWindowNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please enter the match code..
+        /// </summary>
+        public static string UiMatchCodeRequired {
+            get {
+                return ResourceManager.GetString("UiMatchCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t create the match. Please try again..
+        /// </summary>
+        public static string UiMatchCreateFailed {
+            get {
+                return ResourceManager.GetString("UiMatchCreateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The match request is invalid..
+        /// </summary>
+        public static string UiMatchCreateInvalidArgs {
+            get {
+                return ResourceManager.GetString("UiMatchCreateInvalidArgs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a We couldn&apos;t join the match. Please try again..
+        /// </summary>
+        public static string UiMatchJoinFailed {
+            get {
+                return ResourceManager.GetString("UiMatchJoinFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This lobby is full.
+        /// </summary>
+        public static string UiMatchJoinGuestSlotTaken {
+            get {
+                return ResourceManager.GetString("UiMatchJoinGuestSlotTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You are already in another active match..
+        /// </summary>
+        public static string UiMatchJoinInOtherActiveMatch {
+            get {
+                return ResourceManager.GetString("UiMatchJoinInOtherActiveMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Please enter a valid match code..
+        /// </summary>
+        public static string UiMatchJoinInvalidArgs {
+            get {
+                return ResourceManager.GetString("UiMatchJoinInvalidArgs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Match not found..
+        /// </summary>
+        public static string UiMatchJoinMatchNotFound {
+            get {
+                return ResourceManager.GetString("UiMatchJoinMatchNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a This match is no longer joinable..
+        /// </summary>
+        public static string UiMatchJoinMatchNotJoinable {
+            get {
+                return ResourceManager.GetString("UiMatchJoinMatchNotJoinable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The match changed while you were joining. Please try again..
+        /// </summary>
+        public static string UiMatchJoinOperationConflict {
+            get {
+                return ResourceManager.GetString("UiMatchJoinOperationConflict", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You are already in this match..
+        /// </summary>
+        public static string UiMatchJoinPlayerAlreadyInMatch {
+            get {
+                return ResourceManager.GetString("UiMatchJoinPlayerAlreadyInMatch", resourceCulture);
             }
         }
         

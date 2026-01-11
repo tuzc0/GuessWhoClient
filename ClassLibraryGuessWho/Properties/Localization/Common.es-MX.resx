@@ -883,4 +883,79 @@
   <data name="FriendErrorTitle" xml:space="preserve">
     <value>Error de Amigos</value>
   </data>
+  <data name="UiMatchCreateInvalidArgs" xml:space="preserve">
+    <value>La solicitud de partida no es válida.</value>
+  </data>
+  <data name="UiMatchCreateFailed" xml:space="preserve">
+    <value>No se pudo crear la partida. Inténtalo de nuevo.</value>
+  </data>
+  <data name="UiMatchJoinInvalidArgs" xml:space="preserve">
+    <value>Ingresa un código de partida válido.</value>
+  </data>
+  <data name="UiMatchJoinMatchNotFound" xml:space="preserve">
+    <value>No se encontró la partida.</value>
+  </data>
+  <data name="UiMatchJoinMatchNotJoinable" xml:space="preserve">
+    <value>Ya no es posible unirse a esta partida.</value>
+  </data>
+  <data name="UiMatchJoinPlayerAlreadyInMatch" xml:space="preserve">
+    <value>Ya estás en esta partida.</value>
+  </data>
+  <data name="UiMatchJoinGuestSlotTaken" xml:space="preserve">
+    <value>La sala está llena.</value>
+  </data>
+  <data name="UiMatchJoinInOtherActiveMatch" xml:space="preserve">
+    <value>Ya estás en otra partida activa.</value>
+  </data>
+  <data name="UiMatchJoinOperationConflict" xml:space="preserve">
+    <value>La partida cambió mientras intentabas unirte. Inténtalo de nuevo.</value>
+  </data>
+  <data name="UiMatchJoinFailed" xml:space="preserve">
+    <value>No se pudo unir a la partida. Inténtalo de nuevo.</value>
+  </data>
+  <data name="LblMatchTitle" xml:space="preserve">
+    <value>Partida</value>
+  </data>
+  <data name="BtnMatchNewGame" xml:space="preserve">
+    <value>Nueva partida</value>
+  </data>
+  <data name="LblMatchCode" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="BtnMatchJoinGame" xml:space="preserve">
+    <value>Unirse a partida</value>
+  </data>
+  <data name="UiLobbyTitle" xml:space="preserve">
+    <value>Sala</value>
+  </data>
+  <data name="LblLobbyPlayers" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
+  <data name="LblPlayerFallback" xml:space="preserve">
+    <value>Jugador</value>
+  </data>
+  <data name="LblLobbyMatchSettings" xml:space="preserve">
+    <value>Configuración de partida</value>
+  </data>
+  <data name="ChkLobbyPrivate" xml:space="preserve">
+    <value>Privada</value>
+  </data>
+  <data name="LblLobbyBoardMode" xml:space="preserve">
+    <value>Modo de juego:</value>
+  </data>
+  <data name="BtnLobbyReady" xml:space="preserve">
+    <value>LISTO</value>
+  </data>
+  <data name="BtnLobbyStart" xml:space="preserve">
+    <value>INICIAR</value>
+  </data>
+  <data name="TooltipChat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="LblMatchCodePrefix" xml:space="preserve">
+    <value>Código: </value>
+  </data>
+  <data name="UiMatchCodeRequired" xml:space="preserve">
+    <value>Ingresa el código de la partida.</value>
+  </data>
 </root>

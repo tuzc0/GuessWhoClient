@@ -23,17 +23,13 @@ namespace GuessWhoClient.Presentation.Views.Windows
 
             this.lobbyViewModel.ExitRequested += LobbyViewModel_ExitRequested;
 
-            Loaded += GamePlayWindow_Loaded;
-            Closing += GamePlayWindow_Closing;
-            Closed += GamePlayWindow_Closed;
-        }
-
-        private void GamePlayWindow_Loaded(object sender, RoutedEventArgs e)
-        {
             ScreenHost.Content = new GameLobbyView
             {
-                DataContext = lobbyViewModel
+                DataContext = this.lobbyViewModel
             };
+
+            Closing += GamePlayWindow_Closing;
+            Closed += GamePlayWindow_Closed;
         }
 
         private void LobbyViewModel_ExitRequested()
@@ -57,7 +53,7 @@ namespace GuessWhoClient.Presentation.Views.Windows
             }
             catch (Exception ex)
             {
-                Logger.Warn("Error executing LeaveLobbyCommand on closing.", ex);
+                Logger.Warn("GamePlayWindow.Closing: error executing LeaveLobbyCommand.", ex);
             }
         }
 

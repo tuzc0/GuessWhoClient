@@ -94,6 +94,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
         }
 
         public event Action ExitRequested;
+        public event Action LeaveRequested;
 
         public string LobbyTitle { get; }
         public string MatchCode { get; }
@@ -132,6 +133,11 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
         {
             get => selectedBoard;
             set => SetProperty(ref selectedBoard, value ?? EMPTY);
+        }
+
+        private void RequestLeave()
+        {
+            LeaveRequested?.Invoke();
         }
 
         public bool IsCurrentPlayerReady

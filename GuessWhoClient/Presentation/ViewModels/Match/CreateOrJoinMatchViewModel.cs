@@ -1,16 +1,10 @@
-﻿using GuessWhoClient.Assets;
-using GuessWhoClient.Infraestructure.ErrorHandling;
-using GuessWhoClient.Infraestructure.ErrorHandling.Mapper;
-using GuessWhoClient.Infraestructure.Match;
+﻿using GuessWhoClient.Infraestructure.Match;
 using GuessWhoClient.Presentation.ViewsModels.Base;
-using GuessWhoClient.Session;
-using GuessWhoCore.Contracts.Response;
 using log4net;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -27,28 +21,19 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
 
         private const string PROP_MATCH_CODE_INPUT = nameof(MatchCodeInput);
 
-        private const string KEY_UI_GENERIC_ERROR = "UiGenericError";
-        private const string KEY_MATCH_CREATE_FAILED = "Match.CreateFailed";
-        private const string KEY_MATCH_JOIN_FAILED = "Match.JoinFailed";
-        private const string KEY_MATCH_CODE_REQUIRED = "Match.CodeRequired";
-        private const string KEY_MATCH_INVALID_ARGS = "Match.InvalidArgs";
+        private const string KEY_UI_GENERIC_ERROR = "UiGenericError";            
+        private const string KEY_MATCH_CREATE_FAILED = "UiMatchCreateFailed";      
+        private const string KEY_MATCH_JOIN_FAILED = "UiMatchJoinFailed";          
+        private const string KEY_MATCH_CODE_REQUIRED = "UiMatchCodeRequired";      
+        private const string KEY_MATCH_INVALID_ARGS = "UiMatchCreateInvalidArgs";  
 
-        private const byte DEFAULT_VISIBILITY_PRIVATE = 2;
-        private const byte DEFAULT_MODE_CLASSIC = 1;
-        private const byte DEFAULT_STATUS_LOBBY = 1;
+        private const string CONTEXT_CREATE = "CreateOrJoinViewModel.CreateMatchAsync";
+        private const string CONTEXT_JOIN = "CreateOrJoinViewModel.JoinMatchAsync";
 
-        private const byte HOST_SLOT_NUMBER = 1;
-
-        private const string SESSION_PROP_DISPLAY_NAME = "DisplayName";
-        private const string SESSION_PROP_AVATAR_ID = "AvatarId";
-        private const string SESSION_PROP_AVATAR = "Avatar";
-        private const string SESSION_PROP_AVATAR_KEY = "AvatarKey";
-
-        private readonly MatchHub matchHub;
-        private readonly IAvatarPathResolver avatarPathResolver;
-        private readonly IUiFaultMapper uiFaultMapper;
+        private readonly IMatchClient matchClient;
+        private readonly IMatchUiKeyResolver uiKeyResolver;
+        private readonly IGameLobbyViewModelFactory lobbyViewModelFactory;
         private readonly Func<string, string> localize;
-        private readonly SessionContext sessionContext;
 
         private readonly long profileId;
         private readonly long userId;
@@ -59,19 +44,21 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
         private string uiMessage;
 
         public CreateOrJoinViewModel(
-            MatchHub matchHub,
-            IAvatarPathResolver avatarPathResolver,
-            SessionContext sessionContext,
+            IMatchClient matchClient,
             long profileId,
             long userId,
-            IUiFaultMapper uiFaultMapper,
+            IMatchUiKeyResolver uiKeyResolver,
+            IGameLobbyViewModelFactory lobbyViewModelFactory,
             Func<string, string> localize)
         {
-            this.matchHub = matchHub ?? throw new ArgumentNullException(nameof(matchHub));
-            this.avatarPathResolver = avatarPathResolver ?? throw new ArgumentNullException(nameof(avatarPathResolver));
-            this.sessionContext = sessionContext ?? throw new ArgumentNullException(nameof(sessionContext));
-            this.uiFaultMapper = uiFaultMapper ?? throw new ArgumentNullException(nameof(uiFaultMapper));
-            this.localize = localize ?? throw new ArgumentNullException(nameof(localize));
+            this.matchClient = matchClient ?? 
+                throw new ArgumentNullException(nameof(matchClient));
+            this.uiKeyResolver = uiKeyResolver ?? 
+                throw new ArgumentNullException(nameof(uiKeyResolver));
+            this.lobbyViewModelFactory = lobbyViewModelFactory ?? 
+                throw new ArgumentNullException(nameof(lobbyViewModelFactory));
+            this.localize = localize ?? 
+                throw new ArgumentNullException(nameof(localize));
 
             this.profileId = profileId;
             this.userId = userId;
@@ -143,28 +130,28 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
                 return;
             }
 
-            try
+            await ExecuteMatchOperationAsync(async () =>
             {
-                IsBusy = true;
-
-                var connect = await matchHub.ConnectAsync();
+                var connect = await matchClient.ConnectAsync();
                 if (!connect.IsSuccess)
                 {
-                    SetUiMessage(MapFaultOrServerKey(connect.FaultCode, connect.ServerMessage, KEY_UI_GENERIC_ERROR));
+                    SetUiMessage(uiKeyResolver.ResolveFaultOrServerKey(
+                        connect.FaultCode, connect.ServerMessage, KEY_UI_GENERIC_ERROR));
                     return;
                 }
 
-                var created = await matchHub.CreateMatchAsync(profileId);
+                var created = await matchClient.CreateMatchAsync(profileId);
                 if (!created.IsSuccess || !created.HasValue)
                 {
-                    SetUiMessage(MapFaultOrServerKey(created.FaultCode, created.ServerMessage, KEY_MATCH_CREATE_FAILED));
+                    SetUiMessage(uiKeyResolver.ResolveFaultOrServerKey(
+                        created.FaultCode, created.ServerMessage, KEY_MATCH_CREATE_FAILED));
                     return;
                 }
 
                 if (created.Value.MatchId <= INVALID_ID)
                 {
-                    string createUiKey = MatchBusinessErrorMapper.MsapCreateBusinessCodeToUiKey(created.Value.Code);
-                    SetUiMessage(createUiKey);
+                    SetUiMessage(uiKeyResolver.ResolveCodeOrFallback(
+                        created.Value.Code, KEY_MATCH_CREATE_FAILED));
                     return;
                 }
 
@@ -175,24 +162,17 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
                     return;
                 }
 
-                var subscribe = await matchHub.SubscribeLobbyAsync(created.Value.MatchId, userId);
+                var subscribe = await matchClient.SubscribeLobbyAsync(created.Value.MatchId, userId);
                 if (!subscribe.IsSuccess || !subscribe.HasValue || !subscribe.Value.Success)
                 {
-                    SetUiMessage(MapFaultOrServerKey(subscribe.FaultCode, subscribe.ServerMessage, KEY_UI_GENERIC_ERROR));
+                    SetUiMessage(uiKeyResolver.ResolveFaultOrServerKey(
+                        subscribe.FaultCode, subscribe.ServerMessage, KEY_UI_GENERIC_ERROR));
                     return;
                 }
 
-                LobbyRequested?.Invoke(BuildLobbyVmFromCreate(created.Value, createdCode));
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("CreateOrJoinViewModel.CreateMatchAsync", ex);
-                SetUiMessage(KEY_UI_GENERIC_ERROR);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+                GameLobbyViewModel lobbyVm = lobbyViewModelFactory.CreateFromCreate(created.Value, createdCode, userId);
+                LobbyRequested?.Invoke(lobbyVm);
+            }, CONTEXT_CREATE);
         }
 
         private async Task JoinMatchAsync()
@@ -206,132 +186,75 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
                 return;
             }
 
-            try
+            await ExecuteMatchOperationAsync(async () =>
             {
-                IsBusy = true;
+                var connect = await matchClient.ConnectAsync();
 
-                var connect = await matchHub.ConnectAsync();
                 if (!connect.IsSuccess)
                 {
-                    SetUiMessage(MapFaultOrServerKey(connect.FaultCode, connect.ServerMessage, KEY_UI_GENERIC_ERROR));
+                    SetUiMessage(uiKeyResolver.ResolveFaultOrServerKey(
+                        connect.FaultCode, connect.ServerMessage, KEY_UI_GENERIC_ERROR));
                     return;
                 }
 
                 string safeCode = (MatchCodeInput ?? EMPTY).Trim();
 
-                var joined = await matchHub.JoinMatchAsync(safeCode, userId);
+                var joined = await matchClient.JoinMatchAsync(safeCode, userId);
 
                 if (!joined.IsSuccess || !joined.HasValue)
                 {
-                    SetUiMessage(MapFaultOrServerKey(joined.FaultCode, joined.ServerMessage, KEY_MATCH_JOIN_FAILED));
+                    SetUiMessage(uiKeyResolver.ResolveFaultOrServerKey(
+                        joined.FaultCode, joined.ServerMessage, KEY_MATCH_JOIN_FAILED));
                     return;
                 }
 
                 if (joined.Value.MatchId <= INVALID_ID)
                 {
-                    string joinUiKey = MatchBusinessErrorMapper.MapJoinBusinessCodeToUiKey(joined.Value.Code);
-                    SetUiMessage(joinUiKey);
+                    SetUiMessage(uiKeyResolver.ResolveCodeOrFallback(
+                        joined.Value.Code, KEY_MATCH_JOIN_FAILED));
                     return;
                 }
 
-                var subscribe = await matchHub.SubscribeLobbyAsync(joined.Value.MatchId, userId);
+                var subscribe = await matchClient.SubscribeLobbyAsync(joined.Value.MatchId, userId);
+
                 if (!subscribe.IsSuccess || !subscribe.HasValue || !subscribe.Value.Success)
                 {
-                    SetUiMessage(MapFaultOrServerKey(subscribe.FaultCode, subscribe.ServerMessage, KEY_UI_GENERIC_ERROR));
+                    SetUiMessage(uiKeyResolver.ResolveFaultOrServerKey(
+                        subscribe.FaultCode, subscribe.ServerMessage, KEY_UI_GENERIC_ERROR));
                     return;
                 }
 
-                LobbyRequested?.Invoke(BuildLobbyVmFromJoin(joined.Value));
+                GameLobbyViewModel lobbyViewModel = lobbyViewModelFactory.CreateFromJoin(joined.Value, userId);
+                LobbyRequested?.Invoke(lobbyViewModel);
+            }, CONTEXT_JOIN);
+        }
+
+        private async Task ExecuteMatchOperationAsync(Func<Task> operationAsync, string logContext)
+        {
+            if (operationAsync == null)
+            {
+                throw new ArgumentNullException(nameof(operationAsync));
+            }
+
+            if (string.IsNullOrWhiteSpace(logContext))
+            {
+                throw new ArgumentException("logContext is required.", nameof(logContext));
+            }
+
+            try
+            {
+                IsBusy = true;
+                await operationAsync();
             }
             catch (Exception ex)
             {
-                Logger.Error("CreateOrJoinViewModel.JoinMatchAsync", ex);
+                Logger.Error(logContext, ex);
                 SetUiMessage(KEY_UI_GENERIC_ERROR);
             }
             finally
             {
                 IsBusy = false;
             }
-        }
-
-        private GameLobbyViewModel BuildLobbyVmFromJoin(GuessWhoCore.Contracts.Requests.JoinMatchResponse response)
-        {
-            return new GameLobbyViewModel(
-                matchHub,
-                avatarPathResolver,
-                uiFaultMapper,
-                localize,
-                matchId: response.MatchId,
-                matchCode: response.Code ?? EMPTY,
-                currentUserId: userId,
-                hostUserId: response.HostUserId,
-                initialVisibility: response.Visibility,
-                initialMode: response.Mode,
-                initialPlayers: response.Players ?? new List<LobbyPlayerDto>());
-        }
-
-        private GameLobbyViewModel BuildLobbyVmFromCreate(CreateMatchResponse created, string createdCode)
-        {
-            LobbyPlayerDto hostPlayer = BuildHostPlayerDto(created.MatchId);
-
-            var initialPlayers = new List<LobbyPlayerDto> { hostPlayer };
-
-            return new GameLobbyViewModel(
-                matchHub,
-                avatarPathResolver,
-                uiFaultMapper,
-                localize,
-                matchId: created.MatchId,
-                matchCode: createdCode,
-                currentUserId: userId,
-                hostUserId: userId,
-                initialVisibility: created.VisibilityId != 0 ? created.VisibilityId : DEFAULT_VISIBILITY_PRIVATE,
-                initialMode: created.ModeId != 0 ? created.ModeId : DEFAULT_MODE_CLASSIC,
-                initialPlayers: initialPlayers);
-        }
-
-        private LobbyPlayerDto BuildHostPlayerDto(long matchId)
-        {
-            string displayName = ReadSessionString(sessionContext, SESSION_PROP_DISPLAY_NAME);
-
-            if (string.IsNullOrWhiteSpace(displayName))
-            {
-                displayName = userId.ToString();
-            }
-
-            string avatarId =
-                ReadSessionString(sessionContext, SESSION_PROP_AVATAR_ID) ??
-                ReadSessionString(sessionContext, SESSION_PROP_AVATAR_KEY) ??
-                ReadSessionString(sessionContext, SESSION_PROP_AVATAR) ??
-                EMPTY;
-
-            return new LobbyPlayerDto
-            {
-                MatchId = matchId,
-                UserId = userId,
-                DisplayName = displayName,
-                AvatarId = avatarId,
-                SlotNumber = HOST_SLOT_NUMBER,
-                IsReady = true,
-                IsHost = true
-            };
-        }
-
-        private static string ReadSessionString(SessionContext session, string propertyName)
-        {
-            if (session == null || string.IsNullOrWhiteSpace(propertyName))
-            {
-                return EMPTY;
-            }
-
-            PropertyInfo prop = session.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);
-            if (prop == null)
-            {
-                return EMPTY;
-            }
-
-            object value = prop.GetValue(session, null);
-            return value is string s ? (s ?? EMPTY) : EMPTY;
         }
 
         private void ValidateJoinInputs()
@@ -349,23 +272,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
             }
 
             dataErrors.ClearAllErrors();
-        }
-
-        private string MapFaultOrServerKey(string faultCode, string serverMessageKey, string fallbackKey)
-        {
-            UiKeyMapping mapping = uiFaultMapper.Map(faultCode);
-
-            if (mapping.IsMapped)
-            {
-                return mapping.UiKey;
-            }
-
-            if (!string.IsNullOrWhiteSpace(serverMessageKey))
-            {
-                return serverMessageKey;
-            }
-
-            return fallbackKey;
         }
 
         private void SetUiMessage(string messageKey)
