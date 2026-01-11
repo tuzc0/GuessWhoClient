@@ -1672,11 +1672,29 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a The lobby is already private..
+        /// </summary>
+        public static string UiMatchAlreadyPrivate {
+            get {
+                return ResourceManager.GetString("UiMatchAlreadyPrivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Please enter the match code..
         /// </summary>
         public static string UiMatchCodeRequired {
             get {
                 return ResourceManager.GetString("UiMatchCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Something changed in the lobby. Please try again..
+        /// </summary>
+        public static string UiMatchConcurrentUpdate {
+            get {
+                return ResourceManager.GetString("UiMatchConcurrentUpdate", resourceCulture);
             }
         }
         
@@ -1695,6 +1713,15 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiMatchCreateInvalidArgs {
             get {
                 return ResourceManager.GetString("UiMatchCreateInvalidArgs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Only the host can perform this action..
+        /// </summary>
+        public static string UiMatchHostNotAuthorized {
+            get {
+                return ResourceManager.GetString("UiMatchHostNotAuthorized", resourceCulture);
             }
         }
         
@@ -1767,6 +1794,33 @@ namespace ClassLibraryGuessWho.Properties.Localization {
         public static string UiMatchJoinPlayerAlreadyInMatch {
             get {
                 return ResourceManager.GetString("UiMatchJoinPlayerAlreadyInMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a The match is no longer in the lobby..
+        /// </summary>
+        public static string UiMatchNotInLobby {
+            get {
+                return ResourceManager.GetString("UiMatchNotInLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a You need at least 2 players to start..
+        /// </summary>
+        public static string UiMatchStartNotEnoughPlayers {
+            get {
+                return ResourceManager.GetString("UiMatchStartNotEnoughPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a All players must be ready to start..
+        /// </summary>
+        public static string UiMatchStartPlayersNotReady {
+            get {
+                return ResourceManager.GetString("UiMatchStartPlayersNotReady", resourceCulture);
             }
         }
         

@@ -34,13 +34,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LeaveMatchRequest" nillable="true" type="tns:LeaveMatchRequest" />
-  <xs:complexType name="SetMatchPrivateRequest">
+  <xs:complexType name="SetMatchVisibilityRequest">
     <xs:sequence>
+      <xs:element name="IsPrivate" type="xs:boolean" />
       <xs:element name="MatchId" type="xs:long" />
       <xs:element name="UserId" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="SetMatchPrivateRequest" nillable="true" type="tns:SetMatchPrivateRequest" />
+  <xs:element name="SetMatchVisibilityRequest" nillable="true" type="tns:SetMatchVisibilityRequest" />
   <xs:complexType name="SearchPublicMatchRequest">
     <xs:sequence>
       <xs:element name="MatchCode" nillable="true" type="xs:string" />
@@ -69,6 +70,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UnsubscribeLobbyRequest" nillable="true" type="tns:UnsubscribeLobbyRequest" />
+  <xs:complexType name="SendMatchInvitationRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="InviterUserId" type="xs:long" />
+      <xs:element minOccurs="0" name="MatchId" type="xs:long" />
+      <xs:element minOccurs="0" name="TargetEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TargetUserId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendMatchInvitationRequest" nillable="true" type="tns:SendMatchInvitationRequest" />
   <xs:complexType name="StartMatchRequest">
     <xs:sequence>
       <xs:element name="MatchId" type="xs:long" />

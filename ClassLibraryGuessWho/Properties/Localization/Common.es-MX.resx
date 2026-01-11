@@ -958,4 +958,47 @@
   <data name="UiMatchCodeRequired" xml:space="preserve">
     <value>Ingresa el código de la partida.</value>
   </data>
+<data name="UiMatchVisibilityAlreadyInDesiredVisibility" xml:space="preserve">
+  <value>La visibilidad de la partida ya está configurada.</value>
+</data>
+<data name="UiMatchVisibilityHostNotAuthorized" xml:space="preserve">
+  <value>Solo el anfitrión puede cambiar la visibilidad de la partida.</value>
+</data>
+<data name="UiMatchVisibilityMatchNotInLobby" xml:space="preserve">
+  <value>Solo puedes cambiar la visibilidad mientras la partida esté en la sala.</value>
+</data>
+<data name="UiMatchVisibilityMatchNotFound" xml:space="preserve">
+  <value>No se encontró la partida.</value>
+</data>
+<data name="UiMatchVisibilityConcurrentUpdate" xml:space="preserve">
+  <value>La partida se actualizó por otro jugador. Inténtalo de nuevo.</value>
+</data>
+<data name="UiMatchVisibilityInvalidArgs" xml:space="preserve">
+  <value>Datos de partida inválidos.</value>
+</data>
+<data name="UiMatchVisibilityUnexpectedError" xml:space="preserve">
+  <value>No se pudo cambiar la visibilidad. Inténtalo de nuevo.</value>
+</data>
+
+<data name="UiMatchStartMatchNotFound" xml:space="preserve">
+  <value>No se encontró la partida.</value>
+</data>
+<data name="UiMatchStartMatchNotInLobby" xml:space="preserve">
+  <value>La partida ya no está en la sala.</value>
+</data>
+<data name="UiMatchStartNotEnoughPlayers" xml:space="preserve">
+  <value>Se requieren al menos 2 jugadores para iniciar.</value>
+</data>
+<data name="UiMatchStartPlayersNotReady" xml:space="preserve">
+  <value>Todos los jugadores deben estar listos para iniciar.</value>
+</data>
+<data name="UiMatchStartConcurrentUpdate" xml:space="preserve">
+  <value>La partida se actualizó por otro jugador. Inténtalo de nuevo.</value>
+</data>
+<data name="UiMatchStartInvalidArgs" xml:space="preserve">
+  <value>Datos de partida inválidos.</value>
+</data>
+<data name="UiMatchStartUnexpectedError" xml:space="preserve">
+  <value>No se pudo iniciar la partida. Inténtalo de nuevo.</value>
+</data>
 </root>

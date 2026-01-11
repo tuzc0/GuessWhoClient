@@ -36,12 +36,12 @@ namespace GuessWhoClient.MatchServiceRef {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/LeaveMatch", ReplyAction="http://tempuri.org/IMatchLobbyOperations/LeaveMatchResponse")]
         System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> LeaveMatchAsync(GuessWhoCore.Contracts.Requests.LeaveMatchRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivate", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivateResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivateServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
-        GuessWhoCore.Contracts.Response.BasicResponse SetMatchPrivate(GuessWhoCore.Contracts.Requests.SetMatchPrivateRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SetMatchVisibility", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SetMatchVisibilityResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/SetMatchVisibilityServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse SetMatchVisibility(GuessWhoCore.Contracts.Requests.SetMatchVisibilityRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivate", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SetMatchPrivateResponse")]
-        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SetMatchPrivateAsync(GuessWhoCore.Contracts.Requests.SetMatchPrivateRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SetMatchVisibility", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SetMatchVisibilityResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SetMatchVisibilityAsync(GuessWhoCore.Contracts.Requests.SetMatchVisibilityRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SearchPublicMatch", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SearchPublicMatchResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/SearchPublicMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
@@ -70,6 +70,13 @@ namespace GuessWhoClient.MatchServiceRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/UnsubscribeLobby", ReplyAction="http://tempuri.org/IMatchLobbyOperations/UnsubscribeLobbyResponse")]
         System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> UnsubscribeLobbyAsync(GuessWhoCore.Contracts.Requests.UnsubscribeLobbyRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SendMatchInvitation", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SendMatchInvitationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchLobbyOperations/SendMatchInvitationServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
+        GuessWhoCore.Contracts.Response.BasicResponse SendMatchInvitation(GuessWhoCore.Contracts.Requests.SendMatchInvitationRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchLobbyOperations/SendMatchInvitation", ReplyAction="http://tempuri.org/IMatchLobbyOperations/SendMatchInvitationResponse")]
+        System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SendMatchInvitationAsync(GuessWhoCore.Contracts.Requests.SendMatchInvitationRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMatchGameplayOperations/StartMatch", ReplyAction="http://tempuri.org/IMatchGameplayOperations/StartMatchResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(GuessWhoCore.Contracts.Faults.ServiceFault), Action="http://tempuri.org/IMatchGameplayOperations/StartMatchServiceFaultFault", Name="ServiceFault", Namespace="http://schemas.datacontract.org/2004/07/GuessWhoCore.Contracts.Faults")]
@@ -219,12 +226,12 @@ namespace GuessWhoClient.MatchServiceRef {
             return base.Channel.LeaveMatchAsync(request);
         }
         
-        public GuessWhoCore.Contracts.Response.BasicResponse SetMatchPrivate(GuessWhoCore.Contracts.Requests.SetMatchPrivateRequest request) {
-            return base.Channel.SetMatchPrivate(request);
+        public GuessWhoCore.Contracts.Response.BasicResponse SetMatchVisibility(GuessWhoCore.Contracts.Requests.SetMatchVisibilityRequest request) {
+            return base.Channel.SetMatchVisibility(request);
         }
         
-        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SetMatchPrivateAsync(GuessWhoCore.Contracts.Requests.SetMatchPrivateRequest request) {
-            return base.Channel.SetMatchPrivateAsync(request);
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SetMatchVisibilityAsync(GuessWhoCore.Contracts.Requests.SetMatchVisibilityRequest request) {
+            return base.Channel.SetMatchVisibilityAsync(request);
         }
         
         public GuessWhoCore.Contracts.Response.SearchPublicMatchResponse SearchPublicMatch(GuessWhoCore.Contracts.Requests.SearchPublicMatchRequest request) {
@@ -257,6 +264,14 @@ namespace GuessWhoClient.MatchServiceRef {
         
         public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> UnsubscribeLobbyAsync(GuessWhoCore.Contracts.Requests.UnsubscribeLobbyRequest request) {
             return base.Channel.UnsubscribeLobbyAsync(request);
+        }
+        
+        public GuessWhoCore.Contracts.Response.BasicResponse SendMatchInvitation(GuessWhoCore.Contracts.Requests.SendMatchInvitationRequest request) {
+            return base.Channel.SendMatchInvitation(request);
+        }
+        
+        public System.Threading.Tasks.Task<GuessWhoCore.Contracts.Response.BasicResponse> SendMatchInvitationAsync(GuessWhoCore.Contracts.Requests.SendMatchInvitationRequest request) {
+            return base.Channel.SendMatchInvitationAsync(request);
         }
         
         public GuessWhoCore.Contracts.Response.BasicResponse StartMatch(GuessWhoCore.Contracts.Requests.StartMatchRequest request) {

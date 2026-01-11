@@ -11,6 +11,7 @@ namespace GuessWhoClient.Infraestructure.Match
         event Action<LobbyPlayerDto> PlayerJoined;
         event Action<LobbyPlayerDto> PlayerLeft;
         event Action<LobbyPlayerDto> ReadyChanged;
+        event Action<long> GameStarted;
 
         bool IsConnected { get; }
 
@@ -25,7 +26,8 @@ namespace GuessWhoClient.Infraestructure.Match
         Task<WcfCallResult<BasicResponse>> SetPlayerReadyStatusAsync(long matchId, long userId);
         Task<WcfCallResult<BasicResponse>> LeaveMatchAsync(long matchId, long userId);
 
-        Task<WcfCallResult<BasicResponse>> SetMatchPrivateAsync(long matchId, long callerId);
+        Task<WcfCallResult<BasicResponse>> SetMatchVisibilityAsync(long matchId, long userId, bool isPrivate);
+        Task<WcfCallResult<BasicResponse>> StartMatchAsync(long matchId, long callerId);
         Task DisconnectAsync();
     }
 }

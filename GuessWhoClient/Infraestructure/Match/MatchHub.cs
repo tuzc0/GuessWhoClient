@@ -21,7 +21,8 @@ namespace GuessWhoClient.Infraestructure.Match
         private const string LOG_CTX_CONNECT = "MatchHub.Connect";
         private const string LOG_CTX_CREATE_MATCH = "MatchHub.CreateMatch";
         private const string LOG_CTX_JOIN_MATCH = "MatchHub.JoinMatch";
-        private const string LOG_CTX_SET_PRIVATE = "MatchHub.SetMatchPrivate";
+        private const string LOG_CTX_SET_VISIBILITY = "MatchHub.SetMatchVisibility";
+        private const string LOG_CTX_START_MATCH = "MatchHub.StartMatch";
         private const string LOG_CTX_SET_READY = "MatchHub.SetPlayerReadyStatus";
         private const string LOG_CTX_LEAVE_MATCH = "MatchHub.LeaveMatch";
         private const string LOG_CTX_SUBSCRIBE = "MatchHub.SubscribeLobby";
@@ -55,6 +56,12 @@ namespace GuessWhoClient.Infraestructure.Match
         {
             add { callback.ReadyChanged += value; }
             remove { callback.ReadyChanged -= value; }
+        }
+
+        public event Action<long> GameStarted
+        {
+            add { callback.GameStarted += value; }
+            remove { callback.GameStarted -= value; }
         }
 
         public MatchHub(Dispatcher dispatcher)
@@ -148,7 +155,7 @@ namespace GuessWhoClient.Infraestructure.Match
                 LOG_CTX_JOIN_MATCH);
         }
 
-        public async Task<WcfCallResult<BasicResponse>> SetMatchPrivateAsync(long matchId, long userId)
+        public async Task<WcfCallResult<BasicResponse>> SetMatchVisibilityAsync(long matchId, long userId, bool isPrivate)
         {
             if (matchId <= INVALID_ID || userId <= INVALID_ID)
             {
@@ -160,7 +167,33 @@ namespace GuessWhoClient.Infraestructure.Match
                 return WcfCallResult<BasicResponse>.Fail(WcfTechnicalFaultCodes.CLIENT_NOT_CONNECTED, KEY_NOT_CONNECTED);
             }
 
-            var request = new SetMatchPrivateRequest
+            var request = new SetMatchVisibilityRequest
+            {
+                MatchId = matchId,
+                UserId = userId,
+                IsPrivate = isPrivate
+            };
+
+            return await duplexCallExecutor.CallAsync<MatchServiceClient, BasicResponse>(
+                openClient,
+                c => Task.Run(() => c.SetMatchVisibility(request)),
+                Logger,
+                LOG_CTX_SET_VISIBILITY);
+        }
+
+        public async Task<WcfCallResult<BasicResponse>> StartMatchAsync(long matchId, long userId)
+        {
+            if (matchId <= INVALID_ID || userId <= INVALID_ID)
+            {
+                return WcfCallResult<BasicResponse>.Fail(CODE_INVALID_ARGS, KEY_INVALID_ARGS);
+            }
+
+            if (!TryGetConnectedClient(out MatchServiceClient openClient))
+            {
+                return WcfCallResult<BasicResponse>.Fail(WcfTechnicalFaultCodes.CLIENT_NOT_CONNECTED, KEY_NOT_CONNECTED);
+            }
+
+            var request = new StartMatchRequest
             {
                 MatchId = matchId,
                 UserId = userId
@@ -168,9 +201,9 @@ namespace GuessWhoClient.Infraestructure.Match
 
             return await duplexCallExecutor.CallAsync<MatchServiceClient, BasicResponse>(
                 openClient,
-                c => Task.Run(() => c.SetMatchPrivate(request)),
+                c => Task.Run(() => c.StartMatch(request)),
                 Logger,
-                LOG_CTX_SET_PRIVATE);
+                LOG_CTX_START_MATCH);
         }
 
         public async Task<WcfCallResult<SearchPublicMatchResponse>> SearchPublicMatchAsync(string matchCode)

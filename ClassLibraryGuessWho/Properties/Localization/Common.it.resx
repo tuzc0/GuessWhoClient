@@ -958,4 +958,48 @@
   <data name="UiMatchCodeRequired" xml:space="preserve">
     <value>Inserisci il codice della partita.</value>
   </data>
+
+<data name="UiMatchVisibilityAlreadyInDesiredVisibility" xml:space="preserve">
+  <value>La visibilità della partita è già impostata.</value>
+</data>
+<data name="UiMatchVisibilityHostNotAuthorized" xml:space="preserve">
+  <value>Solo l'host può cambiare la visibilità della partita.</value>
+</data>
+<data name="UiMatchVisibilityMatchNotInLobby" xml:space="preserve">
+  <value>Puoi cambiare la visibilità solo mentre la partita è nella lobby.</value>
+</data>
+<data name="UiMatchVisibilityMatchNotFound" xml:space="preserve">
+  <value>Partita non trovata.</value>
+</data>
+<data name="UiMatchVisibilityConcurrentUpdate" xml:space="preserve">
+  <value>La partita è stata aggiornata da un altro giocatore. Riprova.</value>
+</data>
+<data name="UiMatchVisibilityInvalidArgs" xml:space="preserve">
+  <value>Dati della partita non validi.</value>
+</data>
+<data name="UiMatchVisibilityUnexpectedError" xml:space="preserve">
+  <value>Impossibile cambiare la visibilità. Riprova.</value>
+</data>
+
+<data name="UiMatchStartMatchNotFound" xml:space="preserve">
+  <value>Partita non trovata.</value>
+</data>
+<data name="UiMatchStartMatchNotInLobby" xml:space="preserve">
+  <value>La partita non è più nella lobby.</value>
+</data>
+<data name="UiMatchStartNotEnoughPlayers" xml:space="preserve">
+  <value>Servono almeno 2 giocatori per avviare.</value>
+</data>
+<data name="UiMatchStartPlayersNotReady" xml:space="preserve">
+  <value>Tutti i giocatori devono essere pronti per avviare.</value>
+</data>
+<data name="UiMatchStartConcurrentUpdate" xml:space="preserve">
+  <value>La partita è stata aggiornata da un altro giocatore. Riprova.</value>
+</data>
+<data name="UiMatchStartInvalidArgs" xml:space="preserve">
+  <value>Dati della partita non validi.</value>
+</data>
+<data name="UiMatchStartUnexpectedError" xml:space="preserve">
+  <value>Impossibile avviare la partita. Riprova.</value>
+</data>
 </root>

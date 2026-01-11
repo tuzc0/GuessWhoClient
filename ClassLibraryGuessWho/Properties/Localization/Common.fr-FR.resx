@@ -958,4 +958,48 @@
   <data name="UiMatchCodeRequired" xml:space="preserve">
     <value>Veuillez saisir le code de la partie.</value>
   </data>
+
+<data name="UiMatchVisibilityAlreadyInDesiredVisibility" xml:space="preserve">
+  <value>La visibilité de la partie est déjà définie.</value>
+</data>
+<data name="UiMatchVisibilityHostNotAuthorized" xml:space="preserve">
+  <value>Seul l’hôte peut modifier la visibilité de la partie.</value>
+</data>
+<data name="UiMatchVisibilityMatchNotInLobby" xml:space="preserve">
+  <value>Vous ne pouvez changer la visibilité que lorsque la partie est dans le lobby.</value>
+</data>
+<data name="UiMatchVisibilityMatchNotFound" xml:space="preserve">
+  <value>Partie introuvable.</value>
+</data>
+<data name="UiMatchVisibilityConcurrentUpdate" xml:space="preserve">
+  <value>La partie a été mise à jour par quelqu’un d’autre. Veuillez réessayer.</value>
+</data>
+<data name="UiMatchVisibilityInvalidArgs" xml:space="preserve">
+  <value>Données de partie invalides.</value>
+</data>
+<data name="UiMatchVisibilityUnexpectedError" xml:space="preserve">
+  <value>Impossible de modifier la visibilité. Veuillez réessayer.</value>
+</data>
+
+<data name="UiMatchStartMatchNotFound" xml:space="preserve">
+  <value>Partie introuvable.</value>
+</data>
+<data name="UiMatchStartMatchNotInLobby" xml:space="preserve">
+  <value>La partie n’est plus dans le lobby.</value>
+</data>
+<data name="UiMatchStartNotEnoughPlayers" xml:space="preserve">
+  <value>Au moins 2 joueurs sont requis pour démarrer.</value>
+</data>
+<data name="UiMatchStartPlayersNotReady" xml:space="preserve">
+  <value>Tous les joueurs doivent être prêts pour démarrer.</value>
+</data>
+<data name="UiMatchStartConcurrentUpdate" xml:space="preserve">
+  <value>La partie a été mise à jour par quelqu’un d’autre. Veuillez réessayer.</value>
+</data>
+<data name="UiMatchStartInvalidArgs" xml:space="preserve">
+  <value>Données de partie invalides.</value>
+</data>
+<data name="UiMatchStartUnexpectedError" xml:space="preserve">
+  <value>Impossible de démarrer la partie. Veuillez réessayer.</value>
+</data>
 </root>

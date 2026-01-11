@@ -1,6 +1,7 @@
 ﻿using GuessWhoClient.Assets;
 using GuessWhoClient.Infraestructure.ErrorHandling;
 using GuessWhoClient.Infraestructure.Match;
+using GuessWhoClient.Infraestructure.Wcf;
 using GuessWhoClient.Presentation.ViewModels.Base;
 using GuessWhoClient.Presentation.ViewsModels.Base;
 using GuessWhoCore.Contracts.Response;
@@ -8,6 +9,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -27,11 +29,15 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
 
         private const int MIN_PLAYERS_TO_START = 2;
 
+        private const string CODE_ALREADY_IN_DESIRED_VISIBILITY = "AlreadyInDesiredVisibility";
+        private const string CODE_ALREADY_PRIVATE = "AlreadyPrivate";
+        private const string CODE_ALREADY_PUBLIC = "AlreadyPublic";
+
         private const string KEY_UI_GENERIC_ERROR = "UiGenericError";
-        private const string KEY_MATCH_PUBLIC_NOT_SUPPORTED = "Match.PublicNotSupported";
         private const string KEY_MATCH_TOURNAMENT_NOT_AVAILABLE = "Match.TournamentNotAvailable";
-        private const string KEY_MATCH_SET_PRIVATE_FAILED = "Match.SetPrivateFailed";
+        private const string KEY_MATCH_SET_VISIBILITY_FAILED = "Match.SetVisibilityFailed";
         private const string KEY_MATCH_READY_FAILED = "Match.ReadyFailed";
+        private const string KEY_MATCH_START_FAILED = "Match.StartFailed";
 
         private readonly MatchHub matchHub;
         private readonly IAvatarPathResolver avatarPathResolver;
@@ -43,7 +49,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
         private readonly long hostUserId;
 
         private bool isPrivate;
-        private bool isApplyingPrivacy;
+        private bool isApplyingVisibility;
         private bool hasHubEventsAttached;
 
         private string uiMessage;
@@ -71,7 +77,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
             this.currentUserId = currentUserId;
             this.hostUserId = hostUserId;
 
-            LobbyTitle = "Lobby";
+            LobbyTitle = localize("UiLobbyTitle");
             MatchCode = (matchCode ?? EMPTY).Trim();
 
             LobbyPlayers = new ObservableCollection<LobbyPlayerItemViewModel>();
@@ -94,7 +100,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
         }
 
         public event Action ExitRequested;
-        public event Action LeaveRequested;
+        public event Action<long> GameStarted;
 
         public string LobbyTitle { get; }
         public string MatchCode { get; }
@@ -115,17 +121,19 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
             get => isPrivate;
             set
             {
-                if (!IsCurrentUserHost || isApplyingPrivacy)
+                if (!IsCurrentUserHost || isApplyingVisibility)
                 {
                     return;
                 }
+
+                bool previous = isPrivate;
 
                 if (!SetProperty(ref isPrivate, value))
                 {
                     return;
                 }
 
-                _ = ApplyPrivacyAsync(value);
+                _ = ApplyVisibilityAsync(value, previous);
             }
         }
 
@@ -133,11 +141,6 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
         {
             get => selectedBoard;
             set => SetProperty(ref selectedBoard, value ?? EMPTY);
-        }
-
-        private void RequestLeave()
-        {
-            LeaveRequested?.Invoke();
         }
 
         public bool IsCurrentPlayerReady
@@ -238,44 +241,39 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
             }
         }
 
-        private async Task ApplyPrivacyAsync(bool makePrivate)
+        private async Task ApplyVisibilityAsync(bool desiredIsPrivate, bool previousIsPrivate)
         {
             ClearUiMessage();
 
-            if (!makePrivate)
-            {
-                isApplyingPrivacy = true;
-                try
-                {
-                    isPrivate = true;
-                    OnPropertyChanged(nameof(IsPrivate));
-                }
-                finally
-                {
-                    isApplyingPrivacy = false;
-                }
-
-                SetUiMessage(KEY_MATCH_PUBLIC_NOT_SUPPORTED);
-                return;
-            }
-
+            IsBusy = true;
             try
             {
-                IsBusy = true;
+                WcfCallResult<BasicResponse> result =
+                    await matchHub.SetMatchVisibilityAsync(matchId, currentUserId, desiredIsPrivate);
 
-                var result = await matchHub.SetMatchPrivateAsync(matchId, currentUserId);
-
-                if (!result.IsSuccess || !result.HasValue || !result.Value.Success)
+                if (!result.IsSuccess || !result.HasValue)
                 {
-                    SetPrivacyInternal(false);
-                    SetUiMessage(MapToUiKey(result.FaultCode, 
-                        result.ServerMessage, KEY_MATCH_SET_PRIVATE_FAILED));
+                    SetVisibilityInternal(previousIsPrivate);
+                    SetUiMessage(MapToUiKey(result.FaultCode, result.ServerMessage, KEY_MATCH_SET_VISIBILITY_FAILED));
+                    return;
+                }
+
+                if (!result.Value.Success)
+                {
+                    bool shouldRevert = ShouldRevertVisibility(result.FaultCode, result.ServerMessage);
+
+                    if (shouldRevert)
+                    {
+                        SetVisibilityInternal(previousIsPrivate);
+                    }
+
+                    SetUiMessage(MapToUiKey(result.FaultCode, result.ServerMessage, KEY_MATCH_SET_VISIBILITY_FAILED));
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error("GameLobbyViewModel.ApplyPrivacyAsync", ex);
-                SetPrivacyInternal(false);
+                Logger.Error("GameLobbyViewModel.ApplyVisibilityAsync", ex);
+                SetVisibilityInternal(previousIsPrivate);
                 SetUiMessage(KEY_UI_GENERIC_ERROR);
             }
             finally
@@ -284,9 +282,33 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
             }
         }
 
-        private void SetPrivacyInternal(bool value)
+        private static bool ShouldRevertVisibility(string faultCode, string serverMessageKey)
         {
-            isApplyingPrivacy = true;
+            string code = ExtractCode(faultCode, serverMessageKey);
+
+            if (string.Equals(code, CODE_ALREADY_IN_DESIRED_VISIBILITY, StringComparison.Ordinal) ||
+                string.Equals(code, CODE_ALREADY_PRIVATE, StringComparison.Ordinal) ||
+                string.Equals(code, CODE_ALREADY_PUBLIC, StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static string ExtractCode(string faultCode, string serverMessageKey)
+        {
+            if (!string.IsNullOrWhiteSpace(serverMessageKey))
+            {
+                return serverMessageKey.Trim();
+            }
+
+            return (faultCode ?? EMPTY).Trim();
+        }
+
+        private void SetVisibilityInternal(bool value)
+        {
+            isApplyingVisibility = true;
             try
             {
                 isPrivate = value;
@@ -294,7 +316,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
             }
             finally
             {
-                isApplyingPrivacy = false;
+                isApplyingVisibility = false;
             }
         }
 
@@ -336,8 +358,28 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
 
         private async Task StartAsync()
         {
-            // Cuando tengas StartMatch en server, lo conectamos aquí.
-            await Task.CompletedTask;
+            ClearUiMessage();
+
+            try
+            {
+                IsBusy = true;
+
+                var result = await matchHub.StartMatchAsync(matchId, currentUserId);
+
+                if (!result.IsSuccess || !result.HasValue || !result.Value.Success)
+                {
+                    SetUiMessage(MapToUiKey(result.FaultCode, result.ServerMessage, KEY_MATCH_START_FAILED));
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("GameLobbyViewModel.StartAsync", ex);
+                SetUiMessage(KEY_UI_GENERIC_ERROR);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         private async Task LeaveLobbyAsync()
@@ -374,6 +416,7 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
             matchHub.PlayerJoined += OnPlayerJoined;
             matchHub.PlayerLeft += OnPlayerLeft;
             matchHub.ReadyChanged += OnReadyChanged;
+            matchHub.GameStarted += OnGameStarted;
 
             hasHubEventsAttached = true;
         }
@@ -388,8 +431,19 @@ namespace GuessWhoClient.Presentation.ViewModels.Match
             matchHub.PlayerJoined -= OnPlayerJoined;
             matchHub.PlayerLeft -= OnPlayerLeft;
             matchHub.ReadyChanged -= OnReadyChanged;
+            matchHub.GameStarted -= OnGameStarted;
 
             hasHubEventsAttached = false;
+        }
+
+        private void OnGameStarted(long startedMatchId)
+        {
+            if (startedMatchId != matchId)
+            {
+                return;
+            }
+
+            GameStarted?.Invoke(matchId);
         }
 
         private void OnPlayerJoined(LobbyPlayerDto player)
